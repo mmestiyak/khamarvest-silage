@@ -3,6 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ═══════════ Google Analytics 4 (GA4) ═══════════
+       ধাপ ১: analytics.google.com এ গিয়ে একটি প্রপার্টি খুলুন।
+       ধাপ ২: Admin > Data streams > Web > আপনার সাইট যোগ করুন।
+       ধাপ ৩: সেখানে পাওয়া Measurement ID (G-XXXXXXXXXX) নিচের GA_MEASUREMENT_ID এ বসান।
+       ID না বসানো পর্যন্ত ট্র্যাকিং বন্ধ থাকবে, সাইট স্বাভাবিকভাবেই চলবে। -->
+  <script>
+    var GA_MEASUREMENT_ID = 'G-4SVWY8JWBX'; // <-- আপনার আসল Measurement ID বসানো হয়েছে
+    (function () {
+      if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID.indexOf('G-XXXX') === 0) return; // placeholder থাকলে লোড হবে না
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', GA_MEASUREMENT_ID);
+    })();
+    // যেকোনো জায়গা থেকে ইভেন্ট পাঠানোর নিরাপদ হেল্পার (ID না থাকলে চুপচাপ কিছুই করবে না)
+    function gaEvent(name, params) {
+      if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+    }
+  </script>
+  <!-- ═══════════ /Google Analytics 4 ═══════════ -->
   <title>ভুট্টা সাইলেজ দাম মাত্র ১০ টাকা কেজি | মোটাতাজাকরণ ও দুধের গরুর খাদ্য | বগুড়া, পাবনা, সিরাজগঞ্জ, চট্টগ্রাম, কক্সবাজারসহ সারাদেশে ডেলিভারি</title>
   <meta name="description" content="খাঁটি ভুট্টা সাইলেজ (কর্ন সাইলেজ) মাত্র ৯ টাকা কেজি। মোটাতাজাকরণ, দুধের গাভী, ছাগল ভেড়া সবার জন্য। সঠিক সময়ে কাটা, এয়ারটাইট ৫০ কেজি বস্তা। বগুড়া, পাবনা, সিরাজগঞ্জ, রংপুর, চট্টগ্রাম, কক্সবাজারসহ সারাদেশে ডেলিভারি। WhatsApp: +880 1300-886298">
   <meta name="keywords" content="সাইলেজ, ভুট্টা সাইলেজ, কর্ন সাইলেজ, সাইলেজ দাম, সাইলেজ কোথায় পাওয়া যায়, গরুর খাদ্য, গো-খাদ্য, দুধের গাভীর খাদ্য, corn silage, silage price in bangladesh, cattle feed bangladesh, silage bogura, silage pabna, silage sirajganj, silage chittagong, silage cox's bazar">
@@ -515,6 +540,7 @@
       var modal = document.getElementById('yt-modal');
       var body = document.getElementById('yt-modal-body');
       function open() {
+        if (typeof gaEvent === 'function') gaEvent('video_play', { video_id: 'n8sSOV0KQ64', video_title: 'khamar silage short' });
         if (location.protocol.indexOf('http') === 0) {
           body.innerHTML = '<iframe src="https://www.youtube.com/embed/n8sSOV0KQ64?autoplay=1" title="ভুট্টা সাইলেজ তৈরির ভিডিও" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
           modal.classList.remove('hidden');
@@ -534,6 +560,27 @@
       document.getElementById('yt-close').addEventListener('click', close);
       modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    })();
+
+    // ═══════════ Conversion tracking: WhatsApp order clicks ═══════════
+    // প্রতিটি WhatsApp ক্লিক GA4-তে 'whatsapp_click' ইভেন্ট হিসেবে যায়, সাথে কোন সেকশন থেকে ক্লিক হলো তা-ও।
+    // GA4 Admin > Events এ গিয়ে 'whatsapp_click' কে "Mark as key event" করলে এটি কনভার্শন হিসেবে গণ্য হবে।
+    (function () {
+      function locationOf(a) {
+        if (a.classList.contains('fixed')) return 'floating_button';
+        if (a.closest('footer')) return 'footer';
+        var sec = a.closest('section');
+        var h = sec && sec.querySelector('h1, h2');
+        if (h) return h.textContent.trim().replace(/\s+/g, ' ').slice(0, 40);
+        return 'other';
+      }
+      document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (typeof gaEvent === 'function') {
+            gaEvent('whatsapp_click', { link_location: locationOf(a), link_url: a.href });
+          }
+        });
+      });
     })();
   </script>
 </body>
