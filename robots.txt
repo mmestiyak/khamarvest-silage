@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: হোস্টিং-এ তোলার পর নিচের ডোমেইন আপনার আসল ডোমেইন দিয়ে বদলান
-Sitemap: https://www.your-domain.com/sitemap.xml
+Sitemap: https://silage.khamarvest.com/sitemap.xml
