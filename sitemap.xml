@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TODO: হোস্টিং-এ তোলার পর <loc>-এর ডোমেইন আপনার আসল ডোমেইন দিয়ে বদলান -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.your-domain.com/</loc>
+    <loc>https://silage.khamarvest.com/</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
