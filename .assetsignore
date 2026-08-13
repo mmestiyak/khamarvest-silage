@@ -1,0 +1,25 @@
+# Cloudflare Workers Assets ignore list (gitignore syntax).
+# These files are part of the repo but NOT part of the public website.
+
+# VCS / config / secrets
+.git
+.gitignore
+.assetsignore
+.wrangler
+.claude
+node_modules
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+.DS_Store
+
+# Build tooling
+package.json
+package-lock.json
+scripts
+
+# Internal docs / templates (not published pages)
+AGENTS.md
+blog/README.md
+blog/article-template.html
