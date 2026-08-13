@@ -735,6 +735,17 @@
       });
     })();
 
+    // ═══════════ Conversion tracking: Facebook page clicks ═══════════
+    (function () {
+      document.querySelectorAll('a[href*="facebook.com"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (typeof gaEvent === 'function') {
+            gaEvent('facebook_click', { link_url: a.href });
+          }
+        });
+      });
+    })();
+
     // Optional details form: keeps checkout friction low while preparing a complete WhatsApp order.
     (function () {
       var form = document.getElementById('order-details-form');
@@ -817,6 +828,24 @@
         return t;
       }
 
+      var userInteracted = false;
+      var calcUseTimer = null;
+      function trackCalculatorUse() {
+        if (calcUseTimer) return;
+        calcUseTimer = setTimeout(function () {
+          calcUseTimer = null;
+          if (typeof gaEvent === 'function') {
+            gaEvent('calculator_use', {
+              animal_type: state.type,
+              animal_count: state.count,
+              duration_days: state.days
+            });
+          }
+        }, 1500);
+      }
+      document.getElementById('calculator').addEventListener('input', function () { userInteracted = true; });
+      document.getElementById('calculator').addEventListener('click', function () { userInteracted = true; });
+
       function recalc() {
         var dailyKg = state.count * state.kg;
         var totalKg = dailyKg * state.days;
@@ -827,6 +856,7 @@
         countVal.textContent = bn(state.count) + 'টি';
         daysVal.textContent = daysLabel(state.days);
         syncPresets();
+        if (userInteracted) trackCalculatorUse();
         resDailyKg.textContent = fmt(dailyKg);
         resBags.textContent = fmt(bags);
         resTotalCost.textContent = fmt(totalCost);
