@@ -16,6 +16,7 @@ A static marketing + content site for **খামারভেস্ট সাই
 - `npm run build:blog` regenerates `blog/index.html` from the articles (`scripts/generate-blog-index.mjs`).
 - Local preview: `node .claude/serve.js` → `http://localhost:8321` (serves directory index, e.g. `/blog/`).
 - Deploy: Cloudflare Workers Assets (`wrangler.jsonc`, `assets.directory = "."`). **Pushing to `main` auto-deploys** via the Cloudflare GitHub integration — no manual `wrangler deploy` needed.
+- Do **NOT** set `assets.html_handling = "none"`: it also disables auto `index.html` serving, so `/` and `/blog/` return 404. The default serves `.html` at extensionless URLs (307 redirect) and resolves directory indexes. If you ever change canonical/sitemap URLs, use the extensionless form (`/blog/foo`, not `/blog/foo.html`).
 
 ## Brand / content rules (IMPORTANT)
 
