@@ -16,7 +16,9 @@ A static marketing + content site for **খামারভেস্ট সাই
 - `npm run build:blog` regenerates `blog/index.html` from the articles (`scripts/generate-blog-index.mjs`).
 - Local preview: `node .claude/serve.js` → `http://localhost:8321` (serves directory index, e.g. `/blog/`).
 - Deploy: Cloudflare Workers Assets (`wrangler.jsonc`, `assets.directory = "."`). **Pushing to `main` auto-deploys** via the Cloudflare GitHub integration — no manual `wrangler deploy` needed.
-- Do **NOT** set `assets.html_handling = "none"`: it also disables auto `index.html` serving, so `/` and `/blog/` return 404. The default serves `.html` at extensionless URLs (307 redirect) and resolves directory indexes. If you ever change canonical/sitemap URLs, use the extensionless form (`/blog/foo`, not `/blog/foo.html`).
+- Do **NOT** set `assets.html_handling = "none"`: it also disables auto `index.html` serving, so `/` and `/blog/` return 404. The default serves `.html` at extensionless URLs (307 redirect) and resolves directory indexes.
+- **URL convention (applied 2026-08-18): ALL canonicals, og:url, JSON-LD `mainEntityOfPage`, sitemap entries and internal links use the extensionless form** (`/blog/foo`, not `/blog/foo.html`). The `.html` form 307-redirects, which weakens Google indexing and breaks AI crawlers (ChatGPT/Perplexity citations). Never reintroduce `.html` URLs in published pages.
+- **Images in pages must use the optimized copies** (`img/*-1200.jpeg`, `img/*-1400.jpeg`, ~300-600 KB), never the raw `img/IMG_*.JPG.jpeg` originals (3-6 MB — kills Core Web Vitals on rural mobile). Make new optimized copies with `sips -Z 1200 --setProperty format jpeg --setProperty formatOptions 68 in.jpeg --out out.jpeg`.
 
 ## Brand / content rules (IMPORTANT)
 
@@ -57,4 +59,10 @@ A static marketing + content site for **খামারভেস্ট সাই
 ## Blog workflow
 
 - Copy `blog/article-template.html` for a new post (it has a body brand-reminder placeholder).
-- After adding a post: run `npm run build:blog`, then add the URL to `sitemap.xml`.
+- After adding a post: run `npm run build:blog` (regenerates `blog/index.html` AND `sitemap.xml`), then add the article to `llms.txt` (the AI-assistant summary file — keep its facts and guide list current).
+- Every post should carry `FAQPage` + `BreadcrumbList` JSON-LD alongside `Article` when it answers common farmer questions — AI assistants and Google pull answers from these.
+
+## AI discoverability (llms.txt / robots.txt)
+
+- `llms.txt` at the root summarizes the brand, prices, feeding rates and guide URLs for AI assistants (ChatGPT, Claude, Perplexity). Update it whenever prices, delivery areas or the guide list change.
+- `robots.txt` explicitly allows AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, etc.). Do not add blanket Disallow rules.

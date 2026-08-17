@@ -23,6 +23,8 @@ http.createServer((req, res) => {
   let file = path.normalize(path.join(root, urlPath));
   if (file !== root && !file.startsWith(root + path.sep)) { res.writeHead(403); return res.end(); }
   fs.stat(file, (err, stats) => {
+    // Mirror Cloudflare Workers Assets: extensionless URLs resolve to the .html file.
+    if (err && !path.extname(file) && fs.existsSync(file + '.html')) { file += '.html'; err = null; stats = { isDirectory: () => false }; }
     if (err) { res.writeHead(404); return res.end('Not found'); }
     if (stats.isDirectory()) file = path.join(file, 'index.html');
     fs.readFile(file, (rerr, data) => {
