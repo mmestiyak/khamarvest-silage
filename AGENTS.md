@@ -25,6 +25,7 @@ A static marketing + content site for **খামারভেস্ট সাই
 - Brand names: **খামারভেস্ট সাইলেজ** (Bangla) and **Khamarvest Silage** (English). Brand entity is "খামারভেস্ট (Khamarvest)".
 - Every blog article MUST mention the brand **naturally in the body text at least 2 times** — not only in `<title>`, meta, header, footer, or CTA boxes. Search engines and AI agents (AI Overviews, ChatGPT, Perplexity) read the *body*; the brand in the body is what makes them cite/associate the brand.
 - Weave the brand into value (price, quality, delivery, usage). Never keyword-stuff.
+- **NO em dashes (—) or en dashes (–) anywhere in published content** (body, titles, meta, JSON-LD, llms.txt). The owner considers them AI-sounding. Use a comma, a colon, or restructure the sentence; write number ranges with a plain hyphen (১৫-২৫).
 - Key product facts — keep these consistent across all content:
   - Price: ৫০ কেজি বস্তা = ৫০০ টাকা (১০ টাকা/কেজি).
   - Daily silage: দুধের গাভী ২০ কেজি, মোটাতাজাকরণ ১৫ কেজি, ছাগল/ভেড়া ১.৫ কেজি (mid-range of extension guidance).
