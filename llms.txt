@@ -19,6 +19,15 @@ Khamarvest Silage sells fresh corn (maize) silage, fermented whole-plant corn ca
 - [হোমপেজ, দাম, অর্ডার ও সাইলেজ ক্যালকুলেটর](https://silage.khamarvest.com/): দাম, ডেলিভারি এলাকা, পশু অনুযায়ী কত বস্তা লাগবে তার ক্যালকুলেটর, অর্ডারের নিয়ম।
 - [সব খামারি গাইড](https://silage.khamarvest.com/blog/): সাইলেজ ও গরুর খাদ্য নিয়ে বাংলা গাইডের তালিকা।
 
+## ফ্রি টুলস (Free tools, no signup)
+
+- [সব টুলের তালিকা](https://silage.khamarvest.com/tools/): ক্যালকুলেটর ও প্রিন্ট করার শিট, সম্পূর্ণ ফ্রি।
+- [দুধের লাভ-লস ক্যালকুলেটর](https://silage.khamarvest.com/tools/dudher-labh-calculator): দুধ বিক্রি ও খাদ্য খরচ বসিয়ে দৈনিক-মাসিক আয়ের হিসাব।
+- [মোটাতাজাকরণ খরচ ক্যালকুলেটর](https://silage.khamarvest.com/tools/motatajakoron-khoroch-calculator): পুরো চক্রের খাদ্য খরচ ও কত বস্তা সাইলেজ লাগবে।
+- [দৈনিক খাদ্য তালিকা চার্ট](https://silage.khamarvest.com/tools/khaddo-talika-chart): গোয়ালে টানানোর প্রিন্টযোগ্য এক পাতার চার্ট।
+- [টিকা ও কৃমিনাশকের রেকর্ড শিট](https://silage.khamarvest.com/tools/tika-krimi-calendar): কাকে কবে কী দেওয়া হলো তার প্রিন্টযোগ্য খাতা।
+- [মাসিক দুধ ও খরচের হিসাব খাতা](https://silage.khamarvest.com/tools/hishab-khata): দৈনিক আয়-খরচ লেখার প্রিন্টযোগ্য শিট।
+
 ## খামারি গাইড (Guides, Bengali)
 
 - [ভুট্টা সাইলেজের দাম কত ২০২৬? খরচের হিসাব ও কেনার নিয়ম](https://silage.khamarvest.com/blog/vutta-silage-dam-koto-kothay-kinben): ২০২৬ সালের দাম, দৈনিক/মাসিক খরচের হিসাব, ডেলিভারি ও ভালো সাইলেজ চেনার উপায়।

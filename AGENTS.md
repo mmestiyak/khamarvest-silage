@@ -63,6 +63,12 @@ A static marketing + content site for **খামারভেস্ট সাই
 - After adding a post: run `npm run build:blog` (regenerates `blog/index.html` AND `sitemap.xml`), then add the article to `llms.txt` (the AI-assistant summary file — keep its facts and guide list current).
 - Every post should carry `FAQPage` + `BreadcrumbList` JSON-LD alongside `Article` when it answers common farmer questions — AI assistants and Google pull answers from these.
 
+## Free tools (tools/)
+
+- `tools/*.html` are standalone free-tool pages: two calculators (`dudher-labh-calculator`, `motatajakoron-khoroch-calculator`) and three print sheets (`khaddo-talika-chart`, `tika-krimi-calendar`, `hishab-khata`), plus `tools/index.html`.
+- They are NOT scanned by the blog generator. When adding a tool: add its extensionless URL to `toolPages` in `scripts/generate-blog-index.mjs` (feeds sitemap), to the tools strip in that script's blog-index template, to `tools/index.html`, and to `llms.txt`.
+- Calculators fire `calculator_use` / `calculator_order_click` with a `tool` param; print sheets fire `print_click` with `tool`. Silage price in calculator JS is hardcoded 10 tk/kg — update if the price changes.
+
 ## AI discoverability (llms.txt / robots.txt)
 
 - `llms.txt` at the root summarizes the brand, prices, feeding rates and guide URLs for AI assistants (ChatGPT, Claude, Perplexity). Update it whenever prices, delivery areas or the guide list change.
