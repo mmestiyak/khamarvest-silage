@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>খামার স্বাস্থ্য চেকলিস্ট: ১০ প্রশ্নে জানুন আপনার খামারের স্কোর | খামারভেস্ট</title>
+  <meta name="description" content="১০টি সহজ প্রশ্নের উত্তর দিন, আপনার খামারের ব্যবস্থাপনা স্কোর দেখুন আর কোথায় উন্নতি দরকার তা জানুন। দুধ ও মোটাতাজাকরণের খামারিদের জন্য ফ্রি সেলফ-চেক।">
+  <meta name="keywords" content="খামার ব্যবস্থাপনা, খামারের ভুল, গরুর যত্ন, খামার চেকলিস্ট, দুধ কমে যাওয়ার কারণ, খামার পরীক্ষা, খামারভেস্ট">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://silage.khamarvest.com/tools/khamar-shastho-checklist">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="bn_BD">
+  <meta property="og:site_name" content="খামারভেস্ট (Khamarvest)">
+  <meta property="og:title" content="খামার স্বাস্থ্য চেকলিস্ট: ১০ প্রশ্নে জানুন আপনার খামারের স্কোর">
+  <meta property="og:description" content="২ মিনিটের সেলফ-চেক। স্কোর দেখুন, দুর্বল জায়গাগুলোর সমাধান জানুন। ফ্রি, কোনো শর্ত নেই।">
+  <meta property="og:url" content="https://silage.khamarvest.com/tools/khamar-shastho-checklist">
+  <meta property="og:image" content="https://silage.khamarvest.com/img/corn-harvest-1200.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"WebApplication","name":"খামার স্বাস্থ্য চেকলিস্ট","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","inLanguage":"bn-BD","isAccessibleForFree":true,"url":"https://silage.khamarvest.com/tools/khamar-shastho-checklist","publisher":{"@type":"Organization","name":"খামারভেস্ট (Khamarvest)"},"offers":{"@type":"Offer","price":"0","priceCurrency":"BDT"}},
+      {"@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"হোম","item":"https://silage.khamarvest.com/"},
+        {"@type":"ListItem","position":2,"name":"ফ্রি টুলস","item":"https://silage.khamarvest.com/tools/"},
+        {"@type":"ListItem","position":3,"name":"খামার স্বাস্থ্য চেকলিস্ট","item":"https://silage.khamarvest.com/tools/khamar-shastho-checklist"}]}
+    ]
+  }
+  </script>
+</head>
+<body class="bg-[#f7f8f4] font-['Hind_Siliguri'] text-[#233126] antialiased">
+  <header class="sticky top-0 z-20 border-b border-[#184d32]/10 bg-white/95 backdrop-blur">
+    <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+      <a href="/" class="text-lg font-bold tracking-tight text-[#075a35]">খামারভেস্ট সাইলেজ</a>
+      <div class="flex items-center gap-3">
+        <a href="/tools/" class="rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">সব টুল</a>
+        <a href="/blog/" class="rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">গাইড</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-5 py-8 sm:px-6 lg:py-12">
+    <h1 class="text-2xl font-bold text-[#123b28] sm:text-3xl">খামার স্বাস্থ্য চেকলিস্ট</h1>
+    <p class="mt-2 leading-7 text-[#456451]">২ মিনিটে ১০টি প্রশ্নের উত্তর দিন। খামারের ব্যবস্থাপনা কেমন চলছে তার স্কোর পাবেন, আর যেখানে ফাঁক আছে সেখানকার সমাধানও। সৎ উত্তর দিলেই আসল লাভ, ফলাফল শুধু আপনিই দেখছেন।</p>
+
+    <form id="quiz" class="mt-7 space-y-4"></form>
+
+    <button id="show-result" class="mt-6 w-full rounded-xl bg-[#0b5b38] px-5 py-3.5 text-lg font-bold text-white hover:bg-[#0e7c4b]">ফলাফল দেখুন</button>
+    <p id="incomplete-warn" class="mt-2 hidden text-center font-semibold text-[#b3261e]">সবগুলো প্রশ্নের উত্তর দিন, বাকি প্রশ্ন লাল দাগে দেখানো হলো।</p>
+
+    <section id="result" class="mt-6 hidden rounded-2xl bg-[#0b5b38] p-6 text-white" aria-live="polite">
+      <p class="text-sm font-semibold text-[#b8e5c8]">আপনার খামারের স্কোর</p>
+      <p class="mt-1 text-4xl font-bold"><span id="score">০</span><span class="text-2xl text-[#b8e5c8]">/১০</span></p>
+      <p id="verdict" class="mt-2 text-lg font-semibold text-[#ffd166]"></p>
+      <div id="tips-wrap" class="mt-4 hidden">
+        <p class="font-bold text-[#d9f2e0]">যেখানে উন্নতির সুযোগ আছে:</p>
+        <ul id="tips" class="mt-2 space-y-2 text-[15px] leading-7 text-[#e1f5e6]"></ul>
+      </div>
+      <a id="share-wa" href="#" target="_blank" rel="noopener" class="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-white px-4 py-3 text-base font-bold text-[#075a35] hover:bg-[#e5f5e9]">স্কোরটি WhatsApp-এ শেয়ার করুন</a>
+      <p class="mt-3 text-xs leading-5 text-[#b8e5c8]">এটি ব্যবস্থাপনার সাধারণ সেলফ-চেক, রোগ নির্ণয় নয়। পশু অসুস্থ মনে হলে ভেটের পরামর্শ নিন।</p>
+    </section>
+
+    <section class="mt-8 rounded-2xl border border-[#184d32]/10 bg-white p-5 sm:p-6">
+      <h2 class="text-lg font-bold text-[#123b28]">এই চেকলিস্ট কেন</h2>
+      <p class="mt-2 leading-7 text-[#33483a]">দুধ কমা বা বাড়ন থেমে যাওয়ার বেশিরভাগ কারণ বড় কোনো রোগ নয়, ছোট ছোট ব্যবস্থাপনার ফাঁক: পানি, খাদ্যের নিয়ম, আরাম আর হিসাব। খামারভেস্ট সাইলেজের এই ফ্রি চেকলিস্ট সেই ফাঁকগুলোই ধরিয়ে দেয়, আর প্রতিটির সমাধানের গাইড তো আছেই।</p>
+    </section>
+  </main>
+
+  <footer class="border-t border-[#184d32]/10 bg-white px-5 py-7 text-center text-sm text-[#54705d]">© ২০২৬ খামারভেস্ট সাইলেজ · <a href="/tools/" class="font-medium text-[#0b6a3e] underline">সব ফ্রি টুল</a> · <a href="/blog/" class="font-medium text-[#0b6a3e] underline">সব গাইড</a></footer>
+
+  <script>
+    (function () {
+      var QUESTIONS = [
+        { q: 'পশুর সামনে কি সবসময় পরিষ্কার পানি থাকে?', tip: 'দুধের প্রায় ৮৭ ভাগই পানি। পাত্র প্রতিদিন ধুয়ে সবসময় পানি সামনে রাখুন।', link: '/blog/gavir-dudh-baranor-upay', linkText: 'দুধ বাড়ানোর গাইড' },
+        { q: 'সারা বছর কি সবুজ বা আঁশজাতীয় খাদ্যের ব্যবস্থা আছে?', tip: 'ঘাসের সংকটের মৌসুমেই দুধ ও বাড়ন পড়ে যায়। সাইলেজ বা ঘাসের স্থায়ী ব্যবস্থা করুন।', link: '/blog/silage-vs-kacha-ghas-vs-khor', linkText: 'সাইলেজ নাকি ঘাস নাকি খড়' },
+        { q: 'দানাদার কি মাপে দেন, অনুমানে নয়?', tip: 'দুধের মাপে দানাদার দিন। কম দিলে শরীর ভাঙে, বেশি দিলে টাকা নষ্ট।', link: '/blog/gavir-dudh-baranor-upay', linkText: 'দানাদারের হিসাব' },
+        { q: 'নতুন খাবার কি ৭ দিনে ধীরে অভ্যাস করান?', tip: 'হঠাৎ খাবার বদলালে হজমের সমস্যায় খাওয়া ও দুধ দুটোই কমে।', link: '/vutta-silage-prothombar-khawano-rules', linkText: '৭ দিনের নিয়ম' },
+        { q: 'খাবার দেওয়ার আগে কি গন্ধ, রং ও ছত্রাক দেখে নেন?', tip: 'নষ্ট খাবার পশুকে অসুস্থ করে। ৩০ সেকেন্ডের পরীক্ষাটা অভ্যাস করুন।', link: '/blog/vutta-silage-noshto-chinben', linkText: 'নষ্ট সাইলেজ চেনার লক্ষণ' },
+        { q: 'খোলা সাইলেজ বা ভেজা খাবার কি ২-৩ দিনের মধ্যে শেষ করেন?', tip: 'বাতাস লাগা খাবার দ্রুত নষ্ট হয়। পশুর সংখ্যা মিলিয়ে বস্তা কিনুন।', link: '/blog/silage-songrokkhon-niyom', linkText: 'সংরক্ষণের নিয়ম' },
+        { q: 'গোয়ালে কি ছায়া, বাতাস চলাচল ও শুকনা মেঝে আছে?', tip: 'অস্বস্তিতে থাকা পশু খাওয়া কমিয়ে দেয়। গরমে ভোর-সন্ধ্যায় খাওয়ান।', link: '/blog/gavir-dudh-baranor-upay', linkText: 'আরাম ও গরমের যত্ন' },
+        { q: 'প্রতিদিন কি একই সময়ে খাওয়ানো ও দোহন হয়?', tip: 'রুটিন এলোমেলো হলে উৎপাদন ধীরে ধীরে কমে। সময় বেঁধে ফেলুন।', link: '/blog/gavir-dudh-baranor-upay', linkText: 'দোহনের নিয়ম' },
+        { q: 'কৃমিনাশক ও টিকার তারিখ কি লিখে রাখেন?', tip: 'তারিখ মনে রাখার জিনিস নয়, লেখার জিনিস। ফ্রি রেকর্ড শিটটি প্রিন্ট করে নিন।', link: '/tools/tika-krimi-calendar', linkText: 'টিকার রেকর্ড শিট' },
+        { q: 'মাসের আয়-খরচের হিসাব কি খাতায় রাখেন?', tip: 'হিসাব ছাড়া লাভ-লস বোঝা যায় না। দিনে এক মিনিটই যথেষ্ট।', link: '/tools/hishab-khata', linkText: 'মাসিক হিসাব খাতা' }
+      ];
+      var bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+      function toBn(n) { return String(n).replace(/\d/g, function (d) { return bn[+d]; }); }
+
+      var form = document.getElementById('quiz');
+      form.innerHTML = QUESTIONS.map(function (item, i) {
+        return '<fieldset id="q' + i + '" class="rounded-xl border border-[#184d32]/10 bg-white p-5">'
+          + '<legend class="float-left mb-3 w-full font-bold text-[#123b28]">' + toBn(i + 1) + '. ' + item.q + '</legend>'
+          + '<div class="clear-both flex flex-wrap gap-2.5">'
+          + ['হ্যাঁ', 'মাঝে মাঝে', 'না'].map(function (opt) {
+              return '<label class="cursor-pointer rounded-full border border-[#184d32]/20 px-4 py-1.5 font-semibold text-[#30533e] transition has-[:checked]:border-[#0b5b38] has-[:checked]:bg-[#0b5b38] has-[:checked]:text-white">'
+                + '<input type="radio" name="q' + i + '" value="' + opt + '" class="sr-only">' + opt + '</label>';
+            }).join('')
+          + '</div></fieldset>';
+      }).join('');
+
+      document.getElementById('show-result').addEventListener('click', function () {
+        var score = 0, tips = [], unanswered = [];
+        QUESTIONS.forEach(function (item, i) {
+          var checked = form.querySelector('input[name="q' + i + '"]:checked');
+          var box = document.getElementById('q' + i);
+          box.classList.remove('border-[#b3261e]', 'border-2');
+          if (!checked) { unanswered.push(i); return; }
+          if (checked.value === 'হ্যাঁ') { score++; }
+          else {
+            tips.push('<li><span class="font-bold">' + toBn(i + 1) + '.</span> ' + item.tip
+              + ' <a href="' + item.link + '" class="font-bold text-[#ffd166] underline underline-offset-2">' + item.linkText + ' →</a></li>');
+          }
+        });
+        var warn = document.getElementById('incomplete-warn');
+        if (unanswered.length) {
+          warn.classList.remove('hidden');
+          unanswered.forEach(function (i) { document.getElementById('q' + i).classList.add('border-[#b3261e]', 'border-2'); });
+          document.getElementById('q' + unanswered[0]).scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+        warn.classList.add('hidden');
+        document.getElementById('score').textContent = toBn(score);
+        var verdict = score >= 9 ? 'চমৎকার! আপনার খামার নিয়মে চলছে।'
+          : score >= 6 ? 'ভালো অবস্থা, তবে কয়েকটি ফাঁক বন্ধ করলে ফল আরও বাড়বে।'
+          : 'বেশ কিছু জায়গায় উন্নতির সুযোগ আছে। নিচের তালিকা ধরে একটা একটা করে ঠিক করুন।';
+        document.getElementById('verdict').textContent = verdict;
+        var tipsWrap = document.getElementById('tips-wrap');
+        if (tips.length) { tipsWrap.classList.remove('hidden'); document.getElementById('tips').innerHTML = tips.join(''); }
+        else { tipsWrap.classList.add('hidden'); }
+        var shareMsg = 'আমার খামারের স্বাস্থ্য স্কোর ' + toBn(score) + '/১০! আপনার খামারের স্কোর কত? ২ মিনিটে ফ্রি দেখে নিন: https://silage.khamarvest.com/tools/khamar-shastho-checklist';
+        document.getElementById('share-wa').href = 'https://wa.me/?text=' + encodeURIComponent(shareMsg);
+        var result = document.getElementById('result');
+        result.classList.remove('hidden');
+        result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (typeof gaEvent === 'function') gaEvent('quiz_complete', { tool: 'khamar_checklist', score: score });
+      });
+    })();
+  </script>
+<script src="/js/ga.js" defer></script></body>
+</html>

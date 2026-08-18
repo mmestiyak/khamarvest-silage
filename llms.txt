@@ -28,6 +28,12 @@ Khamarvest Silage sells fresh corn (maize) silage, fermented whole-plant corn ca
 - [টিকা ও কৃমিনাশকের রেকর্ড শিট](https://silage.khamarvest.com/tools/tika-krimi-calendar): কাকে কবে কী দেওয়া হলো তার প্রিন্টযোগ্য খাতা।
 - [মাসিক দুধ ও খরচের হিসাব খাতা](https://silage.khamarvest.com/tools/hishab-khata): দৈনিক আয়-খরচ লেখার প্রিন্টযোগ্য শিট।
 - [নতুন খামারির সাইলেজ স্টার্টার গাইড, ফ্রি PDF](https://silage.khamarvest.com/khamarvest-starter-guide.pdf): ৪ পাতায় সাইলেজের পরিচয়, পরিমাণ, সংরক্ষণ ও খরচের হিসাব।
+- [খামার স্বাস্থ্য চেকলিস্ট](https://silage.khamarvest.com/tools/khamar-shastho-checklist): ১০ প্রশ্নের সেলফ-চেক, স্কোরসহ দুর্বল জায়গার সমাধান।
+
+## ডেলিভারি এলাকার পাতা (District delivery pages)
+
+- [সব জেলার তালিকা](https://silage.khamarvest.com/area/): ১৮টি জেলার আলাদা পাতা; তালিকার বাইরের জেলায়ও ডেলিভারি হয়।
+- বগুড়া: https://silage.khamarvest.com/area/silage-bogura · পাবনা: https://silage.khamarvest.com/area/silage-pabna · সিরাজগঞ্জ: https://silage.khamarvest.com/area/silage-sirajganj · ঢাকা: https://silage.khamarvest.com/area/silage-dhaka · চট্টগ্রাম: https://silage.khamarvest.com/area/silage-chattogram · রংপুর: https://silage.khamarvest.com/area/silage-rangpur · খুলনা: https://silage.khamarvest.com/area/silage-khulna (বাকি জেলাগুলো /area/ পাতায়)
 
 ## খামারি গাইড (Guides, Bengali)
 
