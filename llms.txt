@@ -27,6 +27,7 @@ Khamarvest Silage sells fresh corn (maize) silage, fermented whole-plant corn ca
 - [দৈনিক খাদ্য তালিকা চার্ট](https://silage.khamarvest.com/tools/khaddo-talika-chart): গোয়ালে টানানোর প্রিন্টযোগ্য এক পাতার চার্ট।
 - [টিকা ও কৃমিনাশকের রেকর্ড শিট](https://silage.khamarvest.com/tools/tika-krimi-calendar): কাকে কবে কী দেওয়া হলো তার প্রিন্টযোগ্য খাতা।
 - [মাসিক দুধ ও খরচের হিসাব খাতা](https://silage.khamarvest.com/tools/hishab-khata): দৈনিক আয়-খরচ লেখার প্রিন্টযোগ্য শিট।
+- [নতুন খামারির সাইলেজ স্টার্টার গাইড, ফ্রি PDF](https://silage.khamarvest.com/khamarvest-starter-guide.pdf): ৪ পাতায় সাইলেজের পরিচয়, পরিমাণ, সংরক্ষণ ও খরচের হিসাব।
 
 ## খামারি গাইড (Guides, Bengali)
 
