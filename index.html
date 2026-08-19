@@ -81,15 +81,84 @@
       },
       {
         "@type": "LocalBusiness",
+        "@id": "https://silage.khamarvest.com/#business",
         "url": "https://silage.khamarvest.com/",
-        "name": "খামারভেস্ট (Khamarvest) ভুট্টা সাইলেজ",
+        "name": "খামারভেস্ট সাইলেজ",
+        "alternateName": "Khamarvest Silage",
         "telephone": "+8801303438063",
-        "priceRange": "৳",
+        "priceRange": "৳10-500",
         "image": "https://silage.khamarvest.com/img/silage-bag-1200.jpeg",
+        "logo": "https://silage.khamarvest.com/img/silage-bag-1200.jpeg",
         "sameAs": ["https://www.youtube.com/@khamarvest", "https://www.facebook.com/khamarvestSilage/"],
-        "contactPoint": { "@type": "ContactPoint", "telephone": "+8801303438063", "contactType": "sales", "areaServed": "BD", "availableLanguage": ["Bengali", "English"] },
-        "address": { "@type": "PostalAddress", "addressCountry": "BD" },
-        "areaServed": ["Bogura", "Pabna", "Sirajganj", "Natore", "Rangpur", "Dinajpur", "Mymensingh", "Tangail", "Dhaka", "Gazipur", "Kushtia", "Jashore", "Khulna", "Satkhira", "Cumilla", "Noakhali", "Chattogram", "Cox's Bazar"]
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+8801303438063",
+            "contactType": "sales",
+            "url": "https://wa.me/8801303438063",
+            "areaServed": "BD",
+            "availableLanguage": ["Bengali", "English"]
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "BD",
+          "addressCountryCode": "BD"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "বগুড়া", "sameAs": "Bogura" },
+          { "@type": "City", "name": "পাবনা", "sameAs": "Pabna" },
+          { "@type": "City", "name": "সিরাজগঞ্জ", "sameAs": "Sirajganj" },
+          { "@type": "City", "name": "নাটোর", "sameAs": "Natore" },
+          { "@type": "City", "name": "রংপুর", "sameAs": "Rangpur" },
+          { "@type": "City", "name": "দিনাজপুর", "sameAs": "Dinajpur" },
+          { "@type": "City", "name": "ময়মনসিংহ", "sameAs": "Mymensingh" },
+          { "@type": "City", "name": "টাঙ্গাইল", "sameAs": "Tangail" },
+          { "@type": "City", "name": "ঢাকা", "sameAs": "Dhaka" },
+          { "@type": "City", "name": "গাজীপুর", "sameAs": "Gazipur" },
+          { "@type": "City", "name": "কুষ্টিয়া", "sameAs": "Kushtia" },
+          { "@type": "City", "name": "যশোর", "sameAs": "Jashore" },
+          { "@type": "City", "name": "খুলনা", "sameAs": "Khulna" },
+          { "@type": "City", "name": "সাতক্ষীরা", "sameAs": "Satkhira" },
+          { "@type": "City", "name": "কুমিল্লা", "sameAs": "Cumilla" },
+          { "@type": "City", "name": "নোয়াখালী", "sameAs": "Noakhali" },
+          { "@type": "City", "name": "চট্টগ্রাম", "sameAs": "Chattogram" },
+          { "@type": "City", "name": "কক্সবাজার", "sameAs": "Cox's Bazar" }
+        ],
+        "knowsAbout": ["Corn Silage", "Silage Delivery", "Cattle Feed", "Silage Storage"],
+        "slogan": "সাইলেজ ১০ টাকা কেজি, সারাদেশে ডেলিভারি"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://silage.khamarvest.com/#silage-service",
+        "name": "ভুট্টা সাইলেজ সরবরাহ ও ডেলিভারি",
+        "alternateName": "Corn Silage Supply & Delivery",
+        "description": "সারাদেশে খাঁটি ভুট্টা সাইলেজ সরবরাহ ও দ্রুত ডেলিভারি। দুধের গাভী, মোটাতাজাকরণ গরু ও ছাগলের জন্য পুষ্টিকর খাদ্য।",
+        "provider": { "@type": "LocalBusiness", "@id": "https://silage.khamarvest.com/#business" },
+        "areaServed": [
+          { "@type": "City", "name": "বগুড়া" }, { "@type": "City", "name": "পাবনা" },
+          { "@type": "City", "name": "সিরাজগঞ্জ" }, { "@type": "City", "name": "নাটোর" },
+          { "@type": "City", "name": "রংপুর" }, { "@type": "City", "name": "দিনাজপুর" },
+          { "@type": "City", "name": "ময়মনসিংহ" }, { "@type": "City", "name": "টাঙ্গাইল" },
+          { "@type": "City", "name": "ঢাকা" }, { "@type": "City", "name": "গাজীপুর" },
+          { "@type": "City", "name": "কুষ্টিয়া" }, { "@type": "City", "name": "যশোর" },
+          { "@type": "City", "name": "খুলনা" }, { "@type": "City", "name": "সাতক্ষীরা" },
+          { "@type": "City", "name": "কুমিল্লা" }, { "@type": "City", "name": "নোয়াখালী" },
+          { "@type": "City", "name": "চট্টগ্রাম" }, { "@type": "City", "name": "কক্সবাজার" }
+        ],
+        "serviceType": "Agricultural Product Delivery",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "BDT",
+          "price": "10",
+          "priceSpecification": {
+            "@type": "PriceSpecification",
+            "price": "10",
+            "priceCurrency": "BDT",
+            "unitCode": "KGM"
+          }
+        },
+        "url": "https://silage.khamarvest.com/"
       },
       {
         "@type": "FAQPage",
