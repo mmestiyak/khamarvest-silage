@@ -42,31 +42,42 @@ function handleEmailSubmit(e) {
     return;
   }
 
-  // Send to WhatsApp or email service (basic implementation)
-  const message = `নতুন সাবস্ক্রাইবার: ${name} (${email})`;
+  // Send to FormSubmit.co (instant email to meer@ideeza.com)
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('email', email);
+  formData.append('_subject', `নতুন সাবস্ক্রাইবার: ${name}`);
+  formData.append('_captcha', 'false'); // Disable CAPTCHA for better UX
 
-  // Option 1: Send to WhatsApp
-  const waLink = `https://wa.me/8801303438063?text=${encodeURIComponent(message)}`;
+  fetch('https://formsubmit.co/ajax/meer@ideeza.com', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Show success message
+    document.getElementById('popup-form').style.display = 'none';
+    document.getElementById('popup-success').style.display = 'block';
 
-  // Option 2: Store in localStorage (for now, as backup)
-  const subscribers = JSON.parse(localStorage.getItem('subscribers') || '[]');
-  subscribers.push({ name, email, timestamp: new Date().toISOString() });
-  localStorage.setItem('subscribers', JSON.stringify(subscribers));
+    // Also send WhatsApp notification
+    const message = `নতুন সাবস্ক্রাইবার:\nনাম: ${name}\nইমেইল: ${email}`;
+    const waLink = `https://wa.me/8801303438063?text=${encodeURIComponent(message)}`;
 
-  // Show success message
-  document.getElementById('popup-form').style.display = 'none';
-  document.getElementById('popup-success').style.display = 'block';
+    // GA event
+    if (typeof gaEvent === 'function') {
+      gaEvent('email_signup', { subscriber_name: name, subscriber_email: email });
+    }
 
-  // Send WhatsApp
-  setTimeout(() => {
-    window.open(waLink, '_blank');
-    closeEmailPopup();
-  }, 2000);
-
-  // GA event
-  if (typeof gaEvent === 'function') {
-    gaEvent('email_signup', { subscriber_name: name, subscriber_email: email });
-  }
+    // Close popup after 2 seconds
+    setTimeout(() => {
+      window.open(waLink, '_blank');
+      closeEmailPopup();
+    }, 2000);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+  });
 }
 
 // Close on Escape key
