@@ -275,37 +275,6 @@
   </nav>
 
   <!-- EMAIL POPUP MODAL -->
-  <div id="email-popup" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4" style="animation: fadeIn 0.3s ease-in;">
-    <div class="bg-white rounded-lg shadow-2xl max-w-md w-full p-6 md:p-8 relative" style="animation: slideUp 0.3s ease-out;">
-      <button onclick="closeEmailPopup()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl leading-none">×</button>
-
-      <h3 class="font-hind font-bold text-[#0b5b38] text-2xl mb-2">খামার পরামর্শ ফ্রি পান</h3>
-      <p class="font-hind text-[#456451] text-sm mb-4">সাপ্তাহিক সাইলেজ টিপস, নতুন গাইড ও স্টক আপডেট সরাসরি আপনার ফোনে।</p>
-
-      <form id="popup-form" onsubmit="handleEmailSubmit(event)">
-        <div class="mb-4">
-          <input type="text" id="popup-name" placeholder="আপনার নাম" class="w-full px-4 py-2.5 border border-[#184d32]/20 rounded-lg font-hind text-sm focus:outline-none focus:border-[#0b5b38]" required>
-        </div>
-        <div class="mb-4">
-          <input type="email" id="popup-email" placeholder="ইমেইল বা ফোন নম্বর" class="w-full px-4 py-2.5 border border-[#184d32]/20 rounded-lg font-hind text-sm focus:outline-none focus:border-[#0b5b38]" required>
-        </div>
-        <button type="submit" class="w-full bg-[#0b5b38] hover:bg-[#075a35] text-white font-hind font-semibold py-2.5 rounded-lg transition">সাবস্ক্রাইব করুন</button>
-      </form>
-
-      <div id="popup-success" style="display: none;" class="text-center">
-        <p class="font-hind text-[#0b5b38] font-semibold mb-2">✓ ধন্যবাদ!</p>
-        <p class="font-hind text-sm text-[#456451]">আপনার তথ্য পেয়েছি। WhatsApp-এ আপডেট শুরু হবে।</p>
-      </div>
-
-      <p class="font-hind text-xs text-[#888] text-center mt-4">আমরা আপনার তথ্য শেয়ার করব না।</p>
-    </div>
-  </div>
-
-  <style>
-    @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: translateY(0) } }
-    .fadeIn { animation: fadeIn 0.3s ease-in !important; }
-  </style>
 
   <!-- ═══════════ SECTION 1 · HERO  (bg #f5fff8 + mandala pattern) ═══════════ -->
   <section class="hero-pattern relative bg-[rgb(245,255,248)] px-[10px] anim-fadeIn">
@@ -1039,6 +1008,5 @@
       recalc();
     })();
   </script>
-<script src="js/email-popup.js" defer></script>
 </body>
 </html>
