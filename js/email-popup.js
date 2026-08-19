@@ -49,7 +49,7 @@ function handleEmailSubmit(e) {
   formData.append('_subject', `নতুন সাবস্ক্রাইবার: ${name}`);
   formData.append('_captcha', 'false'); // Disable CAPTCHA for better UX
 
-  fetch('https://formsubmit.co/ajax/meer@ideeza.com', {
+  fetch('https://formsubmit.co/ajax/mmestiyak@gmail.com', {
     method: 'POST',
     body: formData
   })
