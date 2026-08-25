@@ -43,8 +43,9 @@ A static marketing + content site for **খামারভেস্ট সাই
 - Measurement ID: `G-4SVWY8JWBX`. The homepage loads it inline; blog pages load `/js/ga.js`.
 - All events fire through the `gaEvent(name, params)` helper.
 - Event names are `snake_case` lowercase. Mark these as key events in GA4:
-  - `whatsapp_click` — WhatsApp order CTA (**primary conversion**). Params: `link_location`, `link_url`.
-  - `facebook_click` — Facebook link. Params: `link_url`.
+  - `whatsapp_click` — WhatsApp order CTA (**primary conversion**). Params: `link_location`, `link_url`, and on `/js/ga.js` pages also `page_path`.
+  - `facebook_click` — Facebook link. Params: `link_location`, `link_url`, `page_path` (on `/js/ga.js` pages).
+  - `link_location` values: the homepage derives them from the section heading (plus `floating_button` / `footer`); `/js/ga.js` pages use `header`, `article_body`, `sidebar`, `cta_section` or `footer`. Never hardcode a single value, it makes the report useless for comparing pages.
   - `video_play` — YouTube play. Params: `video_id`, `video_title`.
   - `calculator_use` — calculator inputs changed (debounced ~1.5s). Params: `animal_type`, `animal_count`, `duration_days`.
   - `calculator_order_click` — calculator → WhatsApp. Params: `animal_type`, `animal_count`, `duration_days`, `bags`.
