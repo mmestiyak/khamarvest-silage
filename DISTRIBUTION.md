@@ -70,6 +70,47 @@ Satkhira, Cumilla, Noakhali, Chattogram and Cox's Bazar. Transport cost is quote
 Order or ask for a quote on WhatsApp: +880 1303-438063.
 Website: https://silage.khamarvest.com
 
+### Company Profile / About Us (for the big text box on TradeFord, TradeKey, Alibaba-style sites)
+
+Khamarvest Silage is a Bangladeshi supplier of corn (maize) silage for dairy cattle, beef
+fattening cattle, goats and sheep. We harvest whole corn plants at the correct maturity
+stage, chop them, and let them ferment naturally in airtight 50 kg bags, so farms can feed
+green fodder all year, including the winter and monsoon months when fresh grass is scarce
+or unsafe to feed.
+
+Our silage sells at BDT 10 per kg in 50 kg airtight bags (BDT 500 per bag), with discounts
+negotiable on bulk and recurring orders. An unopened bag keeps 6 to 12 months and should be
+used within 2 to 3 days once opened. Typical daily feeding is 15 to 25 kg per dairy cow,
+10 to 20 kg per fattening animal, and 1 to 2 kg per goat or sheep.
+
+We deliver nationwide with cash on delivery, including Bogura, Pabna, Sirajganj, Natore,
+Rangpur, Dinajpur, Mymensingh, Tangail, Dhaka, Gazipur, Kushtia, Jashore, Khulna, Satkhira,
+Cumilla, Noakhali, Chattogram and Cox's Bazar. Transport cost is quoted per order at
+confirmation.
+
+Alongside supply, we publish free Bengali-language guides and feed-cost calculators for
+farmers at https://silage.khamarvest.com, covering feeding rates, storage, seasonal feed
+planning and farm economics.
+
+We welcome enquiries from dairy and beef farms, feed traders, agricultural projects and
+institutional buyers. Contact us on WhatsApp at +880 1303-438063.
+
+### The other fields on those forms
+
+Fill these truthfully, and leave blank anything you cannot back up. Directories reward a
+complete profile, but an inflated one costs you the deal when a buyer checks.
+
+- Website: https://silage.khamarvest.com (this field is the whole reason we are listing)
+- Business type: pick what is actually true. If we chop and ferment the corn ourselves,
+  "Manufacturer" or "Producer" fits. If we buy finished silage and resell, it is
+  "Trading Company" or "Distributor / Wholesaler". Do not tick both to look bigger.
+- Main products: Corn silage, maize silage, cattle feed, green fodder, dairy feed
+- Main markets: Bangladesh (domestic). Do not tick export markets we do not serve.
+- Year established, number of employees, annual revenue, production capacity: only we know
+  these. Enter the real figures or leave them blank.
+- Certifications, ISO, export licences: leave blank unless we hold the document.
+- Contact: WhatsApp +880 1303-438063
+
 ### Product listing (for directories with a product field)
 Product: Corn Silage, 50 kg airtight bag
 Price: BDT 500 per bag (BDT 10 per kg)
