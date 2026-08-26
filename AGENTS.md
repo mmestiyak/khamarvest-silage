@@ -13,7 +13,10 @@ A static marketing + content site for **খামারভেস্ট সাই
 ## Tech / workflow
 
 - Plain static HTML + Tailwind via CDN (no per-page build step).
-- `npm run build:blog` regenerates `blog/index.html` from the articles (`scripts/generate-blog-index.mjs`).
+- `npm run build` regenerates the district pages and then `blog/index.html` + `sitemap.xml`. Individual steps are `npm run build:areas` and `npm run build:blog`.
+- **`npm run check` validates the whole site against the rules in this file** (`scripts/check-site.mjs`): title suffix, meta description, robots, canonical (present, extensionless, matches the file path, no duplicates), the four required Open Graph tags, `og:url` matching canonical, valid JSON-LD with a well-formed `datePublished` and the correct author/publisher, brand mentioned at least twice in the article body, `/js/ga.js` present, internal links that actually resolve, no `.html` internal links, optimized images only, and no em/en dashes or Devanagari digits. `npm run verify` runs the build then the check.
+- **Run `npm run verify` before every deploy.** It exits non-zero on errors, so it is safe to wire into CI. Warnings (for example an article with no `FAQPage` schema) do not fail the run.
+- When adding a rule to this file, add the matching assertion to `scripts/check-site.mjs`, otherwise the rule will quietly rot.
 - Local preview: `node .claude/serve.js` → `http://localhost:8321` (serves directory index, e.g. `/blog/`).
 - Deploy: Cloudflare Workers Assets (`wrangler.jsonc`, `assets.directory = "."`). **Pushing to `main` auto-deploys** via the Cloudflare GitHub integration — no manual `wrangler deploy` needed.
 - Do **NOT** set `assets.html_handling = "none"`: it also disables auto `index.html` serving, so `/` and `/blog/` return 404. The default serves `.html` at extensionless URLs (307 redirect) and resolves directory indexes.

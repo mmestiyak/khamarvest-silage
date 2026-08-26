@@ -2,6 +2,9 @@
   "private": true,
   "scripts": {
     "build:blog": "node scripts/generate-blog-index.mjs",
-    "build:areas": "node scripts/generate-area-pages.mjs"
+    "build:areas": "node scripts/generate-area-pages.mjs",
+    "build": "npm run build:areas && npm run build:blog",
+    "check": "node scripts/check-site.mjs",
+    "verify": "npm run build && npm run check"
   }
 }
