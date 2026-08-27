@@ -43,7 +43,14 @@
       .copy table td { padding-top: 9px !important; padding-bottom: 9px !important; }
       .cutline { margin-top: 6px !important; margin-bottom: 6px !important; }
       .print-note { margin-top: 6px !important; }
-      @page { size: A4 portrait; margin: 8mm; }
+      /* Print reliability, applies to every print sheet:
+         Chrome and Edge drop background colours unless the page opts in, which
+         would strip the green header bars, shaded table heads and callout boxes
+         and leave a washed-out sheet. */
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      tr, thead, .avoid-break { break-inside: avoid; page-break-inside: avoid; }
+      a[href]::after { content: none !important; }
+      @page { size: A4 portrait; margin: 9mm; }
     }
     .fill { border-bottom: 1px dotted #7a8f80; display: inline-block; min-width: 60px; }
   </style>

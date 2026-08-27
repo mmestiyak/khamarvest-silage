@@ -17,8 +17,17 @@
     .page:last-child { page-break-after: auto; }
     @media print {
       body { background: white; }
-      .page { margin: 0; box-shadow: none; }
-      @page { size: A4 portrait; margin: 0; }
+      /* On screen a .page is a fixed 210x296mm sheet. In print that box left only
+         4px of slack inside A4, so any rounding pushed every page onto a second
+         sheet and produced a blank page after each one. In print the page box is
+         dropped entirely and the margin comes from @page instead, which also
+         survives the browser's own margin setting in the print dialog. */
+      .page { width: auto !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; box-shadow: none !important; }
+      .footer-note { position: static !important; margin-top: 8mm !important; left: auto; right: auto; bottom: auto; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      tr, thead { break-inside: avoid; page-break-inside: avoid; }
+      a[href]::after { content: none !important; }
+      @page { size: A4 portrait; margin: 12mm; }
       .no-print { display: none !important; }
     }
     h1 { font-size: 30px; line-height: 1.3; color: #0b5b38; }
