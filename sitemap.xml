@@ -7,6 +7,18 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://silage.khamarvest.com/blog/nirapode-silage-kenar-niyom</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://silage.khamarvest.com/blog/silage-mano-jachai</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://silage.khamarvest.com/blog/gorome-gorur-jotno-heat-stress</loc>
     <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
@@ -140,6 +152,12 @@
   </url>
   <url>
     <loc>https://silage.khamarvest.com/tools/khamar-shastho-checklist</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://silage.khamarvest.com/tools/delivery-challan</loc>
     <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
