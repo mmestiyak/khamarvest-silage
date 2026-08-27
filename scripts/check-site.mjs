@@ -162,8 +162,8 @@ for (const file of files) {
   if (brandInBody < 2) err(file, `brand appears ${brandInBody}x in the article body, needs at least 2`);
 
   if (!/<script src="\/js\/ga\.js"/.test(html)) err(file, 'missing /js/ga.js, clicks will not be tracked');
-  if (!/"@type": "FAQPage"/.test(html)) warn(file, 'no FAQPage schema (AI assistants pull answers from it)');
-  if (!/"@type": "BreadcrumbList"/.test(html)) warn(file, 'no BreadcrumbList schema');
+  if (!/"@type"\s*:\s*"FAQPage"/.test(html)) warn(file, 'no FAQPage schema (AI assistants pull answers from it)');
+  if (!/"@type"\s*:\s*"BreadcrumbList"/.test(html)) warn(file, 'no BreadcrumbList schema');
 }
 
 // --- Sitemap and llms.txt coverage ---

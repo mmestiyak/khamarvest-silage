@@ -26,3 +26,11 @@ blog/article-template.html
 BUSINESS_DESCRIPTIONS.md
 GMB_SETUP.md
 DISTRIBUTION.md
+
+# Camera originals (2-6 MB each), kept in the repo only as sources for the
+# optimized img/*-1200.jpeg copies. Never referenced by a published page.
+img/IMG_*.JPG.jpeg
+img/WhatsApp Image *.jpeg
+
+# Design scratch page for the Google Business cover photo, not a public page
+gmb-cover-photo.html
