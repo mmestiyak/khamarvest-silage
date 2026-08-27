@@ -17,9 +17,9 @@ const err = (file, msg) => errors.push(`${file}: ${msg}`);
 const warn = (file, msg) => warnings.push(`${file}: ${msg}`);
 
 // Files that are in the repo but not public pages (mirrors .assetsignore).
-const NOT_PUBLIC = new Set(['blog/article-template.html']);
+const NOT_PUBLIC = new Set(['blog/article-template.html', 'gmb-cover-photo.html']);
 // Public but not article-style pages, so they skip the article-only rules.
-const UTILITY = new Set(['gmb-cover-photo.html', 'guide-book.html']);
+const UTILITY = new Set(['guide-book.html']);
 // Generated, checked as a page but not as an article.
 const GENERATED = new Set(['blog/index.html']);
 
@@ -50,6 +50,8 @@ async function resolves(urlPath) {
 const files = (await walk('')).filter((f) => !NOT_PUBLIC.has(f)).sort();
 const articles = files.filter((f) => (f.startsWith('blog/') && !GENERATED.has(f)) || f === 'vutta-silage-prothombar-khawano-rules.html');
 const canonicals = new Map();
+const titles = new Map();
+const descriptions = new Map();
 
 for (const file of files) {
   const html = await readFile(join(root, file), 'utf8');
@@ -66,9 +68,17 @@ for (const file of files) {
   const deva = html.match(/[०-९]+/g);
   if (deva) err(file, `Devanagari digits instead of Bengali: ${[...new Set(deva)].join(' ')}`);
 
-  // Internal links must be extensionless and must resolve.
-  for (const m of html.matchAll(/(?:href|src)="(\/[^"#?]*)"/g)) {
-    const target = m[1];
+  // Internal links must be extensionless and must resolve. Relative hrefs are
+  // checked too: index.html links to "blog/" and "corn-silage-bangladesh"
+  // without a leading slash, and a typo there would 404 silently.
+  for (const m of html.matchAll(/(?:href|src)="([^"#?]*)"/g)) {
+    let target = m[1];
+    if (!target || /^(https?:|data:|mailto:|tel:|#|\/\/)/.test(target)) continue;
+    if (target.includes("' +") || target.includes('${')) continue; // built in JS at runtime
+    if (!target.startsWith('/')) {
+      const dir = dirname(file) === '.' ? '' : `${dirname(file)}/`;
+      target = `/${relative(root, resolve(root, dir, target)).replace(/\\/g, '/')}`;
+    }
     if (/^\/(img|js)\//.test(target)) {
       if (!await exists(join(root, target.slice(1)))) err(file, `missing asset ${target}`);
       continue;
@@ -99,11 +109,17 @@ for (const file of files) {
     const isEnglish = /<html lang="en"/.test(html);
     const ok = isEnglish ? /\|\s*Khamarvest/.test(title) : /\|\s*খামারভেস্ট/.test(title);
     if (!ok) err(file, `title does not end with | ${isEnglish ? 'Khamarvest Silage' : 'খামারভেস্ট'}`);
+    if (titles.has(title)) err(file, `duplicate <title>, same as ${titles.get(title)}`);
+    titles.set(title, file);
   }
 
   const desc = pick(/<meta name="description" content="([\s\S]*?)"/i);
   if (!desc) err(file, 'no meta description');
-  else if (desc.length < 70 || desc.length > 320) warn(file, `meta description is ${desc.length} chars`);
+  else {
+    if (desc.length < 70 || desc.length > 320) warn(file, `meta description is ${desc.length} chars`);
+    if (descriptions.has(desc)) err(file, `duplicate meta description, same as ${descriptions.get(desc)}`);
+    descriptions.set(desc, file);
+  }
 
   const robots = pick(/<meta name="robots" content="([^"]*)"/i);
   if (!robots) err(file, 'no meta robots');
