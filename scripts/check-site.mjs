@@ -64,6 +64,10 @@ for (const file of files) {
   // Owner considers em/en dashes an AI tell. Plain hyphen for ranges.
   if (/[—–]/.test(html)) err(file, 'contains an em or en dash');
 
+  // A file mixing precomposed and decomposed Bengali stores the same word as two
+  // different byte sequences, so find/replace silently edits only some of them.
+  if (html.normalize('NFC') !== html) warn(file, 'Bengali text is not NFC-normalised, find/replace on it can miss occurrences');
+
   // Bengali digits are ০-৯. Devanagari ०-९ look similar and have slipped in before.
   const deva = html.match(/[०-९]+/g);
   if (deva) err(file, `Devanagari digits instead of Bengali: ${[...new Set(deva)].join(' ')}`);
@@ -158,6 +162,10 @@ for (const file of files) {
       const article = nodes.find((n) => n['@type'] === 'Article');
       if (article) {
         if (!/^\d{4}-\d{2}-\d{2}$/.test(article.datePublished || '')) err(file, 'Article datePublished missing or malformed');
+        if (article.dateModified) {
+          if (!/^\d{4}-\d{2}-\d{2}$/.test(article.dateModified)) err(file, 'Article dateModified malformed');
+          else if (article.datePublished && article.dateModified < article.datePublished) err(file, 'dateModified is earlier than datePublished');
+        }
         if (article.mainEntityOfPage && canonical && article.mainEntityOfPage !== canonical) err(file, 'JSON-LD mainEntityOfPage does not match canonical');
         for (const who of ['author', 'publisher']) {
           if (article[who]?.name !== 'খামারভেস্ট (Khamarvest)') err(file, `Article ${who} should be "খামারভেস্ট (Khamarvest)"`);
@@ -169,6 +177,22 @@ for (const file of files) {
   }
 
   if (!isArticle) continue;
+
+  // --- Trust rules (AGENTS.md: never invent results, customer stories or promises) ---
+
+  // Fabricated testimonials. We have no permission-cleared customer quotes, so
+  // any "farmers say" sentence on this site is invented. Use a real, attributed
+  // quote or state the mechanism instead.
+  for (const phrase of ['তারা বলেন', 'খামারিরা বলেন', 'সফল হয়েছেন']) {
+    if (html.includes(phrase)) err(file, `invented customer testimonial: "${phrase}". Use a real attributed quote or drop it`);
+  }
+  // Promised earnings. Income depends on the reader's milk price and costs, so
+  // link the calculator instead of naming a figure.
+  for (const phrase of ['লাভ করুন', 'আয় করুন', 'গ্যারান্টি']) {
+    if (html.includes(phrase)) err(file, `promises earnings or gives a guarantee: "${phrase}"`);
+  }
+  // Unsupported savings claims of the "cuts your cost in half" kind.
+  if (/অর্ধেকের নিচে|অর্ধেক কমি/.test(html)) err(file, 'unsupported savings claim (halving). State the price, not the saving');
 
   // --- Article-only rules ---
 

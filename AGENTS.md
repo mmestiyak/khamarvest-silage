@@ -40,6 +40,10 @@ A static marketing + content site for **খামারভেস্ট সাই
 
 - Feeding rates / prices must stay within published ranges (dairy 15–25 kg/day, beef 10–20 kg/day, goat/sheep 1–2 kg/day; concentrate ৪০–৫৫ টাকা/কেজি, silage ১০ টাকা/কেজি).
 - Cite sources (DAERA, Teagasc) in a "তথ্যসূত্র" section when making factual claims. Do not invent savings/productivity numbers.
+- **No invented customer stories.** We hold no permission-cleared customer quotes, so any "তারা বলেন" / "খামারিরা বলেন" / "সফল হয়েছেন" sentence is fabricated. State the mechanism instead, or use a real attributed quote. `npm run check` fails on these phrases.
+- **No promised earnings.** Income depends on the reader's milk price, feed cost and animal, so never name a profit figure or write "লাভ করুন" / "আয় করুন" / "গ্যারান্টি". Link `/tools/dudher-labh-calculator` and let the farmer compute it. The checker fails on these too.
+- **No unsupported savings claims** ("cuts straw use in half"). State the price we actually charge, not the saving we imagine.
+- Any article whose content changes materially should get its `dateModified` bumped; the checker rejects a `dateModified` earlier than `datePublished`.
 
 ## Analytics (GA4)
 
@@ -58,6 +62,7 @@ A static marketing + content site for **খামারভেস্ট সাই
 
 ## Editing Bengali text
 
+- Some files mix precomposed and decomposed Bengali, so the same word exists as two different byte sequences and a find/replace silently edits only some occurrences. `npm run check` warns which files are not NFC-normalised. When editing one, normalise it first (`unicodedata.normalize("NFC", text)`) or match around the word with a regex wildcard.
 - Content is Bengali with combining characters (e.g. য়, ড়, "সাশ্রয়"). Manual find/replace of Bengali often fails on encoding (precomposed vs decomposed). Prefer a Python script that matches ASCII anchors or uses `[^<]*` for the Bengali, rather than retyping Bengali into an edit tool.
 - Keep `lang="bn"`. Homepage `font-hind` maps to "Noto Sans Bengali"; blog pages use "Hind Siliguri" — keep consistent with the file you're editing.
 
