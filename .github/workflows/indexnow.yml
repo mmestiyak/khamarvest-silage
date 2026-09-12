@@ -1,0 +1,41 @@
+# Tells Bing (and through IndexNow: Yandex, Naver, Seznam) which pages changed
+# on every deploy. Bing's index feeds ChatGPT search, our main referral source.
+# Google does not support IndexNow; it discovers changes through sitemap.xml.
+name: IndexNow ping
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'sitemap.xml'
+      - 'llms.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Cloudflare deploys from the same push. Give it time so Bing's first
+      # fetch of a brand-new URL does not see a 404.
+      - name: Wait for the Cloudflare deploy to land
+        run: sleep 150
+
+      - name: Verify the key file is live
+        run: |
+          KEY=$(node -e "import('./scripts/indexnow.mjs').catch(()=>{});" 2>/dev/null; grep -o "INDEXNOW_KEY = '[a-f0-9]*'" scripts/indexnow.mjs | cut -d"'" -f2)
+          curl -sf "https://silage.khamarvest.com/$KEY.txt" | grep -q "$KEY"
+
+      - name: Submit changed URLs
+        run: node scripts/indexnow.mjs "${{ github.event.before }}" "${{ github.sha }}"

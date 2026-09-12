@@ -68,6 +68,13 @@ for (const file of files) {
   // different byte sequences, so find/replace silently edits only some of them.
   if (html.normalize('NFC') !== html) warn(file, 'Bengali text is not NFC-normalised, find/replace on it can miss occurrences');
 
+  // Tailwind is compiled into /css/site.css and the fonts are self-hosted in
+  // /fonts. The CDN script and Google Fonts each cost a rural phone seconds of
+  // blank screen before any Bengali renders.
+  if (/cdn\.tailwindcss\.com/.test(html)) err(file, 'loads Tailwind from the CDN, link /css/site.css instead (npm run build:css)');
+  if (/fonts\.(googleapis|gstatic)\.com/.test(html)) err(file, 'loads Google Fonts remotely, fonts are self-hosted (see scripts/fetch-fonts.mjs)');
+  if (/<script>\s*tailwind\.config/.test(html)) err(file, 'inline tailwind.config, the config lives in tailwind.config.js');
+
   // Bengali digits are ০-৯. Devanagari ०-९ look similar and have slipped in before.
   const deva = html.match(/[०-९]+/g);
   if (deva) err(file, `Devanagari digits instead of Bengali: ${[...new Set(deva)].join(' ')}`);
@@ -83,7 +90,7 @@ for (const file of files) {
       const dir = dirname(file) === '.' ? '' : `${dirname(file)}/`;
       target = `/${relative(root, resolve(root, dir, target)).replace(/\\/g, '/')}`;
     }
-    if (/^\/(img|js)\//.test(target)) {
+    if (/^\/(img|js|css|fonts)\//.test(target)) {
       if (!await exists(join(root, target.slice(1)))) err(file, `missing asset ${target}`);
       continue;
     }
@@ -104,6 +111,9 @@ for (const file of files) {
   }
 
   if (isUtility) continue;
+
+  if (!/<link rel="stylesheet" href="\/css\/site\.css">/.test(html)) err(file, 'missing /css/site.css stylesheet');
+  if (!/<link rel="preload" href="\/fonts\/[^"]+\.woff2" as="font" type="font\/woff2" crossorigin>/.test(html)) warn(file, 'no font preload, first Bengali paint will be late');
 
   // --- SEO rules for real pages ---
 
@@ -171,6 +181,15 @@ for (const file of files) {
           if (article[who]?.name !== 'খামারভেস্ট (Khamarvest)') err(file, `Article ${who} should be "খামারভেস্ট (Khamarvest)"`);
         }
       }
+      if (file === 'index.html') {
+        const product = nodes.find((n) => n['@type'] === 'Product');
+        const offers = [].concat(product?.offers || []);
+        if (!product) err(file, 'homepage has no Product schema');
+        else if (!offers.length || offers.some((o) => o.priceCurrency !== 'BDT' || !o.price)) err(file, 'homepage Product needs Offer(s) with price and priceCurrency BDT');
+        const biz = nodes.find((n) => n['@type'] === 'LocalBusiness' || n['@type'] === 'Organization');
+        const sameAs = [].concat(biz?.sameAs || []);
+        if (!sameAs.some((u) => /facebook\.com/.test(u)) || !sameAs.some((u) => /youtube\.com/.test(u))) err(file, 'homepage LocalBusiness.sameAs must link the Facebook page and YouTube channel');
+      }
     } catch (e) {
       err(file, `invalid JSON-LD: ${e.message}`);
     }
@@ -224,6 +243,26 @@ if (llmsDeva) errors.push(`llms.txt: Devanagari digits instead of Bengali: ${[..
 for (const file of articles) {
   const slug = file.replace(/\.html$/, '');
   if (!llms.includes(slug)) warnings.push(`llms.txt: does not list ${slug}, AI assistants will not see it`);
+}
+
+// --- IndexNow ---
+// Bing verifies ownership by fetching /<key>.txt. If the key in the script and
+// the file drift apart every submission is silently rejected.
+{
+  const src = await readFile(join(root, 'scripts/indexnow.mjs'), 'utf8');
+  const key = src.match(/INDEXNOW_KEY = '([a-f0-9]{32})'/)?.[1];
+  if (!key) errors.push('scripts/indexnow.mjs: no 32-hex INDEXNOW_KEY');
+  else {
+    const keyFile = join(root, `${key}.txt`);
+    if (!await exists(keyFile)) errors.push(`missing IndexNow key file ${key}.txt at the repo root`);
+    else if ((await readFile(keyFile, 'utf8')).trim() !== key) errors.push(`${key}.txt does not contain the key`);
+  }
+}
+
+// --- Analytics ---
+// AI-assistant referrals are the main lead source; both GA bootstraps must tag them.
+for (const f of ['js/ga.js', 'index.html']) {
+  if (!(await readFile(join(root, f), 'utf8')).includes('ai_referral')) errors.push(`${f}: does not fire the ai_referral event (see AGENTS.md > Analytics)`);
 }
 
 // --- Report ---

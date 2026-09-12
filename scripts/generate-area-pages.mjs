@@ -68,10 +68,8 @@ function page(d) {
   <meta property="og:description" content="${d.name} জেলার সব উপজেলায় ডেলিভারি। টাকা পণ্য হাতে পেয়ে।">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${siteUrl}/img/silage-production-1400.jpeg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -206,10 +204,8 @@ const indexHtml = `<!DOCTYPE html>
   <meta property="og:description" content="১৮টি জেলার পাতা, আর সারা বাংলাদেশেই ডেলিভারি। টাকা পণ্য হাতে পেয়ে।">
   <meta property="og:url" content="${siteUrl}/area/">
   <meta property="og:image" content="${siteUrl}/img/silage-production-1400.jpeg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"ডেলিভারি এলাকা","inLanguage":"bn-BD","url":"${siteUrl}/area/"}</script>
 </head>
 <body class="bg-[#f7f8f4] font-['Hind_Siliguri'] text-[#233126] antialiased">

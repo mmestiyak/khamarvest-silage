@@ -34,3 +34,10 @@ img/WhatsApp Image *.jpeg
 
 # Design scratch page for the Google Business cover photo, not a public page
 gmb-cover-photo.html
+
+# Tailwind sources and CI (only the compiled css/site.css is public)
+tailwind.config.js
+css/src.css
+css/fonts.css
+css/tailwind.css
+.github

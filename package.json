@@ -3,8 +3,15 @@
   "scripts": {
     "build:blog": "node scripts/generate-blog-index.mjs",
     "build:areas": "node scripts/generate-area-pages.mjs",
-    "build": "npm run build:areas && npm run build:blog",
+    "build": "npm run build:areas && npm run build:blog && npm run build:css",
     "check": "node scripts/check-site.mjs",
-    "verify": "npm run build && npm run check"
+    "verify": "npm run build && npm run check",
+    "build:css": "tailwindcss -c tailwind.config.js -i css/src.css -o css/tailwind.css --minify && cat css/fonts.css css/tailwind.css > css/site.css",
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "check:links": "node scripts/check-external-links.mjs",
+    "indexnow:dry": "INDEXNOW_DRY_RUN=1 node scripts/indexnow.mjs"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
   }
 }

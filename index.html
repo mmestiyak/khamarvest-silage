@@ -23,9 +23,23 @@
       gtag('config', GA_MEASUREMENT_ID);
     })();
     // যেকোনো জায়গা থেকে ইভেন্ট পাঠানোর নিরাপদ হেল্পার (ID না থাকলে চুপচাপ কিছুই করবে না)
+    // AI assistants (ChatGPT, Perplexity, Copilot, Gemini, Claude) are the main
+    // lead source. Detect the landing from the referrer or ChatGPT's
+    // utm_source, remember it for the session, and stamp ai_source on every
+    // later event so a whatsapp_click can be traced back to the assistant.
+    var AI_SOURCES = [['chatgpt', 'chatgpt'], ['openai', 'chatgpt'], ['perplexity', 'perplexity'], ['copilot', 'copilot'], ['gemini', 'gemini'], ['claude', 'claude'], ['meta.ai', 'meta_ai'], ['you.com', 'you']];
+    var aiSource = '', aiFresh = false;
+    try {
+      var probe = ((new URLSearchParams(location.search).get('utm_source') || '') + ' ' + (document.referrer ? new URL(document.referrer).hostname : '')).toLowerCase();
+      for (var ai = 0; ai < AI_SOURCES.length; ai++) if (probe.indexOf(AI_SOURCES[ai][0]) !== -1) { aiSource = AI_SOURCES[ai][1]; aiFresh = true; break; }
+      if (aiSource) sessionStorage.setItem('ai_source', aiSource); else aiSource = sessionStorage.getItem('ai_source') || '';
+    } catch (e) {}
     function gaEvent(name, params) {
-      if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+      params = params || {};
+      if (aiSource && !params.ai_source) params.ai_source = aiSource;
+      if (typeof window.gtag === 'function') window.gtag('event', name, params);
     }
+    if (aiFresh) gaEvent('ai_referral', { ai_source: aiSource, page_path: location.pathname, page_title: document.title });
   </script>
   <!-- ═══════════ /Google Analytics 4 ═══════════ -->
   <title>ভুট্টা সাইলেজের দাম ১০ টাকা কেজি, সারাদেশে ডেলিভারি | খামারভেস্ট সাইলেজ (Khamarvest Silage)</title>
@@ -66,19 +80,49 @@
       },
       {
         "@type": "Product",
+        "@id": "https://silage.khamarvest.com/#product",
         "name": "ভুট্টা সাইলেজ (Corn Silage) ৫০ কেজি বস্তা",
+        "category": "গো-খাদ্য (Cattle feed)",
+        "manufacturer": { "@id": "https://silage.khamarvest.com/#business" },
         "alternateName": ["কর্ন সাইলেজ", "Corn Silage", "Maize Silage"],
         "description": "সঠিক বয়সে কাটা আস্ত ভুট্টা গাছ মেশিনে চপ করে প্রাকৃতিক ফার্মেন্টেশনে তৈরি খাঁটি ভুট্টা সাইলেজ। মোটাতাজাকরণ, দুধের গাভী, ছাগল ভেড়া সবার জন্য। এয়ারটাইট বস্তায় সারাদেশে ডেলিভারি।",
         "image": ["https://silage.khamarvest.com/img/silage-bag-1200.jpeg", "https://silage.khamarvest.com/img/corn-harvest-1200.jpeg"],
         "brand": { "@type": "Brand", "name": "খামারভেস্ট (Khamarvest)" },
-        "offers": {
-          "@type": "Offer",
-          "price": "10",
-          "priceCurrency": "BDT",
-          "availability": "https://schema.org/InStock",
-          "priceValidUntil": "2026-12-31",
-          "seller": { "@type": "Organization", "name": "খামারভেস্ট (Khamarvest)", "telephone": "+8801303438063" }
-        }
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "প্রতি কেজি ভুট্টা সাইলেজ",
+            "price": "10",
+            "priceCurrency": "BDT",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "10",
+              "priceCurrency": "BDT",
+              "unitCode": "KGM",
+              "unitText": "কেজি",
+              "referenceQuantity": { "@type": "QuantitativeValue", "value": "1", "unitCode": "KGM" }
+            },
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "priceValidUntil": "2026-12-31",
+            "url": "https://silage.khamarvest.com/",
+            "areaServed": { "@type": "Country", "name": "Bangladesh" },
+            "seller": { "@type": "Organization", "name": "খামারভেস্ট (Khamarvest)", "telephone": "+8801303438063", "url": "https://silage.khamarvest.com/" }
+          },
+          {
+            "@type": "Offer",
+            "name": "৫০ কেজি এয়ারটাইট বস্তা",
+            "price": "500",
+            "priceCurrency": "BDT",
+            "eligibleQuantity": { "@type": "QuantitativeValue", "value": "50", "unitCode": "KGM", "unitText": "কেজি" },
+            "availability": "https://schema.org/InStock",
+            "itemCondition": "https://schema.org/NewCondition",
+            "priceValidUntil": "2026-12-31",
+            "url": "https://silage.khamarvest.com/",
+            "areaServed": { "@type": "Country", "name": "Bangladesh" },
+            "seller": { "@type": "Organization", "name": "খামারভেস্ট (Khamarvest)", "telephone": "+8801303438063", "url": "https://silage.khamarvest.com/" }
+          }
+        ]
       },
       {
         "@type": "LocalBusiness",
@@ -195,25 +239,8 @@
   }
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌽</text></svg>">
-  <!-- Fonts: Noto Sans Bengali (clean Bangla sans with well-formed numerals) + Noto Serif Bengali -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;500&display=swap" rel="stylesheet">
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            hind: ['"Noto Sans Bengali"', 'sans-serif'],
-            noto: ['"Noto Serif Bengali"', 'sans-serif'],
-            sys: ['-apple-system','BlinkMacSystemFont','"Segoe UI"','Roboto','Oxygen-Sans','Ubuntu','Cantarell','"Helvetica Neue"','sans-serif'],
-          },
-        },
-      },
-    }
-  </script>
+  <link rel="preload" href="/fonts/noto-sans-bengali-300-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css">
   <style>
     /* Hero background: own khamar photo (silage processing beside the corn field) */
     .hero-pattern {

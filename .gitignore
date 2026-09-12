@@ -5,3 +5,7 @@
 .env*
 !.env.example
 .DS_Store
+
+# Dependencies and build intermediates
+node_modules
+css/tailwind.css
