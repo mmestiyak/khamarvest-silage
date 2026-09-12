@@ -30,12 +30,23 @@ jobs:
       # Cloudflare deploys from the same push. Give it time so Bing's first
       # fetch of a brand-new URL does not see a 404.
       - name: Wait for the Cloudflare deploy to land
-        run: sleep 150
+        run: sleep 240
 
+      # Retry for a few minutes instead of failing on one slow deploy: a
+      # missed ping here means this push's pages just wait for Bing's normal
+      # crawl instead of getting the fast-track submission.
       - name: Verify the key file is live
         run: |
-          KEY=$(node -e "import('./scripts/indexnow.mjs').catch(()=>{});" 2>/dev/null; grep -o "INDEXNOW_KEY = '[a-f0-9]*'" scripts/indexnow.mjs | cut -d"'" -f2)
-          curl -sf "https://silage.khamarvest.com/$KEY.txt" | grep -q "$KEY"
+          KEY=$(grep -o "INDEXNOW_KEY = '[a-f0-9]*'" scripts/indexnow.mjs | cut -d"'" -f2)
+          for i in 1 2 3 4 5; do
+            if curl -sf "https://silage.khamarvest.com/$KEY.txt" | grep -q "$KEY"; then
+              echo "Key file is live."; exit 0
+            fi
+            echo "Attempt $i: key file not live yet, waiting 60s..."
+            sleep 60
+          done
+          echo "Key file never came up, skipping this push's IndexNow submission."
+          exit 1
 
       - name: Submit changed URLs
         run: node scripts/indexnow.mjs "${{ github.event.before }}" "${{ github.sha }}"
