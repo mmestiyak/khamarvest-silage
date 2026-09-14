@@ -6,7 +6,10 @@
     "enabled": true
   },
   "assets": {
-    "directory": "."
+    "directory": ".",
+    // Serve /404.html instead of a bare Cloudflare error page. Do NOT set
+    // "html_handling" here: "none" also kills directory indexes (see AGENTS.md).
+    "not_found_handling": "404-page"
   },
   "compatibility_flags": [
     "nodejs_compat"

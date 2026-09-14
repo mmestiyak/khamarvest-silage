@@ -16,8 +16,10 @@ import { readFile } from 'node:fs/promises';
 export const INDEXNOW_KEY = 'a7f3c9e1b2d84f6a9c0e5d7b3f1a8c2e';
 const site = 'https://silage.khamarvest.com';
 
-// Repo files that are HTML but not public pages (mirrors .assetsignore).
-const NOT_PUBLIC = new Set(['blog/article-template.html', 'gmb-cover-photo.html']);
+// Repo files that are HTML but not public pages (mirrors .assetsignore), plus
+// 404.html, which is public but noindex: submitting it would ask Bing to index
+// an error page.
+const NOT_PUBLIC = new Set(['blog/article-template.html', 'gmb-cover-photo.html', '404.html']);
 
 function toUrl(file) {
   if (file === 'index.html') return `${site}/`;
@@ -40,6 +42,9 @@ async function changedUrls(before, after) {
   }
   // llms.txt is what AI assistants read; resubmit it when it changes.
   if (diff.includes('llms.txt')) urls.add(`${site}/llms.txt`);
+  // feed.xml is regenerated whenever a guide changes, so a fresh copy in Bing's
+  // index keeps the feed a usable discovery path.
+  if (diff.includes('feed.xml')) urls.add(`${site}/feed.xml`);
   return [...urls];
 }
 
