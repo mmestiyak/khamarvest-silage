@@ -96,6 +96,7 @@ A static marketing + content site for **খামারভেস্ট সাই
 
 ## AI discoverability (llms.txt / robots.txt)
 
-- `llms.txt` at the root summarizes the brand, prices, feeding rates and guide URLs for AI assistants (ChatGPT, Claude, Perplexity). Update it whenever prices, delivery areas or the guide list change.
+- `llms.txt` at the root summarizes the brand, prices, feeding rates and guide URLs for AI assistants (ChatGPT, Claude, Perplexity). Update it whenever prices, delivery areas or the guide list change, **and whenever an article is materially rewritten**: assistants decide whether to cite a guide from its summary here, not from the page.
+- **The trust rules apply to `llms.txt` too.** It is quoted verbatim by assistants, so a promised profit figure or an invented testimonial there reaches farmers as ours exactly like one in an article, and nothing on the site would reveal it. The checker now runs the same banned-phrase lists over `llms.txt` (it had drifted: a "মাসিক ১৫-২০ হাজার টাকা লাভ করুন" line survived there for a claim no article ever made).
 - `/blog/` ships an `ItemList` of every guide inside its `CollectionPage` JSON-LD (generated). That hands an assistant the whole library, titles and URLs included, from one block instead of 29 cards of markup.
 - `robots.txt` explicitly allows AI crawlers (GPTBot, OAI-SearchBot, ClaudeBot, PerplexityBot, etc.). Do not add blanket Disallow rules.

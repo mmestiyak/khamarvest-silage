@@ -11,6 +11,13 @@ import { join, dirname, resolve, relative } from 'node:path';
 const root = process.cwd();
 const site = 'https://silage.khamarvest.com';
 
+// Trust rules from AGENTS.md. They apply to every word we publish, including
+// llms.txt, which is the file AI assistants read and quote back to farmers: a
+// promised profit figure there reaches people as ours just as surely as one in
+// an article, and nothing on the page would show it to us.
+const INVENTED_TESTIMONIAL = ['তারা বলেন', 'খামারিরা বলেন', 'সফল হয়েছেন'];
+const PROMISED_EARNINGS = ['লাভ করুন', 'আয় করুন', 'গ্যারান্টি'];
+
 const errors = [];
 const warnings = [];
 const err = (file, msg) => errors.push(`${file}: ${msg}`);
@@ -205,12 +212,12 @@ for (const file of files) {
   // Fabricated testimonials. We have no permission-cleared customer quotes, so
   // any "farmers say" sentence on this site is invented. Use a real, attributed
   // quote or state the mechanism instead.
-  for (const phrase of ['তারা বলেন', 'খামারিরা বলেন', 'সফল হয়েছেন']) {
+  for (const phrase of INVENTED_TESTIMONIAL) {
     if (html.includes(phrase)) err(file, `invented customer testimonial: "${phrase}". Use a real attributed quote or drop it`);
   }
   // Promised earnings. Income depends on the reader's milk price and costs, so
   // link the calculator instead of naming a figure.
-  for (const phrase of ['লাভ করুন', 'আয় করুন', 'গ্যারান্টি']) {
+  for (const phrase of PROMISED_EARNINGS) {
     if (html.includes(phrase)) err(file, `promises earnings or gives a guarantee: "${phrase}"`);
   }
   // Unsupported savings claims of the "cuts your cost in half" kind.
@@ -241,6 +248,12 @@ for (const [canonical, file] of canonicals) {
 
 const llms = await readFile(join(root, 'llms.txt'), 'utf8');
 if (/[—–]/.test(llms)) errors.push('llms.txt: contains an em or en dash');
+for (const phrase of PROMISED_EARNINGS) {
+  if (llms.includes(phrase)) errors.push(`llms.txt: promises earnings or gives a guarantee: "${phrase}". Assistants quote this file verbatim`);
+}
+for (const phrase of INVENTED_TESTIMONIAL) {
+  if (llms.includes(phrase)) errors.push(`llms.txt: invented customer testimonial: "${phrase}"`);
+}
 const llmsDeva = llms.match(/[०-९]+/g);
 if (llmsDeva) errors.push(`llms.txt: Devanagari digits instead of Bengali: ${[...new Set(llmsDeva)].join(' ')}`);
 for (const file of articles) {
