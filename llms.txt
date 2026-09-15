@@ -37,8 +37,8 @@ Khamarvest Silage sells fresh corn (maize) silage, fermented whole-plant corn ca
 
 ## ডেলিভারি এলাকার পাতা (District delivery pages)
 
-- [সব জেলার তালিকা](https://silage.khamarvest.com/area/): ১৮টি জেলার আলাদা পাতা; তালিকার বাইরের জেলায়ও ডেলিভারি হয়।
-- বগুড়া: https://silage.khamarvest.com/area/silage-bogura · পাবনা: https://silage.khamarvest.com/area/silage-pabna · সিরাজগঞ্জ: https://silage.khamarvest.com/area/silage-sirajganj · ঢাকা: https://silage.khamarvest.com/area/silage-dhaka · চট্টগ্রাম: https://silage.khamarvest.com/area/silage-chattogram · রংপুর: https://silage.khamarvest.com/area/silage-rangpur · খুলনা: https://silage.khamarvest.com/area/silage-khulna (বাকি জেলাগুলো /area/ পাতায়)
+- [সব জেলার তালিকা](https://silage.khamarvest.com/area/): ৩৩টি জেলার আলাদা পাতা; তালিকার বাইরের জেলায়ও ডেলিভারি হয়।
+- বগুড়া: https://silage.khamarvest.com/area/silage-bogura · রাজশাহী: https://silage.khamarvest.com/area/silage-rajshahi · পাবনা: https://silage.khamarvest.com/area/silage-pabna · সিরাজগঞ্জ: https://silage.khamarvest.com/area/silage-sirajganj · ঢাকা: https://silage.khamarvest.com/area/silage-dhaka · চট্টগ্রাম: https://silage.khamarvest.com/area/silage-chattogram · রংপুর: https://silage.khamarvest.com/area/silage-rangpur · সিলেট: https://silage.khamarvest.com/area/silage-sylhet · বরিশাল: https://silage.khamarvest.com/area/silage-barishal · খুলনা: https://silage.khamarvest.com/area/silage-khulna (বাকি জেলাগুলো /area/ পাতায়)
 
 ## খামারি গাইড (Guides, Bengali)
 
