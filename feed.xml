@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Mon, 14 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 15 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>সাইলেজের পুষ্টিমান: DM, CP, TDN মানে কী আর বিক্রেতার দেওয়া সংখ্যা যাচাই করবেন কীভাবে</title>
+      <link>https://silage.khamarvest.com/blog/silage-pushtiman-dm-cp-tdn</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-pushtiman-dm-cp-tdn</guid>
+      <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
+      <description>সাইলেজের বিজ্ঞাপনে লেখা ড্রাই ম্যাটার, ক্রুড প্রোটিন ও TDN আসলে কী বোঝায়, ভুট্টা সাইলেজের প্রকাশিত সাধারণ মান কত, আর ল্যাব রিপোর্ট ছাড়া কোনো সংখ্যাকে কেন স্পেসিফিকেশন বলা যায় না।</description>
+    </item>
     <item>
       <title>গরুর টিকা ও কৃমিনাশকের সময়সূচি: কোন বয়সে কোনটা দরকার</title>
       <link>https://silage.khamarvest.com/blog/goru-tika-o-krimi-tarik-talika</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-songrokkhon-niyom</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
       <description>না-খোলা এয়ারটাইট বস্তায় সাইলেজ ৬-১২ মাস, খোলার পর ২-৩ দিন। বাতাস কেন একমাত্র শত্রু, ডেলিভারির দিনে যা দেখবেন, পাটাতনে রাখা ও থাক দেওয়ার নিয়ম, গরম-বর্ষা-শীতে আলাদা সতর্কতা ও কত বস্তা কিনবেন।</description>
-    </item>
-    <item>
-      <title>সাইলেজ নাকি কাঁচা ঘাস নাকি খড়? টাকার অঙ্কে আসল হিসাব</title>
-      <link>https://silage.khamarvest.com/blog/silage-vs-kacha-ghas-vs-khor</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-vs-kacha-ghas-vs-khor</guid>
-      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>সাইলেজ, কাঁচা ঘাস ও খড়ের সৎ তুলনা: কেন কেজিতে কেজিতে দাম মেলানো ভুল, শুকনা পদার্থের হিসাবে আসল দাম কত, রেশনে তিনটার তিন কাজ, আর কখন কোনটা বেছে নেবেন।</description>
     </item>
   </channel>
 </rss>
