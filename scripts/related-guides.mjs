@@ -39,6 +39,7 @@ const TAGS = {
   'silage-niye-vul-dharona': ['silage-basics', 'feeding'],
   'mohisher-khaddo-o-silage': ['feeding', 'dairy'],
   'chagol-vera-silage-khawano-guide': ['feeding', 'silage-basics'],
+  'rumen-kivabe-kaj-kore': ['feeding', 'health'],
   'go-khaddo-shobdokosh': ['feeding', 'silage-basics'],
   'danadar-khaddo-goru-ration': ['feeding', 'dairy'],
   'gavir-dudh-baranor-upay': ['dairy', 'feeding'],
