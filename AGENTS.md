@@ -83,6 +83,7 @@ A static marketing + content site for **খামারভেস্ট সাই
 
 - Copy `blog/article-template.html` for a new post (it has a body brand-reminder placeholder).
 - After adding a post: run `npm run build:blog` (regenerates `blog/index.html` AND `sitemap.xml`), then add the article to `llms.txt` (the AI-assistant summary file — keep its facts and guide list current).
+- **Related guides are generated, not hand-picked.** `npm run build:related` (`scripts/related-guides.mjs`, part of `npm run build`) appends a "সম্পর্কিত গাইড" block to every article between `<!-- related-guides:start -->` and `<!-- related-guides:end -->`. It is idempotent: it strips its own previous block first. Relatedness comes from the explicit `TAGS` map in that script, and it prefers guides the article does not already link to, so the block opens new paths instead of repeating links already in the prose. **Adding an article means adding it to `TAGS`**, or the script throws. The checker fails on an article without the block.
 - Every post should carry `FAQPage` + `BreadcrumbList` JSON-LD alongside `Article` when it answers common farmer questions — AI assistants and Google pull answers from these.
 
 ## Free tools (tools/)

@@ -252,6 +252,9 @@ for (const file of files) {
   if (brandInBody < 2) err(file, `brand appears ${brandInBody}x in the article body, needs at least 2`);
 
   if (!/<script src="\/js\/ga\.js"/.test(html)) err(file, 'missing /js/ga.js, clicks will not be tracked');
+  // Every article ends with a generated "সম্পর্কিত গাইড" block. Without it an
+  // article is a dead end for the reader and a leaf for the crawler.
+  if (!html.includes('<!-- related-guides:start -->')) err(file, 'no related-guides block, run npm run build:related');
   if (!/"@type"\s*:\s*"FAQPage"/.test(html)) warn(file, 'no FAQPage schema (AI assistants pull answers from it)');
   if (!/"@type"\s*:\s*"BreadcrumbList"/.test(html)) warn(file, 'no BreadcrumbList schema');
 }

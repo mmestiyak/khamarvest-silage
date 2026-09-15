@@ -3,7 +3,7 @@
   "scripts": {
     "build:blog": "node scripts/generate-blog-index.mjs",
     "build:areas": "node scripts/generate-area-pages.mjs",
-    "build": "npm run build:areas && npm run build:blog && npm run build:images && npm run build:css",
+    "build": "npm run build:areas && npm run build:related && npm run build:blog && npm run build:images && npm run build:css",
     "check": "node scripts/check-site.mjs",
     "verify": "npm run build && npm run check",
     "build:css": "tailwindcss -c tailwind.config.js -i css/src.css -o css/tailwind.css --minify && cat css/fonts.css css/tailwind.css > css/site.css",
@@ -11,7 +11,8 @@
     "check:links": "node scripts/check-external-links.mjs",
     "indexnow:dry": "INDEXNOW_DRY_RUN=1 node scripts/indexnow.mjs",
     "images": "node scripts/optimize-images.mjs",
-    "build:images": "node scripts/responsive-images.mjs"
+    "build:images": "node scripts/responsive-images.mjs",
+    "build:related": "node scripts/related-guides.mjs"
   },
   "devDependencies": {
     "sharp": "^0.35.4",
