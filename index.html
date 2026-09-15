@@ -262,13 +262,22 @@
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌽</text></svg>">
   <link rel="preload" href="/fonts/noto-sans-bengali-300-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" as="image" href="/img/silage-production-1400-800w.webp" type="image/webp" media="(max-width: 899px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/img/silage-production-1400-1200w.webp" type="image/webp" media="(min-width: 900px)" fetchpriority="high">
   <link rel="stylesheet" href="/css/site.css">
   <style>
     /* Hero background: own khamar photo (silage processing beside the corn field) */
     .hero-pattern {
-      background-image: url("img/silage-production-1400.jpeg");
+      background-image: url("img/silage-production-1400-800w.jpeg");
+      background-image: image-set(url("img/silage-production-1400-800w.webp") type("image/webp"), url("img/silage-production-1400-800w.jpeg") type("image/jpeg"));
       background-size: cover;
       background-position: center;
+    }
+    @media (min-width: 900px) {
+      .hero-pattern {
+        background-image: url("img/silage-production-1400-1200w.jpeg");
+        background-image: image-set(url("img/silage-production-1400-1200w.webp") type("image/webp"), url("img/silage-production-1400-1200w.jpeg") type("image/jpeg"));
+      }
     }
     .hero-pattern::before {
       content: "";
@@ -443,9 +452,7 @@
       <!-- Right: framed image slider (original is a 4-slide swiper of the same photo) -->
       <div class="w-full md:w-1/2 flex items-center justify-center px-[10px]">
         <div class="w-full max-w-[540px] rounded-[10px] border-4 border-[rgb(20,148,91)] overflow-hidden">
-          <div class="aspect-square w-full bg-cover bg-center"
-               role="img" aria-label="ভুট্টা সাইলেজ"
-               style="background-image:url('img/silage-bag-1200.jpeg')"></div>
+          <img src="img/silage-bag-1200.jpeg" loading="lazy" alt="ভুট্টা সাইলেজের ৫০ কেজি এয়ারটাইট বস্তা" width="540" height="540" class="aspect-square w-full object-cover">
         </div>
       </div>
     </div>

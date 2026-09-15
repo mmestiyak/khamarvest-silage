@@ -108,6 +108,24 @@ for (const file of files) {
     else if (!await resolves(target)) err(file, `internal link does not resolve: ${target}`);
   }
 
+  // Responsive sources must resolve. A typo in a srcset fails silently: the
+  // browser quietly falls back to the full-size <img src>, so the page still
+  // looks right while every visitor pays for the large file.
+  for (const m of html.matchAll(/srcset="([^"]+)"/g)) {
+    for (const candidate of m[1].split(',')) {
+      const url = candidate.trim().split(/\s+/)[0];
+      if (!url || url.startsWith('http') || url.startsWith('data:')) continue;
+      const abs = url.startsWith('/') ? join(root, url.slice(1)) : resolve(root, dirname(file), url);
+      if (!await exists(abs)) err(file, `srcset references a missing file: ${url}`);
+    }
+  }
+  // Same for CSS image-set()/url() backgrounds pointing into img/.
+  for (const m of html.matchAll(/url\((["']?)((?:\.\.\/)*img\/[^"')]+)\1\)/g)) {
+    const url = m[2];
+    const abs = url.startsWith('/') ? join(root, url.slice(1)) : resolve(root, dirname(file), url);
+    if (!await exists(abs)) err(file, `CSS background references a missing image: ${url}`);
+  }
+
   // Images must be the optimized copies, and must exist.
   for (const m of html.matchAll(/<img\b[^>]*>/g)) {
     const tag = m[0];
