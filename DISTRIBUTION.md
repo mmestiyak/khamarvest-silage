@@ -212,6 +212,10 @@ because YouTube hides the rest behind "show more".
 
 ফ্রি ক্যালকুলেটর ও প্রিন্ট শিট: https://silage.khamarvest.com/tools/
 সব খামারি গাইড: https://silage.khamarvest.com/blog/
+ফ্রি ক্যালকুলেটর ও প্রিন্ট শিট: https://silage.khamarvest.com/tools/
+সাইলেজ ক্যালকুলেটর (কত বস্তা লাগবে): https://silage.khamarvest.com/tools/silage-calculator
+আপনার জেলায় ডেলিভারি (৩৩ জেলা): https://silage.khamarvest.com/area/
+আমরা কারা: https://silage.khamarvest.com/about
 Facebook: https://www.facebook.com/khamarvestSilage/
 
 ---
@@ -226,7 +230,7 @@ Facebook: https://www.facebook.com/khamarvestSilage/
 অর্ডার দিতে WhatsApp-এ নাম, এলাকা আর কত বস্তা লাগবে লিখে পাঠান: https://wa.me/8801303438063
 
 কত বস্তা লাগবে বুঝতে না পারলে ওয়েবসাইটের ক্যালকুলেটরে গরুর সংখ্যা বসিয়ে দেখুন, সঙ্গে দাম,
-খাওয়ানোর নিয়ম আর ১৮টি খামারি গাইডও আছে: https://silage.khamarvest.com
+খাওয়ানোর নিয়ম আর ৩১টি খামারি গাইডও আছে: https://silage.khamarvest.com
 
 কেনার আগে জেনে নিন: দুধের গাভী দিনে ১৫-২৫ কেজি, মোটাতাজাকরণের গরু ১০-২০ কেজি, ছাগল-ভেড়া
 ১-২ কেজি সাইলেজ খায়। নতুন গরুকে ৭ দিনে ধীরে অভ্যাস করাতে হয়।
