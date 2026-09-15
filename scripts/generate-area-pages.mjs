@@ -41,6 +41,22 @@ const districts = [
   { name: 'কক্সবাজার', loc: 'কক্সবাজারে', slug: 'coxsbazar', en: "Cox's Bazar", division: 'চট্টগ্রাম', near: ['chattogram'], ctx: 'coastal' },
 ];
 
+// Production base. The silage is mainly made in Bogura district, around the
+// Sherpur, Dhunat and Shahjahanpur upazilas, with additional production
+// elsewhere in the country when demand requires it. Saying where the product
+// actually comes from is a trust signal competitors do not give, and for the
+// Bogura page it is a genuine local-search advantage. Nothing below claims a
+// depot, branch or stockist anywhere: there are none.
+const ORIGIN = (d) => d.slug === 'bogura'
+  ? `      <h2 class="mt-9 text-2xl font-bold text-[#123b28]">বগুড়ার সাইলেজ বগুড়াতেই তৈরি</h2>
+      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">খামারভেস্ট সাইলেজের মূল উৎপাদন বগুড়া জেলাতেই, শেরপুর, ধুনট ও শাজাহানপুরসহ আশপাশের উপজেলার ভুট্টা খেত থেকে। অর্থাৎ বগুড়ার খামারি যে বস্তাটা হাতে পান সেটি দূরের জেলা থেকে আসা মাল নয়, একই জেলায় তৈরি। ফসল কাটা, চপ করা, চেপে ভরা ও বস্তা সিল করা পর্যন্ত পুরো কাজটাই নিজেদের তত্ত্বাবধানে হয়।</p>
+      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">চাহিদা বেশি হলে দেশের অন্য এলাকাতেও উৎপাদন করা হয়, তবে বগুড়াই মূল ঘাঁটি। বগুড়ায় আমাদের কোনো দোকান বা ডিপো নেই, অর্ডার শুধু WhatsApp নম্বরে নেওয়া হয়।</p>
+`
+  : `      <h2 class="mt-9 text-2xl font-bold text-[#123b28]">সাইলেজটা তৈরি হয় কোথায়</h2>
+      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">খামারভেস্ট সাইলেজের মূল উৎপাদন <a href="/area/silage-bogura" class="font-semibold text-[#0b6a3e] underline underline-offset-4">বগুড়া জেলায়</a>, শেরপুর, ধুনট ও শাজাহানপুরসহ আশপাশের উপজেলার ভুট্টা খেত থেকে। সেখান থেকেই ${d.loc} বস্তা পাঠানো হয়। চাহিদা অনুযায়ী দেশের অন্য এলাকাতেও উৎপাদন করা হয়।</p>
+      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${d.name} জেলায় খামারভেস্টের কোনো গুদাম, শাখা বা ডিলার নেই। কেউ আমাদের নাম ব্যবহার করে ${d.loc} দোকান বা ডিপো দেখালে আগে যাচাই করে নিন, অর্ডার শুধু WhatsApp নম্বরে নেওয়া হয়। কেনার আগে দেখে নিতে পারেন <a href="/blog/nirapode-silage-kenar-niyom" class="font-semibold text-[#0b6a3e] underline underline-offset-4">নিরাপদে সাইলেজ কেনার নিয়ম</a>।</p>
+`;
+
 const bySlug = Object.fromEntries(districts.map((d) => [d.slug, d]));
 const fbSvg = '<svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
 
@@ -81,7 +97,7 @@ function page(d) {
         "inLanguage":"bn-BD",
         "url":"${url}",
         "areaServed":{"@type":"AdministrativeArea","name":"${d.en} District, Bangladesh"},
-        "provider":{"@type":"Organization","name":"খামারভেস্ট (Khamarvest)","telephone":"+8801303438063","url":"${siteUrl}/"}
+        "provider":{"@type":"Organization","name":"খামারভেস্ট (Khamarvest)","telephone":"+8801303438063","url":"${siteUrl}/","address":{"@type":"PostalAddress","addressLocality":"বগুড়া","addressRegion":"রাজশাহী","addressCountry":"BD"}}
       },
       {
         "@type":"BreadcrumbList",
@@ -136,6 +152,7 @@ function page(d) {
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${CONTEXT[d.ctx](d)}</p>
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">ভুট্টা সাইলেজে আস্ত ভুট্টা গাছ দানাসহ কুচি করা থাকে বলে আঁশ ও শক্তি একসাথে মেলে। দুধের গাভীকে দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি আর ছাগল-ভেড়াকে ১-২ কেজি দেওয়া হয়। নতুন হলে আগে পড়ুন: <a href="/blog/silage-ki-kivabe-toiri-upokarita" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সাইলেজ কী?</a> আর <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">প্রথমবার খাওয়ানোর নিয়ম</a>।</p>
 
+${ORIGIN(d)}
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.name} থেকে অর্ডারের নিয়ম (৩ ধাপ)</h2>
       <ol class="mt-4 grid gap-4 sm:grid-cols-3">
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">১. মেসেজ পাঠান</strong>নাম, ${d.name}র ঠিকানা ও কত বস্তা লাগবে লিখে WhatsApp করুন: +880 1303-438063</li>

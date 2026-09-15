@@ -199,6 +199,9 @@ for (const file of files) {
         const biz = nodes.find((n) => n['@type'] === 'LocalBusiness' || n['@type'] === 'Organization');
         const sameAs = [].concat(biz?.sameAs || []);
         if (!sameAs.some((u) => /facebook\.com/.test(u)) || !sameAs.some((u) => /youtube\.com/.test(u))) err(file, 'homepage LocalBusiness.sameAs must link the Facebook page and YouTube channel');
+        // Country-only is what we had, and it is close to no location signal at
+        // all for Google local results or for an AI asked about nearby suppliers.
+        if (!biz?.address?.addressLocality) err(file, 'homepage LocalBusiness.address needs addressLocality (see AGENTS.md > production base)');
       }
     } catch (e) {
       err(file, `invalid JSON-LD: ${e.message}`);
