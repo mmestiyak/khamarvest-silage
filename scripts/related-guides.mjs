@@ -38,6 +38,7 @@ const TAGS = {
   'silage-niye-vul-dharona': ['silage-basics', 'feeding'],
   'chagol-vera-silage-khawano-guide': ['feeding', 'silage-basics'],
   'go-khaddo-shobdokosh': ['feeding', 'silage-basics'],
+  'danadar-khaddo-goru-ration': ['feeding', 'dairy'],
   'gavir-dudh-baranor-upay': ['dairy', 'feeding'],
   'gorvoboti-gavir-khaddo-dry-period': ['dairy', 'breeding'],
   'gavir-heat-o-projonon-niyom': ['breeding', 'dairy'],
