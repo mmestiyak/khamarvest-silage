@@ -39,7 +39,7 @@ for (const file of await walk('')) {
   }
 }
 
-async function probe(url) {
+async function probeOnce(url) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 25000);
   try {
@@ -57,6 +57,27 @@ async function probe(url) {
   }
 }
 
+// A reset connection or a timeout is usually the far end being slow or rate
+// limiting us, not a dead page: police.gov.bd returned ECONNRESET in three runs
+// out of four while answering 200 to every direct request. Reporting that as a
+// dead citation opens a monthly issue that is wrong, and an alert that is
+// usually wrong gets ignored, which is worse than having no alert. So retry
+// transient failures with a pause before believing them.
+const TRANSIENT = /ECONNRESET|ETIMEDOUT|ECONNREFUSED|EAI_AGAIN|ENETUNREACH|socket hang up|timeout|fetch failed/i;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function probe(url) {
+  let last;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    last = await probeOnce(url);
+    const transient = last.status === 0 && !last.tls && TRANSIENT.test(String(last.error))
+      || last.status === 429 || last.status >= 500;
+    if (!transient) return last;
+    if (attempt < 2) await sleep(2000 * (attempt + 1));
+  }
+  return { ...last, retried: true };
+}
+
 const dead = [];     // 404, 410, 5xx, network error: the citation is gone
 const blocked = [];  // 403/405/429 bot walls and TLS-misconfigured sites: a human should click it
 const ok = [];
@@ -64,7 +85,7 @@ for (const [url, files] of links) {
   const r = await probe(url);
   const entry = { url, files: [...files], ...r };
   if (r.status >= 200 && r.status < 400) ok.push(entry);
-  else if ([401, 403, 405, 429].includes(r.status) || r.tls) blocked.push(entry);
+  else if ([401, 403, 405, 429].includes(r.status) || r.tls || r.retried) blocked.push(entry);
   else dead.push(entry);
 }
 
