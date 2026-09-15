@@ -409,6 +409,21 @@ for (const file of articles) {
   }
 }
 
+// --- Social post library ---
+// Every post links to a guide. A typo in a slug sends a farmer who clicked a
+// Facebook link to a 404, which is the worst possible first impression.
+{
+  const { posts } = JSON.parse(await readFile(join(root, 'scripts/social-posts.json'), 'utf8'));
+  for (const post of posts) {
+    if (!await resolves(`/${post.slug}`)) errors.push(`scripts/social-posts.json: "${post.slug}" does not resolve`);
+    if (!post.hook || !post.points?.length || !post.close) errors.push(`scripts/social-posts.json: "${post.slug}" is missing hook, points or close`);
+  }
+  const seasons = new Set(posts.map((p) => p.season));
+  for (const needed of ['monsoon', 'winter', 'summer', 'qurbani']) {
+    if (!seasons.has(needed)) warnings.push(`scripts/social-posts.json: no post tagged "${needed}", that season will fall back to evergreen`);
+  }
+}
+
 // --- IndexNow ---
 // Bing verifies ownership by fetching /<key>.txt. If the key in the script and
 // the file drift apart every submission is silently rejected.

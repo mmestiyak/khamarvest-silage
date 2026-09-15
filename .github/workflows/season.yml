@@ -5,7 +5,7 @@
 # This deliberately does not publish anything. Google's scaled-content-abuse
 # policy targets automated publishing, and this site's advantage is that every
 # claim is sourced and checkable, so the last step stays human.
-name: Seasonal content plan
+name: Monthly content and social plan
 
 on:
   schedule:
@@ -26,13 +26,19 @@ jobs:
           node-version: 20
 
       - name: Build the plan
-        run: node scripts/season-calendar.mjs > report.md && cat report.md
+        run: |
+          node scripts/season-calendar.mjs > report.md
+          printf '\n\n' >> report.md
+          # Ready-to-paste Facebook posts for the month. This market transacts
+          # on Facebook, so the seasonal guide list is only half the job.
+          node scripts/social-posts.mjs >> report.md
+          cat report.md
 
       - name: Open the monthly issue
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          # No "## " heading means no season is within its lead time this month.
-          grep -q '^## ' report.md || { echo "nothing due this month"; exit 0; }
-          gh issue create --title "মৌসুমি কনটেন্ট পরিকল্পনা, $(date -u +'%B %Y')" --body-file report.md
+          # The social plan always has content, so the issue always has value.
+          grep -q '^## \|^### ' report.md || { echo "nothing due this month"; exit 0; }
+          gh issue create --title "মাসিক কনটেন্ট ও ফেসবুক পরিকল্পনা, $(date -u +'%B %Y')" --body-file report.md
