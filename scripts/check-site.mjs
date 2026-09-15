@@ -327,9 +327,11 @@ for (const file of articles) {
 {
   const stamps = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((m) => m[1]);
   if (new Set(stamps).size < 2) errors.push('sitemap.xml: every lastmod is the same date, which crawlers treat as noise (see scripts/generate-blog-index.mjs)');
-  const today = new Date().toISOString().slice(0, 10);
+  // Bangladesh is UTC+6, so for six hours a day the owner's date is a day ahead
+  // of UTC. Allow that one-day skew; anything beyond it is a real typo.
+  const tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
   for (const stamp of stamps) {
-    if (stamp > today) errors.push(`sitemap.xml: lastmod is in the future: ${stamp}`);
+    if (stamp > tomorrow) errors.push(`sitemap.xml: lastmod is more than a day in the future: ${stamp}`);
   }
 }
 
