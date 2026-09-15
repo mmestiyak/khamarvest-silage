@@ -18,22 +18,29 @@ import { join } from 'node:path';
 // stale rather than silently planning against a date that has passed.
 const QURBANI = { 2027: '2027-05-16', 2028: '2028-05-05' };
 
-// Each entry: the months when demand peaks, how many weeks ahead content should
-// be live, and the guides that serve it.
+// Each entry: the months when demand peaks, and two different lead times.
+//
+// `lead` is when EXISTING guides should be refreshed and re-crawled: Google
+// picks up an update to a known page within days.
+//
+// `leadNew` is when writing NEW content has to START. A new page typically
+// needs two to three months to settle into rankings, so a six-week warning is
+// useless for anything that does not exist yet. This distinction was missing,
+// which is how winter arrived with one 681-word guide behind it.
 const SEASONS = [
-  { name: 'গরম ও হিট স্ট্রেস', peak: [3, 4, 5], lead: 6,
+  { name: 'গরম ও হিট স্ট্রেস', peak: [3, 4, 5], lead: 6, leadNew: 18,
     guides: ['blog/gorome-gorur-jotno-heat-stress', 'blog/silage-songrokkhon-niyom'],
     why: 'গরমে খোলা বস্তা দ্রুত নষ্ট হয়, আর হিট স্ট্রেসে দুধ পড়ে যায়। সংরক্ষণ গাইডের মৌসুম অংশটি গরম শুরুর আগেই ক্রল হওয়া দরকার।' },
-  { name: 'বর্ষা', peak: [6, 7, 8, 9], lead: 6,
+  { name: 'বর্ষা', peak: [6, 7, 8, 9], lead: 6, leadNew: 18,
     guides: ['blog/borshakale-gorur-khaddo-babosthapona', 'blog/gorur-pet-fapa-hole-koronio'],
     why: 'ভেজা ঘাসে পেট ফাঁপার ঝুঁকি বাড়ে আর মাঠ ডুবলে সবুজ খাদ্যের সংকট হয়, তখনই সাইলেজের চাহিদা ওঠে।' },
-  { name: 'শীত', peak: [11, 12, 1, 2], lead: 6,
-    guides: ['blog/goru-shitokale-khaddo-vyobosthapna', 'blog/gavir-dudh-baranor-upay'],
+  { name: 'শীত', peak: [11, 12, 1, 2], lead: 6, leadNew: 18,
+    guides: ['blog/goru-shitokale-khaddo-vyobosthapna', 'blog/shite-gorur-thanda-jhuki-o-khaddo', 'blog/bachur-jotno-o-khaddo'],
     why: 'শীতে ঘাসের বাড়ন কমে, খড়ের দাম চড়ে, আর খামারি বিকল্প খোঁজেন।' },
-  { name: 'ভুট্টা কাটা ও সাইলেজ তৈরির মৌসুম', peak: [3, 4, 5], lead: 8,
+  { name: 'ভুট্টা কাটা ও সাইলেজ তৈরির মৌসুম', peak: [3, 4, 5], lead: 8, leadNew: 20,
     guides: ['blog/silage-ki-kivabe-toiri-upokarita', 'blog/silage-kinben-naki-nije-banaben'],
     why: 'ভুট্টা কাটার সময়েই খামারি ঠিক করেন নিজে বানাবেন না কিনবেন, তাই তৈরির পদ্ধতি ও কেনা-বানানোর হিসাব তখন সবচেয়ে বেশি খোঁজা হয়।' },
-  { name: 'কোরবানি (মোটাতাজাকরণ)', peak: 'qurbani', lead: 20,
+  { name: 'কোরবানি (মোটাতাজাকরণ)', peak: 'qurbani', lead: 20, leadNew: 32,
     guides: ['blog/qurbani-goru-motatajakoron-porikolpona', 'blog/goru-motatajakoron-khaddo-talika', 'blog/gorur-ojon-mapar-niyom'],
     why: 'ঈদের ৪-৫ মাস আগে গরু কেনা ও মোটাতাজাকরণের পরিকল্পনা শুরু হয়, তখনই খোঁজ সবচেয়ে বেশি।' },
 ];
@@ -68,7 +75,8 @@ for (const s of SEASONS) {
     weeks = weeksUntil(starts);
     if (s.peak.includes(month)) weeks = 0; // already in season
   }
-  if (weeks !== null && weeks <= s.lead) due.push({ season: s, weeks });
+  const maxLead = Math.max(s.lead, s.leadNew ?? s.lead);
+  if (weeks !== null && weeks <= maxLead) due.push({ season: s, weeks });
 }
 
 const lines = [`# মৌসুমি কনটেন্ট পরিকল্পনা, ${today.toISOString().slice(0, 10)}`, ''];
@@ -80,7 +88,10 @@ if (!due.length) {
       lines.push(`## ${season.name}`, '', `- **QURBANI তারিখ পুরোনো হয়ে গেছে।** \`scripts/season-calendar.mjs\` এর \`QURBANI\` ম্যাপে পরের বছরের তারিখ যোগ করুন।`, '');
       continue;
     }
-    lines.push(`## ${season.name} ${weeks === 0 ? '(চলছে)' : `(আর ${weeks} সপ্তাহ)`}`, '', `${season.why}`, '');
+    const stage = weeks === 0 ? 'চলছে'
+      : weeks <= season.lead ? `আর ${weeks} সপ্তাহ, এখনই হালনাগাদ করার সময়`
+      : `আর ${weeks} সপ্তাহ, নতুন লেখা শুরু করার সময় (নতুন পাতা র‍্যাঙ্ক করতে ২-৩ মাস লাগে)`;
+    lines.push(`## ${season.name} (${stage})`, '', `${season.why}`, '');
     for (const g of season.guides) {
       const mod = await modifiedOf(g);
       const months = mod === 'MISSING' || mod === 'unknown' ? null

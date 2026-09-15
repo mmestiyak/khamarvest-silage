@@ -34,10 +34,18 @@ const GBP = args.includes('--gbp');
 const { posts } = JSON.parse(await readFile(join(process.cwd(), 'scripts/social-posts.json'), 'utf8'));
 
 // Which season a given month belongs to, matching scripts/season-calendar.mjs.
+const PEAKS = { monsoon: [6, 7, 8, 9], winter: [11, 12, 1, 2], summer: [3, 4, 5] };
+// Posting has to start BEFORE the peak, not during it. October is the month to
+// talk about winter; by November the farmer has already bought. So a month also
+// counts as its season when the next month is a peak month.
 function seasonOf(month) {
-  if ([6, 7, 8, 9].includes(month)) return 'monsoon';
-  if ([11, 12, 1, 2].includes(month)) return 'winter';
-  if ([3, 4, 5].includes(month)) return 'summer';
+  const next = (month % 12) + 1;
+  for (const [name, months] of Object.entries(PEAKS)) {
+    if (months.includes(month)) return name;
+  }
+  for (const [name, months] of Object.entries(PEAKS)) {
+    if (months.includes(next)) return name;
+  }
   return 'evergreen';
 }
 // Qurbani planning content runs in the months before Eid al-Adha. Kept in step

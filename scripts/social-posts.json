@@ -2,6 +2,18 @@
   "_comment": "Ready-to-paste Facebook group posts, one per guide. Format follows DISTRIBUTION.md: lead with the useful thing, mention the product once at the end as a fact. `season` schedules it; `evergreen` can run any month. Generated into a plan by `npm run social`.",
   "posts": [
     {
+      "slug": "blog/shite-gorur-thanda-jhuki-o-khaddo",
+      "season": "winter",
+      "hook": "আমাদের শীত ইউরোপের মতো নয়, তাই ঠান্ডাকে অনেকে হিসাবেই ধরেন না। কিন্তু সংখ্যাগুলো পাশাপাশি রাখলে ছবিটা বদলে যায়।",
+      "points": [
+        "জন্মের প্রথম মাসের বাছুরের ঠান্ডার চাপ শুরু হয় ১০ ডিগ্রি সেলসিয়াসের নিচে",
+        "রংপুরে জানুয়ারির গড় সর্বনিম্ন তাপমাত্রা প্রায় ১১ ডিগ্রি, অনেক রাতে এর নিচেও নামে",
+        "সহনসীমার নিচে প্রতি এক ডিগ্রিতে শক্তির চাহিদা প্রায় ১% বাড়ে, খুব ঠান্ডা দিনে ১৫-২০% পর্যন্ত",
+        "বাড়তি শক্তি না দিলে শরীর নিজের চর্বি পুড়িয়ে তাপ বানায়, গরু চুপচাপ শুকিয়ে যায়"
+      ],
+      "close": "সবচেয়ে বড় কথা: ঠান্ডায় শুধু শক্তির চাহিদা বাড়ে, প্রোটিনের নয়। আর সেই তাপের কারখানা গরুর পেটেই, রুমেনে আঁশের গাঁজন। তাই শীতে প্রথম কাজ দানাদার বাড়ানো নয়, ভালো আঁশ নিশ্চিত করা।"
+    },
+    {
       "slug": "blog/silage-ki-kivabe-toiri-upokarita",
       "season": "evergreen",
       "hook": "বন্ধ বস্তার ভেতরে সাইলেজের সাথে ঠিক কী ঘটে, সেটা জানলে বাকি সব নিয়মের কারণ নিজে থেকেই বোঝা যায়। FAO-র গবেষণা অনুযায়ী চারটি ধাপ পার হয়:",

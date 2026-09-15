@@ -54,6 +54,7 @@ const TAGS = {
   'gorur-khura-rog-fmd-lokkhon-o-koronio': ['health'],
   'gorur-pet-fapa-hole-koronio': ['health', 'feeding'],
   'gorome-gorur-jotno-heat-stress': ['seasonal', 'health'],
+  'shite-gorur-thanda-jhuki-o-khaddo': ['seasonal', 'health'],
   'goru-shitokale-khaddo-vyobosthapna': ['seasonal', 'feeding'],
   'borshakale-gorur-khaddo-babosthapona': ['seasonal', 'feeding'],
 };
