@@ -36,6 +36,7 @@ const TAGS = {
   'silage-kinben-naki-nije-banaben': ['cost', 'silage-basics'],
   'nepier-ghas-vs-vutta-silage': ['feeding', 'cost'],
   'silage-niye-vul-dharona': ['silage-basics', 'feeding'],
+  'mohisher-khaddo-o-silage': ['feeding', 'dairy'],
   'chagol-vera-silage-khawano-guide': ['feeding', 'silage-basics'],
   'go-khaddo-shobdokosh': ['feeding', 'silage-basics'],
   'danadar-khaddo-goru-ration': ['feeding', 'dairy'],

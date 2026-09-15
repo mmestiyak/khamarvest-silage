@@ -157,6 +157,11 @@ for (const file of files) {
     const isEnglish = /<html lang="en"/.test(html);
     const ok = isEnglish ? /\|\s*Khamarvest/.test(title) : /\|\s*খামারভেস্ট/.test(title);
     if (!ok) err(file, `title does not end with | ${isEnglish ? 'Khamarvest Silage' : 'খামারভেস্ট'}`);
+    // Google truncates a title around 55-60 characters and Bengali glyphs are
+    // wider than Latin, so anything past that is written for nobody. The
+    // homepage was 91 characters, 40 of which never rendered.
+    const visible = title.split('|')[0].trim();
+    if (visible.length > 60) warn(file, `title's visible span is ${visible.length} chars and will be cut off in search results`);
     if (titles.has(title)) err(file, `duplicate <title>, same as ${titles.get(title)}`);
     titles.set(title, file);
   }

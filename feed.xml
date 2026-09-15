@@ -6,16 +6,23 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Tue, 15 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2026 00:00:00 GMT</lastBuildDate>
     <item>
-      <title>গরুর দানাদার খাদ্য: কতটা লাগে, কী দিয়ে তৈরি, আর কেনার সময় যা দেখবেন</title>
+      <title>মহিষের খাদ্য ও সাইলেজ: দিনে কত কেজি, ফ্যাট কেন বেশি</title>
+      <link>https://silage.khamarvest.com/blog/mohisher-khaddo-o-silage</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/mohisher-khaddo-o-silage</guid>
+      <pubDate>Wed, 16 Sep 2026 00:00:00 GMT</pubDate>
+      <description>বাংলাদেশে মহিষের মূল খাদ্য ধানের খড়, যাতে শক্তি ও প্রোটিন দুটোরই ঘাটতি। মহিষের দুধে ফ্যাট ৭.৯% বনাম গরুর ৪.৩%, তাই খাদ্য ঠিক হলে লাভটা বড়। দৈনিক কত কেজি সাইলেজ ও কীভাবে শুরু করবেন।</description>
+    </item>
+    <item>
+      <title>গরুর দানাদার খাদ্য: কতটা লাগে, কী দিয়ে তৈরি</title>
       <link>https://silage.khamarvest.com/blog/danadar-khaddo-goru-ration</link>
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/danadar-khaddo-goru-ration</guid>
       <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
       <description>দানাদার খাদ্য আসলে কী, সাইলেজের সাথে কেন লাগে, দুধের পরিমাণ অনুযায়ী দৈনিক কত কেজি, শক্তি ও প্রোটিনের উপাদান কী কী, নিজে মেশানোর নিয়ম এবং যে ভুলগুলোতে খরচ বাড়ে।</description>
     </item>
     <item>
-      <title>সাইলেজের পুষ্টিমান: DM, CP, TDN মানে কী আর বিক্রেতার দেওয়া সংখ্যা যাচাই করবেন কীভাবে</title>
+      <title>সাইলেজের পুষ্টিমান: DM, CP, TDN ও সংখ্যা যাচাই</title>
       <link>https://silage.khamarvest.com/blog/silage-pushtiman-dm-cp-tdn</link>
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-pushtiman-dm-cp-tdn</guid>
       <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
@@ -36,14 +43,14 @@
       <description>গরুর মুখে-পায়ে ফোস্কা, জ্বর ও খোঁড়ানো দেখলে করণীয়। ক্ষুরা রোগ (FMD) কেন এত দ্রুত ছড়ায়, বাংলাদেশে কোন মাসে ঝুঁকি বেশি, ভ্যাকসিনের নিয়ম, অসুস্থ গরুকে কী খাওয়াবেন এবং সন্দেহ হলে কাকে জানাবেন।</description>
     </item>
     <item>
-      <title>গর্ভবতী গাভীর খাদ্য ও ড্রাই পিরিয়ড: দুধ বন্ধ থেকে বিয়ানো পর্যন্ত ৬০ দিনের নিয়ম</title>
+      <title>গর্ভবতী গাভীর খাদ্য ও ড্রাই পিরিয়ড: ৬০ দিনের নিয়ম</title>
       <link>https://silage.khamarvest.com/blog/gorvoboti-gavir-khaddo-dry-period</link>
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorvoboti-gavir-khaddo-dry-period</guid>
       <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
       <description>বিয়ানোর কত দিন আগে দুধ বন্ধ করবেন, কীভাবে বন্ধ করবেন, শুষ্ক কালে গাভীকে কী খাওয়াবেন, সাইলেজ কতটুকু দেবেন, শেষ ৩ সপ্তাহে রেশন কীভাবে বদলাবেন এবং বিয়ানোর পরে কোন লক্ষণে পশুচিকিৎসক ডাকবেন।</description>
     </item>
     <item>
-      <title>সাইলেজ খাওয়ালে দুধে গন্ধ হয়? সাইলেজ নিয়ে ৮টি প্রচলিত ভুল ধারণা ও আসল কথা</title>
+      <title>সাইলেজ নিয়ে ৮টি ভুল ধারণা: দুধে কি গন্ধ হয়?</title>
       <link>https://silage.khamarvest.com/blog/silage-niye-vul-dharona</link>
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-niye-vul-dharona</guid>
       <pubDate>Sat, 12 Sep 2026 00:00:00 GMT</pubDate>
@@ -92,7 +99,7 @@
       <description>নবজাতক বাছুরের শাল দুধ, নাভির যত্ন, দুধ খাওয়ানোর সময়, কখন থেকে দানাদার ও ঘাস, আর কেন ৩ মাসের আগে সাইলেজ দেওয়া ঠিক নয়।</description>
     </item>
     <item>
-      <title>গরমে গরুর যত্ন ও খাদ্য ব্যবস্থাপনা: হিট স্ট্রেস চেনা ও দুধ ধরে রাখার উপায়</title>
+      <title>গরমে গরুর যত্ন: হিট স্ট্রেস চেনা ও দুধ ধরে রাখা</title>
       <link>https://silage.khamarvest.com/blog/gorome-gorur-jotno-heat-stress</link>
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorome-gorur-jotno-heat-stress</guid>
       <pubDate>Wed, 26 Aug 2026 00:00:00 GMT</pubDate>
@@ -106,7 +113,7 @@
       <description>গরুর পেট হঠাৎ ফুলে গেলে কী করবেন, কোন লক্ষণে সঙ্গে সঙ্গে চিকিৎসক ডাকবেন, আর খাওয়ানোর কোন নিয়ম মানলে পেট ফাঁপা হয়ই না।</description>
     </item>
     <item>
-      <title>নেপিয়ার ঘাস নাকি ভুট্টা সাইলেজ? চাষের খরচ, পুষ্টি ও কোনটা কখন লাভজনক</title>
+      <title>নেপিয়ার ঘাস নাকি ভুট্টা সাইলেজ? খরচ ও পুষ্টির তুলনা</title>
       <link>https://silage.khamarvest.com/blog/nepier-ghas-vs-vutta-silage</link>
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/nepier-ghas-vs-vutta-silage</guid>
       <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
@@ -148,7 +155,7 @@
       <description>পাঁচ শতক জমি বা বাড়ির পাশে দুটি গাভী পালনের পরিকল্পনা: শেডের জায়গা, খাদ্য খরচ কমানোর কৌশল আর নিজের এলাকার দাম ধরে লাভ-লস হিসাব করার নিয়ম।</description>
     </item>
     <item>
-      <title>ছাগল-ভেড়াকে সাইলেজ: দিনে মাত্র ১৫-২০ টাকায় সবুজ খাদ্য, হিসাবসহ নিয়ম</title>
+      <title>ছাগল-ভেড়াকে সাইলেজ: দিনে কত কেজি, খরচ কত</title>
       <link>https://silage.khamarvest.com/blog/chagol-vera-silage-khawano-guide</link>
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/chagol-vera-silage-khawano-guide</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/goru-motatajakoron-khaddo-talika</guid>
       <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
       <description>গরু মোটাতাজাকরণের সঠিক খাদ্য তালিকা: দৈনিক সাইলেজ-খড়-দানাদারের পরিমাণ, খরচের হিসাব, কৃমিনাশকের নিয়ম আর স্টেরয়েড ছাড়াই নিরাপদে লাভ করার পদ্ধতি।</description>
-    </item>
-    <item>
-      <title>সাইলেজ কী? উপকারিতা, তৈরির পদ্ধতি আর যে সতর্কতাগুলো কেউ বলে না</title>
-      <link>https://silage.khamarvest.com/blog/silage-ki-kivabe-toiri-upokarita</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-ki-kivabe-toiri-upokarita</guid>
-      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>সাইলেজ কী ও কীভাবে তৈরি হয়? কাটার সঠিক সময়, চপ, চাপ ও সিল করার ৬ ধাপ, বস্তার ভেতরে গাঁজনের ৪টি ধাপ, উপকারিতা-অসুবিধা এবং কোন পশুকে দৈনিক কতটুকু, সম্পূর্ণ বাংলা গাইড।</description>
     </item>
   </channel>
 </rss>
