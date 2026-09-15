@@ -1,0 +1,38 @@
+# Monthly reminder of which seasonal guides need to be live and freshly crawled
+# BEFORE the season starts. Search demand for cattle feed is strongly seasonal
+# and a winter guide published in January has already missed its traffic.
+#
+# This deliberately does not publish anything. Google's scaled-content-abuse
+# policy targets automated publishing, and this site's advantage is that every
+# claim is sourced and checkable, so the last step stays human.
+name: Seasonal content plan
+
+on:
+  schedule:
+    - cron: '0 3 1 * *'   # 1st of every month, 03:00 UTC (09:00 Dhaka)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build the plan
+        run: node scripts/season-calendar.mjs > report.md && cat report.md
+
+      - name: Open the monthly issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          # No "## " heading means no season is within its lead time this month.
+          grep -q '^## ' report.md || { echo "nothing due this month"; exit 0; }
+          gh issue create --title "মৌসুমি কনটেন্ট পরিকল্পনা, $(date -u +'%B %Y')" --body-file report.md

@@ -1,0 +1,50 @@
+{
+  "sites": [
+    {
+      "name": "AK Silage",
+      "url": "https://www.aksilage.com",
+      "checked": "2026-09-15",
+      "title": "AK সাইলেজ | একমাত্র গুণগত মানসম্পন্ন পিট সাইলেজ — ভুট্টার সাইলেজ ৫০ কেজি",
+      "publishesPrice": false,
+      "claimsLab": false,
+      "nutritionClaims": [
+        "TDN — মোট হজমযোগ্য পুষ্টি ৬",
+        "TDN — মোট হজমযোগ্য পুষ্টি স",
+        "ড্রাই ম্যাটার বেসিস) ড্রাই ম্যাটা",
+        "ক্রুড প্রোটিন ৮–১২% ক্রুড ফাইবার ",
+        "TDN ৬৫–৭৫% অ্যাশ ৩–৫% * শুধ"
+      ],
+      "pages": [
+        "https://www.aksilage.com/",
+        "https://www.aksilage.com/guide",
+        "https://www.aksilage.com/guide/how-much-silage-per-cow",
+        "https://www.aksilage.com/guide/price-and-ordering",
+        "https://www.aksilage.com/guide/silage-vs-green-grass",
+        "https://www.aksilage.com/guide/storage-and-shelf-life",
+        "https://www.aksilage.com/guide/what-is-silage"
+      ]
+    },
+    {
+      "name": "Prantor Silage",
+      "url": "https://www.prantorsilage.com",
+      "checked": "2026-09-15",
+      "title": "প্রান্তর সাইলেজ | অবিরাম পুষ্টি, অফুরন্ত যোগান — ভুট্টার সাইলেজ ৫০ কেজি",
+      "publishesPrice": false,
+      "claimsLab": false,
+      "nutritionClaims": [
+        "ড্রাই ম্যাটার বেসিস) ড্রাই ম্যাটা",
+        "ক্রুড প্রোটিন ৮–১২% ক্রুড ফাইবার ",
+        "TDN ৬৫–৭৫% অ্যাশ ৩–৫% * শুধ"
+      ],
+      "pages": [
+        "https://www.prantorsilage.com/",
+        "https://www.prantorsilage.com/guide",
+        "https://www.prantorsilage.com/guide/how-much-silage-per-cow",
+        "https://www.prantorsilage.com/guide/price-and-ordering",
+        "https://www.prantorsilage.com/guide/silage-vs-green-grass",
+        "https://www.prantorsilage.com/guide/storage-and-shelf-life",
+        "https://www.prantorsilage.com/guide/what-is-silage"
+      ]
+    }
+  ]
+}

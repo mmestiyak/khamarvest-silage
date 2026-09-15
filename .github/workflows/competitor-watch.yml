@@ -1,0 +1,48 @@
+# Weekly snapshot of the competing silage sites. Reports new pages, title
+# changes, and the two things that would matter most to us: the day they start
+# publishing a price, and the day they claim a lab analysis.
+# The snapshot is committed so the diff survives between runs.
+name: Competitor watch
+
+on:
+  schedule:
+    - cron: '0 4 * * 1'   # Mondays, 04:00 UTC (10:00 Dhaka)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Snapshot competitors
+        id: watch
+        run: |
+          set +e
+          node scripts/watch-competitors.mjs > report.md
+          echo "changed=$?" >> "$GITHUB_OUTPUT"
+          cat report.md
+
+      - name: Commit the new snapshot
+        run: |
+          if ! git diff --quiet scripts/competitor-snapshot.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add scripts/competitor-snapshot.json
+            git commit -m "Update competitor snapshot"
+            git push
+          fi
+
+      - name: Open an issue when something changed
+        if: steps.watch.outputs.changed != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh issue create --title "Competitor change detected, $(date -u +%F)" --body-file report.md

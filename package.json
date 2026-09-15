@@ -12,7 +12,10 @@
     "indexnow:dry": "INDEXNOW_DRY_RUN=1 node scripts/indexnow.mjs",
     "images": "node scripts/optimize-images.mjs",
     "build:images": "node scripts/responsive-images.mjs",
-    "build:related": "node scripts/related-guides.mjs"
+    "build:related": "node scripts/related-guides.mjs",
+    "watch": "node scripts/watch-site.mjs",
+    "watch:competitors": "node scripts/watch-competitors.mjs",
+    "season": "node scripts/season-calendar.mjs"
   },
   "devDependencies": {
     "sharp": "^0.35.4",

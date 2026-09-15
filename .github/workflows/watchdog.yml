@@ -1,0 +1,58 @@
+# Daily check of the LIVE site. `npm run check` validates the repo; this
+# validates what Cloudflare is actually serving, which is where a broken deploy,
+# an expired price offer or a lapsed HTTPS redirect would show up instead.
+# Opens or updates one GitHub issue when something is wrong.
+name: Live site watchdog
+
+on:
+  schedule:
+    - cron: '0 2 * * *'   # daily, 02:00 UTC (08:00 Dhaka)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Watch the live site
+        id: watch
+        run: |
+          set +e
+          node scripts/watch-site.mjs > report.md
+          echo "failed=$?" >> "$GITHUB_OUTPUT"
+          cat report.md
+
+      - name: Open or update the issue
+        if: steps.watch.outputs.failed != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          TITLE="Live site watchdog found a problem"
+          EXISTING=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file report.md
+          else
+            gh issue create --title "$TITLE" --body-file report.md
+          fi
+
+      - name: Close the issue once the site is healthy again
+        if: steps.watch.outputs.failed == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          TITLE="Live site watchdog found a problem"
+          EXISTING=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "Watchdog is green again as of $(date -u +%F). Closing."
+            gh issue close "$EXISTING"
+          fi
