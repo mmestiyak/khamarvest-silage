@@ -70,195 +70,576 @@
   <!-- Structured data: Product + FAQ + Business (Google rich results) -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "name": "খামারভেস্ট সাইলেজ",
-        "alternateName": ["Khamarvest Silage", "Khamarvest"],
-        "url": "https://silage.khamarvest.com/",
-        "inLanguage": "bn-BD"
-      },
-      {
-        "@type": "VideoObject",
-        "@id": "https://silage.khamarvest.com/#silage-video",
-        "name": "খামারভেস্ট সাইলেজ: আপনার খামার, আমাদের দেখভাল",
-        "description": "খামারভেস্টের ভুট্টা সাইলেজ কেমন দেখতে, বস্তা কীভাবে প্যাক করা হয় এবং খামারে কীভাবে পৌঁছে দেওয়া হয় তার সংক্ষিপ্ত ভিডিও।",
-        "thumbnailUrl": ["https://i.ytimg.com/vi/n8sSOV0KQ64/hqdefault.jpg", "https://i.ytimg.com/vi/n8sSOV0KQ64/maxresdefault.jpg"],
-        "uploadDate": "2026-06-13",
-        "duration": "PT1M2S",
-        "contentUrl": "https://www.youtube.com/shorts/n8sSOV0KQ64",
-        "embedUrl": "https://www.youtube.com/embed/n8sSOV0KQ64",
-        "inLanguage": "bn-BD",
-        "publisher": { "@id": "https://silage.khamarvest.com/#business" }
-      },
-      {
-        "@type": "Product",
-        "@id": "https://silage.khamarvest.com/#product",
-        "name": "ভুট্টা সাইলেজ (Corn Silage) ৫০ কেজি বস্তা",
-        "category": "গো-খাদ্য (Cattle feed)",
-        "manufacturer": { "@id": "https://silage.khamarvest.com/#business" },
-        "alternateName": ["কর্ন সাইলেজ", "Corn Silage", "Maize Silage"],
-        "description": "সঠিক বয়সে কাটা আস্ত ভুট্টা গাছ মেশিনে চপ করে প্রাকৃতিক ফার্মেন্টেশনে তৈরি খাঁটি ভুট্টা সাইলেজ। মোটাতাজাকরণ, দুধের গাভী, ছাগল ভেড়া সবার জন্য। এয়ারটাইট বস্তায় সারাদেশে ডেলিভারি।",
-        "image": ["https://silage.khamarvest.com/img/silage-bag-1200.jpeg", "https://silage.khamarvest.com/img/corn-harvest-1200.jpeg"],
-        "brand": { "@type": "Brand", "name": "খামারভেস্ট (Khamarvest)" },
-        "weight": { "@type": "QuantitativeValue", "value": 50, "unitCode": "KGM", "unitText": "কেজি" },
-        "additionalProperty": [
-          { "@type": "PropertyValue", "name": "উপাদান", "value": "আস্ত ভুট্টা গাছ, পাতা, কাণ্ড, মোচা ও দানাসহ" },
-          { "@type": "PropertyValue", "name": "প্যাকেজিং", "value": "৫০ কেজি এয়ারটাইট বস্তা, সেলাই করা" },
-          { "@type": "PropertyValue", "name": "সংরক্ষণকাল", "value": "না-খোলা বস্তায় ৬-১২ মাস, খোলার পর ২-৩ দিন" },
-          { "@type": "PropertyValue", "name": "সংরক্ষণ পদ্ধতি", "value": "প্রাকৃতিক ল্যাকটিক ফার্মেন্টেশন, কোনো রাসায়নিক সংরক্ষক নয়" }
-        ],
-        "offers": [
-          {
-            "@type": "Offer",
-            "name": "প্রতি কেজি ভুট্টা সাইলেজ",
-            "price": "10",
-            "priceCurrency": "BDT",
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "10",
-              "priceCurrency": "BDT",
-              "unitCode": "KGM",
-              "unitText": "কেজি",
-              "referenceQuantity": { "@type": "QuantitativeValue", "value": "1", "unitCode": "KGM" }
-            },
-            "availability": "https://schema.org/InStock",
-            "itemCondition": "https://schema.org/NewCondition",
-            "priceValidUntil": "2026-12-31",
-            "url": "https://silage.khamarvest.com/",
-            "areaServed": { "@type": "Country", "name": "Bangladesh" },
-            "seller": { "@type": "Organization", "name": "খামারভেস্ট (Khamarvest)", "telephone": "+8801303438063", "url": "https://silage.khamarvest.com/" }
-          },
-          {
-            "@type": "Offer",
-            "name": "৫০ কেজি এয়ারটাইট বস্তা",
-            "price": "500",
-            "priceCurrency": "BDT",
-            "eligibleQuantity": { "@type": "QuantitativeValue", "value": "50", "unitCode": "KGM", "unitText": "কেজি" },
-            "availability": "https://schema.org/InStock",
-            "itemCondition": "https://schema.org/NewCondition",
-            "priceValidUntil": "2026-12-31",
-            "url": "https://silage.khamarvest.com/",
-            "areaServed": { "@type": "Country", "name": "Bangladesh" },
-            "seller": { "@type": "Organization", "name": "খামারভেস্ট (Khamarvest)", "telephone": "+8801303438063", "url": "https://silage.khamarvest.com/" }
-          }
-        ]
-      },
-      {
-        "@type": "LocalBusiness",
-        "@id": "https://silage.khamarvest.com/#business",
-        "url": "https://silage.khamarvest.com/",
-        "name": "খামারভেস্ট সাইলেজ",
-        "alternateName": "Khamarvest Silage",
-        "telephone": "+8801303438063",
-        "priceRange": "৳10-500",
-        "image": "https://silage.khamarvest.com/img/silage-bag-1200.jpeg",
-        "logo": "https://silage.khamarvest.com/img/silage-bag-1200.jpeg",
-        "sameAs": ["https://www.youtube.com/@khamarvest", "https://www.facebook.com/khamarvestSilage/"],
-        "contactPoint": [
-          {
-            "@type": "ContactPoint",
-            "telephone": "+8801303438063",
-            "contactType": "sales",
-            "url": "https://wa.me/8801303438063",
-            "areaServed": "BD",
-            "availableLanguage": ["Bengali", "English"]
-          }
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "বগুড়া",
-          "addressRegion": "রাজশাহী",
-          "addressCountry": "BD"
-        },
-        "areaServed": [
-          { "@type": "City", "name": "বগুড়া", "sameAs": "Bogura" },
-          { "@type": "City", "name": "পাবনা", "sameAs": "Pabna" },
-          { "@type": "City", "name": "সিরাজগঞ্জ", "sameAs": "Sirajganj" },
-          { "@type": "City", "name": "নাটোর", "sameAs": "Natore" },
-          { "@type": "City", "name": "রংপুর", "sameAs": "Rangpur" },
-          { "@type": "City", "name": "দিনাজপুর", "sameAs": "Dinajpur" },
-          { "@type": "City", "name": "ময়মনসিংহ", "sameAs": "Mymensingh" },
-          { "@type": "City", "name": "টাঙ্গাইল", "sameAs": "Tangail" },
-          { "@type": "City", "name": "ঢাকা", "sameAs": "Dhaka" },
-          { "@type": "City", "name": "গাজীপুর", "sameAs": "Gazipur" },
-          { "@type": "City", "name": "কুষ্টিয়া", "sameAs": "Kushtia" },
-          { "@type": "City", "name": "যশোর", "sameAs": "Jashore" },
-          { "@type": "City", "name": "খুলনা", "sameAs": "Khulna" },
-          { "@type": "City", "name": "সাতক্ষীরা", "sameAs": "Satkhira" },
-          { "@type": "City", "name": "কুমিল্লা", "sameAs": "Cumilla" },
-          { "@type": "City", "name": "নোয়াখালী", "sameAs": "Noakhali" },
-          { "@type": "City", "name": "চট্টগ্রাম", "sameAs": "Chattogram" },
-          { "@type": "City", "name": "কক্সবাজার", "sameAs": "Cox's Bazar" }
-        ],
-        "knowsAbout": ["Corn Silage", "Silage Delivery", "Cattle Feed", "Silage Storage"],
-        "slogan": "সাইলেজ ১০ টাকা কেজি, সারাদেশে ডেলিভারি"
-      },
-      {
-        "@type": "Service",
-        "@id": "https://silage.khamarvest.com/#silage-service",
-        "name": "ভুট্টা সাইলেজ সরবরাহ ও ডেলিভারি",
-        "alternateName": "Corn Silage Supply & Delivery",
-        "description": "সারাদেশে খাঁটি ভুট্টা সাইলেজ সরবরাহ ও দ্রুত ডেলিভারি। দুধের গাভী, মোটাতাজাকরণ গরু ও ছাগলের জন্য পুষ্টিকর খাদ্য।",
-        "provider": { "@type": "LocalBusiness", "@id": "https://silage.khamarvest.com/#business" },
-        "areaServed": [
-          { "@type": "City", "name": "বগুড়া" }, { "@type": "City", "name": "পাবনা" },
-          { "@type": "City", "name": "সিরাজগঞ্জ" }, { "@type": "City", "name": "নাটোর" },
-          { "@type": "City", "name": "রংপুর" }, { "@type": "City", "name": "দিনাজপুর" },
-          { "@type": "City", "name": "ময়মনসিংহ" }, { "@type": "City", "name": "টাঙ্গাইল" },
-          { "@type": "City", "name": "ঢাকা" }, { "@type": "City", "name": "গাজীপুর" },
-          { "@type": "City", "name": "কুষ্টিয়া" }, { "@type": "City", "name": "যশোর" },
-          { "@type": "City", "name": "খুলনা" }, { "@type": "City", "name": "সাতক্ষীরা" },
-          { "@type": "City", "name": "কুমিল্লা" }, { "@type": "City", "name": "নোয়াখালী" },
-          { "@type": "City", "name": "চট্টগ্রাম" }, { "@type": "City", "name": "কক্সবাজার" }
-        ],
-        "serviceType": "Agricultural Product Delivery",
-        "offers": {
-          "@type": "Offer",
-          "priceCurrency": "BDT",
-          "price": "10",
-          "priceSpecification": {
-            "@type": "PriceSpecification",
-            "price": "10",
-            "priceCurrency": "BDT",
-            "unitCode": "KGM"
-          }
-        },
-        "url": "https://silage.khamarvest.com/"
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "ভুট্টা সাইলেজের দাম কত?",
-            "acceptedAnswer": { "@type": "Answer", "text": "প্রতি কেজি এখন মাত্র ১০ টাকা (আগের দাম ১২ টাকা)। ৫০ কেজি বস্তা ৫০০ টাকা। বেশি পরিমাণে নিলে দামে আরও ছাড় আছে, WhatsApp-এ আলোচনা করে নিন: +880 1303-438063।" }
-          },
-          {
-            "@type": "Question",
-            "name": "সাইলেজ কতদিন সংরক্ষণ করা যায়?",
-            "acceptedAnswer": { "@type": "Answer", "text": "এয়ারটাইট বস্তা না খোলা পর্যন্ত ৬ থেকে ১২ মাস পর্যন্ত ভালো থাকে। বস্তা খোলার পর ২-৩ দিনের মধ্যে খাওয়িয়ে ফেলা ভালো এবং মুখ ভালো করে বেঁধে ছায়ায় রাখতে হয়।" }
-          },
-          {
-            "@type": "Question",
-            "name": "গরুকে দৈনিক কতটুকু সাইলেজ খাওয়াবো?",
-            "acceptedAnswer": { "@type": "Answer", "text": "দুধের গাভীকে ওজন অনুযায়ী দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি। প্রথম ৭ দিন অল্প অল্প করে দিয়ে অভ্যাস করালে সবচেয়ে ভালো ফল পাবেন।" }
-          },
-          {
-            "@type": "Question",
-            "name": "কোন কোন এলাকায় ডেলিভারি দেওয়া হয়?",
-            "acceptedAnswer": { "@type": "Answer", "text": "বগুড়া, পাবনা, সিরাজগঞ্জ, নাটোর, রংপুর, দিনাজপুর, ময়মনসিংহ, টাঙ্গাইল, ঢাকা, গাজীপুর, কুষ্টিয়া, যশোর, খুলনা, সাতক্ষীরা, কুমিল্লা, নোয়াখালী, চট্টগ্রাম, কক্সবাজারসহ সারা বাংলাদেশে ডেলিভারি দেওয়া হয়।" }
-          },
-          {
-            "@type": "Question",
-            "name": "কীভাবে অর্ডার করবো?",
-            "acceptedAnswer": { "@type": "Answer", "text": "WhatsApp-এ আপনার নাম, ঠিকানা আর কত বস্তা লাগবে লিখে পাঠান: +880 1303-438063। আমাদের প্রতিনিধি ফোন করে অর্ডার কনফার্ম করবেন। পণ্য হাতে পেয়ে টাকা দেবেন।" }
-          }
-        ]
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "খামারভেস্ট সাইলেজ",
+      "alternateName": [
+        "Khamarvest Silage",
+        "Khamarvest"
+      ],
+      "url": "https://silage.khamarvest.com/",
+      "inLanguage": "bn-BD"
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://silage.khamarvest.com/#silage-video",
+      "name": "খামারভেস্ট সাইলেজ: আপনার খামার, আমাদের দেখভাল",
+      "description": "খামারভেস্টের ভুট্টা সাইলেজ কেমন দেখতে, বস্তা কীভাবে প্যাক করা হয় এবং খামারে কীভাবে পৌঁছে দেওয়া হয় তার সংক্ষিপ্ত ভিডিও।",
+      "thumbnailUrl": [
+        "https://i.ytimg.com/vi/n8sSOV0KQ64/hqdefault.jpg",
+        "https://i.ytimg.com/vi/n8sSOV0KQ64/maxresdefault.jpg"
+      ],
+      "uploadDate": "2026-06-13",
+      "duration": "PT1M2S",
+      "contentUrl": "https://www.youtube.com/shorts/n8sSOV0KQ64",
+      "embedUrl": "https://www.youtube.com/embed/n8sSOV0KQ64",
+      "inLanguage": "bn-BD",
+      "publisher": {
+        "@id": "https://silage.khamarvest.com/#business"
       }
-    ]
-  }
+    },
+    {
+      "@type": "Product",
+      "@id": "https://silage.khamarvest.com/#product",
+      "name": "ভুট্টা সাইলেজ (Corn Silage) ৫০ কেজি বস্তা",
+      "category": "গো-খাদ্য (Cattle feed)",
+      "manufacturer": {
+        "@id": "https://silage.khamarvest.com/#business"
+      },
+      "alternateName": [
+        "কর্ন সাইলেজ",
+        "Corn Silage",
+        "Maize Silage"
+      ],
+      "description": "সঠিক বয়সে কাটা আস্ত ভুট্টা গাছ মেশিনে চপ করে প্রাকৃতিক ফার্মেন্টেশনে তৈরি খাঁটি ভুট্টা সাইলেজ। মোটাতাজাকরণ, দুধের গাভী, ছাগল ভেড়া সবার জন্য। এয়ারটাইট বস্তায় সারাদেশে ডেলিভারি।",
+      "image": [
+        "https://silage.khamarvest.com/img/silage-bag-1200.jpeg",
+        "https://silage.khamarvest.com/img/corn-harvest-1200.jpeg"
+      ],
+      "brand": {
+        "@type": "Brand",
+        "name": "খামারভেস্ট (Khamarvest)"
+      },
+      "weight": {
+        "@type": "QuantitativeValue",
+        "value": 50,
+        "unitCode": "KGM",
+        "unitText": "কেজি"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "উপাদান",
+          "value": "আস্ত ভুট্টা গাছ, পাতা, কাণ্ড, মোচা ও দানাসহ"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "প্যাকেজিং",
+          "value": "৫০ কেজি এয়ারটাইট বস্তা, সেলাই করা"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "সংরক্ষণকাল",
+          "value": "না-খোলা বস্তায় ৬-১২ মাস, খোলার পর ২-৩ দিন"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "সংরক্ষণ পদ্ধতি",
+          "value": "প্রাকৃতিক ল্যাকটিক ফার্মেন্টেশন, কোনো রাসায়নিক সংরক্ষক নয়"
+        }
+      ],
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "প্রতি কেজি ভুট্টা সাইলেজ",
+          "price": "10",
+          "priceCurrency": "BDT",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "10",
+            "priceCurrency": "BDT",
+            "unitCode": "KGM",
+            "unitText": "কেজি",
+            "referenceQuantity": {
+              "@type": "QuantitativeValue",
+              "value": "1",
+              "unitCode": "KGM"
+            }
+          },
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "priceValidUntil": "2026-12-31",
+          "url": "https://silage.khamarvest.com/",
+          "areaServed": {
+            "@type": "Country",
+            "name": "Bangladesh"
+          },
+          "seller": {
+            "@type": "Organization",
+            "name": "খামারভেস্ট (Khamarvest)",
+            "telephone": "+8801303438063",
+            "url": "https://silage.khamarvest.com/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "৫০ কেজি এয়ারটাইট বস্তা",
+          "price": "500",
+          "priceCurrency": "BDT",
+          "eligibleQuantity": {
+            "@type": "QuantitativeValue",
+            "value": "50",
+            "unitCode": "KGM",
+            "unitText": "কেজি"
+          },
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "priceValidUntil": "2026-12-31",
+          "url": "https://silage.khamarvest.com/",
+          "areaServed": {
+            "@type": "Country",
+            "name": "Bangladesh"
+          },
+          "seller": {
+            "@type": "Organization",
+            "name": "খামারভেস্ট (Khamarvest)",
+            "telephone": "+8801303438063",
+            "url": "https://silage.khamarvest.com/"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://silage.khamarvest.com/#business",
+      "url": "https://silage.khamarvest.com/",
+      "name": "খামারভেস্ট সাইলেজ",
+      "alternateName": "Khamarvest Silage",
+      "telephone": "+8801303438063",
+      "priceRange": "৳10-500",
+      "image": "https://silage.khamarvest.com/img/silage-bag-1200.jpeg",
+      "logo": "https://silage.khamarvest.com/img/silage-bag-1200.jpeg",
+      "sameAs": [
+        "https://www.youtube.com/@khamarvest",
+        "https://www.facebook.com/khamarvestSilage/"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+8801303438063",
+          "contactType": "sales",
+          "url": "https://wa.me/8801303438063",
+          "areaServed": "BD",
+          "availableLanguage": [
+            "Bengali",
+            "English"
+          ]
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "বগুড়া",
+        "addressRegion": "রাজশাহী",
+        "addressCountry": "BD"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "বগুড়া",
+          "sameAs": "Bogura"
+        },
+        {
+          "@type": "City",
+          "name": "পাবনা",
+          "sameAs": "Pabna"
+        },
+        {
+          "@type": "City",
+          "name": "সিরাজগঞ্জ",
+          "sameAs": "Sirajganj"
+        },
+        {
+          "@type": "City",
+          "name": "নাটোর",
+          "sameAs": "Natore"
+        },
+        {
+          "@type": "City",
+          "name": "রংপুর",
+          "sameAs": "Rangpur"
+        },
+        {
+          "@type": "City",
+          "name": "দিনাজপুর",
+          "sameAs": "Dinajpur"
+        },
+        {
+          "@type": "City",
+          "name": "ময়মনসিংহ",
+          "sameAs": "Mymensingh"
+        },
+        {
+          "@type": "City",
+          "name": "টাঙ্গাইল",
+          "sameAs": "Tangail"
+        },
+        {
+          "@type": "City",
+          "name": "ঢাকা",
+          "sameAs": "Dhaka"
+        },
+        {
+          "@type": "City",
+          "name": "গাজীপুর",
+          "sameAs": "Gazipur"
+        },
+        {
+          "@type": "City",
+          "name": "কুষ্টিয়া",
+          "sameAs": "Kushtia"
+        },
+        {
+          "@type": "City",
+          "name": "যশোর",
+          "sameAs": "Jashore"
+        },
+        {
+          "@type": "City",
+          "name": "খুলনা",
+          "sameAs": "Khulna"
+        },
+        {
+          "@type": "City",
+          "name": "সাতক্ষীরা",
+          "sameAs": "Satkhira"
+        },
+        {
+          "@type": "City",
+          "name": "কুমিল্লা",
+          "sameAs": "Cumilla"
+        },
+        {
+          "@type": "City",
+          "name": "নোয়াখালী",
+          "sameAs": "Noakhali"
+        },
+        {
+          "@type": "City",
+          "name": "চট্টগ্রাম",
+          "sameAs": "Chattogram"
+        },
+        {
+          "@type": "City",
+          "name": "কক্সবাজার",
+          "sameAs": "Cox's Bazar"
+        },
+        {
+          "@type": "City",
+          "name": "রাজশাহী",
+          "sameAs": "Rajshahi"
+        },
+        {
+          "@type": "City",
+          "name": "নওগাঁ",
+          "sameAs": "Naogaon"
+        },
+        {
+          "@type": "City",
+          "name": "জয়পুরহাট",
+          "sameAs": "Joypurhat"
+        },
+        {
+          "@type": "City",
+          "name": "গাইবান্ধা",
+          "sameAs": "Gaibandha"
+        },
+        {
+          "@type": "City",
+          "name": "নীলফামারী",
+          "sameAs": "Nilphamari"
+        },
+        {
+          "@type": "City",
+          "name": "কুড়িগ্রাম",
+          "sameAs": "Kurigram"
+        },
+        {
+          "@type": "City",
+          "name": "লালমনিরহাট",
+          "sameAs": "Lalmonirhat"
+        },
+        {
+          "@type": "City",
+          "name": "ঠাকুরগাঁও",
+          "sameAs": "Thakurgaon"
+        },
+        {
+          "@type": "City",
+          "name": "জামালপুর",
+          "sameAs": "Jamalpur"
+        },
+        {
+          "@type": "City",
+          "name": "কিশোরগঞ্জ",
+          "sameAs": "Kishoreganj"
+        },
+        {
+          "@type": "City",
+          "name": "ব্রাহ্মণবাড়িয়া",
+          "sameAs": "Brahmanbaria"
+        },
+        {
+          "@type": "City",
+          "name": "সিলেট",
+          "sameAs": "Sylhet"
+        },
+        {
+          "@type": "City",
+          "name": "হবিগঞ্জ",
+          "sameAs": "Habiganj"
+        },
+        {
+          "@type": "City",
+          "name": "ফরিদপুর",
+          "sameAs": "Faridpur"
+        },
+        {
+          "@type": "City",
+          "name": "বরিশাল",
+          "sameAs": "Barishal"
+        }
+      ],
+      "knowsAbout": [
+        "Corn Silage",
+        "Silage Delivery",
+        "Cattle Feed",
+        "Silage Storage"
+      ],
+      "slogan": "সাইলেজ ১০ টাকা কেজি, সারাদেশে ডেলিভারি",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Saturday",
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "21:00"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://silage.khamarvest.com/#silage-service",
+      "name": "ভুট্টা সাইলেজ সরবরাহ ও ডেলিভারি",
+      "alternateName": "Corn Silage Supply & Delivery",
+      "description": "সারাদেশে খাঁটি ভুট্টা সাইলেজ সরবরাহ ও দ্রুত ডেলিভারি। দুধের গাভী, মোটাতাজাকরণ গরু ও ছাগলের জন্য পুষ্টিকর খাদ্য।",
+      "provider": {
+        "@type": "LocalBusiness",
+        "@id": "https://silage.khamarvest.com/#business"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "বগুড়া"
+        },
+        {
+          "@type": "City",
+          "name": "পাবনা"
+        },
+        {
+          "@type": "City",
+          "name": "সিরাজগঞ্জ"
+        },
+        {
+          "@type": "City",
+          "name": "নাটোর"
+        },
+        {
+          "@type": "City",
+          "name": "রংপুর"
+        },
+        {
+          "@type": "City",
+          "name": "দিনাজপুর"
+        },
+        {
+          "@type": "City",
+          "name": "ময়মনসিংহ"
+        },
+        {
+          "@type": "City",
+          "name": "টাঙ্গাইল"
+        },
+        {
+          "@type": "City",
+          "name": "ঢাকা"
+        },
+        {
+          "@type": "City",
+          "name": "গাজীপুর"
+        },
+        {
+          "@type": "City",
+          "name": "কুষ্টিয়া"
+        },
+        {
+          "@type": "City",
+          "name": "যশোর"
+        },
+        {
+          "@type": "City",
+          "name": "খুলনা"
+        },
+        {
+          "@type": "City",
+          "name": "সাতক্ষীরা"
+        },
+        {
+          "@type": "City",
+          "name": "কুমিল্লা"
+        },
+        {
+          "@type": "City",
+          "name": "নোয়াখালী"
+        },
+        {
+          "@type": "City",
+          "name": "চট্টগ্রাম"
+        },
+        {
+          "@type": "City",
+          "name": "কক্সবাজার"
+        },
+        {
+          "@type": "City",
+          "name": "রাজশাহী"
+        },
+        {
+          "@type": "City",
+          "name": "নওগাঁ"
+        },
+        {
+          "@type": "City",
+          "name": "জয়পুরহাট"
+        },
+        {
+          "@type": "City",
+          "name": "গাইবান্ধা"
+        },
+        {
+          "@type": "City",
+          "name": "নীলফামারী"
+        },
+        {
+          "@type": "City",
+          "name": "কুড়িগ্রাম"
+        },
+        {
+          "@type": "City",
+          "name": "লালমনিরহাট"
+        },
+        {
+          "@type": "City",
+          "name": "ঠাকুরগাঁও"
+        },
+        {
+          "@type": "City",
+          "name": "জামালপুর"
+        },
+        {
+          "@type": "City",
+          "name": "কিশোরগঞ্জ"
+        },
+        {
+          "@type": "City",
+          "name": "ব্রাহ্মণবাড়িয়া"
+        },
+        {
+          "@type": "City",
+          "name": "সিলেট"
+        },
+        {
+          "@type": "City",
+          "name": "হবিগঞ্জ"
+        },
+        {
+          "@type": "City",
+          "name": "ফরিদপুর"
+        },
+        {
+          "@type": "City",
+          "name": "বরিশাল"
+        }
+      ],
+      "serviceType": "Agricultural Product Delivery",
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BDT",
+        "price": "10",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": "10",
+          "priceCurrency": "BDT",
+          "unitCode": "KGM"
+        }
+      },
+      "url": "https://silage.khamarvest.com/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ভুট্টা সাইলেজের দাম কত?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "প্রতি কেজি এখন মাত্র ১০ টাকা (আগের দাম ১২ টাকা)। ৫০ কেজি বস্তা ৫০০ টাকা। বেশি পরিমাণে নিলে দামে আরও ছাড় আছে, WhatsApp-এ আলোচনা করে নিন: +880 1303-438063।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "সাইলেজ কতদিন সংরক্ষণ করা যায়?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "এয়ারটাইট বস্তা না খোলা পর্যন্ত ৬ থেকে ১২ মাস পর্যন্ত ভালো থাকে। বস্তা খোলার পর ২-৩ দিনের মধ্যে খাওয়িয়ে ফেলা ভালো এবং মুখ ভালো করে বেঁধে ছায়ায় রাখতে হয়।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "গরুকে দৈনিক কতটুকু সাইলেজ খাওয়াবো?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "দুধের গাভীকে ওজন অনুযায়ী দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি। প্রথম ৭ দিন অল্প অল্প করে দিয়ে অভ্যাস করালে সবচেয়ে ভালো ফল পাবেন।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "কোন কোন এলাকায় ডেলিভারি দেওয়া হয়?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "বগুড়া, পাবনা, সিরাজগঞ্জ, নাটোর, রংপুর, দিনাজপুর, ময়মনসিংহ, টাঙ্গাইল, ঢাকা, গাজীপুর, কুষ্টিয়া, যশোর, খুলনা, সাতক্ষীরা, কুমিল্লা, নোয়াখালী, চট্টগ্রাম, কক্সবাজারসহ সারা বাংলাদেশে ডেলিভারি দেওয়া হয়।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "কীভাবে অর্ডার করবো?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WhatsApp-এ আপনার নাম, ঠিকানা আর কত বস্তা লাগবে লিখে পাঠান: +880 1303-438063। আমাদের প্রতিনিধি ফোন করে অর্ডার কনফার্ম করবেন। পণ্য হাতে পেয়ে টাকা দেবেন।"
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌽</text></svg>">
   <link rel="preload" href="/fonts/noto-sans-bengali-300-700-bengali.woff2" as="font" type="font/woff2" crossorigin>

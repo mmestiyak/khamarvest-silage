@@ -17,7 +17,8 @@
     "watch:competitors": "node scripts/watch-competitors.mjs",
     "season": "node scripts/season-calendar.mjs",
     "set-price": "node scripts/set-price.mjs",
-    "social": "node scripts/social-posts.mjs"
+    "social": "node scripts/social-posts.mjs",
+    "social:gbp": "node scripts/social-posts.mjs -- --gbp"
   },
   "devDependencies": {
     "sharp": "^0.35.4",

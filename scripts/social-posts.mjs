@@ -24,6 +24,12 @@ import { product } from './product.mjs';
 const SITE = 'https://silage.khamarvest.com';
 const args = process.argv.slice(2);
 const weeks = Number(args[args.indexOf('--weeks') + 1]) || 4;
+// Google Business Profile posts are a different shape: ~1,500 character limit,
+// no link formatting, and one call-to-action button. They also feed local
+// ranking, which matters more here than Facebook reach because the profile
+// currently serves "Bogra District and nearby areas" while we publish 33
+// district pages.
+const GBP = args.includes('--gbp');
 
 const { posts } = JSON.parse(await readFile(join(process.cwd(), 'scripts/social-posts.json'), 'utf8'));
 
@@ -40,6 +46,23 @@ const QURBANI = { 2027: '2027-05-16', 2028: '2028-05-05' };
 
 const today = new Date();
 const weekOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 1)) / (7 * 86400000));
+
+function renderGbp(p, when) {
+  const url = `${SITE}/${p.slug}`;
+  const body = [p.hook, '', ...p.points.map((t) => `• ${t}`), '', p.close].join('\n');
+  // GBP truncates hard, so warn rather than silently publishing a cut-off post.
+  const over = body.length > 1400 ? `  [!] ${body.length} chars, trim before posting` : '';
+  return [
+    `### ${when} · Google Post · ${p.slug}${over}`,
+    '',
+    body,
+    '',
+    `বোতাম (Learn more): ${url}`,
+    '',
+    '---',
+    '',
+  ].join('\n');
+}
 
 function render(p, when) {
   const url = `${SITE}/${p.slug}`;
@@ -84,10 +107,21 @@ for (let w = 0; w < weeks; w += 1) {
   if (!seasonal.length && !evergreen.length) { used.clear(); w -= 1; continue; }
   const pick = seasonal.length ? seasonal[0] : evergreen[(weekOfYear + w) % evergreen.length];
   used.add(pick.slug);
-  plan.push(render(pick, date.toISOString().slice(0, 10)));
+  plan.push((GBP ? renderGbp : render)(pick, date.toISOString().slice(0, 10)));
 }
 
-console.log([
+const header = GBP ? [
+  `# Google Business Profile পোস্ট, ${today.toISOString().slice(0, 10)} থেকে ${weeks} সপ্তাহ`,
+  '',
+  'Google Business Profile > Posts এ গিয়ে পেস্ট করুন। নিয়ম:',
+  '',
+  '- সপ্তাহে একটি যথেষ্ট। Google Post সাধারণত ৭ দিন পর গুরুত্ব হারায়, তাই নিয়মিত পোস্টই কাজে দেয়।',
+  '- প্রতিটি পোস্টে একটি ছবি দিন, ছবিসহ পোস্ট বেশি দেখানো হয়।',
+  '- বোতাম হিসেবে "Learn more" বেছে নিয়ে নিচের লিংকটি বসান।',
+  '',
+  '---',
+  '',
+] : [
   `# ফেসবুক পোস্ট পরিকল্পনা, ${today.toISOString().slice(0, 10)} থেকে ${weeks} সপ্তাহ`,
   '',
   'প্রতিটি পোস্ট হুবহু কপি করে পেস্ট করা যায়। নিয়ম:',
@@ -98,5 +132,5 @@ console.log([
   '',
   '---',
   '',
-  ...plan,
-].join('\n'));
+];
+console.log([...header, ...plan].join('\n'));
