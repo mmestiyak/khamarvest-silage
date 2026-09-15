@@ -24,6 +24,7 @@ Khamarvest Silage sells fresh corn (maize) silage, fermented whole-plant corn ca
 ## ফ্রি টুলস (Free tools, no signup)
 
 - [সব টুলের তালিকা](https://silage.khamarvest.com/tools/): ক্যালকুলেটর ও প্রিন্ট করার শিট, সম্পূর্ণ ফ্রি।
+- [সাইলেজ ক্যালকুলেটর](https://silage.khamarvest.com/tools/silage-calculator): পশুর ধরন (দুধের গাভী ~২০ কেজি, মোটাতাজাকরণ ~১৫, ছাগল-ভেড়া ~১.৫), সংখ্যা ও দিন বসালে দৈনিক মোট কেজি, মোট প্রয়োজন, ৫০ কেজির কত বস্তা, ১০ টাকা কেজি দরে খরচ, দৈনিক প্রতি পশুর খরচ এবং এক বস্তা কত দিন চলবে তা দেখায়। এক বস্তা ৩ দিনের বেশি চললে খোলা বস্তা সংরক্ষণের সতর্কতাও দেখানো হয়।
 - [দুধের লাভ-লস ক্যালকুলেটর](https://silage.khamarvest.com/tools/dudher-labh-calculator): দুধ বিক্রি ও খাদ্য খরচ বসিয়ে দৈনিক-মাসিক আয়ের হিসাব।
 - [মোটাতাজাকরণ খরচ ক্যালকুলেটর](https://silage.khamarvest.com/tools/motatajakoron-khoroch-calculator): পুরো চক্রের খাদ্য খরচ ও কত বস্তা সাইলেজ লাগবে।
 - [দৈনিক খাদ্য তালিকা চার্ট](https://silage.khamarvest.com/tools/khaddo-talika-chart): গোয়ালে টানানোর প্রিন্টযোগ্য এক পাতার চার্ট।

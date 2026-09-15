@@ -53,6 +53,7 @@ A static marketing + content site for **খামারভেস্ট সাই
 - Cite sources (DAERA, Teagasc) in a "তথ্যসূত্র" section when making factual claims. Do not invent savings/productivity numbers.
 - **No invented customer stories.** We hold no permission-cleared customer quotes, so any "তারা বলেন" / "খামারিরা বলেন" / "সফল হয়েছেন" sentence is fabricated. State the mechanism instead, or use a real attributed quote. `npm run check` fails on these phrases.
 - **No promised earnings.** Income depends on the reader's milk price, feed cost and animal, so never name a profit figure or write "লাভ করুন" / "আয় করুন" / "গ্যারান্টি". Link `/tools/dudher-labh-calculator` and let the farmer compute it. The checker fails on these too.
+- **The homepage calculator's "খাদ্য খরচ সাশ্রয়" figure assumes ~3 kg silage replaces 1 kg concentrate** and prices the difference. That is a sound dry-matter equivalence (3 kg at ~30% DM is ~0.9 kg DM, as is 1 kg of concentrate at ~90%), and the assumption is disclosed under the number. It is still an *energy-only* substitution: concentrate also carries protein that silage does not, so silage cannot replace it one-for-one in practice, which is what `/blog/silage-vs-kacha-ghas-vs-khor#dry-matter` now tells readers. Treat the figure as the maximum, not the expected saving, and do not copy the framing onto new pages. `tools/silage-calculator` deliberately omits it.
 - **No unsupported savings claims** ("cuts straw use in half"). State the price we actually charge, not the saving we imagine.
 - Any article whose content changes materially should get its `dateModified` bumped; the checker rejects a `dateModified` earlier than `datePublished`.
 
@@ -86,8 +87,9 @@ A static marketing + content site for **খামারভেস্ট সাই
 
 ## Free tools (tools/)
 
-- `tools/*.html` are standalone free-tool pages: two calculators (`dudher-labh-calculator`, `motatajakoron-khoroch-calculator`) and three print sheets (`khaddo-talika-chart`, `tika-krimi-calendar`, `hishab-khata`), plus `tools/index.html`.
+- `tools/*.html` are standalone free-tool pages: three calculators (`silage-calculator`, `dudher-labh-calculator`, `motatajakoron-khoroch-calculator`) and three print sheets (`khaddo-talika-chart`, `tika-krimi-calendar`, `hishab-khata`), plus `tools/index.html`.
 - They are NOT scanned by the blog generator. When adding a tool: add its extensionless URL to `toolPages` in `scripts/generate-blog-index.mjs` (feeds sitemap), to the tools strip in that script's blog-index template, to `tools/index.html`, and to `llms.txt`.
+- `tools/silage-calculator` is the quantity calculator for the product itself (the homepage has one at `#calculator`, but an anchor cannot rank on its own). It reports daily kg, total kg, 50 kg bags, cost at 10 tk/kg, cost per animal per day, and **how many days one bag lasts**, warning when that exceeds the 2-3 day open-bag limit. It deliberately shows no "savings" figure: see the note on the homepage calculator in Data accuracy.
 - Calculators fire `calculator_use` / `calculator_order_click` with a `tool` param; print sheets fire `print_click` with `tool`. Silage price in calculator JS is hardcoded 10 tk/kg — update if the price changes.
 
 ## District pages (area/)
