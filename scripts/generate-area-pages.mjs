@@ -4,6 +4,9 @@
 // promises, transport cost "জানানো হয়" only. Keep facts in sync with AGENTS.md.
 import { writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
+// Price comes from scripts/product.json so 33 generated pages can never drift
+// from it. Change it with `npm run set-price`, never by hand.
+import { product } from './product.mjs';
 
 const root = process.cwd();
 const siteUrl = 'https://silage.khamarvest.com';
@@ -78,8 +81,8 @@ const fbSvg = '<svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" ar
 function page(d) {
   const url = `${siteUrl}/area/silage-${d.slug}`;
   const wa = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.name} থেকে বলছি। ভুট্টা সাইলেজ নিতে চাই।`)}`;
-  const title = `${d.loc} ভুট্টা সাইলেজ: ১০ টাকা কেজি, হোম ডেলিভারি | খামারভেস্ট সাইলেজ`;
-  const desc = `${d.name} জেলার সব উপজেলায় খাঁটি ভুট্টা সাইলেজ ডেলিভারি। দাম ১০ টাকা কেজি, ৫০ কেজি এয়ারটাইট বস্তা ৫০০ টাকা, টাকা পণ্য হাতে পেয়ে। WhatsApp: +880 1303-438063।`;
+  const title = `${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি | খামারভেস্ট সাইলেজ`;
+  const desc = `${d.name} জেলার সব উপজেলায় খাঁটি ভুট্টা সাইলেজ ডেলিভারি। দাম ${product.perKgBn} টাকা কেজি, ${product.bagKgBn} কেজি এয়ারটাইট বস্তা ${product.bagPriceBn} টাকা, টাকা পণ্য হাতে পেয়ে। WhatsApp: +880 1303-438063।`;
   const nearLinks = d.near.map((s) => `<a href="/area/silage-${s}" class="font-semibold text-[#0b6a3e] underline underline-offset-4">${bySlug[s].name}</a>`).join(', ');
 
   return `<!DOCTYPE html>
@@ -95,7 +98,7 @@ function page(d) {
   <meta property="og:type" content="website">
   <meta property="og:locale" content="bn_BD">
   <meta property="og:site_name" content="খামারভেস্ট (Khamarvest)">
-  <meta property="og:title" content="${d.loc} ভুট্টা সাইলেজ: ১০ টাকা কেজি, হোম ডেলিভারি">
+  <meta property="og:title" content="${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি">
   <meta property="og:description" content="${d.name} জেলার সব উপজেলায় ডেলিভারি। টাকা পণ্য হাতে পেয়ে।">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${siteUrl}/img/silage-production-1400.jpeg">
@@ -151,7 +154,7 @@ function page(d) {
     <section class="border-b border-[#184d32]/10 bg-[#eaf5eb]">
       <div class="mx-auto max-w-5xl px-5 py-10 sm:px-6 sm:py-14">
         <p class="text-sm font-bold tracking-wide text-[#147447]">ডেলিভারি এলাকা · ${d.division} বিভাগ</p>
-        <h1 class="mt-3 max-w-3xl text-3xl font-bold leading-snug text-[#123b28] sm:text-4xl">${d.loc} ভুট্টা সাইলেজ: ১০ টাকা কেজি, বাড়ি পর্যন্ত ডেলিভারি</h1>
+        <h1 class="mt-3 max-w-3xl text-3xl font-bold leading-snug text-[#123b28] sm:text-4xl">${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, বাড়ি পর্যন্ত ডেলিভারি</h1>
         <p class="mt-4 max-w-3xl text-lg leading-8 text-[#456451]">${d.name} জেলার সব উপজেলায় খামারভেস্ট সাইলেজের এয়ারটাইট বস্তা পৌঁছে দেওয়া হয়। আগে টাকা নয়, পণ্য হাতে পেয়ে মান দেখে তারপর দাম।</p>
         <a href="${wa}" target="_blank" rel="noopener" class="mt-6 inline-flex rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b]">WhatsApp-এ অর্ডার করুন</a>
       </div>
@@ -160,7 +163,7 @@ function page(d) {
     <div class="mx-auto max-w-5xl px-5 py-8 sm:px-6">
       <section class="rounded-2xl border border-[#e4b44c]/40 bg-[#fff8e6] p-5 sm:p-6">
         <h2 class="text-xl font-bold text-[#724c00]">দাম (২০২৬)</h2>
-        <p class="mt-2 text-[#624d24]">প্রতি কেজি <strong>১০ টাকা</strong> · ৫০ কেজি এয়ারটাইট বস্তা <strong>৫০০ টাকা</strong> · একসাথে বেশি নিলে ছাড় আলোচনাসাপেক্ষ। পরিবহন খরচ ঠিকানা ও পরিমাণভেদে, কনফার্মেশন কলে আগেই জানানো হয়।</p>
+        <p class="mt-2 text-[#624d24]">প্রতি কেজি <strong>${product.perKgBn} টাকা</strong> · ${product.bagKgBn} কেজি এয়ারটাইট বস্তা <strong>${product.bagPriceBn} টাকা</strong> · একসাথে বেশি নিলে ছাড় আলোচনাসাপেক্ষ। পরিবহন খরচ ঠিকানা ও পরিমাণভেদে, কনফার্মেশন কলে আগেই জানানো হয়।</p>
       </section>
 
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.loc} খামারিদের জন্য সাইলেজ কেন</h2>

@@ -1,0 +1,15 @@
+{
+  "_comment": "Single source of truth for the product facts that appear on ~72 pages. Change the price with `npm run set-price -- --per-kg 12 --bag 600`, never by hand: npm run check fails if any page still shows a superseded price.",
+  "pricePerKg": 10,
+  "bagKg": 50,
+  "bagPrice": 500,
+  "currency": "BDT",
+  "priceValidUntil": "2026-12-31",
+  "history": [
+    {
+      "from": "2026-01-01",
+      "pricePerKg": 10,
+      "bagPrice": 500
+    }
+  ]
+}

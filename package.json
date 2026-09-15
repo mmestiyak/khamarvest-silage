@@ -15,7 +15,8 @@
     "build:related": "node scripts/related-guides.mjs",
     "watch": "node scripts/watch-site.mjs",
     "watch:competitors": "node scripts/watch-competitors.mjs",
-    "season": "node scripts/season-calendar.mjs"
+    "season": "node scripts/season-calendar.mjs",
+    "set-price": "node scripts/set-price.mjs"
   },
   "devDependencies": {
     "sharp": "^0.35.4",

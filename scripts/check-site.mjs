@@ -85,6 +85,12 @@ for (const file of files) {
   if (/fonts\.(googleapis|gstatic)\.com/.test(html)) err(file, 'loads Google Fonts remotely, fonts are self-hosted (see scripts/fetch-fonts.mjs)');
   if (/<script>\s*tailwind\.config/.test(html)) err(file, 'inline tailwind.config, the config lives in tailwind.config.js');
 
+  // Devanagari letters look close enough to Bengali to survive proofreading:
+  // "टाका" sat in a published article until a price codemod walked past it.
+  // U+0964 danda is shared punctuation and legitimately used everywhere.
+  const deva_letters = html.match(/[\u0900-\u0963\u0966-\u097F]+/g);
+  if (deva_letters) err(file, `Devanagari letters instead of Bengali: ${[...new Set(deva_letters)].join(' ')}`);
+
   // Bengali digits are ০-৯. Devanagari ०-९ look similar and have slipped in before.
   const deva = html.match(/[०-९]+/g);
   if (deva) err(file, `Devanagari digits instead of Bengali: ${[...new Set(deva)].join(' ')}`);
@@ -236,6 +242,12 @@ for (const file of files) {
   for (const phrase of INVENTED_TESTIMONIAL) {
     if (html.includes(phrase)) err(file, `invented customer testimonial: "${phrase}". Use a real attributed quote or drop it`);
   }
+  // A named profit figure is the same promise as "লাভ করুন", just in numbers,
+  // and it slipped past the phrase list for months.
+  for (const m of html.matchAll(/[০-৯][০-৯,]*\s*টাকা\s*লাভ|লাভজনক একটি বিনিয়োগ|বছরে লাভ/g)) {
+    err(file, `names a profit figure or endorses the investment: "${m[0]}". Link /tools/dudher-labh-calculator instead`);
+  }
+
   // Promised earnings. Income depends on the reader's milk price and costs, so
   // link the calculator instead of naming a figure.
   for (const phrase of PROMISED_EARNINGS) {
@@ -332,6 +344,63 @@ for (const file of articles) {
   const tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
   for (const stamp of stamps) {
     if (stamp > tomorrow) errors.push(`sitemap.xml: lastmod is more than a day in the future: ${stamp}`);
+  }
+}
+
+// --- Price consistency ---
+// The price is written in ~400 places across ~80 files. A change that lands in
+// most of them but not all is the worst outcome available: a farmer reads one
+// price and is charged another. scripts/product.json is the source of truth,
+// `npm run set-price` does the rewrite, and this makes a partial change
+// impossible to ship.
+{
+  const product = JSON.parse(await readFile(join(root, 'scripts/product.json'), 'utf8'));
+  const bn = (n) => Number(n).toLocaleString('en-US').replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[+d]);
+
+  // 1. The offers Google reads must match the source of truth.
+  const home = await readFile(join(root, 'index.html'), 'utf8');
+  for (const [label, value] of [['per kg', product.pricePerKg], ['per bag', product.bagPrice]]) {
+    if (!new RegExp(`"price":\\s*"${value}"`).test(home)) {
+      errors.push(`index.html: Product schema has no ${label} offer of ${value}, but scripts/product.json says it should`);
+    }
+  }
+  if (!home.includes(`"priceValidUntil": "${product.priceValidUntil}"`)) {
+    errors.push(`index.html: priceValidUntil does not match scripts/product.json (${product.priceValidUntil})`);
+  }
+
+  // 2. Calculators must charge what the pages advertise.
+  for (const file of files.filter((f) => f.startsWith('tools/'))) {
+    const html = await readFile(join(root, file), 'utf8');
+    for (const m of html.matchAll(/(?:SILAGE_PRICE|PRICE)\s*=\s*(\d+)/g)) {
+      if (Number(m[1]) !== product.pricePerKg) {
+        errors.push(`${file}: calculator uses ${m[1]} tk/kg but the price is ${product.pricePerKg}`);
+      }
+    }
+  }
+
+  // 3. llms.txt is what assistants quote, so it must not lag the site.
+  if (!llms.includes(`${bn(product.pricePerKg)} টাকা`)) {
+    errors.push(`llms.txt: does not state the current price of ${bn(product.pricePerKg)} টাকা`);
+  }
+
+  // 4. No page may still show a price we have moved away from.
+  const superseded = product.history
+    .filter((h) => h.pricePerKg !== product.pricePerKg || h.bagPrice !== product.bagPrice);
+  for (const old of superseded) {
+    const oK = bn(old.pricePerKg);
+    const oB = bn(old.bagPrice);
+    const patterns = [
+      new RegExp(`${oK} টাকা কেজি`),
+      new RegExp(`${oK} টাকা/কেজি`),
+      new RegExp(`কেজি(?:<[^>]*>|\\s)*${oK} টাকা`),
+      new RegExp(`${oB} টাকা`),
+    ];
+    for (const file of files) {
+      const html = await readFile(join(root, file), 'utf8');
+      if (patterns.some((re) => re.test(html))) {
+        err(file, `still shows the superseded price (${old.pricePerKg}/kg, ${old.bagPrice}/bag). Run npm run set-price, then fix whatever it reports as needing a human`);
+      }
+    }
   }
 }
 
