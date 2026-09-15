@@ -30,6 +30,7 @@ const TAGS = {
   'silage-songrokkhon-niyom': ['storage', 'silage-basics'],
   'vutta-silage-noshto-chinben': ['storage', 'buying'],
   'silage-mano-jachai': ['buying', 'storage'],
+  'silage-kothay-pawa-jay': ['buying', 'cost'],
   'nirapode-silage-kenar-niyom': ['buying', 'cost'],
   'vutta-silage-dam-koto-kothay-kinben': ['cost', 'buying'],
   'silage-vs-kacha-ghas-vs-khor': ['cost', 'feeding'],

@@ -14,6 +14,8 @@
         "ক্রুড প্রোটিন ৮–১২% ক্রুড ফাইবার ",
         "TDN ৬৫–৭৫% অ্যাশ ৩–৫% * শুধ"
       ],
+      "crawlerWords": 746,
+      "hasSchema": true,
       "pages": [
         "https://www.aksilage.com/",
         "https://www.aksilage.com/guide",
@@ -36,6 +38,8 @@
         "ক্রুড প্রোটিন ৮–১২% ক্রুড ফাইবার ",
         "TDN ৬৫–৭৫% অ্যাশ ৩–৫% * শুধ"
       ],
+      "crawlerWords": 688,
+      "hasSchema": true,
       "pages": [
         "https://www.prantorsilage.com/",
         "https://www.prantorsilage.com/guide",
@@ -45,6 +49,18 @@
         "https://www.prantorsilage.com/guide/storage-and-shelf-life",
         "https://www.prantorsilage.com/guide/what-is-silage"
       ]
+    },
+    {
+      "name": "Safina Silage",
+      "url": "https://safinasilage.com",
+      "checked": "2026-09-15",
+      "title": "সাফিনা সাইলেজ | উন্নতমানের ১০০% ভুট্টার কর্ণ সাইলেজ ও পশুখাদ্য",
+      "publishesPrice": false,
+      "claimsLab": false,
+      "nutritionClaims": [],
+      "crawlerWords": 10,
+      "hasSchema": false,
+      "pages": []
     }
   ]
 }

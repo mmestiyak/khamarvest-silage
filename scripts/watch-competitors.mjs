@@ -15,6 +15,13 @@ const SNAPSHOT = join(process.cwd(), 'scripts/competitor-snapshot.json');
 const SITES = [
   { name: 'AK Silage', url: 'https://www.aksilage.com' },
   { name: 'Prantor Silage', url: 'https://www.prantorsilage.com' },
+  // Safina is the most serious competitor: a real shop with silage, feed,
+  // minerals and milk, two silage tiers, and a differentiated product (black
+  // cumin and moringa leaf). Its weakness is that it is client-side rendered,
+  // so it serves ~10 words to a crawler and ~1,470 to a browser. AI crawlers do
+  // not run JavaScript, so it is effectively invisible to them today. If that
+  // ever changes, it changes our position, which is why renderedGap is tracked.
+  { name: 'Safina Silage', url: 'https://safinasilage.com' },
 ];
 
 const text = (html) => html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '')
@@ -34,6 +41,11 @@ async function snapshot(site) {
     // needs a response.
     out.claimsLab = /(ল্যাব|laboratory|lab report|পরীক্ষাগার)/i.test(body);
     out.nutritionClaims = (body.match(/TDN[^,।]{0,24}|ড্রাই ম্যাটার[^,।]{0,20}|ক্রুড প্রোটিন[^,।]{0,20}/gi) || []).slice(0, 6);
+    // Words a crawler sees without running JavaScript. A site that jumps from
+    // near-zero has started server-rendering, which would make it visible to AI
+    // assistants for the first time.
+    out.crawlerWords = body.split(/\s+/).filter(Boolean).length;
+    out.hasSchema = /application\/ld\+json/.test(html);
     const sm = await fetch(`${site.url}/sitemap.xml`, { headers: { 'user-agent': 'Mozilla/5.0' } });
     out.pages = sm.ok ? [...(await sm.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).sort() : [];
   } catch (e) {
@@ -57,6 +69,8 @@ for (const now of current.sites) {
   if (now.publishesPrice && !before.publishesPrice) changes.push(`**${now.name}** now publishes a price on the homepage. Our published price was a clear advantage on price queries; check how theirs compares.`);
   if (!now.publishesPrice && before.publishesPrice) changes.push(`**${now.name}** removed its published price.`);
   if (now.claimsLab && !before.claimsLab) changes.push(`**${now.name}** now mentions a lab report. /blog/silage-pushtiman-dm-cp-tdn tells farmers to ask which lab and which batch, so check whether they actually answer that.`);
+  if (now.crawlerWords > 200 && before.crawlerWords <= 200) changes.push(`**${now.name}** now server-renders its content (${before.crawlerWords} -> ${now.crawlerWords} words visible without JavaScript). It was invisible to AI crawlers; it is not any more.`);
+  if (now.hasSchema && !before.hasSchema) changes.push(`**${now.name}** has added structured data, having had none.`);
 }
 
 await writeFile(SNAPSHOT, `${JSON.stringify(current, null, 2)}\n`);
@@ -66,7 +80,7 @@ if (changes.length) { lines.push('## Changes', ''); changes.forEach((c) => lines
 else lines.push('No changes since the last snapshot.');
 lines.push('', '## Current state', '');
 for (const s of current.sites) {
-  lines.push(`- **${s.name}**: ${s.error ? `unreachable (${s.error})` : `${s.pages.length} pages, price published: ${s.publishesPrice ? 'yes' : 'no'}, mentions a lab: ${s.claimsLab ? 'yes' : 'no'}`}`);
+  lines.push(`- **${s.name}**: ${s.error ? `unreachable (${s.error})` : `${s.pages.length} sitemap pages, ${s.crawlerWords} words without JS, price published: ${s.publishesPrice ? 'yes' : 'no'}, schema: ${s.hasSchema ? 'yes' : 'no'}, mentions a lab: ${s.claimsLab ? 'yes' : 'no'}`}`);
 }
 console.log(lines.join('\n'));
 // Exit 1 only when something actually changed, so the workflow can decide
