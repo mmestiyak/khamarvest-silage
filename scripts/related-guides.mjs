@@ -41,6 +41,7 @@ const TAGS = {
   'chagol-vera-silage-khawano-guide': ['feeding', 'silage-basics'],
   'rumen-kivabe-kaj-kore': ['feeding', 'health'],
   'go-khaddo-shobdokosh': ['feeding', 'silage-basics'],
+  'khonij-lobon-mineral-mixture': ['feeding', 'health'],
   'danadar-khaddo-goru-ration': ['feeding', 'dairy'],
   'gavir-dudh-baranor-upay': ['dairy', 'feeding'],
   'gorvoboti-gavir-khaddo-dry-period': ['dairy', 'breeding'],

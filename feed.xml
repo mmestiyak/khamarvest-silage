@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Wed, 16 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>গরুর খনিজ ও লবণ: কেন লাগে, কতটা, আর ঘাটতির লক্ষণ</title>
+      <link>https://silage.khamarvest.com/blog/khonij-lobon-mineral-mixture</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/khonij-lobon-mineral-mixture</guid>
+      <pubDate>Thu, 17 Sep 2026 00:00:00 GMT</pubDate>
+      <description>খড়ভিত্তিক রেশনে ফসফরাস ও দস্তার ঘাটতি কতটা, দুধের গাভীর আসল চাহিদা কত, ঘাটতির যে লক্ষণগুলো খামারি অন্য রোগ ভেবে ভুল করেন, আর খনিজ মিশ্রণ কীভাবে দেবেন।</description>
+    </item>
     <item>
       <title>মহিষের খাদ্য ও সাইলেজ: দিনে কত কেজি, ফ্যাট কেন বেশি</title>
       <link>https://silage.khamarvest.com/blog/mohisher-khaddo-o-silage</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/kom-jaiyay-gavir-palan-labh</guid>
       <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
       <description>পাঁচ শতক জমি বা বাড়ির পাশে দুটি গাভী পালনের পরিকল্পনা: শেডের জায়গা, খাদ্য খরচ কমানোর কৌশল আর নিজের এলাকার দাম ধরে লাভ-লস হিসাব করার নিয়ম।</description>
-    </item>
-    <item>
-      <title>ছাগল-ভেড়াকে সাইলেজ: দিনে কত কেজি, খরচ কত</title>
-      <link>https://silage.khamarvest.com/blog/chagol-vera-silage-khawano-guide</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/chagol-vera-silage-khawano-guide</guid>
-      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
-      <description>ছাগল ও ভেড়াকে দৈনিক ১-২ কেজি ভুট্টা সাইলেজ খাওয়ানোর নিয়ম: বাড়ন্ত, প্রাপ্তবয়স্ক ও গর্ভবতী ছাগলের আলাদা পরিমাণ, পাত্রের উচ্চতা দিয়ে অপচয় ঠেকানো, ৭ দিনে অভ্যাস ও ছোট পালের বস্তার হিসাব।</description>
     </item>
   </channel>
 </rss>
