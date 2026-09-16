@@ -424,6 +424,24 @@ for (const file of articles) {
   }
 }
 
+// --- Favicon ---
+// Search Console reported a "Not found (404)", which was /favicon.ico, and only
+// the homepage declared an icon at all, as a data: URI that Google's favicon
+// crawler cannot fetch. The result was a generic globe beside every result in
+// mobile search.
+{
+  for (const f of ['favicon.ico', 'favicon.svg', 'favicon-48.png', 'favicon-180.png', 'favicon-192.png']) {
+    if (!await exists(join(root, f))) errors.push(`missing ${f}, run npm run favicon`);
+  }
+  const missing = [];
+  for (const file of files) {
+    const html = await readFile(join(root, file), 'utf8');
+    if (!html.includes('<!-- favicon:start -->')) missing.push(file);
+    if (/<link rel="icon" href="data:/.test(html)) err(file, 'declares a data: URI favicon, which Google cannot fetch. Use /favicon.ico');
+  }
+  if (missing.length) errors.push(`${missing.length} page(s) declare no favicon, run npm run build:favicon: ${missing.slice(0, 3).join(', ')}`);
+}
+
 // --- IndexNow ---
 // Bing verifies ownership by fetching /<key>.txt. If the key in the script and
 // the file drift apart every submission is silently rejected.

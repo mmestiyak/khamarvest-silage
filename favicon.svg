@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="খামারভেস্ট সাইলেজ">
+  <rect width="64" height="64" rx="12" fill="#0b5b38"/>
+  <!-- Corn ear: bold enough to stay legible at 16px -->
+  <path d="M32 11c7 0 12 7 12 17s-5 21-12 21-12-11-12-21 5-17 12-17z" fill="#ffd166"/>
+  <path d="M32 11c7 0 12 7 12 17s-5 21-12 21z" fill="#f0b93f"/>
+  <g fill="#0b5b38" opacity=".55">
+    <rect x="26" y="20" width="12" height="2.6" rx="1.3"/>
+    <rect x="25" y="27" width="14" height="2.6" rx="1.3"/>
+    <rect x="25" y="34" width="14" height="2.6" rx="1.3"/>
+    <rect x="27" y="41" width="10" height="2.6" rx="1.3"/>
+  </g>
+  <path d="M20 31c-5-3-8-9-8-14 6 0 11 3 13 8z" fill="#3aa869"/>
+</svg>
