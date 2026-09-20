@@ -58,6 +58,7 @@ const TAGS = {
   'gorome-gorur-jotno-heat-stress': ['seasonal', 'health'],
   'shite-gorur-thanda-jhuki-o-khaddo': ['seasonal', 'health'],
   'goru-shitokale-khaddo-vyobosthapna': ['seasonal', 'feeding'],
+  'go-khaddo-mousumi-calendar': ['seasonal', 'feeding'],
   'borshakale-gorur-khaddo-babosthapona': ['seasonal', 'feeding'],
 };
 

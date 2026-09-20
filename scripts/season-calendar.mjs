@@ -35,7 +35,7 @@ const SEASONS = [
     guides: ['blog/borshakale-gorur-khaddo-babosthapona', 'blog/gorur-pet-fapa-hole-koronio'],
     why: 'ভেজা ঘাসে পেট ফাঁপার ঝুঁকি বাড়ে আর মাঠ ডুবলে সবুজ খাদ্যের সংকট হয়, তখনই সাইলেজের চাহিদা ওঠে।' },
   { name: 'শীত', peak: [11, 12, 1, 2], lead: 6, leadNew: 18,
-    guides: ['blog/goru-shitokale-khaddo-vyobosthapna', 'blog/shite-gorur-thanda-jhuki-o-khaddo', 'blog/bachur-jotno-o-khaddo'],
+    guides: ['blog/goru-shitokale-khaddo-vyobosthapna', 'blog/shite-gorur-thanda-jhuki-o-khaddo', 'blog/go-khaddo-mousumi-calendar', 'blog/bachur-jotno-o-khaddo'],
     why: 'শীতে ঘাসের বাড়ন কমে, খড়ের দাম চড়ে, আর খামারি বিকল্প খোঁজেন।' },
   { name: 'ভুট্টা কাটা ও সাইলেজ তৈরির মৌসুম', peak: [3, 4, 5], lead: 8, leadNew: 20,
     guides: ['blog/silage-ki-kivabe-toiri-upokarita', 'blog/silage-kinben-naki-nije-banaben'],
