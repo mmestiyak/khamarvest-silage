@@ -10,7 +10,7 @@ module.exports = {
     './area/*.html',
     './tools/*.html',
     './scripts/*.mjs',
-    './js/*.js',
+    './js/**/*.js',
   ],
   theme: {
     extend: {

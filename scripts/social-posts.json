@@ -2,6 +2,18 @@
   "_comment": "Ready-to-paste Facebook group posts, one per guide. Format follows DISTRIBUTION.md: lead with the useful thing, mention the product once at the end as a fact. `season` schedules it; `evergreen` can run any month. Generated into a plan by `npm run social`.",
   "posts": [
     {
+      "slug": "tools/ration-generator",
+      "season": "evergreen",
+      "hook": "গরুকে কী কতটুকু খাওয়াবেন, এই প্রশ্নের উত্তর সাধারণত দোকানদার দেন। এখন নিজেই হিসাব করে নিতে পারেন, ফ্রিতে।",
+      "points": [
+        "গরুর ওজন আর দুধ (বা ষাঁড়ের ওজন বৃদ্ধির লক্ষ্য) বসান",
+        "আপনার বাজারে যে খাদ্য যে দামে পান, শুধু সেগুলোতে টিক দিয়ে দাম লিখুন",
+        "প্রোটিন, শক্তি ও খনিজের চাহিদা পূরণ করে এমন সবচেয়ে কম খরচের তালিকা কেজি ধরে বেরিয়ে আসে",
+        "খড় আর ভুসি দিয়ে কেন দুধের গাভীর রেশন হয় না, সেটাও কারণসহ দেখায়"
+      ],
+      "close": "হিসাব NRC ও Kearl-এর সূত্রে, খাদ্যের মান বাংলাদেশি বিশ্লেষণ থেকে। প্রায় ৯০% নির্ভুল ধরুন, বাকিটা গরু দেখে ঠিক করুন। টুলটি খামারভেস্ট সাইলেজের পক্ষ থেকে, যাদের ভুট্টা সাইলেজ ১০ টাকা কেজি; রেশনে সাইলেজ না এলেও টুল ফ্রি।"
+    },
+    {
       "slug": "blog/shite-gorur-thanda-jhuki-o-khaddo",
       "season": "winter",
       "hook": "আমাদের শীত ইউরোপের মতো নয়, তাই ঠান্ডাকে অনেকে হিসাবেই ধরেন না। কিন্তু সংখ্যাগুলো পাশাপাশি রাখলে ছবিটা বদলে যায়।",

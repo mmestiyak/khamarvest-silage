@@ -1,0 +1,4 @@
+{
+  "_comment": "Makes Node treat js/ration/*.js as ES modules so scripts/test-ration.mjs can import the same files the browser loads. Nothing else reads this file.",
+  "type": "module"
+}
