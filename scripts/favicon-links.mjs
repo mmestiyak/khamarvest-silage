@@ -32,7 +32,10 @@ for (const file of await walk('')) {
   // bytes behind than it removed and every page slowly grows.
   let html = before.replace(new RegExp(`\\s*${OPEN}[\\s\\S]*?${CLOSE}`, 'g'), '');
   // The homepage carried a data: URI icon, which Google cannot fetch.
-  html = html.replace(/\s*<link rel="icon" href="data:image\/svg\+xml[^>]*>/g, '');
+  // The data URI contains an inline SVG, so the tag ends at the first `">`
+  // after the href, not at the first `>`: an earlier [^>]* version left the
+  // tail of the SVG (`...🌽</text></svg>">`) visible at the top of the homepage.
+  html = html.replace(/\s*<link rel="icon" href="data:image\/svg\+xml[\s\S]*?">/g, '');
   // Anchor on </head>, not the stylesheet: guide-book.html and the GMB scratch
   // page do not link site.css and were being skipped.
   if (!html.includes('</head>')) continue;

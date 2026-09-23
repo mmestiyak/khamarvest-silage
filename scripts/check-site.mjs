@@ -73,6 +73,10 @@ for (const file of files) {
 
   // Owner considers em/en dashes an AI tell. Plain hyphen for ranges.
   if (/[—–]/.test(html)) err(file, 'contains an em or en dash');
+  // Markup that leaked into visible text. The homepage showed `🌽">` above the
+  // header for a week after the data-URI favicon was removed with a regex that
+  // stopped at the first `>` inside the SVG.
+  if (/<\/(?:svg|script|style)>\s*">/.test(html) || /<\/script><text /.test(html)) err(file, 'stray markup leaked into visible text (leftover of a removed tag)');
 
   // A file mixing precomposed and decomposed Bengali stores the same word as two
   // different byte sequences, so find/replace silently edits only some of them.
