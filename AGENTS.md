@@ -69,10 +69,20 @@ A static marketing + content site for **খামারভেস্ট সাই
 - Feeding rates / prices must stay within published ranges (dairy 15–25 kg/day, beef 10–20 kg/day, goat/sheep 1–2 kg/day; concentrate ৪০–৫৫ টাকা/কেজি, silage ১০ টাকা/কেজি).
 - Cite sources (DAERA, Teagasc) in a "তথ্যসূত্র" section when making factual claims. Do not invent savings/productivity numbers.
 - **No invented customer stories.** We hold no permission-cleared customer quotes, so any "তারা বলেন" / "খামারিরা বলেন" / "সফল হয়েছেন" sentence is fabricated. State the mechanism instead, or use a real attributed quote. `npm run check` fails on these phrases.
+- **The trust rules run on every public page and on `scripts/social-posts.json`, not only on articles.** Until 2026-09-29 the checker skipped every non-article page, which is how the homepage carried "কেন শত শত খামারি..." and "দ্রুত ডেলিভারি" for months. Beyond the phrase lists it now matches patterns (`TRUST_PATTERNS` in `scripts/check-site.mjs`): invented social proof, delivery-speed promises, health or yield promises ("গরু সুস্থ থাকে", "হজমশক্তি বাড়ায়"), absolute no-spoilage claims, brand superlatives, and the "তাজা খাবারের মতো পুষ্টি" nutrition equivalence. Describe the feed and the mechanism, not the result. A page that quotes a banned claim in order to disown it (`/about`'s "যে দাবিগুলো আমরা করি না") wraps that part in `<!-- trust:quoted-start -->` / `<!-- trust:quoted-end -->`. Two patterns are warnings only, pending the owner: the homepage reference price ("আগের দাম ১২ টাকা", "ছাড় চলছে") and "৯০% নির্ভুল".
 - **No promised earnings.** Income depends on the reader's milk price, feed cost and animal, so never name a profit figure or write "লাভ করুন" / "আয় করুন" / "গ্যারান্টি". Link `/tools/dudher-labh-calculator` and let the farmer compute it. The checker fails on these too.
 - **The homepage calculator's "খাদ্য খরচ সাশ্রয়" figure assumes ~3 kg silage replaces 1 kg concentrate** and prices the difference. That is a sound dry-matter equivalence (3 kg at ~30% DM is ~0.9 kg DM, as is 1 kg of concentrate at ~90%), and the assumption is disclosed under the number. It is still an *energy-only* substitution: concentrate also carries protein that silage does not, so silage cannot replace it one-for-one in practice, which is what `/blog/silage-vs-kacha-ghas-vs-khor#dry-matter` now tells readers. Treat the figure as the maximum, not the expected saving, and do not copy the framing onto new pages. `tools/silage-calculator` deliberately omits it.
 - **No unsupported savings claims** ("cuts straw use in half"). State the price we actually charge, not the saving we imagine.
 - Any article whose content changes materially should get its `dateModified` bumped; the checker rejects a `dateModified` earlier than `datePublished`.
+
+## Accessibility
+
+The audience is often older farmers on low-end Android phones, outdoors. A WCAG 2.1 AA audit (2026-09-29) set these rules:
+- **Contrast at least 4.5:1 for text.** White on WhatsApp green `#25D366` is 1.98:1, so order buttons use `#0e7c4b` (hover `#0b6a3e`). The homepage greens moved from `rgb(20,148,91)` to `rgb(14,124,75)` and from `rgb(73,163,43)` to `rgb(53,122,31)`. Facebook blue is `#0b5fcc`, not `#1877F2` (4.2:1 on white). Form borders are `#6f8f7c` (3.6:1).
+- **Bengali text at least 14px, body text 16px.** Conjuncts and matras blur below that on a cheap screen.
+- **Touch targets at least 44px** (`min-h-11`) for buttons, chips, header links and FAQ summaries.
+- **Global rules live in `css/src.css`:** `scroll-padding` so the sticky header and the fixed order bar never cover a focused link or an anchor target, spacing for footer links, placeholder colour, and a visible `:focus-visible` ring. Put a site-wide fix there rather than in 88 pages.
+- **Toggle buttons carry `aria-pressed`,** in the markup and updated in JS. Colour alone does not tell a screen-reader user which animal is selected.
 
 ## Analytics (GA4)
 

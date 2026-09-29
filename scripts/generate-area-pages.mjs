@@ -17,11 +17,11 @@ await mkdir(areaDir, { recursive: true });
 // context keys: dairy (পাবনা-সিরাজগঞ্জ belt), north (কৃষিপ্রধান উত্তর),
 // urban (শহরঘেঁষা খামার), coastal, general
 const CONTEXT = {
-  dairy: (d) => `${d.name} অঞ্চল দুধের খামারের জন্য পরিচিত। দুধের গাভীর জন্য সারা বছর একই মানের আঁশ ও শক্তির জোগান দিতে এখানকার অনেক খামারি এখন ভুট্টা সাইলেজে ভরসা রাখেন, বিশেষ করে যখন কাঁচা ঘাসের সংকট চলে।`,
+  dairy: (d) => `${d.name} অঞ্চল দুধের খামারের জন্য পরিচিত। দুধের গাভীর রেশনে আঁশ ও শক্তির জোগান সারা বছর একরকম রাখা কঠিন, বিশেষ করে যখন কাঁচা ঘাসের সংকট চলে। ভুট্টা সাইলেজ সেই ঘাটতির মাসগুলোর জন্য আগে থেকে মজুদ রাখা যায়।`,
   north: (d) => `কৃষিপ্রধান ${d.name} অঞ্চলে গরু পালন ও মোটাতাজাকরণ দুটোই জনপ্রিয়। খড় সস্তায় পেট ভরায় কিন্তু পুষ্টি সামান্য, আর ভুট্টা সাইলেজে আঁশের সাথে দানার শক্তিটাও আসে। দুটোর সৎ তুলনা দেখুন <a href="/blog/silage-vs-kacha-ghas-vs-khor#dry-matter" class="font-semibold text-[#0b6a3e] underline underline-offset-4">শুকনা পদার্থের হিসাবে</a>।`,
   urban: (d) => `${d.name} ও আশপাশের শহরঘেঁষা খামারগুলোর বড় সমস্যা ঘাসের জমি না থাকা। ভুট্টা সাইলেজ সেই সমস্যার সহজ সমাধান: জমি বা ঘাস কাটার লোক ছাড়াই সারা বছর সবুজ খাদ্য, বস্তা খুলে দিলেই হলো।`,
-  coastal: (d) => `${d.name} অঞ্চলে বর্ষা ও লোনা পানির কারণে সবুজ ঘাসের জোগান বছরজুড়ে সমান থাকে না। এয়ারটাইট বস্তার ভুট্টা সাইলেজ সেই ঘাটতির নির্ভরযোগ্য সমাধান, ৬-১২ মাস পর্যন্ত ভালো থাকে।`,
-  general: (d) => `${d.name} জেলার দুধের খামারি, মোটাতাজাকরণকারী কিংবা ছাগল-ভেড়ার খামারি, সবার জন্যই ভুট্টা সাইলেজ সারা বছরের সবুজ খাদ্যের সহজ সমাধান। কাঁচা ঘাসের সংকটের দিনেও দুধ বা বাড়ন থেমে থাকে না।`,
+  coastal: (d) => `${d.name} অঞ্চলে বর্ষা ও লোনা পানির কারণে সবুজ ঘাসের জোগান বছরজুড়ে সমান থাকে না। এয়ারটাইট বস্তার ভুট্টা সাইলেজ সেই ঘাটতির জন্য আগে থেকে রাখা যায়: না-খোলা বস্তা ৬-১২ মাস ভালো থাকে।`,
+  general: (d) => `${d.name} জেলার দুধের খামারি, মোটাতাজাকরণকারী কিংবা ছাগল-ভেড়ার খামারি, সবার জন্যই ভুট্টা সাইলেজ সারা বছরের সবুজ খাদ্যের সহজ সমাধান। কাঁচা ঘাসের সংকটের দিনেও সবুজ খাদ্যের জোগান থাকে।`,
 };
 
 const districts = [
@@ -155,10 +155,10 @@ function page(d) {
   <header class="sticky top-0 z-20 border-b border-[#184d32]/10 bg-white/95 backdrop-blur">
     <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
       <a href="/" class="text-lg font-bold tracking-tight text-[#075a35]">খামারভেস্ট সাইলেজ</a>
-      <div class="flex items-center gap-3">
-        <a href="/area/" class="rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">সব এলাকা</a>
-        <a href="/blog/" class="rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">গাইড</a>
-        <a href="https://www.facebook.com/khamarvestSilage/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-full bg-[#1877F2]/10 px-3 py-1 font-semibold text-sm text-[#1877F2] transition hover:bg-[#1877F2] hover:text-white">${fbSvg}<span>Facebook</span></a>
+      <div class="flex items-center gap-1 sm:gap-3">
+        <a href="/area/" class="inline-flex min-h-11 items-center rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">সব এলাকা</a>
+        <a href="/blog/" class="inline-flex min-h-11 items-center rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">গাইড</a>
+        <a href="https://www.facebook.com/khamarvestSilage/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-[#0b5fcc]/10 px-3 py-1 font-semibold text-sm text-[#0b5fcc] transition hover:bg-[#0b5fcc] hover:text-white">${fbSvg}<span class="hidden sm:inline">Facebook</span></a>
       </div>
     </nav>
   </header>
@@ -214,9 +214,9 @@ ${ORIGIN(d)}${PROOF}
 
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.loc} ডেলিভারি নিয়ে সাধারণ প্রশ্ন</h2>
       <div class="mt-4 space-y-3">
-        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5" open><summary class="cursor-pointer font-bold text-[#0b6a3e]">${d.name}র সব উপজেলায় কি ডেলিভারি হয়?</summary><p class="mt-2 text-[#33483a]">হ্যাঁ। WhatsApp-এ ঠিকানা জানালে আপনার উপজেলা-গ্রামসহ মোট খরচ জানিয়ে দেওয়া হয়।</p></details>
-        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="cursor-pointer font-bold text-[#0b6a3e]">ডেলিভারি চার্জ কত?</summary><p class="mt-2 text-[#33483a]">দূরত্ব ও বস্তার সংখ্যাভেদে আলাদা। কনফার্মেশন কলে আগেই মোট খরচ বলা হয়, পরে বাড়তি কিছু নেই। এলাকার কয়েকজন মিলে অর্ডার করলে খরচ ভাগ হয়ে যায়।</p></details>
-        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="cursor-pointer font-bold text-[#0b6a3e]">আগে অল্প নিয়ে পরীক্ষা করা যাবে?</summary><p class="mt-2 text-[#33483a]">যাবে। প্রথমে কয়েক বস্তা নিয়ে <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">৭ দিনের নিয়মে</a> গরুকে অভ্যাস করান, তারপর প্রয়োজনমতো নিয়মিত অর্ডার দিন।</p></details>
+        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5" open><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">${d.name}র সব উপজেলায় কি ডেলিভারি হয়?</summary><p class="mt-2 text-[#33483a]">হ্যাঁ। WhatsApp-এ ঠিকানা জানালে আপনার উপজেলা-গ্রামসহ মোট খরচ জানিয়ে দেওয়া হয়।</p></details>
+        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">ডেলিভারি চার্জ কত?</summary><p class="mt-2 text-[#33483a]">দূরত্ব ও বস্তার সংখ্যাভেদে আলাদা। কনফার্মেশন কলে আগেই মোট খরচ বলা হয়, পরে বাড়তি কিছু নেই। এলাকার কয়েকজন মিলে অর্ডার করলে খরচ ভাগ হয়ে যায়।</p></details>
+        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">আগে অল্প নিয়ে পরীক্ষা করা যাবে?</summary><p class="mt-2 text-[#33483a]">যাবে। প্রথমে কয়েক বস্তা নিয়ে <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">৭ দিনের নিয়মে</a> গরুকে অভ্যাস করান, তারপর প্রয়োজনমতো নিয়মিত অর্ডার দিন।</p></details>
       </div>
 
       <p class="mt-8 text-[#456451]">কাছাকাছি জেলায়ও ডেলিভারি: ${nearLinks} · <a href="/area/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সব এলাকা দেখুন</a></p>
@@ -273,7 +273,7 @@ const indexHtml = `<!DOCTYPE html>
       <a href="/" class="text-lg font-bold tracking-tight text-[#075a35]">খামারভেস্ট সাইলেজ</a>
       <div class="flex items-center gap-3">
         <a href="/tools/" class="rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">ফ্রি টুলস</a>
-        <a href="/blog/" class="rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">গাইড</a>
+        <a href="/blog/" class="inline-flex min-h-11 items-center rounded-full px-3 py-1.5 text-sm font-semibold text-[#075a35] hover:bg-[#e7f3e9]">গাইড</a>
       </div>
     </nav>
   </header>

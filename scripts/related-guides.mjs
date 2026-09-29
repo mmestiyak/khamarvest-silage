@@ -99,7 +99,7 @@ for (const f of (await readdir(join(root, 'area'))).filter((f) => /^silage-.+\.h
   districts.push({ name, url: `/area/${f.replace(/\.html$/, '')}` });
 }
 districts.sort((x, y) => x.name.localeCompare(y.name, 'bn'));
-const districtLinks = districts.map((d) => `<a href="${d.url}" class="rounded-full border border-[#184d32]/15 bg-white px-3 py-1 text-sm font-medium text-[#0b6a3e] hover:border-[#0e7c4b]">${d.name}</a>`).join('\n              ');
+const districtLinks = districts.map((d) => `<a href="${d.url}" class="inline-flex min-h-11 items-center rounded-full border border-[#184d32]/25 bg-white px-3.5 text-sm font-medium text-[#0b6a3e] hover:border-[#0e7c4b]">${d.name}</a>`).join('\n              ');
 
 function score(a, b) {
   let s = 0;

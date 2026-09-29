@@ -16,7 +16,41 @@ const site = 'https://silage.khamarvest.com';
 // promised profit figure there reaches people as ours just as surely as one in
 // an article, and nothing on the page would show it to us.
 const INVENTED_TESTIMONIAL = ['তারা বলেন', 'খামারিরা বলেন', 'সফল হয়েছেন'];
-const PROMISED_EARNINGS = ['লাভ করুন', 'আয় করুন', 'গ্যারান্টি'];
+const PROMISED_EARNINGS = ['লাভ করুন', 'আয় করুন', 'গ্যারান্টি', 'মুনাফা নিশ্চিত', 'লাভ বাড়ান', 'লাভ তত', 'লাভ শুরু হবে'];
+
+// Patterns a phrase list misses, from the 2026-09-29 brand review. Each one was
+// live on the site. They run on every public page and on the Facebook posts,
+// not only on articles: the homepage said "কেন শত শত খামারি..." for months
+// because the trust rules skipped everything that was not an article.
+const TRUST_PATTERNS = [
+  [/(শত শত|হাজারো|হাজার হাজার|অসংখ্য)\s*খামারি|খামারি[^।<"]{0,40}(ভরসা রাখেন|আস্থা রাখেন)|ব্যবহারকারী[^।<"]{0,20}খামারি/, 'invented social proof (we hold no customer data or quotes). State the mechanism instead'],
+  [/দ্রুত ডেলিভারি|[০-৯]+\s*ঘণ্টায়\s*(পৌঁছ|ডেলিভারি)|পরদিন ডেলিভারি/, 'promises a delivery speed. Dates are confirmed on the confirmation call'],
+  [/(সবসময়|সব সময়)\s*সুস্থ|(গরু|গাভী) সুস্থ থাকে(?! না)|দুধ উৎপাদন বেশি হয়|হজমশক্তি বাড়ায়/, 'health or yield promise. Cite a source or describe the feed, not the outcome'],
+  [/(পচার|পচন)[^।<"]{0,15}(কোনো সমস্যা নেই|ধরে না)|নষ্ট(ের| হওয়ার) ভয় নেই/, 'absolute no-spoilage claim; the guides themselves warn about punctures and rodents'],
+  [/খামারভেস্ট[^।<"]{0,30}(সবচেয়ে (কার্যকর|নির্ভরযোগ্য|ভালো)|সেরা)|ভেজালমুক্ত নিশ্চয়তা/, 'unsupported superlative or guarantee about the brand'],
+  [/তাজা (সবুজ )?খাবারের মতো(ই)? পুষ্টি/, 'nutrition equivalence we have no lab report for (see /about)'],
+];
+// Pending the owner's decision, so warnings for now: a struck-through reference
+// price with no matching product.json history, and an invented precision figure.
+const TRUST_WARNINGS = [
+  [/আগের দাম|ছাড় চলছে|বাঁচান\s*[০-৯]/, 'price anchor ("আগের দাম", "ছাড় চলছে"): product.json history has no older price. Owner decision pending'],
+  [/[০-৯]+\s*%\s*নির্ভুল/, 'precision figure ("X% নির্ভুল") with no source. Owner decision pending'],
+];
+
+// Every trust rule over one text. Comments are stripped: they are not published.
+function trustProblems(text) {
+  // A page may quote a banned claim in order to disown it (/about's "যে দাবিগুলো
+  // আমরা করি না"). Wrap that in <!-- trust:quoted-start --> / <!-- trust:quoted-end -->.
+  const t = text.replace(/<!-- trust:quoted-start -->[\s\S]*?<!-- trust:quoted-end -->/g, '').replace(/<!--[\s\S]*?-->/g, '').normalize('NFC');
+  const out = [];
+  for (const phrase of INVENTED_TESTIMONIAL) if (t.includes(phrase)) out.push(['err', `invented customer testimonial: "${phrase}". Use a real attributed quote or drop it`]);
+  for (const m of t.matchAll(/[০-৯][০-৯,]*\s*টাকা\s*লাভ|লাভজনক একটি বিনিয়োগ|বছরে লাভ/g)) out.push(['err', `names a profit figure or endorses the investment: "${m[0]}". Link /tools/dudher-labh-calculator instead`]);
+  for (const phrase of PROMISED_EARNINGS) if (t.includes(phrase)) out.push(['err', `promises earnings or gives a guarantee: "${phrase}"`]);
+  if (/অর্ধেকের নিচে|অর্ধেক কমি/.test(t)) out.push(['err', 'unsupported savings claim (halving). State the price, not the saving']);
+  for (const [re, msg] of TRUST_PATTERNS) { const m = t.match(re); if (m) out.push(['err', `${msg}: "${m[0]}"`]); }
+  for (const [re, msg] of TRUST_WARNINGS) { const m = t.match(re); if (m) out.push(['warn', `${msg}: "${m[0]}"`]); }
+  return out;
+}
 
 const errors = [];
 const warnings = [];
@@ -241,29 +275,11 @@ for (const file of files) {
     }
   }
 
-  if (!isArticle) continue;
-
   // --- Trust rules (AGENTS.md: never invent results, customer stories or promises) ---
+  // Every public page, not only articles.
+  for (const [level, msg] of trustProblems(html)) (level === 'err' ? err : warn)(file, msg);
 
-  // Fabricated testimonials. We have no permission-cleared customer quotes, so
-  // any "farmers say" sentence on this site is invented. Use a real, attributed
-  // quote or state the mechanism instead.
-  for (const phrase of INVENTED_TESTIMONIAL) {
-    if (html.includes(phrase)) err(file, `invented customer testimonial: "${phrase}". Use a real attributed quote or drop it`);
-  }
-  // A named profit figure is the same promise as "লাভ করুন", just in numbers,
-  // and it slipped past the phrase list for months.
-  for (const m of html.matchAll(/[০-৯][০-৯,]*\s*টাকা\s*লাভ|লাভজনক একটি বিনিয়োগ|বছরে লাভ/g)) {
-    err(file, `names a profit figure or endorses the investment: "${m[0]}". Link /tools/dudher-labh-calculator instead`);
-  }
-
-  // Promised earnings. Income depends on the reader's milk price and costs, so
-  // link the calculator instead of naming a figure.
-  for (const phrase of PROMISED_EARNINGS) {
-    if (html.includes(phrase)) err(file, `promises earnings or gives a guarantee: "${phrase}"`);
-  }
-  // Unsupported savings claims of the "cuts your cost in half" kind.
-  if (/অর্ধেকের নিচে|অর্ধেক কমি/.test(html)) err(file, 'unsupported savings claim (halving). State the price, not the saving');
+  if (!isArticle) continue;
 
   // --- Article-only rules ---
 
@@ -278,6 +294,15 @@ for (const file of files) {
   if (!html.includes('<!-- related-guides:start -->')) err(file, 'no related-guides block, run npm run build:related');
   if (!/"@type"\s*:\s*"FAQPage"/.test(html)) warn(file, 'no FAQPage schema (AI assistants pull answers from it)');
   if (!/"@type"\s*:\s*"BreadcrumbList"/.test(html)) warn(file, 'no BreadcrumbList schema');
+}
+
+// --- Facebook posts (scripts/social-posts.json) ---
+// They reach more farmers than the site does, so the same trust rules apply.
+{
+  const posts = await readFile(join(root, 'scripts/social-posts.json'), 'utf8');
+  const strings = [];
+  (function collect(v) { if (typeof v === 'string') strings.push(v); else if (v && typeof v === 'object') Object.values(v).forEach(collect); })(JSON.parse(posts));
+  for (const [level, msg] of trustProblems(strings.join('\n'))) (level === 'err' ? errors.push(`scripts/social-posts.json: ${msg}`) : warn('scripts/social-posts.json', msg));
 }
 
 // --- Sitemap and llms.txt coverage ---

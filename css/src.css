@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Site-wide accessibility rules (WCAG 2.1 AA audit, 2026-09-29). They live here,
+   not in the pages, so generated and hand-written pages all get them. */
+@layer base {
+  /* Sticky headers and the fixed mobile order bar covered focused links and
+     in-page anchor targets (60 of 360 Tab stops were hidden on phones). */
+  html { scroll-padding-top: 4.5rem; }
+  @media (max-width: 767px) {
+    html { scroll-padding-bottom: 7rem; }
+  }
+  /* Footer links sat 20px apart, under the 24px minimum for a thumb. */
+  footer a { display: inline-block; padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  /* Default placeholder grey is 2.5:1 on white. */
+  input::placeholder, textarea::placeholder { color: #6b7280; }
+  /* A visible focus ring wherever a page removed the outline. */
+  a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid #0b6a3e;
+    outline-offset: 2px;
+  }
+}

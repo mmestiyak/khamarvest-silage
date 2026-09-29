@@ -25,12 +25,12 @@ const SKIP = new Set([
 ]);
 
 const bar = (t) => `${OPEN}
-  <div class="h-16 md:hidden print:hidden" aria-hidden="true"></div>
+  <div class="h-24 md:hidden print:hidden" aria-hidden="true"></div>
   <div data-cta="sticky_bar" class="fixed inset-x-0 bottom-0 z-40 border-t border-[#184d32]/15 bg-white/95 px-3 py-2 backdrop-blur md:hidden print:hidden">
     <div class="mx-auto flex max-w-lg items-center gap-2">
-      <p class="min-w-0 flex-1 text-xs leading-tight text-[#456451]"><strong class="block text-sm text-[#0b5b38]">${t.price}</strong>${t.pay}</p>
-      <a href="tel:${CALL_TEL}" class="rounded-xl border border-[#0b5b38]/30 px-3.5 py-2.5 text-sm font-bold text-[#0b5b38]">${t.call}</a>
-      <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="rounded-xl bg-[#0b5b38] px-4 py-2.5 text-sm font-bold text-white">${t.wa}</a>
+      <p class="min-w-0 flex-1 text-sm leading-tight text-[#456451]"><strong class="block text-base text-[#0b5b38]">${t.price}</strong>${t.pay}</p>
+      <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 px-3.5 text-sm font-bold text-[#0b5b38]">${t.call}</a>
+      <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0b5b38] px-4 text-sm font-bold text-white">${t.wa}</a>
     </div>
   </div>
   ${CLOSE}`;
