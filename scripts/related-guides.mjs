@@ -86,6 +86,21 @@ for (const file of files) {
   articles.push({ file, slug, tags, title, url: urlOf(file), html });
 }
 
+// Every district page, for the "আপনার জেলায়" strip. District pages convert
+// best on the site (11.2% CTR vs 2.4% for the homepage), yet 34 of 38 articles
+// linked none of them, so a reader who had just decided to try silage had no
+// path to the page that answers "does it reach my district, and for how much".
+// Read from the generated pages so a new district appears here automatically.
+const districts = [];
+for (const f of (await readdir(join(root, 'area'))).filter((f) => /^silage-.+\.html$/.test(f)).sort()) {
+  const html = await readFile(join(root, 'area', f), 'utf8');
+  const name = html.match(/"position":3,"name":"([^"]+)"/)?.[1];
+  if (!name) throw new Error(`area/${f}: no district name in its BreadcrumbList`);
+  districts.push({ name, url: `/area/${f.replace(/\.html$/, '')}` });
+}
+districts.sort((x, y) => x.name.localeCompare(y.name, 'bn'));
+const districtLinks = districts.map((d) => `<a href="${d.url}" class="rounded-full border border-[#184d32]/15 bg-white px-3 py-1 text-sm font-medium text-[#0b6a3e] hover:border-[#0e7c4b]">${d.name}</a>`).join('\n              ');
+
 function score(a, b) {
   let s = 0;
   b.tags.forEach((t, i) => {
@@ -122,6 +137,13 @@ for (const a of articles) {
           <section class="mt-10 border-t border-[#184d32]/10 pt-7">
             <h2 class="text-lg font-bold text-[#123b28]">সম্পর্কিত গাইড</h2>
             <div class="mt-4 grid gap-3 sm:grid-cols-2">${cards}
+            </div>
+          </section>
+          <section class="mt-8 rounded-2xl bg-[#eaf5eb] p-5">
+            <h2 class="text-lg font-bold text-[#123b28]">আপনার জেলায় সাইলেজ: দাম ও ডেলিভারি</h2>
+            <p class="mt-1 text-sm text-[#456451]">জেলা বেছে নিন, সেখানে কীভাবে অর্ডার ও ডেলিভারি হয় দেখে নিন।</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              ${districtLinks}
             </div>
           </section>
           ${MARKER_CLOSE}`;

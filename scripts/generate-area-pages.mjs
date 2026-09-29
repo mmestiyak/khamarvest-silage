@@ -6,6 +6,7 @@ import { writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 // Price comes from scripts/product.json so 33 generated pages can never drift
 // from it. Change it with `npm run set-price`, never by hand.
+import { CALL_TEL } from './contact.mjs';
 import { product } from './product.mjs';
 
 const root = process.cwd();
@@ -75,12 +76,24 @@ const ORIGIN = (d) => d.slug === 'bogura'
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${d.name} জেলায় খামারভেস্টের কোনো গুদাম, শাখা বা ডিলার নেই। কেউ আমাদের নাম ব্যবহার করে ${d.loc} দোকান বা ডিপো দেখালে আগে যাচাই করে নিন, অর্ডার শুধু WhatsApp নম্বরে নেওয়া হয়। কেনার আগে দেখে নিতে পারেন <a href="/blog/nirapode-silage-kenar-niyom" class="font-semibold text-[#0b6a3e] underline underline-offset-4">নিরাপদে সাইলেজ কেনার নিয়ম</a>।</p>
 `;
 
+// A real production photo and the video, then the trust page. District pages
+// had no image at all, while a cash-on-delivery buyer ordering from a website
+// they have never seen needs to see that the product and the people are real.
+const PROOF = `      <figure class="mt-5">
+        <img src="/img/silage-production-1400.jpeg" alt="মাঠে ভুট্টা চপ করে সাইলেজের বস্তা ভরা হচ্ছে, খামারভেস্ট সাইলেজ" width="1400" height="1050" loading="lazy" decoding="async" class="aspect-[16/9] w-full rounded-2xl object-cover shadow-sm">
+        <figcaption class="mt-2 text-sm text-[#54705d]">মাঠেই ভুট্টা চপ করে বস্তা ভরার কাজ চলছে। <a href="https://www.youtube.com/shorts/n8sSOV0KQ64" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-4">ভিডিওতে দেখুন</a> · <a href="/about" class="font-semibold text-[#0b6a3e] underline underline-offset-4">আমরা কারা</a></figcaption>
+      </figure>
+`;
+
 const bySlug = Object.fromEntries(districts.map((d) => [d.slug, d]));
 const fbSvg = '<svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
 
 function page(d) {
   const url = `${siteUrl}/area/silage-${d.slug}`;
-  const wa = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.name} থেকে বলছি। ভুট্টা সাইলেজ নিতে চাই।`)}`;
+  // Names the district page and asks for upazila and bag count, the two facts
+  // the owner needs before quoting transport. Also tells the owner which page sent the lead.
+  const wa = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, ${d.name} জেলার পাতা থেকে লিখছি। ভুট্টা সাইলেজ নিতে চাই।\nউপজেলা: \nবস্তা: `)}`;
+  const callBtn = (cls) => `<a href="tel:${CALL_TEL}" class="${cls}">কল করুন</a>`;
   const title = `${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি | খামারভেস্ট সাইলেজ`;
   const desc = `${d.name} জেলার সব উপজেলায় খাঁটি ভুট্টা সাইলেজ ডেলিভারি। দাম ${product.perKgBn} টাকা কেজি, ${product.bagKgBn} কেজি এয়ারটাইট বস্তা ${product.bagPriceBn} টাকা, টাকা পণ্য হাতে পেয়ে। WhatsApp: +880 1303-438063।`;
   const nearLinks = d.near.map((s) => `<a href="/area/silage-${s}" class="font-semibold text-[#0b6a3e] underline underline-offset-4">${bySlug[s].name}</a>`).join(', ');
@@ -156,7 +169,10 @@ function page(d) {
         <p class="text-sm font-bold tracking-wide text-[#147447]">ডেলিভারি এলাকা · ${d.division} বিভাগ</p>
         <h1 class="mt-3 max-w-3xl text-3xl font-bold leading-snug text-[#123b28] sm:text-4xl">${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, বাড়ি পর্যন্ত ডেলিভারি</h1>
         <p class="mt-4 max-w-3xl text-lg leading-8 text-[#456451]">${d.name} জেলার সব উপজেলায় খামারভেস্ট সাইলেজের এয়ারটাইট বস্তা পৌঁছে দেওয়া হয়। আগে টাকা নয়, পণ্য হাতে পেয়ে মান দেখে তারপর দাম।</p>
-        <a href="${wa}" target="_blank" rel="noopener" class="mt-6 inline-flex rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b]">WhatsApp-এ অর্ডার করুন</a>
+        <div data-cta="hero" class="mt-6 flex flex-wrap gap-3">
+          <a href="${wa}" target="_blank" rel="noopener" class="inline-flex rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b]">WhatsApp-এ অর্ডার করুন</a>
+          ${callBtn('inline-flex rounded-xl border border-[#0b5b38]/30 bg-white px-5 py-3 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]')}
+        </div>
       </div>
     </section>
 
@@ -164,19 +180,24 @@ function page(d) {
       <section class="rounded-2xl border border-[#e4b44c]/40 bg-[#fff8e6] p-5 sm:p-6">
         <h2 class="text-xl font-bold text-[#724c00]">দাম (২০২৬)</h2>
         <p class="mt-2 text-[#624d24]">প্রতি কেজি <strong>${product.perKgBn} টাকা</strong> · ${product.bagKgBn} কেজি এয়ারটাইট বস্তা <strong>${product.bagPriceBn} টাকা</strong> · একসাথে বেশি নিলে ছাড় আলোচনাসাপেক্ষ। পরিবহন খরচ ঠিকানা ও পরিমাণভেদে, কনফার্মেশন কলে আগেই জানানো হয়।</p>
+        <a href="${wa}" target="_blank" rel="noopener" data-cta="price" class="mt-4 inline-flex rounded-xl bg-[#0b5b38] px-5 py-2.5 text-base font-bold text-white hover:bg-[#0e7c4b]">${d.loc} ডেলিভারিসহ দাম জানুন</a>
       </section>
 
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.loc} খামারিদের জন্য সাইলেজ কেন</h2>
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${CONTEXT[d.ctx](d)}</p>
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">ভুট্টা সাইলেজে আস্ত ভুট্টা গাছ দানাসহ কুচি করা থাকে বলে আঁশ ও শক্তি একসাথে মেলে। দুধের গাভীকে দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি আর ছাগল-ভেড়াকে ১-২ কেজি দেওয়া হয়। নতুন হলে আগে পড়ুন: <a href="/blog/silage-ki-kivabe-toiri-upokarita" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সাইলেজ কী?</a> আর <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">প্রথমবার খাওয়ানোর নিয়ম</a>।</p>
 
-${ORIGIN(d)}
+${ORIGIN(d)}${PROOF}
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.name} থেকে অর্ডারের নিয়ম (৩ ধাপ)</h2>
       <ol class="mt-4 grid gap-4 sm:grid-cols-3">
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">১. মেসেজ পাঠান</strong>নাম, ${d.name}র ঠিকানা ও কত বস্তা লাগবে লিখে WhatsApp করুন: +880 1303-438063</li>
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">২. কনফার্মেশন কল</strong>ডেলিভারির তারিখ ও পরিবহনসহ মোট খরচ আগেই জানানো হবে</li>
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">৩. পণ্য বুঝে টাকা</strong>বস্তা হাতে পেয়ে মান দেখে টাকা দেবেন (ক্যাশ অন ডেলিভারি)</li>
       </ol>
+      <div data-cta="steps" class="mt-4 flex flex-wrap gap-3">
+        <a href="${wa}" target="_blank" rel="noopener" class="inline-flex rounded-xl bg-[#0b5b38] px-5 py-2.5 text-base font-bold text-white hover:bg-[#0e7c4b]">১ম ধাপ: WhatsApp-এ মেসেজ পাঠান</a>
+        ${callBtn('inline-flex rounded-xl border border-[#0b5b38]/30 bg-white px-5 py-2.5 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]')}
+      </div>
 
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">কত বস্তা লাগবে?</h2>
       <div class="mt-4 overflow-x-auto rounded-xl border border-[#184d32]/10 bg-white">
@@ -195,7 +216,7 @@ ${ORIGIN(d)}
       <div class="mt-4 space-y-3">
         <details class="rounded-xl border border-[#184d32]/10 bg-white p-5" open><summary class="cursor-pointer font-bold text-[#0b6a3e]">${d.name}র সব উপজেলায় কি ডেলিভারি হয়?</summary><p class="mt-2 text-[#33483a]">হ্যাঁ। WhatsApp-এ ঠিকানা জানালে আপনার উপজেলা-গ্রামসহ মোট খরচ জানিয়ে দেওয়া হয়।</p></details>
         <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="cursor-pointer font-bold text-[#0b6a3e]">ডেলিভারি চার্জ কত?</summary><p class="mt-2 text-[#33483a]">দূরত্ব ও বস্তার সংখ্যাভেদে আলাদা। কনফার্মেশন কলে আগেই মোট খরচ বলা হয়, পরে বাড়তি কিছু নেই। এলাকার কয়েকজন মিলে অর্ডার করলে খরচ ভাগ হয়ে যায়।</p></details>
-        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="cursor-pointer font-bold text-[#0b6a3e]">আগে অল্প নিয়ে পরীক্ষা করা যাবে?</summary><p class="mt-2 text-[#33483a]">যাবে। অনেক খামারি প্রথমে কয়েক বস্তা নিয়ে গরুকে ৭ দিনের নিয়মে অভ্যাস করান, ফল দেখে মাসিক অর্ডারে যান।</p></details>
+        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="cursor-pointer font-bold text-[#0b6a3e]">আগে অল্প নিয়ে পরীক্ষা করা যাবে?</summary><p class="mt-2 text-[#33483a]">যাবে। প্রথমে কয়েক বস্তা নিয়ে <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">৭ দিনের নিয়মে</a> গরুকে অভ্যাস করান, তারপর প্রয়োজনমতো নিয়মিত অর্ডার দিন।</p></details>
       </div>
 
       <p class="mt-8 text-[#456451]">কাছাকাছি জেলায়ও ডেলিভারি: ${nearLinks} · <a href="/area/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সব এলাকা দেখুন</a></p>
@@ -204,12 +225,15 @@ ${ORIGIN(d)}
         <p class="text-sm font-semibold text-[#b8e5c8]">খামারভেস্ট সাইলেজ (Khamarvest Silage)</p>
         <h2 class="mt-2 text-2xl font-bold">${d.loc} ডেলিভারিসহ দাম জানতে চান?</h2>
         <p class="mt-3 max-w-2xl text-lg leading-8 text-[#e1f5e6]">এক মেসেজেই হিসাব পেয়ে যাবেন। আগে টাকা দিতে হয় না।</p>
-        <a href="${wa}" target="_blank" rel="noopener" class="mt-5 inline-flex rounded-xl bg-white px-5 py-3 text-base font-bold text-[#075a35] hover:bg-[#e5f5e9]">WhatsApp-এ কথা বলুন</a>
+        <div data-cta="bottom" class="mt-5 flex flex-wrap gap-3">
+          <a href="${wa}" target="_blank" rel="noopener" class="inline-flex rounded-xl bg-white px-5 py-3 text-base font-bold text-[#075a35] hover:bg-[#e5f5e9]">WhatsApp-এ কথা বলুন</a>
+          ${callBtn('inline-flex rounded-xl border border-white/40 px-5 py-3 text-base font-bold text-white hover:bg-white/10')}
+        </div>
       </section>
     </div>
   </main>
 
-  <footer class="border-t border-[#184d32]/10 bg-white px-5 py-7 text-center text-sm text-[#54705d]">© ২০২৬ খামারভেস্ট সাইলেজ · <a href="/area/" class="font-medium text-[#0b6a3e] underline">ডেলিভারি এলাকা</a> · <a href="/blog/" class="font-medium text-[#0b6a3e] underline">সব গাইড</a> · <a href="/tools/" class="font-medium text-[#0b6a3e] underline">ফ্রি টুলস</a></footer>
+  <footer class="border-t border-[#184d32]/10 bg-white px-5 py-7 text-center text-sm text-[#54705d]">© ২০২৬ খামারভেস্ট সাইলেজ · <a href="/area/" class="font-medium text-[#0b6a3e] underline">ডেলিভারি এলাকা</a> · <a href="/blog/" class="font-medium text-[#0b6a3e] underline">সব গাইড</a> · <a href="/tools/" class="font-medium text-[#0b6a3e] underline">ফ্রি টুলস</a> · <a href="/about" class="font-medium text-[#0b6a3e] underline">আমাদের সম্পর্কে</a></footer>
 <script src="/js/ga.js" defer></script></body>
 </html>
 `;

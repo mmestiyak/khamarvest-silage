@@ -36,6 +36,10 @@
   // Which spot on the page the link sits in, so GA4 shows whether the sticky
   // header, the in-body links, the sidebar or the closing CTA earns the click.
   function locationOf(a) {
+    // An explicit data-cta wins, so two CTAs in the same region (the hero and
+    // the closing box of a district page) can be told apart.
+    var tagged = a.closest('[data-cta]');
+    if (tagged) return tagged.getAttribute('data-cta');
     if (a.closest('header')) return 'header';
     if (a.closest('footer')) return 'footer';
     if (a.closest('aside')) return 'sidebar';
@@ -62,7 +66,31 @@
         });
       });
     });
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        window.gaEvent('phone_click', {
+          link_location: locationOf(a),
+          link_url: a.href,
+          page_path: window.location.pathname
+        });
+      });
+    });
   }
+
+  // A bare wa.me link opens an empty chat: the farmer has to think of what to
+  // write, and the owner cannot tell which page sent them (GA sees the click,
+  // not the order). Name the page and ask for the two facts every quote needs.
+  // Links that already carry ?text= (district pages, calculators) keep theirs.
+  // Runs before the GA early return so it works even with analytics off.
+  function prefillWhatsApp() {
+    var h1 = document.querySelector('h1');
+    var name = ((h1 && h1.textContent) || document.title.split('|')[0]).replace(/\s+/g, ' ').trim().slice(0, 70);
+    var msg = 'আসসালামু আলাইকুম, "' + name + '" পাতা থেকে লিখছি। ভুট্টা সাইলেজ নিতে চাই।\nএলাকা: \nবস্তা: ';
+    document.querySelectorAll('a[href*="wa.me/"]').forEach(function (a) {
+      if (a.href.indexOf('text=') === -1) a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(msg);
+    });
+  }
+  prefillWhatsApp();
 
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID.indexOf('G-XXXX') === 0) return;
 

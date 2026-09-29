@@ -62,11 +62,13 @@ for (const file of await walk('')) {
   const tags = [...html.matchAll(/<img\b[^>]*src="\/img\/([^"]+)\.jpeg"[^>]*>/g)];
   for (const m of tags) {
     const [tag, base] = [m[0], m[1]];
+    // npm run images writes .webp only for images where it beats the JPEG,
+    // so a JPEG-only srcset is normal, not a missing build step.
     const webp = await srcset(base, 'webp');
-    if (!webp) continue; // no variants generated for this image
     const jpeg = await srcset(base, 'jpeg');
+    if (!webp && !jpeg) continue; // no variants generated for this image
     const picture = '<picture>'
-      + `<source type="image/webp" srcset="${webp}" sizes="${SIZES}">`
+      + (webp ? `<source type="image/webp" srcset="${webp}" sizes="${SIZES}">` : '')
       + (jpeg ? `<source type="image/jpeg" srcset="${jpeg}" sizes="${SIZES}">` : '')
       + tag
       + '</picture>';

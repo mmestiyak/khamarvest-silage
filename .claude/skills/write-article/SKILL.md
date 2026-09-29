@@ -83,7 +83,9 @@ Missing any of these is the most common failure. The first two throw or fail the
 rest are silent.
 
 1. `scripts/related-guides.mjs` → add the slug to `TAGS` (the script throws without it)
-2. `llms.txt` → add a detailed entry with the concrete figures (checker warns)
+2. `llms.txt` → add **one line**, `- [short title](https://silage.khamarvest.com/blog/<slug>)`, no summary;
+   then `llms-full.txt` → add the detailed entry with the concrete figures and sources (the checker warns
+   if either is missing, and fails if `llms.txt` grows past 16 KB, because assistants truncate it)
 3. `scripts/social-posts.json` → add a post so it reaches Facebook and Google Posts
 4. `scripts/season-calendar.mjs` → add to a season's `guides` if it is seasonal
 5. `npm run build` → regenerates blog index, sitemap, feed, related blocks, images, CSS

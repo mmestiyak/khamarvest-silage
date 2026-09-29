@@ -2,7 +2,7 @@
 // Run: node scripts/set-price.mjs --per-kg 12 --bag 600 [--dry]
 //
 // Why this exists: the price is written in 398 places across 72 pages, three
-// calculator scripts, the JSON-LD offers, llms.txt and the page generators.
+// calculator scripts, the JSON-LD offers, llms.txt, llms-full.txt and the page generators.
 // Changing it by hand guarantees a missed spot, and a missed spot means a
 // farmer reads one price and is charged another. That is worse than any
 // ranking problem.
@@ -33,6 +33,7 @@ const oldPerKg = data.pricePerKg;
 const oldBag = data.bagPrice;
 if (oldPerKg === newPerKg && oldBag === newBag) { console.log('Price is already that. Nothing to do.'); process.exit(0); }
 
+const TODAY = new Date().toISOString().slice(0, 10);
 const [oK, nK, oB, nB] = [bn(oldPerKg), bn(newPerKg), bn(oldBag), bn(newBag)];
 
 // Every place the price is legitimately written. Bare `N টাকা` is only ever
@@ -57,6 +58,13 @@ const RULES = [
   [new RegExp(`"price":\\s*"${oldBag}"`, 'g'), `"price": "${newBag}"`],
   [new RegExp(`SILAGE_PRICE = ${oldPerKg}\\b`, 'g'), `SILAGE_PRICE = ${newPerKg}`],
   [new RegExp(`\\bPRICE = ${oldPerKg}\\b`, 'g'), `PRICE = ${newPerKg}`],
+  // English wording: corn-silage-bangladesh and the English key facts in
+  // llms.txt / llms-full.txt ("BDT 10 per kg", "BDT 10/kg", "BDT 500").
+  [new RegExp(`\\bBDT ${oldPerKg}(/kg| per kg)`, 'g'), `BDT ${newPerKg}$1`],
+  [new RegExp(`\\bBDT ${oldBag}(?![\\d,])`, 'g'), `BDT ${newBag}`],
+  // The offers' validFrom is the day this price took effect, the same date
+  // recorded in product.json > history below.
+  [/"validFrom":\s*"\d{4}-\d{2}-\d{2}"/g, `"validFrom": "${TODAY}"`],
 ];
 
 async function walk(dir) {
@@ -65,6 +73,7 @@ async function walk(dir) {
     if (['node_modules', '.git', '.wrangler', '.claude', 'img', 'fonts', 'css'].includes(e.name)) continue;
     const rel = dir ? `${dir}/${e.name}` : e.name;
     if (e.isDirectory()) out.push(...await walk(rel));
+    // .txt covers llms.txt and llms-full.txt, which assistants quote verbatim.
     else if (/\.(html|mjs|txt|js)$/.test(e.name) && e.name !== 'product.json') out.push(rel);
   }
   return out;
@@ -95,12 +104,17 @@ for (const file of await walk('')) {
     if (new RegExp(`(?:${nK}|${nB}) টাকা`).test(snippet)) continue; // already the new price
     leftovers.push(`${file}: ${snippet}`);
   }
+  // Same for English prices. English derived sums ("BDT 200 per day" on
+  // corn-silage-bangladesh) match neither rule, so they need a human look too.
+  for (const m of after.matchAll(new RegExp(`.{0,24}BDT (?:${oldPerKg}|${oldBag})(?![\\d,]).{0,16}`, 'g'))) {
+    leftovers.push(`${file}: ${m[0].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()}`);
+  }
 }
 
 if (!DRY) {
   data.pricePerKg = newPerKg;
   data.bagPrice = newBag;
-  data.history.push({ from: new Date().toISOString().slice(0, 10), pricePerKg: newPerKg, bagPrice: newBag });
+  data.history.push({ from: TODAY, pricePerKg: newPerKg, bagPrice: newBag });
   await writeFile(productPath, `${JSON.stringify(data, null, 2)}\n`);
 }
 

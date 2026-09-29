@@ -291,19 +291,43 @@ for (const [canonical, file] of canonicals) {
   if (!sitemapUrls.includes(canonical)) errors.push(`sitemap.xml: missing ${canonical} (${file}). Run npm run build:blog`);
 }
 
-const llms = await readFile(join(root, 'llms.txt'), 'utf8');
-if (/[—–]/.test(llms)) errors.push('llms.txt: contains an em or en dash');
-for (const phrase of PROMISED_EARNINGS) {
-  if (llms.includes(phrase)) errors.push(`llms.txt: promises earnings or gives a guarantee: "${phrase}". Assistants quote this file verbatim`);
+// llms.txt is the short index (one line per page) that assistants fetch first;
+// llms-full.txt carries the per-guide summaries. The trust, dash and digit rules
+// apply to both, because both are quoted verbatim.
+const LLMS_FILES = ['llms.txt', 'llms-full.txt'];
+const llmsText = {};
+for (const name of LLMS_FILES) {
+  if (!await exists(join(root, name))) { errors.push(`${name}: missing`); llmsText[name] = ''; continue; }
+  llmsText[name] = await readFile(join(root, name), 'utf8');
 }
-for (const phrase of INVENTED_TESTIMONIAL) {
-  if (llms.includes(phrase)) errors.push(`llms.txt: invented customer testimonial: "${phrase}"`);
+const llms = llmsText['llms.txt'];
+const llmsFull = llmsText['llms-full.txt'];
+for (const [name, text] of Object.entries(llmsText)) {
+  if (/[—–]/.test(text)) errors.push(`${name}: contains an em or en dash`);
+  for (const phrase of PROMISED_EARNINGS) {
+    if (text.includes(phrase)) errors.push(`${name}: promises earnings or gives a guarantee: "${phrase}". Assistants quote this file verbatim`);
+  }
+  for (const phrase of INVENTED_TESTIMONIAL) {
+    if (text.includes(phrase)) errors.push(`${name}: invented customer testimonial: "${phrase}"`);
+  }
+  const deva = text.match(/[०-९]+/g);
+  if (deva) errors.push(`${name}: Devanagari digits instead of Bengali: ${[...new Set(deva)].join(' ')}`);
+  // Every site URL it hands an assistant must exist and be extensionless.
+  for (const m of text.matchAll(/https:\/\/silage\.khamarvest\.com(\/[\w\/.#-]*)?(?![\w\/.#<-])/g)) {
+    const path = m[1] || '/';
+    if (/\.html(#|$)/.test(path)) errors.push(`${name}: .html URL ${m[0]}, use the extensionless form`);
+    else if (!await resolves(path)) errors.push(`${name}: URL does not resolve: ${m[0]}`);
+  }
 }
-const llmsDeva = llms.match(/[०-९]+/g);
-if (llmsDeva) errors.push(`llms.txt: Devanagari digits instead of Bengali: ${[...new Set(llmsDeva)].join(' ')}`);
+// Many assistants truncate a long llms.txt, and it had grown to 58 KB. Keep it
+// an index: one line per page, summaries go in llms-full.txt.
+const llmsBytes = Buffer.byteLength(llms, 'utf8');
+if (llmsBytes > 16 * 1024) errors.push(`llms.txt: ${(llmsBytes / 1024).toFixed(1)} KB, keep it under 16 KB (one line per page; move summaries to llms-full.txt)`);
+if (!llms.includes(`${site}/llms-full.txt`)) errors.push('llms.txt: does not point to llms-full.txt');
 for (const file of articles) {
   const slug = file.replace(/\.html$/, '');
   if (!llms.includes(slug)) warnings.push(`llms.txt: does not list ${slug}, AI assistants will not see it`);
+  if (!llmsFull.includes(slug)) warnings.push(`llms-full.txt: has no summary of ${slug}`);
 }
 
 // --- Recovery page ---
@@ -376,6 +400,19 @@ for (const file of articles) {
   if (!home.includes(`"priceValidUntil": "${product.priceValidUntil}"`)) {
     errors.push(`index.html: priceValidUntil does not match scripts/product.json (${product.priceValidUntil})`);
   }
+  // validFrom is the day the current price took effect (Merchant listings
+  // asks for it). It must be the latest date in product.json > history, which
+  // set-price keeps in step.
+  const priceFrom = product.history.at(-1).from;
+  if (!home.includes(`"validFrom": "${priceFrom}"`)) {
+    errors.push(`index.html: offers have no validFrom of ${priceFrom} (the latest date in scripts/product.json > history)`);
+  }
+  for (const file of files) {
+    const html = await readFile(join(root, file), 'utf8');
+    for (const m of html.matchAll(/"validFrom":\s*"([^"]*)"/g)) {
+      if (m[1] !== priceFrom) errors.push(`${file}: validFrom ${m[1]} does not match the current price's start date ${priceFrom}`);
+    }
+  }
 
   // 2. Calculators must charge what the pages advertise.
   for (const file of files.filter((f) => f.startsWith('tools/'))) {
@@ -387,9 +424,11 @@ for (const file of articles) {
     }
   }
 
-  // 3. llms.txt is what assistants quote, so it must not lag the site.
-  if (!llms.includes(`${bn(product.pricePerKg)} টাকা`)) {
-    errors.push(`llms.txt: does not state the current price of ${bn(product.pricePerKg)} টাকা`);
+  // 3. llms.txt and llms-full.txt are what assistants quote, so they must not lag the site.
+  for (const [name, text] of Object.entries(llmsText)) {
+    if (!text.includes(`${bn(product.pricePerKg)} টাকা`)) {
+      errors.push(`${name}: does not state the current price of ${bn(product.pricePerKg)} টাকা`);
+    }
   }
 
   // 4. No page may still show a price we have moved away from.
@@ -403,8 +442,11 @@ for (const file of articles) {
       new RegExp(`${oK} টাকা/কেজি`),
       new RegExp(`কেজি(?:<[^>]*>|\\s)*${oK} টাকা`),
       new RegExp(`${oB} টাকা`),
+      // English wording, on corn-silage-bangladesh and in the llms files.
+      new RegExp(`BDT ${old.pricePerKg}(?:/kg| per kg)`),
+      new RegExp(`BDT ${old.bagPrice}(?![\\d,])`),
     ];
-    for (const file of files) {
+    for (const file of [...files, ...LLMS_FILES]) {
       const html = await readFile(join(root, file), 'utf8');
       if (patterns.some((re) => re.test(html))) {
         err(file, `still shows the superseded price (${old.pricePerKg}/kg, ${old.bagPrice}/bag). Run npm run set-price, then fix whatever it reports as needing a human`);
@@ -446,6 +488,30 @@ for (const file of articles) {
   if (missing.length) errors.push(`${missing.length} page(s) declare no favicon, run npm run build:favicon: ${missing.slice(0, 3).join(', ')}`);
 }
 
+// --- Mobile order bar ---
+// Only the homepage had a floating order button; a phone reader of a guide
+// scrolled 11-13 screens to the first WhatsApp link. scripts/order-bar.mjs
+// writes the bar into every page except the two with a bottom bar of their own.
+{
+  const OWN_BAR = new Set(['index.html', 'tools/ration-generator.html', 'guide-book.html']);
+  const missing = [];
+  for (const file of files) {
+    if (OWN_BAR.has(file)) continue;
+    const html = await readFile(join(root, file), 'utf8');
+    if (!html.includes('<!-- order-bar:start -->')) missing.push(file);
+  }
+  if (missing.length) errors.push(`${missing.length} page(s) have no mobile order bar, run npm run build:orderbar: ${missing.slice(0, 3).join(', ')}`);
+}
+
+// --- District links from articles ---
+// District pages convert best (11.2% CTR) but 34 of 38 articles linked none.
+// The related-guides block carries a strip of every district page.
+for (const file of articles) {
+  const html = await readFile(join(root, file), 'utf8');
+  const block = html.split('<!-- related-guides:start -->')[1]?.split('<!-- related-guides:end -->')[0] || '';
+  if (!/href="\/area\/silage-/.test(block)) err(file, 'related-guides block has no district links, run npm run build:related');
+}
+
 // --- IndexNow ---
 // Bing verifies ownership by fetching /<key>.txt. If the key in the script and
 // the file drift apart every submission is silently rejected.
@@ -463,7 +529,10 @@ for (const file of articles) {
 // --- Analytics ---
 // AI-assistant referrals are the main lead source; both GA bootstraps must tag them.
 for (const f of ['js/ga.js', 'index.html']) {
-  if (!(await readFile(join(root, f), 'utf8')).includes('ai_referral')) errors.push(`${f}: does not fire the ai_referral event (see AGENTS.md > Analytics)`);
+  const src = await readFile(join(root, f), 'utf8');
+  if (!src.includes('ai_referral')) errors.push(`${f}: does not fire the ai_referral event (see AGENTS.md > Analytics)`);
+  // Farmers who call instead of typing are leads too; every tel: link is tracked.
+  if (!src.includes('phone_click')) errors.push(`${f}: does not fire phone_click for tel: links (see AGENTS.md > Analytics)`);
 }
 
 // --- Report ---

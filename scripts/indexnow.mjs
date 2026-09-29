@@ -40,8 +40,11 @@ async function changedUrls(before, after) {
     if (/^(scripts|node_modules|\.claude|\.github)\//.test(file)) continue;
     urls.add(toUrl(file));
   }
-  // llms.txt is what AI assistants read; resubmit it when it changes.
-  if (diff.includes('llms.txt')) urls.add(`${site}/llms.txt`);
+  // llms.txt (the short index) and llms-full.txt (per-guide summaries) are
+  // what AI assistants read; resubmit whichever changed.
+  const changed = diff.split('\n');
+  if (changed.includes('llms.txt')) urls.add(`${site}/llms.txt`);
+  if (changed.includes('llms-full.txt')) urls.add(`${site}/llms-full.txt`);
   // feed.xml is regenerated whenever a guide changes, so a fresh copy in Bing's
   // index keeps the feed a usable discovery path.
   if (diff.includes('feed.xml')) urls.add(`${site}/feed.xml`);

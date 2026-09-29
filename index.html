@@ -170,6 +170,7 @@
           },
           "availability": "https://schema.org/InStock",
           "itemCondition": "https://schema.org/NewCondition",
+          "validFrom": "2026-01-01",
           "priceValidUntil": "2026-12-31",
           "url": "https://silage.khamarvest.com/",
           "areaServed": {
@@ -196,6 +197,7 @@
           },
           "availability": "https://schema.org/InStock",
           "itemCondition": "https://schema.org/NewCondition",
+          "validFrom": "2026-01-01",
           "priceValidUntil": "2026-12-31",
           "url": "https://silage.khamarvest.com/",
           "areaServed": {
@@ -642,21 +644,20 @@
 }
   </script>
   <link rel="preload" href="/fonts/noto-sans-bengali-300-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" as="image" href="/img/silage-production-1400-800w.webp" type="image/webp" media="(max-width: 899px)" fetchpriority="high">
-  <link rel="preload" as="image" href="/img/silage-production-1400-1200w.webp" type="image/webp" media="(min-width: 900px)" fetchpriority="high">
+  <!-- JPEG, not WebP: on this photo mozjpeg is the smaller file at every width (see scripts/optimize-images.mjs). -->
+  <link rel="preload" as="image" href="/img/silage-production-1400-800w.jpeg" media="(max-width: 899px)" fetchpriority="high">
+  <link rel="preload" as="image" href="/img/silage-production-1400-1200w.jpeg" media="(min-width: 900px)" fetchpriority="high">
   <link rel="stylesheet" href="/css/site.css">
   <style>
     /* Hero background: own khamar photo (silage processing beside the corn field) */
     .hero-pattern {
       background-image: url("img/silage-production-1400-800w.jpeg");
-      background-image: image-set(url("img/silage-production-1400-800w.webp") type("image/webp"), url("img/silage-production-1400-800w.jpeg") type("image/jpeg"));
       background-size: cover;
       background-position: center;
     }
     @media (min-width: 900px) {
       .hero-pattern {
         background-image: url("img/silage-production-1400-1200w.jpeg");
-        background-image: image-set(url("img/silage-production-1400-1200w.webp") type("image/webp"), url("img/silage-production-1400-1200w.jpeg") type("image/jpeg"));
       }
     }
     .hero-pattern::before {
@@ -728,7 +729,7 @@
           মোটাতাজাকরণ, দুধের গাভী কিংবা ছাগল ভেড়া, যে খামারই চালান না কেন। সঠিক বয়সে কাটা আস্ত ভুট্টা গাছ, প্রাকৃতিক ফার্মেন্টেশনে তৈরি। সারা বছর একই মান, একই দাম।
         </h2>
         <div class="flex justify-center md:justify-start">
-          <a href="https://wa.me/8801303438063?text=আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ অর্ডার করতে চাই।" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(241,99,52)] hover:bg-[rgb(224,84,38)] text-white font-hind font-semibold text-[28px] leading-none rounded-[6px] px-7 py-3.5 shadow-[0_6px_20px_0_rgba(241,99,52,0.45)] transition hover:-translate-y-0.5">
+          <a href="https://wa.me/8801303438063?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%B9%E0%A7%8B%E0%A6%AE%E0%A6%AA%E0%A7%87%E0%A6%9C%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%9B%E0%A6%BF%E0%A5%A4%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%8F%E0%A6%B2%E0%A6%BE%E0%A6%95%E0%A6%BE%3A%20%0A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%3A%20" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(241,99,52)] hover:bg-[rgb(224,84,38)] text-white font-hind font-semibold text-[28px] leading-none rounded-[6px] px-7 py-3.5 shadow-[0_6px_20px_0_rgba(241,99,52,0.45)] transition hover:-translate-y-0.5">
             <svg aria-hidden="true" class="w-[28px] h-[28px] fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
             অর্ডার করতে চাই
           </a>
@@ -739,8 +740,8 @@
       </div>
       <!-- Right column: khamar photo -->
       <div class="w-full md:w-1/2 flex justify-center md:justify-end px-[10px]">
-        <img src="img/corn-harvest-1200.jpeg" loading="lazy"
-             alt="Meer Estiyak, Co-founder Khamarvest Silage" width="540" height="540"
+        <img src="img/corn-harvest-1200.jpeg" decoding="async"
+             alt="Meer Estiyak, Co-founder Khamarvest Silage, ভুট্টা খেতে সদ্য কাটা ভুট্টা হাতে" width="540" height="540"
              class="w-full max-w-[540px] aspect-square object-cover rounded-[8px] border-[5px] border-[rgb(20,148,91)]">
       </div>
     </div>
@@ -779,7 +780,7 @@
       <p class="font-hind text-[17px] md:text-[20px] text-[rgb(84,89,95)] text-center">
         ৫০ কেজি এয়ারটাইট বস্তা মাত্র ৫০০ টাকা। বেশি পরিমাণে নিলে দামে আরও ছাড়, WhatsApp-এ আলোচনা করে নিন।
       </p>
-      <a href="https://wa.me/8801303438063?text=আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ অর্ডার করতে চাই।" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(0,105,68)] text-white font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
+      <a href="https://wa.me/8801303438063?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%B9%E0%A7%8B%E0%A6%AE%E0%A6%AA%E0%A7%87%E0%A6%9C%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%9B%E0%A6%BF%E0%A5%A4%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%8F%E0%A6%B2%E0%A6%BE%E0%A6%95%E0%A6%BE%3A%20%0A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%3A%20" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(0,105,68)] text-white font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
         <svg aria-hidden="true" class="w-[28px] h-[28px] fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
         অর্ডার করতে চাই
       </a>
@@ -795,7 +796,7 @@
       <h2 class="font-hind font-normal text-white text-center text-[19px] leading-[34px] md:text-[28px]">
         দানাদার খাদ্যের কেজি এখন ৪০ টাকার ওপরে, ভালো খড়ও ১৫ থেকে ২০ টাকা, অথচ খড়ে পুষ্টি নামমাত্র। ভুট্টা সাইলেজে মাত্র ১০ টাকাতেই পাচ্ছেন শক্তি আর হজমযোগ্য সবুজ খাদ্য একসাথে, যা খাওয়ালে দামি দানাদার খাদ্যের খরচ অনেকটা কমে আসে। মোটাতাজাকরণে দ্রুত ওজন বাড়ে, দুধের গাভীতে দুধ বাড়ে, ছাগল ভেড়াতেও একই ফল। ঘাস কাটার লোক লাগে না, জমি লাগে না, বস্তা খুলে দিলেই হলো। হিসাবটা যত আগে মেলাবেন, লাভ তত আগে শুরু হবে।
       </h2>
-      <a href="https://wa.me/8801303438063?text=আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ অর্ডার করতে চাই।" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white text-black font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
+      <a href="https://wa.me/8801303438063?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%B9%E0%A7%8B%E0%A6%AE%E0%A6%AA%E0%A7%87%E0%A6%9C%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%9B%E0%A6%BF%E0%A5%A4%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%8F%E0%A6%B2%E0%A6%BE%E0%A6%95%E0%A6%BE%3A%20%0A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%3A%20" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white text-black font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
         <svg aria-hidden="true" class="w-[28px] h-[28px] fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
         অর্ডার করতে চাই
       </a>
@@ -824,7 +825,7 @@
           <li class="flex items-center gap-[5px] py-[6px]"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(20,148,91)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">গরু, ছাগল, ভেড়া সবাই আগ্রহ নিয়ে খায়</span></li>
         </ul>
         <div class="flex justify-center md:justify-start">
-          <a href="https://wa.me/8801303438063?text=আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ অর্ডার করতে চাই।" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(0,105,68)] text-white font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
+          <a href="https://wa.me/8801303438063?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%B9%E0%A7%8B%E0%A6%AE%E0%A6%AA%E0%A7%87%E0%A6%9C%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%9B%E0%A6%BF%E0%A5%A4%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%8F%E0%A6%B2%E0%A6%BE%E0%A6%95%E0%A6%BE%3A%20%0A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%3A%20" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(0,105,68)] text-white font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
             <svg aria-hidden="true" class="w-[28px] h-[28px] fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
             অর্ডার করতে চাই
           </a>
@@ -833,7 +834,7 @@
       <!-- Right: framed image slider (original is a 4-slide swiper of the same photo) -->
       <div class="w-full md:w-1/2 flex items-center justify-center px-[10px]">
         <div class="w-full max-w-[540px] rounded-[10px] border-4 border-[rgb(20,148,91)] overflow-hidden">
-          <img src="img/silage-bag-1200.jpeg" loading="lazy" alt="ভুট্টা সাইলেজের ৫০ কেজি এয়ারটাইট বস্তা" width="540" height="540" class="aspect-square w-full object-cover">
+          <img src="img/silage-bag-1200.jpeg" srcset="img/silage-bag-1200-480w.jpeg 480w, img/silage-bag-1200-800w.jpeg 800w, img/silage-bag-1200-1200w.jpeg 1200w" sizes="(min-width: 768px) 540px, 100vw" loading="lazy" decoding="async" alt="ভুট্টা সাইলেজের ৫০ কেজি এয়ারটাইট বস্তা" width="540" height="540" class="aspect-square w-full object-cover">
         </div>
       </div>
     </div>
@@ -956,25 +957,40 @@
         পাবনা-সিরাজগঞ্জের দুধের বেল্ট, বগুড়া-রংপুরের মোটাতাজাকরণ খামার, ঢাকা-গাজীপুরের ডেইরি ফার্ম কিংবা চট্টগ্রাম-কক্সবাজারের উপকূলীয় অঞ্চল, যেখানে সবুজ ঘাসের সংকট সবচেয়ে বেশি, সেখানেই আমরা নিয়মিত ডেলিভারি দিচ্ছি। আপনার এলাকা তালিকায় না থাকলেও চিন্তা নেই, WhatsApp-এ জিজ্ঞেস করুন।
       </p>
       <div class="flex flex-wrap justify-center gap-2 max-w-[900px]">
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">বগুড়া</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">পাবনা</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">সিরাজগঞ্জ</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">নাটোর</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">রংপুর</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">দিনাজপুর</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">ময়মনসিংহ</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">টাঙ্গাইল</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">ঢাকা</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">গাজীপুর</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">কুষ্টিয়া</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">যশোর</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">খুলনা</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">সাতক্ষীরা</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">কুমিল্লা</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">নোয়াখালী</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">চট্টগ্রাম</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1">কক্সবাজার</span>
-        <span class="font-hind text-[15px] md:text-[17px] bg-[rgb(20,148,91)] text-white rounded-full px-4 py-1 font-medium">+ সারাদেশে</span>
+        <a href="/area/silage-bogura" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">বগুড়া</a>
+        <a href="/area/silage-coxsbazar" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">কক্সবাজার</a>
+        <a href="/area/silage-kishoreganj" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">কিশোরগঞ্জ</a>
+        <a href="/area/silage-kurigram" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">কুড়িগ্রাম</a>
+        <a href="/area/silage-cumilla" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">কুমিল্লা</a>
+        <a href="/area/silage-kushtia" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">কুষ্টিয়া</a>
+        <a href="/area/silage-khulna" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">খুলনা</a>
+        <a href="/area/silage-gaibandha" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">গাইবান্ধা</a>
+        <a href="/area/silage-gazipur" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">গাজীপুর</a>
+        <a href="/area/silage-chattogram" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">চট্টগ্রাম</a>
+        <a href="/area/silage-joypurhat" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">জয়পুরহাট</a>
+        <a href="/area/silage-jamalpur" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">জামালপুর</a>
+        <a href="/area/silage-tangail" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">টাঙ্গাইল</a>
+        <a href="/area/silage-thakurgaon" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">ঠাকুরগাঁও</a>
+        <a href="/area/silage-dhaka" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">ঢাকা</a>
+        <a href="/area/silage-dinajpur" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">দিনাজপুর</a>
+        <a href="/area/silage-naogaon" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">নওগাঁ</a>
+        <a href="/area/silage-natore" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">নাটোর</a>
+        <a href="/area/silage-nilphamari" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">নীলফামারী</a>
+        <a href="/area/silage-noakhali" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">নোয়াখালী</a>
+        <a href="/area/silage-pabna" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">পাবনা</a>
+        <a href="/area/silage-faridpur" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">ফরিদপুর</a>
+        <a href="/area/silage-barishal" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">বরিশাল</a>
+        <a href="/area/silage-brahmanbaria" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">ব্রাহ্মণবাড়িয়া</a>
+        <a href="/area/silage-mymensingh" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">ময়মনসিংহ</a>
+        <a href="/area/silage-jashore" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">যশোর</a>
+        <a href="/area/silage-rangpur" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">রংপুর</a>
+        <a href="/area/silage-rajshahi" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">রাজশাহী</a>
+        <a href="/area/silage-lalmonirhat" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">লালমনিরহাট</a>
+        <a href="/area/silage-satkhira" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">সাতক্ষীরা</a>
+        <a href="/area/silage-sirajganj" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">সিরাজগঞ্জ</a>
+        <a href="/area/silage-sylhet" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">সিলেট</a>
+        <a href="/area/silage-habiganj" class="font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(20,148,91)] text-[rgb(0,105,68)] rounded-full px-4 py-1 hover:bg-[rgb(20,148,91)] hover:text-white">হবিগঞ্জ</a>
+        <a href="/area/" class="font-hind text-[15px] md:text-[17px] bg-[rgb(20,148,91)] text-white rounded-full px-4 py-1 font-medium">+ সারাদেশে</a>
       </div>
       <p class="text-center mt-5"><a href="area/" class="font-hind font-semibold text-[17px] text-[rgb(0,105,68)] underline underline-offset-4">আপনার জেলার পাতা দেখুন →</a></p>
     </div>
@@ -1141,7 +1157,7 @@
           <p class="font-hind text-[16px] leading-[26px] text-[rgb(84,89,95)] mt-1">বস্তা বুঝে নিন, তারপর টাকা দিন। আগে থেকে কিছুই দিতে হবে না।</p>
         </div>
       </div>
-      <a href="https://wa.me/8801303438063?text=আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ অর্ডার করতে চাই।"
+      <a href="https://wa.me/8801303438063?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%B9%E0%A7%8B%E0%A6%AE%E0%A6%AA%E0%A7%87%E0%A6%9C%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%9B%E0%A6%BF%E0%A5%A4%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%8F%E0%A6%B2%E0%A6%BE%E0%A6%95%E0%A6%BE%3A%20%0A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%3A%20"
          target="_blank" rel="noopener"
          class="wa-glow mt-4 inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1fbe5a] text-white font-hind font-semibold text-[20px] md:text-[26px] leading-none px-8 py-4 rounded-full transition hover:scale-105">
         <svg class="w-8 h-8 md:w-9 md:h-9 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -1198,7 +1214,7 @@
   </footer>
 
   <!-- ═══════════ GLOWING WHATSAPP BUTTON (fixed) ═══════════ -->
-  <a href="https://wa.me/8801303438063?text=আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ অর্ডার করতে চাই।"
+  <a href="https://wa.me/8801303438063?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%B9%E0%A7%8B%E0%A6%AE%E0%A6%AA%E0%A7%87%E0%A6%9C%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%9B%E0%A6%BF%E0%A5%A4%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%8F%E0%A6%B2%E0%A6%BE%E0%A6%95%E0%A6%BE%3A%20%0A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%3A%20"
      target="_blank" rel="noopener" aria-label="WhatsApp-এ অর্ডার করুন"
      class="wa-glow fixed bottom-5 right-5 z-50 inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1fbe5a] text-white font-hind font-semibold text-[18px] md:text-[22px] leading-none pl-4 pr-5 py-3.5 md:py-4 rounded-full transition hover:scale-105">
     <svg class="w-8 h-8 md:w-9 md:h-9 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -1239,6 +1255,7 @@
     // GA4 Admin > Events এ গিয়ে 'whatsapp_click' কে "Mark as key event" করলে এটি কনভার্শন হিসেবে গণ্য হবে।
     (function () {
       function locationOf(a) {
+        if (a.dataset.cta) return a.dataset.cta;
         if (a.classList.contains('fixed')) return 'floating_button';
         if (a.closest('footer')) return 'footer';
         var sec = a.closest('section');
@@ -1246,21 +1263,30 @@
         if (h) return h.textContent.trim().replace(/\s+/g, ' ').slice(0, 40);
         return 'other';
       }
+      // A bare wa.me link opens an empty chat, and the owner cannot tell which
+      // part of the site sent the farmer. Give it the same prefill as the rest of the site.
+      var PREFILL = 'আসসালামু আলাইকুম, হোমপেজ থেকে লিখছি। ভুট্টা সাইলেজ নিতে চাই।\nএলাকা: \nবস্তা: ';
       document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
+        if (a.href.indexOf('text=') === -1) a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(PREFILL);
         a.addEventListener('click', function () {
           if (typeof gaEvent === 'function') {
             gaEvent('whatsapp_click', { link_location: locationOf(a), link_url: a.href });
           }
         });
       });
-    })();
-
-    // ═══════════ Conversion tracking: Facebook page clicks ═══════════
-    (function () {
+      // ═══════════ Conversion tracking: Facebook page clicks ═══════════
       document.querySelectorAll('a[href*="facebook.com"]').forEach(function (a) {
         a.addEventListener('click', function () {
           if (typeof gaEvent === 'function') {
-            gaEvent('facebook_click', { link_url: a.href });
+            gaEvent('facebook_click', { link_location: locationOf(a), link_url: a.href });
+          }
+        });
+      });
+      // Farmers who would rather call than type.
+      document.querySelectorAll('a[href^="tel:"]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (typeof gaEvent === 'function') {
+            gaEvent('phone_click', { link_location: locationOf(a), link_url: a.href });
           }
         });
       });
@@ -1282,7 +1308,12 @@
           'প্রয়োজন: ' + data.get('bags') + ' বস্তা',
           data.get('note') ? 'অতিরিক্ত তথ্য: ' + data.get('note') : ''
         ].filter(Boolean).join('\n');
-        if (typeof gaEvent === 'function') gaEvent('order_details_submitted', { submission_method: 'whatsapp' });
+        if (typeof gaEvent === 'function') {
+          gaEvent('order_details_submitted', { submission_method: 'whatsapp' });
+          // window.open bypasses the link listener above, so the richest leads
+          // never reached the primary conversion. Fire it here too.
+          gaEvent('whatsapp_click', { link_location: 'order_form', link_url: 'https://wa.me/8801303438063' });
+        }
         window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(message), '_blank', 'noopener');
       });
     })();
