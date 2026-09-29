@@ -68,11 +68,11 @@ const districts = [
 // depot, branch or stockist anywhere: there are none.
 const ORIGIN = (d) => d.slug === 'bogura'
   ? `      <h2 class="mt-9 text-2xl font-bold text-[#123b28]">বগুড়ার সাইলেজ বগুড়াতেই তৈরি</h2>
-      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">খামারভেস্ট সাইলেজের মূল উৎপাদন বগুড়া জেলাতেই, শেরপুর, ধুনট ও শাজাহানপুরসহ আশপাশের উপজেলার ভুট্টা খেত থেকে। অর্থাৎ বগুড়ার খামারি যে বস্তাটা হাতে পান সেটি দূরের জেলা থেকে আসা মাল নয়, একই জেলায় তৈরি। ফসল কাটা, চপ করা, চেপে ভরা ও বস্তা সিল করা পর্যন্ত পুরো কাজটাই নিজেদের তত্ত্বাবধানে হয়।</p>
+      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">খামারভেস্ট সাইলেজের মূল উৎপাদন বগুড়া জেলাতেই, শেরপুর, ধুনট ও শাজাহানপুরসহ আশপাশের উপজেলার ভুট্টা খেত থেকে। অর্থাৎ বগুড়ার খামারি যে বস্তাটা হাতে পান সেটি দূরের জেলা থেকে আসা মাল নয়, একই জেলায় তৈরি। ফসল কাটা, চপ করা, চেপে ভরা ও বস্তা সিল করা পর্যন্ত পুরো কাজটাই নিজেদের তত্ত্বাবধানে হয়। এই দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য পর্দার আড়ালে বিপুল পরিমাণ সাইলেজ বানিয়েছে; খামারভেস্ট সেই দলেরই নিজের ব্র্যান্ড (<a href="/about#story" class="font-semibold text-[#0b6a3e] underline underline-offset-4">আমাদের গল্প</a>)।</p>
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">চাহিদা বেশি হলে দেশের অন্য এলাকাতেও উৎপাদন করা হয়, তবে বগুড়াই মূল ঘাঁটি। বগুড়ায় আমাদের কোনো দোকান বা ডিপো নেই, অর্ডার শুধু WhatsApp নম্বরে নেওয়া হয়।</p>
 `
   : `      <h2 class="mt-9 text-2xl font-bold text-[#123b28]">সাইলেজটা তৈরি হয় কোথায়</h2>
-      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">খামারভেস্ট সাইলেজের মূল উৎপাদন <a href="/area/silage-bogura" class="font-semibold text-[#0b6a3e] underline underline-offset-4">বগুড়া জেলায়</a>, শেরপুর, ধুনট ও শাজাহানপুরসহ আশপাশের উপজেলার ভুট্টা খেত থেকে। সেখান থেকেই ${d.loc} বস্তা পাঠানো হয়। চাহিদা অনুযায়ী দেশের অন্য এলাকাতেও উৎপাদন করা হয়।</p>
+      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">খামারভেস্ট সাইলেজের মূল উৎপাদন <a href="/area/silage-bogura" class="font-semibold text-[#0b6a3e] underline underline-offset-4">বগুড়া জেলায়</a>, শেরপুর, ধুনট ও শাজাহানপুরসহ আশপাশের উপজেলার ভুট্টা খেত থেকে। সেখান থেকেই ${d.loc} বস্তা পাঠানো হয়। চাহিদা অনুযায়ী দেশের অন্য এলাকাতেও উৎপাদন করা হয়। যে দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য পর্দার আড়ালে বিপুল পরিমাণ সাইলেজ বানিয়েছে, খামারভেস্ট সেই দলেরই নিজের ব্র্যান্ড (<a href="/about#story" class="font-semibold text-[#0b6a3e] underline underline-offset-4">আমাদের গল্প</a>)।</p>
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${d.name} জেলায় খামারভেস্টের কোনো গুদাম, শাখা বা ডিলার নেই। কেউ আমাদের নাম ব্যবহার করে ${d.loc} দোকান বা ডিপো দেখালে আগে যাচাই করে নিন, অর্ডার শুধু WhatsApp নম্বরে নেওয়া হয়। কেনার আগে দেখে নিতে পারেন <a href="/blog/nirapode-silage-kenar-niyom" class="font-semibold text-[#0b6a3e] underline underline-offset-4">নিরাপদে সাইলেজ কেনার নিয়ম</a>।</p>
 `;
 
@@ -144,7 +144,8 @@ function page(d) {
           {"@type":"Question","name":"${d.loc} কি ভুট্টা সাইলেজ ডেলিভারি হয়?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ, খামারভেস্ট সাইলেজ ${d.name} জেলার সব উপজেলায় হোম ডেলিভারি দেয়। WhatsApp-এ (+880 1303-438063) নাম, ঠিকানা ও বস্তার সংখ্যা লিখে পাঠালেই অর্ডার হয়ে যায়।"}},
           {"@type":"Question","name":"${d.loc} ডেলিভারি চার্জ কত?","acceptedAnswer":{"@type":"Answer","text":"পরিবহন খরচ ঠিকানার দূরত্ব ও বস্তার সংখ্যাভেদে আলাদা হয়। অর্ডারের পর কনফার্মেশন কলে ডেলিভারিসহ মোট খরচ আগেই জানিয়ে দেওয়া হয়, পরে বাড়তি কিছু চাওয়া হয় না।"}},
           {"@type":"Question","name":"কত দিনে পৌঁছায়?","acceptedAnswer":{"@type":"Answer","text":"অর্ডার কনফার্ম করার সময়ই ডেলিভারির তারিখ জানিয়ে দেওয়া হয়। এলাকা ও পরিমাণ অনুযায়ী তারিখ ঠিক হয়।"}},
-          {"@type":"Question","name":"টাকা কীভাবে দিতে হয়?","acceptedAnswer":{"@type":"Answer","text":"পণ্য হাতে পেয়ে, বস্তা ও মান দেখে তারপর টাকা দেবেন (ক্যাশ অন ডেলিভারি)। আগে কোনো টাকা দিতে হয় না।"}}
+          {"@type":"Question","name":"টাকা কীভাবে দিতে হয়?","acceptedAnswer":{"@type":"Answer","text":"পণ্য হাতে পেয়ে, বস্তা ও মান দেখে তারপর টাকা দেবেন: নগদে (ক্যাশ অন ডেলিভারি), অথবা খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে ট্রান্সফার করে। আগে কোনো টাকা দিতে হয় না।"}},
+          {"@type":"Question","name":"সর্বনিম্ন কত বস্তা নিতে হয়?","acceptedAnswer":{"@type":"Answer","text":"কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়। তবে পরিবহন খরচ দূরত্ব ও পরিমাণভেদে আলাদা, তাই দূরের জেলায় অল্প বস্তায় কেজিপ্রতি পরিবহন খরচ বেশি পড়ে। এলাকার কয়েকজন মিলে অর্ডার করলে খরচ ভাগ হয়ে যায়।"}}
         ]
       }
     ]
@@ -192,7 +193,7 @@ ${ORIGIN(d)}${PROOF}
       <ol class="mt-4 grid gap-4 sm:grid-cols-3">
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">১. মেসেজ পাঠান</strong>নাম, ${d.name}র ঠিকানা ও কত বস্তা লাগবে লিখে WhatsApp করুন: +880 1303-438063</li>
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">২. কনফার্মেশন কল</strong>ডেলিভারির তারিখ ও পরিবহনসহ মোট খরচ আগেই জানানো হবে</li>
-        <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">৩. পণ্য বুঝে টাকা</strong>বস্তা হাতে পেয়ে মান দেখে টাকা দেবেন (ক্যাশ অন ডেলিভারি)</li>
+        <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">৩. পণ্য বুঝে টাকা</strong>বস্তা হাতে পেয়ে মান দেখে টাকা দেবেন: নগদে বা খামারভেস্টের নামের ব্যাংক অ্যাকাউন্টে</li>
       </ol>
       <div data-cta="steps" class="mt-4 flex flex-wrap gap-3">
         <a href="${wa}" target="_blank" rel="noopener" class="inline-flex rounded-xl bg-[#0b5b38] px-5 py-2.5 text-base font-bold text-white hover:bg-[#0e7c4b]">১ম ধাপ: WhatsApp-এ মেসেজ পাঠান</a>
@@ -216,7 +217,7 @@ ${ORIGIN(d)}${PROOF}
       <div class="mt-4 space-y-3">
         <details class="rounded-xl border border-[#184d32]/10 bg-white p-5" open><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">${d.name}র সব উপজেলায় কি ডেলিভারি হয়?</summary><p class="mt-2 text-[#33483a]">হ্যাঁ। WhatsApp-এ ঠিকানা জানালে আপনার উপজেলা-গ্রামসহ মোট খরচ জানিয়ে দেওয়া হয়।</p></details>
         <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">ডেলিভারি চার্জ কত?</summary><p class="mt-2 text-[#33483a]">দূরত্ব ও বস্তার সংখ্যাভেদে আলাদা। কনফার্মেশন কলে আগেই মোট খরচ বলা হয়, পরে বাড়তি কিছু নেই। এলাকার কয়েকজন মিলে অর্ডার করলে খরচ ভাগ হয়ে যায়।</p></details>
-        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">আগে অল্প নিয়ে পরীক্ষা করা যাবে?</summary><p class="mt-2 text-[#33483a]">যাবে। প্রথমে কয়েক বস্তা নিয়ে <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">৭ দিনের নিয়মে</a> গরুকে অভ্যাস করান, তারপর প্রয়োজনমতো নিয়মিত অর্ডার দিন।</p></details>
+        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">আগে অল্প নিয়ে পরীক্ষা করা যাবে?</summary><p class="mt-2 text-[#33483a]">যাবে, কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়। দূরের জেলায় অল্প বস্তায় পরিবহন খরচ তুলনায় বেশি পড়ে। প্রথমে কয়েক বস্তা নিয়ে <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">৭ দিনের নিয়মে</a> গরুকে অভ্যাস করান, তারপর প্রয়োজনমতো নিয়মিত অর্ডার দিন।</p></details>
       </div>
 
       <p class="mt-8 text-[#456451]">কাছাকাছি জেলায়ও ডেলিভারি: ${nearLinks} · <a href="/area/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সব এলাকা দেখুন</a></p>

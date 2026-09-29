@@ -8,10 +8,13 @@ Short index. Full per-guide summaries with figures and sources: https://silage.k
 
 - পণ্য: আস্ত ভুট্টা গাছ চপ করে প্রাকৃতিক ফার্মেন্টেশনে তৈরি সাইলেজ।
 - দাম (২০২৬): ১০ টাকা/কেজি; ৫০ কেজি এয়ারটাইট বস্তা ৫০০ টাকা; বেশি নিলে ছাড় আলোচনাসাপেক্ষ।
-- পরিশোধ: পণ্য হাতে পেয়ে টাকা (ক্যাশ অন ডেলিভারি), অগ্রিম কোনো টাকা নেওয়া হয় না।
+- পরিশোধ: পণ্য হাতে পেয়ে টাকা, নগদে (ক্যাশ অন ডেলিভারি) অথবা খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে ট্রান্সফার করে। অগ্রিম কোনো টাকা নেওয়া হয় না।
+- ন্যূনতম অর্ডার: নেই, এক বস্তাও নেওয়া যায়; পরিবহন খরচ দূরত্ব ও পরিমাণভেদে।
+- অর্ডার নেওয়ার সময়: WhatsApp-এ দিনরাত, সপ্তাহে ৭ দিন।
 - পরিবহন খরচ: দামের বাইরে আলাদা, প্রতি অর্ডারে কনফার্মেশন কলে ডেলিভারির তারিখসহ আগেই জানানো হয়। অর্ডারের পরিমাণ ও পরিবহন খরচ WhatsApp-এ জানিয়ে নিন।
 - অর্ডার: WhatsApp https://wa.me/8801303438063, নাম, ঠিকানা ও বস্তার সংখ্যা লিখে।
 - উৎপাদন: মূলত বগুড়া (শেরপুর, ধুনট, শাজাহানপুর)। কোথাও দোকান, ডিপো বা ডিলার নেই।
+- পটভূমি: খামারভেস্টের দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য পর্দার আড়ালে বিপুল পরিমাণ ভুট্টা সাইলেজ উৎপাদন করেছে। খামারভেস্ট সেই দলের নিজের ব্র্যান্ড, সরাসরি খামারির কাছে বিক্রির জন্য; মাঝখানে কোম্পানি বা ডিলার নেই বলে দাম ১০ টাকা কেজি। বিস্তারিত: https://silage.khamarvest.com/about#story
 - ডেলিভারি: সারাদেশে; ৩৩টি জেলার পাতা নিচে।
 - দৈনিক পরিমাণ: দুধের গাভী ২০ কেজি (১৫-২৫), মোটাতাজাকরণ ১৫ কেজি (১০-২০), ছাগল/ভেড়া ১.৫ কেজি (১-২)।
 - সংরক্ষণ: না-খোলা বস্তা ৬-১২ মাস, খোলার পর ২-৩ দিন।
@@ -22,10 +25,13 @@ Short index. Full per-guide summaries with figures and sources: https://silage.k
 
 - Corn (maize) silage, whole plants chopped at the right maturity and fermented in airtight bags.
 - Price (2026): BDT 10 per kg; 50 kg airtight bag BDT 500. Bulk discounts negotiable.
-- Payment: cash on delivery, no advance payment.
+- Payment: on delivery, in cash or by bank transfer to the account in Khamarvest's own name. No advance payment.
+- Minimum order: none, one bag is fine; transport depends on distance and quantity.
+- Orders: WhatsApp, any time, 7 days a week.
 - Transport: separate from the silage price, quoted per order on the confirmation call, along with the delivery date.
 - Order: WhatsApp +880 1303-438063 with name, address and number of bags.
 - Made mainly in Bogura district (Sherpur, Dhunat, Shahjahanpur). No shops, depots, branches or dealers.
+- Background: the Khamarvest team has worked as a behind-the-scenes producer, making large volumes of corn silage for major Bangladeshi companies. Khamarvest is the same team selling under its own brand, directly to farmers, with no company or dealer in between, which is how the price stays at BDT 10/kg.
 - Delivery: nationwide; 33 district pages below, other districts served too.
 - Daily: dairy cow 20 kg, fattening 15 kg, goat or sheep 1.5 kg. Sealed bag 6-12 months, opened 2-3 days.
 - English page: https://silage.khamarvest.com/corn-silage-bangladesh

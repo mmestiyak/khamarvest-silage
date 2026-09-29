@@ -42,7 +42,7 @@ export const FEEDS = [
     dm: 92, cp: 4.0, me: 5.8, ca: 0.25, p: 0.09, price: 20, max: 0.45,
     maxBy: { dairy: 0.4, fattening: 0.45, dry: 0.7, heifer: 0.5, goat: 0.4 },
     default: true,
-    note: 'পেট ভরায়, কিন্তু প্রোটিন ৪% ও শক্তি খুব কম। ২০২৪ থেকে মণ ৯০০-১২০০ টাকা, তাই আর "সস্তা" নয়। দুধের গাভীর রেশনে ৪০% এর বেশি নয়।',
+    note: 'পেট ভরায়, কিন্তু প্রোটিন ৪% ও শক্তি খুব কম। দাম এলাকা ও মৌসুমভেদে মণে ৩০০ থেকে ১২০০ টাকা (কেজি প্রায় ৮-৩২), ঘাটতির সময় আর "সস্তা" নয়; নিজের এলাকার দর বসান। দুধের গাভীর রেশনে ৪০% এর বেশি নয়।',
   },
   {
     id: 'ums', cat: 'rough', bn: 'ইউএমএস (ইউরিয়া-চিটাগুড় মাখানো খড়)', en: 'Urea-molasses straw',
@@ -186,6 +186,7 @@ export const SOURCES = [
   { title: 'জার্মান ঘাসের বাংলাদেশি বিশ্লেষণ (Frontiers in Animal Science, 2024)', url: 'https://www.frontiersin.org/journals/animal-science/articles/10.3389/fanim.2024.1485887/full' },
   { title: 'USDA GAIN, Bangladesh Grain and Feed Annual 2026: ভুট্টা, গম ও ফিডের খুচরা দাম', url: 'https://www.fas.usda.gov/data/gain-report/2026/04/Grain%20and%20Feed%20Annual_Dhaka_Bangladesh_BG2026-0002.pdf' },
   { title: 'খড়ের দাম মণে ৯০০-১২০০ টাকা, ডিসেম্বর ২০২৪ (The Business Standard বাংলা)', url: 'https://www.tbsnews.net/bangla/%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6/news-details-292741' },
+  { title: 'সিলেটে বন্যার পর খড়ের দাম মণে ৩০০-৩৫০ থেকে ৮০০-১০০০ টাকা, মে ২০২৬ (The Daily Star / Asia News Network)', url: 'https://asianews.network/floods-trigger-cattle-feed-crisis-in-bangladeshs-sylhet/' },
 ];
 
 export const feedById = (id) => FEEDS.find((f) => f.id === id);
