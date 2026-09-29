@@ -3,7 +3,7 @@
 // a feed value that pushes a standard ration outside published ranges.
 
 import { solveLP } from '../js/ration/lp.js';
-import { formulate, defaultSelection, requirements, FEEDS } from '../js/ration/engine.js';
+import { formulate, defaultSelection, requirements, FEEDS, P_CEILING_PCT } from '../js/ration/engine.js';
 
 let failures = 0;
 const check = (cond, msg) => { if (!cond) { failures++; console.error('  FAIL', msg); } };
@@ -46,13 +46,13 @@ const SILAGE = 10;
 const scenarios = [
   { name: 'dairy 350 kg, 8 L', animal: { type: 'dairy', weight: 350, milk: 8 }, cost: [150, 400] },
   { name: 'dairy 400 kg, 10 L', animal: { type: 'dairy', weight: 400, milk: 10 }, cost: [180, 460] },
-  { name: 'dairy 450 kg, 15 L, pregnant', animal: { type: 'dairy', weight: 450, milk: 15, pregnant: true }, cost: [250, 720] },
+  { name: 'dairy 450 kg, 15 L, pregnant', animal: { type: 'dairy', weight: 450, milk: 15, pregnant: true }, cost: [250, 720], pMax: 0.7 },
   { name: 'fattening 250 kg, 0.8 kg/d', animal: { type: 'fattening', weight: 250, adg: 0.8 }, cost: [110, 300] },
   { name: 'fattening 350 kg, 1.0 kg/d', animal: { type: 'fattening', weight: 350, adg: 1.0 }, cost: [150, 380] },
   { name: 'dry cow 400 kg, pregnant', animal: { type: 'dry', weight: 400, pregnant: true }, cost: [90, 280] },
-  { name: 'heifer 150 kg, 0.5 kg/d', animal: { type: 'heifer', weight: 150, adg: 0.5 }, cost: [60, 200] },
-  { name: 'goat 25 kg, 50 g/d', animal: { type: 'goat', weight: 25, adg: 0.05 }, cost: [10, 45] },
-  { name: 'goat 30 kg, 1 L milk', animal: { type: 'goat', weight: 30, milk: 1 }, cost: [15, 60] },
+  { name: 'heifer 150 kg, 0.5 kg/d', animal: { type: 'heifer', weight: 150, adg: 0.5 }, cost: [60, 200], pMax: 0.7 },
+  { name: 'goat 25 kg, 50 g/d', animal: { type: 'goat', weight: 25, adg: 0.05 }, cost: [10, 45], pMax: 0.7 },
+  { name: 'goat 30 kg, 1 L milk', animal: { type: 'goat', weight: 30, milk: 1 }, cost: [15, 60], pMax: 0.7 },
 ];
 
 console.log('Default feeds:', defaultSelection(SILAGE).map((f) => f.id).join(', '));
@@ -66,6 +66,10 @@ for (const sc of scenarios) {
   check(r.adequacy.me >= 0.95 && r.adequacy.me <= (sc.animal.type === 'goat' ? 1.3 : 1.22), `${sc.name}: ME adequacy ${fmt(r.adequacy.me, 2)}`);
   check(r.supply.dm >= 0.97 * r.req.dmiMin && r.adequacy.dm <= 1.08, `${sc.name}: DM ${fmt(r.supply.dm)} kg outside ${fmt(r.req.dmiMin)}-${fmt(r.req.dmi)}`);
   check(r.caToP >= 1.2 || r.additives.limeG >= 2 * r.req.dcpCap, `${sc.name}: Ca:P ${fmt(r.caToP, 2)} below 1.2`);
+  // Phosphorus stays near the ceiling where the default feeds allow it; the
+  // 15 L cow, heifer and goats need a protein density only P-rich feeds give.
+  const pPct = r.supply.p / r.supply.dm / 10;
+  check(pPct <= (sc.pMax ?? P_CEILING_PCT + 0.02), `${sc.name}: P ${fmt(pPct, 2)}% of DM above ceiling`);
   check(r.adequacy.ca >= 0.9 && r.adequacy.p >= 0.9, `${sc.name}: minerals Ca ${fmt(r.adequacy.ca, 2)} P ${fmt(r.adequacy.p, 2)}`);
   check(r.cost.perAnimal >= sc.cost[0] && r.cost.perAnimal <= sc.cost[1], `${sc.name}: cost ${fmt(r.cost.perAnimal, 0)} outside ${sc.cost.join('-')} tk/day`);
   const roughShare = r.supply.rough / r.supply.dm;

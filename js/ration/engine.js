@@ -29,6 +29,14 @@ const PENALTY = { dm: 400, cp: 2, me: 40 }; // taka per kg DM, per g CP, per MJ 
 // filler only when it costs little more.
 const ME_CEILING = 1.15;
 const PENALTY_ME_OVER = 12; // taka per MJ above the ceiling
+// Phosphorus above this share of DM does nothing for the animal: dairy cows
+// yielding up to 40 L are fully supplied at 0.35-0.40% (NRC 2001; Wu & Satter
+// 2000), and the surplus is excreted. Bran and oil cake carry 1-1.7% P, so a
+// bran-heavy ration drifts to 0.7%, the NRC (2005) maximum tolerable level,
+// and then needs a large dose of limestone to hold Ca:P. The limit is soft so
+// a farm that only has bran still gets a ration; the UI says when it is hit.
+export const P_CEILING_PCT = 0.5;
+const PENALTY_P_OVER = 2; // taka per g P above the ceiling
 
 /** Feeds with `default: true`, priced at their defaults, for a first render. */
 export function defaultSelection(silagePrice) {
@@ -59,14 +67,15 @@ function resolveFeeds(selection, req, silagePrice, excluded) {
 
 function solve(feeds, req) {
   const n = feeds.length;
-  const S = { dm: n, cp: n + 1, me: n + 2, over: n + 3 };
-  const nv = n + 4;
+  const S = { dm: n, cp: n + 1, me: n + 2, over: n + 3, pOver: n + 4 };
+  const nv = n + 5;
   const c = new Array(nv).fill(0);
   feeds.forEach((f, i) => { c[i] = f.costPerKgDM; });
   c[S.dm] = PENALTY.dm;
   c[S.cp] = PENALTY.cp;
   c[S.me] = PENALTY.me;
   c[S.over] = PENALTY_ME_OVER;
+  c[S.pOver] = PENALTY_P_OVER;
   const row = () => new Array(nv).fill(0);
   const cons = [];
 
@@ -77,6 +86,8 @@ function solve(feeds, req) {
   r = row(); feeds.forEach((f, i) => { r[i] = f.cp * 10; }); r[S.cp] = 1; cons.push({ coef: r, op: '>=', rhs: req.cpG });
   r = row(); feeds.forEach((f, i) => { r[i] = f.me; }); r[S.me] = 1; cons.push({ coef: r, op: '>=', rhs: req.meMJ });
   r = row(); feeds.forEach((f, i) => { r[i] = f.me; }); r[S.over] = -1; cons.push({ coef: r, op: '<=', rhs: ME_CEILING * req.meMJ });
+  // Phosphorus ceiling as a share of whatever DM the ration ends up with.
+  r = row(); feeds.forEach((f, i) => { r[i] = (f.p - P_CEILING_PCT) * 10; }); r[S.pOver] = -1; cons.push({ coef: r, op: '<=', rhs: 0 });
   // Rumen health: roughage share of DM.
   r = row(); feeds.forEach((f, i) => { r[i] = (f.cat === 'rough' ? 1 : 0) - req.minRough; }); cons.push({ coef: r, op: '>=', rhs: 0 });
   // Each feed's safe share of DM, and any quantity the farmer capped.
