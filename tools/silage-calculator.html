@@ -143,6 +143,11 @@
           <div>
             <label for="days" class="block text-base font-bold text-[#0b6a3e]">৪. কত দিনের জন্য</label>
             <input id="days" type="number" min="1" max="365" step="1" value="30" inputmode="numeric" class="mt-1.5 w-full rounded-xl border border-[#6f8f7c] bg-white px-3 py-2.5 text-[17px] font-semibold text-[#123b28] focus:border-[#0b6a3e] focus:outline-none focus:ring-2 focus:ring-[#0b6a3e]">
+          
+            <div class="mt-2 flex flex-wrap gap-2">
+              <button type="button" data-days="90" class="days-preset inline-flex min-h-11 items-center rounded-xl border border-[#6f8f7c] bg-white px-3 text-sm font-semibold text-[#0b6a3e] hover:bg-[#eaf5eb]">শীতের ৯০ দিন</button>
+              <button type="button" data-days="120" class="days-preset inline-flex min-h-11 items-center rounded-xl border border-[#6f8f7c] bg-white px-3 text-sm font-semibold text-[#0b6a3e] hover:bg-[#eaf5eb]">কোরবানির ১২০ দিন</button>
+            </div>
           </div>
         </div>
         <p class="mt-3 text-sm leading-6 text-[#54705d]">ওজন জানা থাকলে ওজনের প্রায় ৪% ধরে শুরু করতে পারেন, ৪০০ কেজির গাভীর জন্য প্রায় ১৬ কেজি। বিস্তারিত <a href="/blog/vutta-silage-khawanor-poriman-o-hishab" class="font-semibold text-[#0b6a3e] underline underline-offset-4">পরিমাণের গাইডে</a>।</p>
@@ -240,6 +245,15 @@
         }, 1500);
       }
       ['count', 'perday', 'days'].forEach(function (id) { $(id).addEventListener('input', calc); });
+      // Season presets: December to February is 31 + 31 + 28 = 90 days; a Qurbani
+      // fattening cycle is 90-120 days, so 120 covers the longest one.
+      Array.prototype.forEach.call(document.querySelectorAll('.days-preset'), function (btn) {
+        btn.addEventListener('click', function () {
+          $('days').value = btn.getAttribute('data-days');
+          calc();
+          if (typeof gaEvent === 'function') gaEvent('calculator_preset', { tool: 'silage_quantity', duration_days: +btn.getAttribute('data-days') });
+        });
+      });
       var ON = ['border-[#0b6a3e]', 'bg-[#eaf5eb]', 'text-[#0b6a3e]'];
       var OFF = ['border-transparent', 'bg-[#f7f8f4]', 'text-[#30533e]'];
       function setActive(active) {

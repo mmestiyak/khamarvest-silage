@@ -6,7 +6,21 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Sun, 20 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>শীতের জন্য সাইলেজ মজুদ: কত বস্তা, কবে কিনবেন, কীভাবে রাখবেন</title>
+      <link>https://silage.khamarvest.com/blog/shiter-jonno-silage-mojud</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/shiter-jonno-silage-mojud</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+      <description>ডিসেম্বর থেকে ফেব্রুয়ারির ৯০ দিনে একটি দুধের গাভীর ৩৬ বস্তা, মোটাতাজাকরণের গরুর ২৭ বস্তা সাইলেজ লাগে। কবে কিনবেন, একবারে নাকি ভাগে ভাগে, খোলা বস্তার তিন দিনের নিয়ম আর মজুদ রাখার নিয়ম, হিসাবসহ।</description>
+    </item>
+    <item>
+      <title>সাইলেজের পরিবহন খরচ: কীভাবে হিসাব হয়, কীভাবে কমাবেন</title>
+      <link>https://silage.khamarvest.com/blog/silage-poribohon-khoroch</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-poribohon-khoroch</guid>
+      <pubDate>Wed, 30 Sep 2026 00:00:00 GMT</pubDate>
+      <description>সাইলেজের দুই-তৃতীয়াংশই পানি, তাই পরিবহন খরচ বড় বিষয়। ডেলিভারিসহ কেজিপ্রতি দাম বের করার সূত্র, অল্প আর বেশি বস্তার হিসাব, কয়েকজন মিলে অর্ডার দিলে কত কমে, আর দাম জানার সময় কী জিজ্ঞেস করবেন।</description>
+    </item>
     <item>
       <title>কোন মাসে ঘাস বাড়ে না: ১২ মাসের গো-খাদ্য ক্যালেন্ডার</title>
       <link>https://silage.khamarvest.com/blog/go-khaddo-mousumi-calendar</link>
@@ -167,20 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorur-khamar-shuru-korar-upay</guid>
       <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
       <description>২টি গাভী দিয়ে খামার শুরু করবেন কীভাবে? গোয়াল, গরু কেনা, খাদ্য খরচের মাসিক হিসাব আর নতুন খামারিদের যে ভুলে লস হয়, সব এক গাইডে।</description>
-    </item>
-    <item>
-      <title>কোরবানির গরু মোটাতাজাকরণ: কবে কিনবেন, কী খাওয়াবেন, খরচের হিসাব</title>
-      <link>https://silage.khamarvest.com/blog/qurbani-goru-motatajakoron-porikolpona</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/qurbani-goru-motatajakoron-porikolpona</guid>
-      <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
-      <description>কোরবানির হাটে ভালো দাম পেতে গরু কবে কিনবেন, ৩-৪ মাসে কী খাওয়াবেন আর স্টেরয়েড ছাড়া নিরাপদে মোটাতাজা করার পুরো পরিকল্পনা।</description>
-    </item>
-    <item>
-      <title>শীতকালে গরুর খাদ্য ব্যবস্থাপনা: ঘাটতির মাসের পরিকল্পনা</title>
-      <link>https://silage.khamarvest.com/blog/goru-shitokale-khaddo-vyobosthapna</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/goru-shitokale-khaddo-vyobosthapna</guid>
-      <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
-      <description>নভেম্বর থেকে ফেব্রুয়ারি সবুজ ঘাস কমে, খড় ও দানাদারের দাম বাড়ে। শীতের ঘাটতির মাসের জন্য আগে থেকে সাইলেজ রাখার পরিকল্পনা, দৈনিক পরিমাণ ও মাসিক খরচের হিসাব।</description>
     </item>
   </channel>
 </rss>

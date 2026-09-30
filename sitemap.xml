@@ -7,6 +7,18 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://silage.khamarvest.com/blog/shiter-jonno-silage-mojud</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://silage.khamarvest.com/blog/silage-poribohon-khoroch</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://silage.khamarvest.com/blog/go-khaddo-mousumi-calendar</loc>
     <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -164,7 +176,7 @@
   </url>
   <url>
     <loc>https://silage.khamarvest.com/blog/chagol-vera-silage-khawano-guide</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
