@@ -7,6 +7,7 @@
 // missing from the sitemap) before they reach production.
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, dirname, resolve, relative } from 'node:path';
+import { product as PRODUCT } from './product.mjs';
 
 const root = process.cwd();
 const site = 'https://silage.khamarvest.com';
@@ -29,11 +30,13 @@ const TRUST_PATTERNS = [
   [/(পচার|পচন)[^।<"]{0,15}(কোনো সমস্যা নেই|ধরে না)|নষ্ট(ের| হওয়ার) ভয় নেই/, 'absolute no-spoilage claim; the guides themselves warn about punctures and rodents'],
   [/খামারভেস্ট[^।<"]{0,30}(সবচেয়ে (কার্যকর|নির্ভরযোগ্য|ভালো)|সেরা)|ভেজালমুক্ত নিশ্চয়তা/, 'unsupported superlative or guarantee about the brand'],
   [/তাজা (সবুজ )?খাবারের মতো(ই)? পুষ্টি/, 'nutrition equivalence we have no lab report for (see /about)'],
+  // The price is the same all year. A real, permanent price cut may be shown
+  // (see the price-history marker below); a "sale" or "stock is running out"
+  // frame may not, because it tells the farmer the price is about to go back up.
+  [/ছাড় চলছে|স্টক থাকতেই|স্টক শেষ হওয়ার আগে|অফার শেষ/, 'temporary-sale or false-urgency framing; the price is the same all year'],
 ];
-// Pending the owner's decision, so warnings for now: a struck-through reference
-// price with no matching product.json history, and an invented precision figure.
+// Warnings: an invented precision figure.
 const TRUST_WARNINGS = [
-  [/আগের দাম|ছাড় চলছে|বাঁচান\s*[০-৯]/, 'price anchor ("আগের দাম", "ছাড় চলছে"): product.json history has no older price. Owner decision pending'],
   [/[০-৯]+\s*%\s*নির্ভুল/, 'precision figure ("X% নির্ভুল") with no source. Owner decision pending'],
 ];
 
@@ -48,6 +51,8 @@ function trustProblems(text) {
   for (const phrase of PROMISED_EARNINGS) if (t.includes(phrase)) out.push(['err', `promises earnings or gives a guarantee: "${phrase}"`]);
   if (/অর্ধেকের নিচে|অর্ধেক কমি/.test(t)) out.push(['err', 'unsupported savings claim (halving). State the price, not the saving']);
   for (const [re, msg] of TRUST_PATTERNS) { const m = t.match(re); if (m) out.push(['err', `${msg}: "${m[0]}"`]); }
+  // "আগের দাম" is only true if product.json records an earlier price.
+  if (/আগের দাম/.test(t) && !PRODUCT.previous) out.push(['err', 'shows an "আগের দাম" but scripts/product.json > history has no earlier price']);
   for (const [re, msg] of TRUST_WARNINGS) { const m = t.match(re); if (m) out.push(['warn', `${msg}: "${m[0]}"`]); }
   return out;
 }
@@ -466,13 +471,15 @@ for (const file of articles) {
       new RegExp(`${oK} টাকা কেজি`),
       new RegExp(`${oK} টাকা/কেজি`),
       new RegExp(`কেজি(?:<[^>]*>|\\s)*${oK} টাকা`),
-      new RegExp(`${oB} টাকা`),
+      new RegExp(`(?<![০-৯,])${oB} টাকা`),
       // English wording, on corn-silage-bangladesh and in the llms files.
       new RegExp(`BDT ${old.pricePerKg}(?:/kg| per kg)`),
       new RegExp(`BDT ${old.bagPrice}(?![\\d,])`),
     ];
     for (const file of [...files, ...LLMS_FILES]) {
-      const html = await readFile(join(root, file), 'utf8');
+      // A page may state the old price as history ("আগে ১২ টাকা ছিল, এখন ১০"),
+      // wrapped in <!-- price-history:start --> / <!-- price-history:end -->.
+      const html = (await readFile(join(root, file), 'utf8')).replace(/<!-- price-history:start -->[\s\S]*?<!-- price-history:end -->/g, '');
       if (patterns.some((re) => re.test(html))) {
         err(file, `still shows the superseded price (${old.pricePerKg}/kg, ${old.bagPrice}/bag). Run npm run set-price, then fix whatever it reports as needing a human`);
       }

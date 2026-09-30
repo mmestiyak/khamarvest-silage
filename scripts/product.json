@@ -7,6 +7,12 @@
   "priceValidUntil": "2026-12-31",
   "history": [
     {
+      "until": "2025-12-31",
+      "pricePerKg": 12,
+      "bagPrice": 600,
+      "note": "Confirmed by the owner 2026-09-30; the start date was not recorded."
+    },
+    {
       "from": "2026-01-01",
       "pricePerKg": 10,
       "bagPrice": 500
