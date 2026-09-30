@@ -65,7 +65,7 @@
           <label class="block">
             <span class="text-sm font-bold text-[#123b28]">সাইলেজ, প্রতি গাভী (কেজি/দিন)</span>
             <input id="silage" type="number" min="0" max="30" value="20" inputmode="numeric" class="mt-1.5 w-full rounded-xl border border-[#184d32]/20 bg-[#f7f8f4] p-3 text-lg font-bold text-[#0b5b38] focus:border-[#0e7c4b] focus:outline-none">
-            <span class="mt-1 block text-xs text-[#54705d]">দুধের গাভীর স্বাভাবিক পরিমাণ ১৫-২৫ কেজি · দাম ১০ টাকা/কেজি ধরা হয়েছে</span>
+            <span class="mt-1 block text-xs text-[#54705d]">দুধের গাভীর স্বাভাবিক পরিমাণ ১৫-২৫ কেজি · দাম ৮.৫০ টাকা/কেজি ধরা হয়েছে</span>
           </label>
           <label class="block">
             <span class="text-sm font-bold text-[#123b28]">দানাদার, প্রতি গাভী (কেজি/দিন)</span>
@@ -115,7 +115,7 @@
 
     <section class="mt-8 rounded-2xl border border-[#184d32]/10 bg-white p-5 sm:p-6">
       <h2 class="text-lg font-bold text-[#123b28]">এই হিসাব থেকে যা বোঝা যায়</h2>
-      <p class="mt-2 leading-7 text-[#33483a]">প্রতি লিটার দুধে খাদ্য খরচ যত কম, খামারের অবস্থা তত ভালো। খরচ বেশি মনে হলে প্রথমে দেখুন দামি দানাদার কতটা কমানো যায়: ভুট্টা সাইলেজে দানা থাকায় খামারভেস্ট সাইলেজ (১০ টাকা/কেজি) দিয়ে অনেকে দানাদারের অতিরিক্ত ব্যবহার কমিয়ে আনেন। কীভাবে, তা দেখুন <a href="/blog/gavir-dudh-baranor-upay" class="font-semibold text-[#0b6a3e] underline underline-offset-4">দুধ বাড়ানোর গাইডে</a>।</p>
+      <p class="mt-2 leading-7 text-[#33483a]">প্রতি লিটার দুধে খাদ্য খরচ যত কম, খামারের অবস্থা তত ভালো। খরচ বেশি মনে হলে প্রথমে দেখুন দামি দানাদার কতটা কমানো যায়: ভুট্টা সাইলেজে দানা থাকায় খামারভেস্ট সাইলেজ (৮.৫০ টাকা/কেজি) দিয়ে অনেকে দানাদারের অতিরিক্ত ব্যবহার কমিয়ে আনেন। কীভাবে, তা দেখুন <a href="/blog/gavir-dudh-baranor-upay" class="font-semibold text-[#0b6a3e] underline underline-offset-4">দুধ বাড়ানোর গাইডে</a>।</p>
     </section>
   </main>
 
@@ -123,7 +123,7 @@
 
   <script>
     (function () {
-      var SILAGE_PRICE = 10;
+      var SILAGE_PRICE = 8.5;
       var $ = function (id) { return document.getElementById(id); };
       var inputs = ['cows', 'milk', 'milkPrice', 'silage', 'dana', 'danaPrice', 'other'];
       function num(id) { var v = parseFloat($(id).value); return isNaN(v) || v < 0 ? 0 : v; }
@@ -164,7 +164,7 @@
   <div class="h-24 md:hidden print:hidden" aria-hidden="true"></div>
   <div data-cta="sticky_bar" class="fixed inset-x-0 bottom-0 z-40 border-t border-[#184d32]/15 bg-white/95 px-3 py-2 backdrop-blur md:hidden print:hidden">
     <div class="mx-auto flex max-w-lg items-center gap-2">
-      <p class="min-w-0 flex-1 text-sm leading-tight text-[#456451]"><strong class="block text-base text-[#0b5b38]">১০ টাকা কেজি</strong>পণ্য হাতে পেয়ে টাকা</p>
+      <p class="min-w-0 flex-1 text-sm leading-tight text-[#456451]"><strong class="block text-base text-[#0b5b38]">৮.৫০ টাকা কেজি</strong>পণ্য হাতে পেয়ে টাকা</p>
       <a href="tel:+8801334211984" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 px-3.5 text-sm font-bold text-[#0b5b38]">কল করুন</a>
       <a href="https://wa.me/8801303438063" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0b5b38] px-4 text-sm font-bold text-white">WhatsApp-এ অর্ডার</a>
     </div>

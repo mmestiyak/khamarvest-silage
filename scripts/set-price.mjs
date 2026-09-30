@@ -14,7 +14,7 @@
 // price, so a partial change cannot ship.
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { bn } from './product.mjs';
+import { bn, money, moneyEn } from './product.mjs';
 
 const args = process.argv.slice(2);
 const flag = (name) => { const i = args.indexOf(name); return i === -1 ? null : args[i + 1]; };
@@ -34,7 +34,11 @@ const oldBag = data.bagPrice;
 if (oldPerKg === newPerKg && oldBag === newBag) { console.log('Price is already that. Nothing to do.'); process.exit(0); }
 
 const TODAY = new Date().toISOString().slice(0, 10);
-const [oK, nK, oB, nB] = [bn(oldPerKg), bn(newPerKg), bn(oldBag), bn(newBag)];
+const [oK, nK, oB, nB] = [money(oldPerKg), money(newPerKg), bn(oldBag), bn(newBag)];
+// English copy and JSON-LD use Latin digits, and two decimals for a non-whole price.
+const [eK, eNK] = [moneyEn(oldPerKg), moneyEn(newPerKg)];
+// A price like ৮.৫০ carries a dot; inside a RegExp it must be literal.
+const oKr = oK.replace(/\./g, '\\.');
 
 // Every place the price is legitimately written. Bare `N টাকা` is only ever
 // rewritten when it sits next to "কেজি" or "বস্তা", never on its own.
@@ -46,21 +50,25 @@ const NOTNUM = '(?<![০-৯,])';
 const RULES = [
   // Per-kg. The bare number is only ever touched when "কেজি" precedes it or
   // "কেজি" follows it, so a price is never confused with another amount.
-  [new RegExp(`${NOTNUM}${oK} টাকা কেজি`, 'g'), `${nK} টাকা কেজি`],
-  [new RegExp(`${NOTNUM}${oK} টাকা/কেজি`, 'g'), `${nK} টাকা/কেজি`],
-  [new RegExp(`(কেজি${TAGS})${oK}( টাকা)`, 'g'), `$1${nK}$2`],
-  [new RegExp(`(মাত্র${TAGS})${oK}( টাকা)`, 'g'), `$1${nK}$2`],
-  [new RegExp(`${NOTNUM}${oK} টাকা দরে`, 'g'), `${nK} টাকা দরে`],
-  // The bag price: verified to appear only in bag or per-kg context sitewide.
-  [new RegExp(`${NOTNUM}${oB} টাকা`, 'g'), `${nB} টাকা`],
+  [new RegExp(`${NOTNUM}${oKr} টাকা কেজি`, 'g'), `${nK} টাকা কেজি`],
+  [new RegExp(`${NOTNUM}${oKr} টাকা/কেজি`, 'g'), `${nK} টাকা/কেজি`],
+  [new RegExp(`(কেজি${TAGS})${oKr}( টাকা)`, 'g'), `$1${nK}$2`],
+  [new RegExp(`(মাত্র${TAGS})${oKr}( টাকা)`, 'g'), `$1${nK}$2`],
+  [new RegExp(`${NOTNUM}${oKr} টাকা দরে`, 'g'), `${nK} টাকা দরে`],
+  // The bag price, only where "বস্তা" sits within the 60 characters before it.
+  // Without that, the four-neighbour transport share "২,০০০ ÷ ৪ = ৫০০ টাকা"
+  // was rewritten to the new bag price on the 2026-09-30 change.
+  [new RegExp(`(বস্তা(?:(?!পরিবহন)[^।"]){0,60}?)${NOTNUM}${oB}( টাকা)`, 'g'), `$1${nB}$2`],
   // Structured data and calculator constants.
-  [new RegExp(`"price":\\s*"${oldPerKg}"`, 'g'), `"price": "${newPerKg}"`],
+  [new RegExp(`"price":\\s*"${eK}"`, 'g'), `"price": "${eNK}"`],
   [new RegExp(`"price":\\s*"${oldBag}"`, 'g'), `"price": "${newBag}"`],
   [new RegExp(`SILAGE_PRICE = ${oldPerKg}\\b`, 'g'), `SILAGE_PRICE = ${newPerKg}`],
   [new RegExp(`\\bPRICE = ${oldPerKg}\\b`, 'g'), `PRICE = ${newPerKg}`],
+  // The homepage calculator prices by the bag.
+  [new RegExp(`\\bPRICE_PER_BAG = ${oldBag}\\b`, 'g'), `PRICE_PER_BAG = ${newBag}`],
   // English wording: corn-silage-bangladesh and the English key facts in
   // llms.txt / llms-full.txt ("BDT 10 per kg", "BDT 10/kg", "BDT 500").
-  [new RegExp(`\\bBDT ${oldPerKg}(/kg| per kg)`, 'g'), `BDT ${newPerKg}$1`],
+  [new RegExp(`\\bBDT ${eK.replace('.', '\\.')}(/kg| per kg)`, 'g'), `BDT ${eNK}$1`],
   [new RegExp(`\\bBDT ${oldBag}(?![\\d,])`, 'g'), `BDT ${newBag}`],
   // The offers' validFrom is the day this price took effect, the same date
   // recorded in product.json > history below.
@@ -74,7 +82,8 @@ async function walk(dir) {
     const rel = dir ? `${dir}/${e.name}` : e.name;
     if (e.isDirectory()) out.push(...await walk(rel));
     // .txt covers llms.txt and llms-full.txt, which assistants quote verbatim.
-    else if (/\.(html|mjs|txt|js)$/.test(e.name) && e.name !== 'product.json') out.push(rel);
+    // .json covers scripts/social-posts.json, the Facebook posts; product.json is written below.
+    else if (/\.(html|mjs|txt|js|json)$/.test(e.name) && e.name !== 'product.json' && e.name !== 'package.json' && e.name !== 'package-lock.json' && e.name !== 'competitor-snapshot.json') out.push(rel);
   }
   return out;
 }
@@ -98,7 +107,7 @@ for (const file of await walk('')) {
   }
   // Anything still carrying the old number in a price-shaped context is a
   // phrasing the rules do not cover. Report it rather than guess.
-  for (const m of after.matchAll(new RegExp(`.{0,24}(?:${oK}|${oB}) টাকা.{0,16}`, 'g'))) {
+  for (const m of after.matchAll(new RegExp(`.{0,24}(?:${oKr}|${oB}) টাকা.{0,16}`, 'g'))) {
     const snippet = m[0].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
     if (/[০-৯]-[০-৯]/.test(snippet)) continue;            // a range: another feed's price
     if (new RegExp(`(?:${nK}|${nB}) টাকা`).test(snippet)) continue; // already the new price

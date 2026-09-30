@@ -10,6 +10,7 @@
 // Writes a markdown report to stdout and exits non-zero if anything is wrong,
 // so the workflow can turn it into a GitHub issue.
 import { readFile } from 'node:fs/promises';
+import { product } from './product.mjs';
 
 const SITE = (process.env.SITE || 'https://silage.khamarvest.com').replace(/\/$/, '');
 const LIVE = !SITE.includes('localhost');
@@ -67,10 +68,10 @@ if (home.status !== 200) {
   problems.push(`homepage returned ${home.status}`);
 } else {
   const title = home.body.match(/<title>([^<]*)<\/title>/)?.[1] || '';
-  if (!/১০ টাকা/.test(title)) problems.push('homepage <title> no longer contains the per-kg price');
+  if (!title.includes(`${product.perKgBn} টাকা`)) problems.push(`homepage <title> no longer contains the per-kg price (${product.perKgBn} টাকা)`);
   if (title.length > 80) problems.push(`homepage <title> is ${title.length} chars and will be truncated in search results`);
-  const offers = [...home.body.matchAll(/"price":\s*"(\d+)"/g)].map((m) => m[1]);
-  for (const expected of ['10', '500']) {
+  const offers = [...home.body.matchAll(/"price":\s*"([\d.]+)"/g)].map((m) => m[1]);
+  for (const expected of [product.perKgEn, String(product.bagPrice)]) {
     if (!offers.includes(expected)) problems.push(`homepage Product schema no longer offers ${expected} BDT`);
   }
   // An expired offer makes Google drop the price from the search result.

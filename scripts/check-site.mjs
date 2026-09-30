@@ -7,7 +7,7 @@
 // missing from the sitemap) before they reach production.
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, dirname, resolve, relative } from 'node:path';
-import { product as PRODUCT } from './product.mjs';
+import { product as PRODUCT, money } from './product.mjs';
 
 const root = process.cwd();
 const site = 'https://silage.khamarvest.com';
@@ -422,8 +422,10 @@ for (const file of articles) {
 
   // 1. The offers Google reads must match the source of truth.
   const home = await readFile(join(root, 'index.html'), 'utf8');
+  // Compared as numbers: the schema writes a non-whole price as "8.50".
+  const schemaPrices = [...home.matchAll(/"price":\s*"([\d.]+)"/g)].map((m) => Number(m[1]));
   for (const [label, value] of [['per kg', product.pricePerKg], ['per bag', product.bagPrice]]) {
-    if (!new RegExp(`"price":\\s*"${value}"`).test(home)) {
+    if (!schemaPrices.includes(value)) {
       errors.push(`index.html: Product schema has no ${label} offer of ${value}, but scripts/product.json says it should`);
     }
   }
@@ -444,10 +446,16 @@ for (const file of articles) {
     }
   }
 
+  // The homepage calculator prices by the bag. It kept 500 through the
+  // 2026-09-30 change to 425, because set-price did not know the constant.
+  for (const m of home.matchAll(/PRICE_PER_BAG\s*=\s*(\d+)/g)) {
+    if (Number(m[1]) !== product.bagPrice) errors.push(`index.html: homepage calculator uses ${m[1]} tk/bag but the price is ${product.bagPrice}`);
+  }
+
   // 2. Calculators must charge what the pages advertise.
   for (const file of files.filter((f) => f.startsWith('tools/'))) {
     const html = await readFile(join(root, file), 'utf8');
-    for (const m of html.matchAll(/(?:SILAGE_PRICE|PRICE)\s*=\s*(\d+)/g)) {
+    for (const m of html.matchAll(/(?:SILAGE_PRICE|PRICE)\s*=\s*(\d+(?:\.\d+)?)/g)) {
       if (Number(m[1]) !== product.pricePerKg) {
         errors.push(`${file}: calculator uses ${m[1]} tk/kg but the price is ${product.pricePerKg}`);
       }
@@ -456,8 +464,8 @@ for (const file of articles) {
 
   // 3. llms.txt and llms-full.txt are what assistants quote, so they must not lag the site.
   for (const [name, text] of Object.entries(llmsText)) {
-    if (!text.includes(`${bn(product.pricePerKg)} টাকা`)) {
-      errors.push(`${name}: does not state the current price of ${bn(product.pricePerKg)} টাকা`);
+    if (!text.includes(`${money(product.pricePerKg)} টাকা`)) {
+      errors.push(`${name}: does not state the current price of ${money(product.pricePerKg)} টাকা`);
     }
   }
 
@@ -471,7 +479,9 @@ for (const file of articles) {
       new RegExp(`${oK} টাকা কেজি`),
       new RegExp(`${oK} টাকা/কেজি`),
       new RegExp(`কেজি(?:<[^>]*>|\\s)*${oK} টাকা`),
-      new RegExp(`(?<![০-৯,])${oB} টাকা`),
+      // A bag price only in bag context, and not a transport figure in between:
+      // "২০ বস্তা ... পরিবহন ২,০০০ ÷ ৪ = ৫০০ টাকা" is a share, not a price.
+      new RegExp(`বস্তা(?:(?!পরিবহন)[^।"]){0,60}?(?<![০-৯,])${oB} টাকা`),
       // English wording, on corn-silage-bangladesh and in the llms files.
       new RegExp(`BDT ${old.pricePerKg}(?:/kg| per kg)`),
       new RegExp(`BDT ${old.bagPrice}(?![\\d,])`),
