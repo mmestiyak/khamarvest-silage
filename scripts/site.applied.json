@@ -1,0 +1,12 @@
+{
+  "_comment": "Business facts that appear on every page. Change a value here, then run `npm run build`: scripts/sync-facts.mjs rewrites every page, generator and script to match, in every format the value is written in. The price is not here; it lives in scripts/product.json and changes with `npm run set-price`. See EDITING.md.",
+  "whatsapp": "01303-438063",
+  "call": "01334-211984",
+  "callExtra": [
+    "01300-886298",
+    "01575-805542"
+  ],
+  "facebook": "https://www.facebook.com/khamarvestSilage/",
+  "youtube": "https://www.youtube.com/@khamarvest",
+  "ga4": "G-4SVWY8JWBX"
+}

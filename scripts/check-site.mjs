@@ -8,6 +8,8 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, dirname, resolve, relative } from 'node:path';
 import { product as PRODUCT, money } from './product.mjs';
+import { evaluate, MARKER } from './calc.mjs';
+import { parse as parseFaq } from './faq.mjs';
 
 const root = process.cwd();
 const site = 'https://silage.khamarvest.com';
@@ -528,6 +530,59 @@ for (const file of articles) {
     if (/<link rel="icon" href="data:/.test(html)) err(file, 'declares a data: URI favicon, which Google cannot fetch. Use /favicon.ico');
   }
   if (missing.length) errors.push(`${missing.length} page(s) declare no favicon, run npm run build:favicon: ${missing.slice(0, 3).join(', ')}`);
+}
+
+// --- Calculated figures and FAQ (single sources) ---
+// A figure with a formula must show what the formula gives today, and the
+// FAQPage schema must be exactly the visible FAQ. Either failing means a hand
+// edit went around the build; `npm run build` repairs both.
+for (const file of files) {
+  const html = await readFile(join(root, file), 'utf8');
+  for (const s of html.matchAll(/<script[\s\S]*?<\/script>/g)) {
+    if (s[0].includes('<!--=')) err(file, 'a calc marker sits inside a <script>; markers belong in visible text only');
+  }
+  for (const m of html.matchAll(MARKER)) {
+    let want;
+    try { want = evaluate(m[1], file); } catch (e) { err(file, e.message); continue; }
+    if (m[2] !== want) err(file, `figure "${m[2]}" should be ${want} by its formula "${m[1]}". Run npm run build`);
+  }
+  const a = html.indexOf('<!-- faq:start -->');
+  if (a !== -1) {
+    const clean = (x) => x.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
+    const visible = parseFaq(html.slice(a, html.indexOf('<!-- faq:end -->'))).map(([q, ans]) => [clean(q), clean(ans)]);
+    const schema = [];
+    for (const s of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+      try { const j = JSON.parse(s[1]); for (const n of j['@graph'] || [j]) if (n['@type'] === 'FAQPage') schema.push(...n.mainEntity.map((q) => [q.name, q.acceptedAnswer.text])); } catch {}
+    }
+    if (JSON.stringify(visible) !== JSON.stringify(schema)) err(file, 'FAQPage schema differs from the visible FAQ. Edit the visible FAQ only, then run npm run build');
+  } else if (/"@type"\s*:\s*"FAQPage"/.test(html) && !file.startsWith('area/')) {
+    err(file, 'has FAQPage schema but no visible <!-- faq:start --> block (Google wants FAQ markup to match what readers see)');
+  }
+}
+
+// "দাম কমেছে" is only true after a price cut. After an increase the homepage
+// price block (struck-through old price, "টাকা কম" badge) must be rewritten.
+if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
+  const home = await readFile(join(root, 'index.html'), 'utf8');
+  if (/দাম কমেছে|টাকা কম/.test(home)) errors.push(`index.html: the price went up (${PRODUCT.previous.pricePerKg} -> ${PRODUCT.pricePerKg}) but the page still says the price came down. Rewrite the price block`);
+}
+
+// --- Business facts (scripts/site.json) ---
+// Pages must agree with site.json: a forgotten `npm run build` after editing
+// it fails here, and so does any phone number that is not one of ours, which
+// is how a typo or a stale number would otherwise survive.
+{
+  const site = JSON.parse(await readFile(join(root, 'scripts/site.json'), 'utf8'));
+  const applied = JSON.parse(await readFile(join(root, 'scripts/site.applied.json'), 'utf8'));
+  const strip = (o) => JSON.stringify(Object.fromEntries(Object.entries(o).filter(([k]) => !k.startsWith('_'))));
+  if (strip(site) !== strip(applied)) errors.push('scripts/site.json has changes the pages do not have yet. Run npm run build');
+  const ours = new Set([site.whatsapp, site.call, ...site.callExtra].map((n) => n.replace(/\D/g, '').slice(1)));
+  for (const file of [...files, ...LLMS_FILES]) {
+    const text = await readFile(join(root, file), 'utf8');
+    for (const m of text.matchAll(/(?:\+?880[ -]?|(?<![0-9])0)(1[3-9]\d{2})-?(\d{6})(?![0-9])/g)) {
+      if (!ours.has(m[1] + m[2])) err(file, `phone number ${m[0]} is not in scripts/site.json`);
+    }
+  }
 }
 
 // --- Mobile order bar ---

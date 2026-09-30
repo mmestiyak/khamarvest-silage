@@ -107,10 +107,14 @@ for (const file of await walk('')) {
   }
   // Anything still carrying the old number in a price-shaped context is a
   // phrasing the rules do not cover. Report it rather than guess.
-  for (const m of after.matchAll(new RegExp(`.{0,24}(?:${oKr}|${oB}) টাকা.{0,16}`, 'g'))) {
+  // JSON-LD is skipped: its offers are rewritten by the rules above and its FAQ
+  // answers are regenerated from the visible FAQ by npm run build.
+  const visible = after.replace(/<script[\s\S]*?<\/script>/g, '');
+  for (const m of visible.matchAll(new RegExp(`.{0,24}(?:${oKr}|${oB}) টাকা.{0,16}`, 'g'))) {
     const snippet = m[0].replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
     if (/[০-৯]-[০-৯]/.test(snippet)) continue;            // a range: another feed's price
     if (new RegExp(`(?:${nK}|${nB}) টাকা`).test(snippet)) continue; // already the new price
+    if (/<!--=/.test(m[0])) continue;                    // a calc formula, recomputed by npm run build
     leftovers.push(`${file}: ${snippet}`);
   }
   // Same for English prices. English derived sums ("BDT 200 per day" on

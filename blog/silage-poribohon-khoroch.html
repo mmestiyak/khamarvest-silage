@@ -140,7 +140,7 @@
         <div class="mt-8 max-w-3xl text-[17px] leading-8 text-[#33483a] sm:text-[19px] sm:leading-9">
           <section class="mt-9 rounded-2xl border border-[#e4b44c]/40 bg-[#fff8e6] p-5 sm:p-6">
             <h2 class="text-xl font-bold text-[#724c00] sm:text-2xl">এক কথায় উত্তর</h2>
-            <p class="mt-2 text-[#624d24]">দামের সাথে পরিবহন যোগ করে আসল দাম: <strong>৮.৫০ + (পরিবহন খরচ ÷ মোট কেজি)</strong>। একটা গাড়ির খরচ বস্তার সংখ্যায় খুব একটা বদলায় না, তাই বস্তা যত বেশি, কেজিতে পরিবহন তত কম। দূরের জেলায় <strong>কয়েকজন মিলে একসাথে অর্ডার</strong> দেওয়াই খরচ কমানোর সবচেয়ে কার্যকর উপায়।</p>
+            <p class="mt-2 text-[#624d24]">দামের সাথে পরিবহন যোগ করে আসল দাম: <strong><!--=price-->৮.৫০<!--/=--> + (পরিবহন খরচ ÷ মোট কেজি)</strong>। একটা গাড়ির খরচ বস্তার সংখ্যায় খুব একটা বদলায় না, তাই বস্তা যত বেশি, কেজিতে পরিবহন তত কম। দূরের জেলায় <strong>কয়েকজন মিলে একসাথে অর্ডার</strong> দেওয়াই খরচ কমানোর সবচেয়ে কার্যকর উপায়।</p>
           </section>
 
           <h2 id="why-heavy" class="mt-11 font-['Noto_Serif_Bengali'] text-2xl font-bold leading-snug text-[#123b28] sm:text-3xl">১. সাইলেজ পরিবহনে কেন ভারী</h2>
@@ -150,7 +150,7 @@
 
           <h2 id="formula" class="mt-11 font-['Noto_Serif_Bengali'] text-2xl font-bold leading-snug text-[#123b28] sm:text-3xl">২. ডেলিভারিসহ দাম কীভাবে হিসাব করবেন</h2>
           <p class="mt-4">খামারভেস্ট সাইলেজের ৮.৫০ টাকা কেজি দামে পরিবহন খরচ ধরা নেই। অর্ডারের পর কনফার্মেশন কলে আপনার ঠিকানা আর বস্তার সংখ্যা ধরে পরিবহন খরচ জানানো হয়। সেই সংখ্যা পেলে আসল দাম বের করার সূত্র:</p>
-          <p class="mt-4 rounded-xl bg-[#eaf5eb] p-4 font-semibold text-[#123b28]">ডেলিভারিসহ কেজিপ্রতি দাম = ৮.৫০ + (পরিবহন খরচ ÷ মোট কেজি)</p>
+          <p class="mt-4 rounded-xl bg-[#eaf5eb] p-4 font-semibold text-[#123b28]">ডেলিভারিসহ কেজিপ্রতি দাম = <!--=price-->৮.৫০<!--/=--> + (পরিবহন খরচ ÷ মোট কেজি)</p>
           <p class="mt-4">একটা গাড়ির খরচ মোটামুটি গাড়ি ও দূরত্বের উপর নির্ভর করে, বস্তার সংখ্যার উপর ততটা নয়। তাই একই গাড়িতে যত বেশি বস্তা যায়, প্রতি বস্তায় খরচ তত কমে। ধরুন আপনার ঠিকানায় একটা গাড়ির খরচ ২,০০০ টাকা বলা হলো। এটা শুধু হিসাব বোঝানোর উদাহরণ, কোনো নির্ধারিত দর নয়:</p>
           <div class="mt-5 overflow-x-auto rounded-xl border border-[#184d32]/10 bg-white">
             <table class="w-full text-left text-base">
@@ -158,17 +158,17 @@
                 <tr><th class="p-4 border-b border-[#184d32]/10">বস্তা</th><th class="p-4 border-b border-[#184d32]/10">মোট ওজন</th><th class="p-4 border-b border-[#184d32]/10">প্রতি বস্তায় পরিবহন</th><th class="p-4 border-b border-[#184d32]/10">প্রতি কেজিতে পরিবহন</th><th class="p-4 border-b border-[#184d32]/10">ডেলিভারিসহ কেজি</th></tr>
               </thead>
               <tbody class="divide-y divide-[#184d32]/10 text-[#33483a]">
-                <tr><td class="p-4 font-semibold text-[#0b6a3e]">৫ বস্তা</td><td class="p-4">২৫০ কেজি</td><td class="p-4">৪০০ টাকা</td><td class="p-4">৮ টাকা</td><td class="p-4"><strong>১৬.৫০ টাকা</strong></td></tr>
-                <tr><td class="p-4 font-semibold text-[#0b6a3e]">১০ বস্তা</td><td class="p-4">৫০০ কেজি</td><td class="p-4">২০০ টাকা</td><td class="p-4">৪ টাকা</td><td class="p-4"><strong>১২.৫০ টাকা</strong></td></tr>
-                <tr><td class="p-4 font-semibold text-[#0b6a3e]">২০ বস্তা</td><td class="p-4">১,০০০ কেজি</td><td class="p-4">১০০ টাকা</td><td class="p-4">২ টাকা</td><td class="p-4"><strong>১০.৫০ টাকা</strong></td></tr>
-                <tr><td class="p-4 font-semibold text-[#0b6a3e]">৪০ বস্তা</td><td class="p-4">২,০০০ কেজি</td><td class="p-4">৫০ টাকা</td><td class="p-4">১ টাকা</td><td class="p-4"><strong>৯.৫০ টাকা</strong></td></tr>
+                <tr><td class="p-4 font-semibold text-[#0b6a3e]">৫ বস্তা</td><td class="p-4">২৫০ কেজি</td><td class="p-4">৪০০ টাকা</td><td class="p-4">৮ টাকা</td><td class="p-4"><strong><!--=price+8-->১৬.৫০<!--/=--> টাকা</strong></td></tr>
+                <tr><td class="p-4 font-semibold text-[#0b6a3e]">১০ বস্তা</td><td class="p-4">৫০০ কেজি</td><td class="p-4">২০০ টাকা</td><td class="p-4">৪ টাকা</td><td class="p-4"><strong><!--=price+4-->১২.৫০<!--/=--> টাকা</strong></td></tr>
+                <tr><td class="p-4 font-semibold text-[#0b6a3e]">২০ বস্তা</td><td class="p-4">১,০০০ কেজি</td><td class="p-4">১০০ টাকা</td><td class="p-4">২ টাকা</td><td class="p-4"><strong><!--=price+2-->১০.৫০<!--/=--> টাকা</strong></td></tr>
+                <tr><td class="p-4 font-semibold text-[#0b6a3e]">৪০ বস্তা</td><td class="p-4">২,০০০ কেজি</td><td class="p-4">৫০ টাকা</td><td class="p-4">১ টাকা</td><td class="p-4"><strong><!--=price+1-->৯.৫০<!--/=--> টাকা</strong></td></tr>
               </tbody>
             </table>
           </div>
-          <p class="mt-4">যেমন ৫ বস্তায়: ২,০০০ ÷ ২৫০ কেজি = ৮ টাকা, তাই কেজি পড়ে ৮.৫০ + ৮ = ১৬.৫০ টাকা। ২০ বস্তায় ২,০০০ ÷ ১,০০০ = ২ টাকা, কেজি পড়ে ১০.৫০ টাকা। দুটো সতর্কতা: বস্তা একটা গাড়িতে না আঁটলে দ্বিতীয় গাড়ি লাগে, তখন খরচ আবার বাড়ে; আর খুব অল্প বস্তার জন্য ছোট গাড়িতে খরচ কমও হতে পারে। তাই আসল সংখ্যাটা কনফার্মেশন কলেই জেনে নিন, তারপর এই সূত্রে বসান।</p>
+          <p class="mt-4">যেমন ৫ বস্তায়: ২,০০০ ÷ ২৫০ কেজি = ৮ টাকা, তাই কেজি পড়ে <!--=price-->৮.৫০<!--/=--> + ৮ = <!--=price+8-->১৬.৫০<!--/=--> টাকা। ২০ বস্তায় ২,০০০ ÷ ১,০০০ = ২ টাকা, কেজি পড়ে <!--=price+2-->১০.৫০<!--/=--> টাকা। দুটো সতর্কতা: বস্তা একটা গাড়িতে না আঁটলে দ্বিতীয় গাড়ি লাগে, তখন খরচ আবার বাড়ে; আর খুব অল্প বস্তার জন্য ছোট গাড়িতে খরচ কমও হতে পারে। তাই আসল সংখ্যাটা কনফার্মেশন কলেই জেনে নিন, তারপর এই সূত্রে বসান।</p>
 
           <h2 id="share" class="mt-11 font-['Noto_Serif_Bengali'] text-2xl font-bold leading-snug text-[#123b28] sm:text-3xl">৩. কয়েকজন মিলে অর্ডার করলে কত কমে</h2>
-          <p class="mt-4">দূরের জেলায় পরিবহন খরচ কমানোর সবচেয়ে কার্যকর উপায় প্রতিবেশী খামারিদের সাথে একসাথে অর্ডার দেওয়া। উপরের উদাহরণে একজন একা ৫ বস্তা আনলে পরিবহন ২,০০০ টাকা, কেজি পড়ে ১৬.৫০ টাকা। চারজন মিলে ৫ বস্তা করে মোট ২০ বস্তা একই গাড়িতে আনলে প্রত্যেকের ভাগে পরিবহন ২,০০০ ÷ ৪ = <strong>৫০০ টাকা</strong>, কেজি পড়ে <strong>১০.৫০ টাকা</strong>। অর্থাৎ প্রত্যেকের পরিবহন খরচ ২,০০০ থেকে নেমে আসে ৫০০ টাকায়, ২,০০০ - ৫০০ = ১,৫০০ টাকা কম।</p>
+          <p class="mt-4">দূরের জেলায় পরিবহন খরচ কমানোর সবচেয়ে কার্যকর উপায় প্রতিবেশী খামারিদের সাথে একসাথে অর্ডার দেওয়া। উপরের উদাহরণে একজন একা ৫ বস্তা আনলে পরিবহন ২,০০০ টাকা, কেজি পড়ে <!--=price+8-->১৬.৫০<!--/=--> টাকা। চারজন মিলে ৫ বস্তা করে মোট ২০ বস্তা একই গাড়িতে আনলে প্রত্যেকের ভাগে পরিবহন ২,০০০ ÷ ৪ = <strong>৫০০ টাকা</strong>, কেজি পড়ে <strong><!--=price+2-->১০.৫০<!--/=--> টাকা</strong>। অর্থাৎ প্রত্যেকের পরিবহন খরচ ২,০০০ থেকে নেমে আসে ৫০০ টাকায়, ২,০০০ - ৫০০ = ১,৫০০ টাকা কম।</p>
           <p class="mt-4">একসাথে অর্ডার দিলে যা আগে ঠিক করে নেবেন:</p>
           <ul class="mt-4 list-disc space-y-2 pl-6">
             <li><strong>এক জায়গায় নামানো:</strong> গাড়ি এক ঠিকানায় থামবে, সেখান থেকে যার যার বস্তা নিয়ে যাবেন।</li>
@@ -190,14 +190,16 @@
           </ul>
           <p class="mt-4">খামারভেস্ট সাইলেজে পরিবহনসহ মোট হিসাব কনফার্মেশন কলেই জানিয়ে দেওয়া হয়, পরে বাড়তি কিছু চাওয়া হয় না। কোনো ন্যূনতম অর্ডার নেই, আর টাকা দেবেন পণ্য হাতে পেয়ে, নগদে অথবা খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে। "ফ্রি ডেলিভারি" শুনলে মনে রাখবেন, গাড়ির খরচ কাউকে না কাউকে দিতেই হয়, সাধারণত সেটা দামের ভেতরেই থাকে। দাম যাচাইয়ের আরও প্রশ্ন আছে <a href="/blog/vutta-silage-dam-koto-kothay-kinben" class="font-semibold text-[#0b6a3e] underline underline-offset-4">দাম যাচাইয়ের গাইডে</a>, আর আপনার জেলায় কীভাবে অর্ডার ও ডেলিভারি হয় তা দেখুন <a href="/area/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">জেলার পাতায়</a>।</p>
 
+          <!-- faq:start -->
           <h2 id="faq" class="mt-11 font-['Noto_Serif_Bengali'] text-2xl font-bold leading-snug text-[#123b28] sm:text-3xl">৬. সাধারণ প্রশ্ন</h2>
           <div class="mt-4 space-y-3">
             <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">সাইলেজের দামে কি পরিবহন খরচ ধরা থাকে?</summary><p class="mt-2 text-[#33483a]">খামারভেস্ট সাইলেজের ৮.৫০ টাকা কেজি দামে পরিবহন খরচ ধরা নেই। অর্ডারের পর কনফার্মেশন কলে ঠিকানা আর বস্তার সংখ্যা ধরে পরিবহন খরচসহ মোট হিসাব জানানো হয়।</p></details>
             <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">সাইলেজের পরিবহন খরচ এত বেশি কেন?</summary><p class="mt-2 text-[#33483a]">ভুট্টা সাইলেজের প্রায় দুই-তৃতীয়াংশই পানি (শুকনা পদার্থ গড়ে ৩২.৫%)। ৫০ কেজির বস্তায় পানি প্রায় ৩৩.৭৫ কেজি। একই পরিমাণ শুকনা খাবারের জন্য সাইলেজে খড়ের প্রায় ২.৮ গুণ ওজন বইতে হয়।</p></details>
-            <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">ডেলিভারিসহ কেজিপ্রতি দাম কীভাবে বের করব?</summary><p class="mt-2 text-[#33483a]">ডেলিভারিসহ কেজিপ্রতি দাম = ৮.৫০ + (পরিবহন খরচ ÷ মোট কেজি)। যেমন পরিবহন ২,০০০ টাকা আর ২০ বস্তা (১,০০০ কেজি) হলে ডেলিভারিসহ কেজিপ্রতি ৮.৫০ + ২ = ১০.৫০ টাকা পড়ে। এটা উদাহরণ, আসল পরিবহন খরচ কনফার্মেশন কলে জানানো হয়।</p></details>
+            <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">ডেলিভারিসহ কেজিপ্রতি দাম কীভাবে বের করব?</summary><p class="mt-2 text-[#33483a]">ডেলিভারিসহ কেজিপ্রতি দাম = <!--=price-->৮.৫০<!--/=--> + (পরিবহন খরচ ÷ মোট কেজি)। যেমন পরিবহন ২,০০০ টাকা আর ২০ বস্তা (১,০০০ কেজি) হলে ডেলিভারিসহ কেজিপ্রতি <!--=price-->৮.৫০<!--/=--> + ২ = <!--=price+2-->১০.৫০<!--/=--> টাকা পড়ে। এটা উদাহরণ, আসল পরিবহন খরচ কনফার্মেশন কলে জানানো হয়।</p></details>
             <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">অল্প বস্তা নিলে কি পরিবহন খরচ বেশি পড়ে?</summary><p class="mt-2 text-[#33483a]">প্রতি কেজিতে সাধারণত বেশি পড়ে, কারণ গাড়ির খরচ অল্প বস্তায় ভাগ হয়। কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়, তবে দূরের জেলায় কয়েকজন মিলে অর্ডার দিলে প্রত্যেকের খরচ অনেক কমে।</p></details>
             <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">কয়েকজন মিলে অর্ডার দিলে কীভাবে ভাগ করব?</summary><p class="mt-2 text-[#33483a]">এক ঠিকানায় গাড়ি থামবে, পরিবহন খরচ বস্তার সংখ্যা অনুযায়ী ভাগ করুন, একজন সবার হিসাব নিয়ে অর্ডার দিন, আর বস্তা নামার সময় সবাই মিলে গুনে ও মান দেখে যার যার টাকা দিন।</p></details>
           </div>
+          <!-- faq:end -->
 
           <section class="mt-9 rounded-2xl border border-[#0b5fcc]/20 bg-[#0b5fcc]/5 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>

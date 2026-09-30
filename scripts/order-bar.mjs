@@ -36,7 +36,7 @@ const bar = (t) => `${OPEN}
   ${CLOSE}`;
 const BN = bar({ price: `${product.perKgBn} টাকা কেজি`, pay: 'পণ্য হাতে পেয়ে টাকা', call: 'কল করুন', wa: 'WhatsApp-এ অর্ডার' });
 // corn-silage-bangladesh is lang="en": a Bengali bar on it read as a mistake.
-const EN = bar({ price: `BDT ${product.pricePerKg}/kg`, pay: 'Pay on delivery', call: 'Call', wa: 'Order on WhatsApp' });
+const EN = bar({ price: `BDT ${product.perKgEn}/kg`, pay: 'Pay on delivery', call: 'Call', wa: 'Order on WhatsApp' });
 
 async function walk(dir) {
   const out = [];

@@ -68,8 +68,20 @@ Required, and mostly enforced by `npm run check`:
   count it before moving on.
 - Title ends `| খামারভেস্ট` or `| খামারভেস্ট সাইলেজ`; meta description 70-320 chars.
 - Canonical, `og:url` matching it, all four OG tags, extensionless internal links.
-- JSON-LD `Article` + `BreadcrumbList` + `FAQPage`. Author and publisher are exactly
+- JSON-LD `Article` + `BreadcrumbList`. Author and publisher are exactly
   `খামারভেস্ট (Khamarvest)`. Add `HowTo` when the guide is genuinely a process.
+- **FAQ: write it once, visibly.** Put the questions in a `<!-- faq:start -->` /
+  `<!-- faq:end -->` block of `<details><summary>প্রশ্ন?</summary><p>উত্তর</p></details>`
+  items (copy the block from any guide). `npm run build` writes the `FAQPage` JSON-LD from
+  it; never write FAQ JSON-LD by hand. The checker fails a page whose schema FAQ is not the
+  visible FAQ.
+- **Any figure that depends on the price gets a formula**, never a typed number:
+  `<!--=12*bag-->৫,১০০<!--/=-->`, `<!--=20*price-->১৭০<!--/=-->`, and also the price
+  itself when it sits inside arithmetic or alone in a table cell (`× <!--=price-->৮.৫০<!--/=-->`).
+  Names: `price`, `bag`, `bagKg`, `prev`; filters `|round`, `|en`. See `scripts/calc.mjs`.
+  A typed total goes stale silently at the next price change.
+- Phone numbers and links come from `scripts/site.json`; write them as the site already
+  does (`wa.me/8801303438063`, `+880 1303-438063`) and the build keeps them current.
 - Brand named naturally in the `<article>` body **at least twice**, woven into value.
 - A `তথ্যসূত্র` section with the verified source links.
 - No em or en dashes anywhere. Bengali digits ০-৯, never Devanagari ०-९, and no Devanagari

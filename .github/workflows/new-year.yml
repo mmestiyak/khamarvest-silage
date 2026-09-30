@@ -1,0 +1,57 @@
+# Rolls the "this year" labels forward on 1 January: "© YYYY" in every footer
+# and "দাম (YYYY)" on the price boxes (scripts/year.mjs). The site is only
+# rebuilt when someone pushes, so without this every footer would say last year
+# until the next edit. The change is mechanical, so it is committed directly,
+# like the competitor snapshot; pushing to main deploys it. It also opens an
+# issue for the part a script should not decide: year references in titles and
+# sentences, which need a human to judge.
+name: New year
+
+on:
+  schedule:
+    - cron: '5 0 1 1 *'   # 1 January, 00:05 UTC (06:05 Dhaka)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  roll:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Roll year labels forward
+        run: node scripts/year.mjs
+
+      - name: Check the site still passes
+        run: node scripts/check-site.mjs
+
+      - name: Commit
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git commit -am "Roll year labels forward to $(date -u +%Y)"
+            git push
+          fi
+
+      - name: List year references that need a human
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          last=$(( $(date -u +%Y) - 1 ))
+          {
+            echo "The footers and price-box labels were rolled forward automatically."
+            echo "These titles and sentences still mention $last. Some are history and correct as they are; update the ones that mean 'this year' (for example the English page title)."
+            echo
+            grep -rn --include='*.html' -E "(<title>|<h1)[^<]*$last" . | cut -c1-200 || true
+            echo
+            echo "Also check priceValidUntil in scripts/product.json and llms.txt."
+          } > year.md
+          gh issue create --title "New year: review $last references" --body-file year.md

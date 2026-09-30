@@ -69,7 +69,7 @@
   <meta name="twitter:image" content="https://silage.khamarvest.com/img/silage-bag-1200.jpeg">
   <!-- Structured data: Product + FAQ + Business (Google rich results) -->
   <script type="application/ld+json">
-  {
+{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -765,14 +765,14 @@
         দাম কমেছে, আর সারা বছর এই দামই
       </h2>
       <div class="w-[80%] border-t-2 border-[rgb(218,165,47)]"></div>
-      <span class="inline-block bg-[rgb(194,65,12)] text-white font-hind font-semibold text-[16px] md:text-[18px] rounded-full px-4 py-1">আগের চেয়ে প্রতি কেজিতে ১.৫০ টাকা কম</span>
+      <span class="inline-block bg-[rgb(194,65,12)] text-white font-hind font-semibold text-[16px] md:text-[18px] rounded-full px-4 py-1">আগের চেয়ে প্রতি কেজিতে <!--=prev-price-->১.৫০<!--/=--> টাকা কম</span>
       <p class="font-hind font-medium text-[#111111] text-center text-[24px] md:text-[32px]">প্রতি কেজি ভুট্টা সাইলেজের দাম</p>
       <div class="flex items-center justify-center gap-8 md:gap-14">
         <!-- Old price -->
         <div class="flex flex-col items-center gap-1">
           <span class="font-hind text-[14px] md:text-[17px] text-[#6b6b6b]">আগের দাম</span>
           <span class="relative font-hind text-[#767676] text-[34px] md:text-[46px] leading-none">
-            ১০ টাকা
+            <!--=prev-->১০<!--/=--> টাকা
             <span class="absolute left-[-4px] right-[-4px] top-1/2 h-[3px] -rotate-6 bg-[rgb(194,65,12)]"></span>
           </span>
         </div>
@@ -1014,9 +1014,10 @@
       <h2 class="font-hind font-semibold text-[rgb(53,122,31)] text-center text-[26px] leading-[30px] md:text-[45px] md:leading-[50px] mb-3">
         খামারি ভাইদের সাধারণ প্রশ্ন
       </h2>
+      <!-- faq:start -->
       <details class="bg-white rounded-[8px] border border-[rgb(14,124,75)]/30 p-4 font-hind">
         <summary class="cursor-pointer font-medium text-[18px] md:text-[21px] text-[rgb(0,105,68)]">ভুট্টা সাইলেজের দাম কত?</summary>
-        <p class="mt-2 text-[16px] md:text-[18px] leading-[28px] text-[rgb(84,89,95)]">প্রতি কেজি এখন মাত্র ৮.৫০ টাকা (আগের দাম ১০ টাকা)। ৫০ কেজি বস্তা ৪২৫ টাকা। বেশি পরিমাণে নিলে দামে আরও ছাড় আছে, WhatsApp-এ আলোচনা করে নিন: +880 1303-438063।</p>
+        <p class="mt-2 text-[16px] md:text-[18px] leading-[28px] text-[rgb(84,89,95)]">প্রতি কেজি এখন মাত্র ৮.৫০ টাকা (আগের দাম <!--=prev-->১০<!--/=--> টাকা)। ৫০ কেজি বস্তা ৪২৫ টাকা। বেশি পরিমাণে নিলে দামে আরও ছাড় আছে, WhatsApp-এ আলোচনা করে নিন: +880 1303-438063।</p>
       </details>
       <details class="bg-white rounded-[8px] border border-[rgb(14,124,75)]/30 p-4 font-hind">
         <summary class="cursor-pointer font-medium text-[18px] md:text-[21px] text-[rgb(0,105,68)]">সাইলেজ কতদিন সংরক্ষণ করা যায়?</summary>
@@ -1034,6 +1035,7 @@
         <summary class="cursor-pointer font-medium text-[18px] md:text-[21px] text-[rgb(0,105,68)]">কীভাবে অর্ডার করবো?</summary>
         <p class="mt-2 text-[16px] md:text-[18px] leading-[28px] text-[rgb(84,89,95)]">WhatsApp-এ আপনার নাম, ঠিকানা আর কত বস্তা লাগবে লিখে পাঠান: <a href="https://wa.me/8801303438063" class="text-[rgb(0,105,68)] font-medium underline">+880 1303-438063</a>। আমাদের প্রতিনিধি ফোন করে অর্ডার কনফার্ম করবেন। পণ্য হাতে পেয়ে নগদে, অথবা খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে ট্রান্সফার করে টাকা দেবেন। কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়; পরিবহন খরচ দূরত্ব ও পরিমাণভেদে আলাদা। WhatsApp-এ দিনরাত যেকোনো সময় মেসেজ করতে পারেন।</p>
       </details>
+      <!-- faq:end -->
     </div>
   </section>
 
@@ -1126,12 +1128,12 @@
 
             <div class="mt-3 border-b border-green-700/60 pb-3">
               <p class="font-hind text-[14px] text-green-100">আনুমানিক মোট খরচ</p>
-              <p class="font-hind font-bold text-[28px] text-white leading-tight">৳<span id="res-total-cost">২৫,৫০০</span></p>
+              <p class="font-hind font-bold text-[28px] text-white leading-tight">৳<span id="res-total-cost"><!--=60*bag-->২৫,৫০০<!--/=--></span></p>
             </div>
 
             <div class="mt-3">
               <p class="font-hind text-[14px] text-green-100">সর্বোচ্চ সম্ভাব্য খাদ্য খরচ সাশ্রয়</p>
-              <p class="font-hind font-bold text-[24px] text-emerald-200 leading-tight">৳<span id="res-savings">১৪,৫০০</span></p>
+              <p class="font-hind font-bold text-[24px] text-emerald-200 leading-tight">৳<span id="res-savings"><!--=3000*(40/3-bag/bagKg)|round-->১৪,৫০০<!--/=--></span></p>
               <p class="font-hind text-[12px] text-green-200 mt-0.5">*দানাদার ৪০ টাকা/কেজি ও সাইলেজ ৮.৫০ টাকা/কেজি ধরে; শক্তির হিসাবে ~৩ কেজি সাইলেজ ≈ ১ কেজি দানাদার</p>
             </div>
           </div>

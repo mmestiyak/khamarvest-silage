@@ -19,7 +19,7 @@
   <link rel="preload" href="/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <script type="application/ld+json">
-  {
+{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -178,7 +178,7 @@
               <tbody class="divide-y divide-[#184d32]/10 text-[#33483a]">
                 <tr>
                   <td class="p-4 font-semibold text-[#0b6a3e]">দাম (প্রতি কেজি)</td>
-                  <td class="p-4 font-bold">৮.৫০ টাকা</td>
+                  <td class="p-4 font-bold"><!--=price-->৮.৫০<!--/=--> টাকা</td>
                   <td class="p-4">জমি, সেচ ও শ্রমের খরচ</td>
                   <td class="p-4">১৫ - ২০ টাকা</td>
                 </tr>
@@ -231,7 +231,7 @@
               </thead>
               <tbody class="divide-y divide-[#184d32]/10 text-[#33483a]">
                 <tr><td class="p-4 font-semibold text-[#0b6a3e]">শুকনা খড়</td><td class="p-4">প্রায় ৯০%</td><td class="p-4">১৫ - ২০ টাকা</td><td class="p-4 font-bold">প্রায় ১৭ - ২২ টাকা</td></tr>
-                <tr><td class="p-4 font-semibold text-[#0b6a3e]">ভুট্টা সাইলেজ</td><td class="p-4">প্রায় ৩০%</td><td class="p-4">৮.৫০ টাকা</td><td class="p-4 font-bold">প্রায় ২৮ টাকা</td></tr>
+                <tr><td class="p-4 font-semibold text-[#0b6a3e]">ভুট্টা সাইলেজ</td><td class="p-4">প্রায় ৩০%</td><td class="p-4"><!--=price-->৮.৫০<!--/=--> টাকা</td><td class="p-4 font-bold">প্রায় <!--=price/0.3|round-->২৮<!--/=--> টাকা</td></tr>
                 <tr><td class="p-4 font-semibold text-[#0b6a3e]">দানাদার</td><td class="p-4">প্রায় ৯০%</td><td class="p-4">৪০ - ৫৫ টাকা</td><td class="p-4 font-bold">প্রায় ৪৪ - ৬১ টাকা</td></tr>
               </tbody>
             </table>
@@ -278,6 +278,20 @@
               নিজের জমি বা মাঠের ঘাস পাওয়া গেলে সেদিন সাইলেজ কমিয়ে ঘাস দিন, খরচ আরও কমবে। খাবার বদলটা অবশ্য ধীরে করবেন (<a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">৭ দিনের নিয়ম</a>)।
             </li>
           </ol>
+
+          <!-- faq:start -->
+          <h2 id="faq" class="mt-11 font-['Noto_Serif_Bengali'] text-2xl font-bold leading-snug text-[#123b28] sm:text-3xl">সাধারণ প্রশ্ন</h2>
+          <div class="mt-4 space-y-3">
+      <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">সাইলেজ কি খড়ের চেয়ে ভালো?</summary><p class="mt-2 text-[#33483a]">পুষ্টির দিক থেকে হ্যাঁ, খড়ে মূলত শুকনা আঁশ থাকে, পুষ্টি সামান্য, দামও এখন ১৫-২০ টাকা কেজি। সাইলেজে আঁশের সাথে দানার শক্তি থাকে মাত্র ৮.৫০ টাকা কেজিতে। তবে রুমেন সুস্থ রাখতে দৈনিক ১-২ কেজি খড় রাখা ভালো, খড় পুরো বাদ নয়, কমিয়ে আনাই বুদ্ধিমানের কাজ।</p></details>
+      <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">কাঁচা ঘাসের বদলে কি সাইলেজ চালানো যায়?</summary><p class="mt-2 text-[#33483a]">যায়, সাইলেজ আসলে কাঁচা ঘাসজাতীয় খাদ্যই, সংরক্ষিত রূপে। যাদের নিজের ঘাসের জমি ও শ্রম আছে তাদের জন্য কাঁচা ঘাস চমৎকার; যাদের নেই, তাদের জন্য সারা বছর একই মান ও দামের সাইলেজই বাস্তবসম্মত সমাধান। ঘাস পাওয়া গেলে সেদিন সাইলেজ কমিয়ে দুটোই খাওয়ানো যায়।</p></details>
+      <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">গরুর জন্য সবচেয়ে সাশ্রয়ী খাদ্য কোনটা?</summary><p class="mt-2 text-[#33483a]">শুধু পেট ভরানোর (শুকনা পদার্থের) খরচ ধরলে খড়ই সবচেয়ে সস্তা। খড় ১৫-২০ টাকা কেজি, প্রায় ৯০% শুকনা পদার্থ, অর্থাৎ শুকনা পদার্থের হিসাবে প্রায় ১৭-২২ টাকা কেজি। ভুট্টা সাইলেজ ৮.৫০ টাকা কেজি, প্রায় ৩০% শুকনা পদার্থ, অর্থাৎ প্রায় <!--=price/0.3|round-->২৮<!--/=--> টাকা। দানাদার ৪০-৫৫ টাকা কেজি, অর্থাৎ প্রায় ৪৪-৬১ টাকা। সাইলেজের শুকনা পদার্থের সাথে দানার শক্তিও আসে যা খড়ে প্রায় নেই, তাই কোনটা সাশ্রয়ী তা পুরো রেশনের হিসাবে দেখতে হয়, এক কেজির সাথে এক কেজি মিলিয়ে নয়। নিজের জমির কাঁচা ঘাসের নগদ খরচ কম হলেও জমি, সেচ, শ্রম আর মৌসুমের হিসাব ধরলে খরচ শূন্য নয়।</p></details>
+      <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">খড় কি পুরোপুরি বাদ দেওয়া যাবে?</summary><p class="mt-2 text-[#33483a]">না। সাইলেজ প্রধান আঁশ হলেও গরুর রুমেন (পাকস্থলী) সুস্থ রাখতে দৈনিক ১-২ কেজি শুকনা খড় দেওয়া ভালো। খড় বাদ নয়, খড়ের ওপর নির্ভরতা কমানোই খরচ কমানোর কৌশল।</p></details>
+      <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">সাইলেজ কি খড়ের চেয়ে সস্তা?</summary><p class="mt-2 text-[#33483a]">কেজির দামে সাইলেজ সস্তা (৮.৫০ টাকা বনাম খড় ১৫-২০ টাকা), কিন্তু শুকনা পদার্থের হিসাবে নয়। খড়ে প্রায় ৯০% শুকনা পদার্থ আর সাইলেজে প্রায় ৩০%, তাই শুকনা পদার্থের হিসাবে খড় প্রায় ১৭-২২ টাকা আর সাইলেজ প্রায় <!--=price/0.3|round-->২৮<!--/=--> টাকা। সাইলেজ কেনার কারণ কম দাম নয়, বরং এর শুকনা পদার্থের সাথে দানার শক্তিটাও আসে যা খড়ে প্রায় নেই।</p></details>
+      <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">সাইলেজ থাকলে কি খড় বন্ধ করে দেওয়া যায়?</summary><p class="mt-2 text-[#33483a]">না। দৈনিক ১-২ কেজি শুকনা খড় জাবর কাটাতে সাহায্য করে ও রুমেনের চলন ঠিক রাখে, এটুকুর বিকল্প নেই। তবে এর বেশি খড় দিলে গরুর পেট ভরে কিন্তু পুষ্টি আসে না।</p></details>
+      <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">কাঁচা ঘাস থাকলে কি সাইলেজ লাগবে?</summary><p class="mt-2 text-[#33483a]">সারা বছর যথেষ্ট ভালো ঘাস পেলে লাগে না। বাস্তবে সমস্যাটা হয় বর্ষায় জমি ডুবলে আর শীতে বাড়ন কমলে, ঠিক তখনই ঘাস থাকে না। তাই প্রশ্নটা ঘাস নাকি সাইলেজ নয়, প্রশ্ন হলো ঘাস যখন নেই তখন কী।</p></details>
+      <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">দানাদারের বদলে কি সাইলেজ দেওয়া যায়?</summary><p class="mt-2 text-[#33483a]">পুরোপুরি নয়। ভুট্টা সাইলেজে দানার শক্তি থাকে বলে দানাদারের উপর নির্ভরতা কমে, কিন্তু প্রোটিন ও খনিজের ঘাটতি পূরণে দানাদার ও মিনারেল লাগবেই। সাইলেজ রেশনের মূল ভিত্তি, দানাদার সেই ভিত্তির ঘাটতি পূরণের অংশ।</p></details>
+          </div>
+          <!-- faq:end -->
 
           <section class="mt-9 rounded-2xl border border-[#0b5fcc]/20 bg-[#0b5fcc]/5 p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>

@@ -21,6 +21,7 @@ scripts
 
 # Internal docs / templates (not published pages)
 AGENTS.md
+EDITING.md
 blog/README.md
 blog/article-template.html
 BUSINESS_DESCRIPTIONS.md
