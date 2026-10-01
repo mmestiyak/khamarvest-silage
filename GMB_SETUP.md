@@ -1,12 +1,12 @@
 # Google My Business Setup Guide (খামারভেস্ট সাইলেজ)
 
 ## What I Did (Schema is Live)
-✅ Added **LocalBusiness** schema with 18 districts (both Bengali + English names)  
+✅ Added **LocalBusiness** schema with all 33 districts (both Bengali + English names)  
 ✅ Added **Service** schema for "silage delivery" across all areas  
 ✅ WhatsApp contact link included  
-✅ Price specification (BDT 10/kg) structured for local search  
+✅ Price specification (BDT 8.50/kg) structured for local search  
 
-This is now live on your homepage. Google Search & Maps will recognize you as a legitimate local business serving all 18 districts.
+This is now live on your homepage. Google Search & Maps will recognize you as a legitimate local business serving all 33 districts.
 
 ---
 
@@ -38,7 +38,7 @@ Once verified:
 1. In GMB dashboard, go to **"Info"** tab
 2. Scroll to **"Service areas"**
 3. Click **"Add service area"**
-4. Add these 18 districts one by one:
+4. Add these districts one by one (GBP allows up to 20 service areas; the site has pages for 33):
    - বগুড়া (Bogura)
    - পাবনা (Pabna)
    - সিরাজগঞ্জ (Sirajganj)
@@ -60,8 +60,8 @@ Once verified:
 
 ### Step 5: Add Photos & Description
 - **Business photo**: Upload one of your silage bags/deliveries
-- **Description**: "খাঁটি ভুট্টা সাইলেজ সরবরাহ সারাদেশে। ১০ টাকা/কেজি। অর্ডার: WhatsApp +880 1303-438063"
-- **Hours**: Since you're delivery-based, set hours to "By appointment" or your typical order hours
+- **Description**: use section 1 of BUSINESS_DESCRIPTIONS.md (kept current by `npm run set-price` and checked by `npm run check`)
+- **Hours**: Open 24 hours, every day (owner, 2026-09-29: WhatsApp is answered day and night; matches the site's openingHoursSpecification)
 
 ### Step 6: Link Your Website
 - GMB will automatically find your website
@@ -83,7 +83,7 @@ When a farmer searches **"সাইলেজ বগুড়ায়"** or **"s
 ## What Happens After Setup
 
 - **Day 1**: Your listing appears in Google Maps & local search
-- **Week 1**: Google starts indexing your 18 district pages (boost from GMB)
+- **Week 1**: Google starts indexing your 33 district pages (boost from GMB)
 - **Month 1**: Farmers searching "[district] সাইলেজ" start finding you
 - **Ongoing**: Reviews & posts from your GMB dashboard appear in search results
 
@@ -103,4 +103,4 @@ Once verified, use GMB to:
 
 ---
 
-**That's it!** Once GMB is live + verified, you'll start ranking for local silage searches across all 18 districts.
+**That's it!** Once GMB is live + verified, you'll start ranking for local silage searches across the districts you serve.

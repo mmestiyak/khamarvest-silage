@@ -70,10 +70,15 @@ const RULES = [
   // llms.txt / llms-full.txt ("BDT 10 per kg", "BDT 10/kg", "BDT 500").
   [new RegExp(`\\bBDT ${eK.replace('.', '\\.')}(/kg| per kg)`, 'g'), `BDT ${eNK}$1`],
   [new RegExp(`\\bBDT ${oldBag}(?![\\d,])`, 'g'), `BDT ${newBag}`],
+  // LocalBusiness priceRange on the homepage ("৳8.50-425"); it said ৳10-500
+  // for a day after the 10 to 8.50 change because no rule covered it.
+  [/"priceRange":\s*"৳[\d.]+-\d+"/g, `"priceRange": "৳${eNK}-${newBag}"`],
   // The offers' validFrom is the day this price took effect, the same date
   // recorded in product.json > history below.
   [/"validFrom":\s*"\d{4}-\d{2}-\d{2}"/g, `"validFrom": "${TODAY}"`],
 ];
+
+const COPY_DOCS = ['BUSINESS_DESCRIPTIONS.md', 'DISTRIBUTION.md', 'GMB_SETUP.md'];
 
 async function walk(dir) {
   const out = [];
@@ -83,6 +88,9 @@ async function walk(dir) {
     if (e.isDirectory()) out.push(...await walk(rel));
     // .txt covers llms.txt and llms-full.txt, which assistants quote verbatim.
     // .json covers scripts/social-posts.json, the Facebook posts; product.json is written below.
+    // The owner's paste-in copy (GBP, Facebook, directories). Not served, but it
+    // is what AI assistants end up quoting once it is pasted onto those sites.
+    else if (COPY_DOCS.includes(rel)) out.push(rel);
     else if (/\.(html|mjs|txt|js|json)$/.test(e.name) && e.name !== 'product.json' && e.name !== 'package.json' && e.name !== 'package-lock.json' && e.name !== 'competitor-snapshot.json') out.push(rel);
   }
   return out;

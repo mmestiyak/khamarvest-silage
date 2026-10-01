@@ -6,7 +6,7 @@ on and posting in. Copy from here, do not rewrite from scratch each time.
 
 Facts to keep consistent everywhere (change them here first if they ever change):
 
-- Price: ১০ টাকা/কেজি, ৫০ কেজি এয়ারটাইট বস্তা ৫০০ টাকা. Bulk discount negotiable.
+- Price: ৮.৫০ টাকা/কেজি, ৫০ কেজি এয়ারটাইট বস্তা ৪২৫ টাকা, at the load point; transport quoted per order. Bulk discount negotiable.
 - Daily feeding: দুধের গাভী ১৫-২৫ কেজি, মোটাতাজাকরণ ১০-২০ কেজি, ছাগল/ভেড়া ১-২ কেজি.
 - Storage: unopened airtight bag ৬-১২ মাস; after opening use within ২-৩ দিন.
 - Payment: cash on delivery, nationwide. Transport quoted per order on the confirmation call.
@@ -49,7 +49,7 @@ fattening feed, silage supplier Bangladesh
 ### Short listing (about 250 characters)
 Khamarvest Silage supplies fresh corn (maize) silage to dairy and beef farms across
 Bangladesh. Whole corn plants chopped at the correct maturity stage and naturally fermented
-in 50 kg airtight bags. BDT 10/kg. Cash on delivery nationwide. WhatsApp +880 1303-438063.
+in 50 kg airtight bags. BDT 8.50/kg. Cash on delivery nationwide. WhatsApp +880 1303-438063.
 
 ### Long listing (about 900 characters)
 Khamarvest Silage is a Bangladeshi supplier of corn (maize) silage for dairy cattle, beef
@@ -58,7 +58,7 @@ stage, chop them, and let them ferment naturally in airtight 50 kg bags, so farm
 green-fodder nutrition all year, including the winter and monsoon months when fresh grass
 is scarce or risky to feed.
 
-Price is BDT 10 per kg, packed in 50 kg airtight bags at BDT 500 per bag, with discounts
+Price is BDT 8.50 per kg, packed in 50 kg airtight bags at BDT 425 per bag, with discounts
 negotiable on bulk orders. An unopened bag keeps 6 to 12 months, and should be used within
 2 to 3 days once opened. Typical daily feeding is 15 to 25 kg for a dairy cow, 10 to 20 kg
 for fattening cattle and 1 to 2 kg for goats and sheep.
@@ -78,7 +78,7 @@ stage, chop them, and let them ferment naturally in airtight 50 kg bags, so farm
 green fodder all year, including the winter and monsoon months when fresh grass is scarce
 or unsafe to feed.
 
-Our silage sells at BDT 10 per kg in 50 kg airtight bags (BDT 500 per bag), with discounts
+Our silage sells at BDT 8.50 per kg in 50 kg airtight bags (BDT 425 per bag), with discounts
 negotiable on bulk and recurring orders. An unopened bag keeps 6 to 12 months and should be
 used within 2 to 3 days once opened. Typical daily feeding is 15 to 25 kg per dairy cow,
 10 to 20 kg per fattening animal, and 1 to 2 kg per goat or sheep.
@@ -113,7 +113,7 @@ complete profile, but an inflated one costs you the deal when a buyer checks.
 
 ### Product listing (for directories with a product field)
 Product: Corn Silage, 50 kg airtight bag
-Price: BDT 500 per bag (BDT 10 per kg)
+Price: BDT 425 per bag (BDT 8.50 per kg)
 Minimum order: negotiable, ask on WhatsApp
 Payment: cash on delivery
 Shelf life: 6 to 12 months unopened
@@ -145,7 +145,7 @@ and can restrict the account.
 
 পুরো নিয়মটা বিস্তারিত লিখেছি এখানে: https://silage.khamarvest.com/blog/borshakale-gorur-khaddo-babosthapona
 
-আমরা খামারভেস্ট সাইলেজ সরবরাহ করি (১০ টাকা কেজি, ৫০ কেজি বস্তা ৫০০ টাকা, সারাদেশে ক্যাশ অন
+আমরা খামারভেস্ট সাইলেজ সরবরাহ করি (৮.৫০ টাকা কেজি, ৫০ কেজি বস্তা ৪২৫ টাকা, সারাদেশে ক্যাশ অন
 ডেলিভারি), তবে লেখাটা কেউ কিছু না কিনেও কাজে লাগাতে পারবেন। প্রশ্ন থাকলে কমেন্ট করুন।
 
 ### Post B: bloat emergency (high engagement, very shareable)
@@ -202,7 +202,7 @@ and can restrict the account.
 Paste at the top of every video description. The link must be in the first two lines,
 because YouTube hides the rest behind "show more".
 
-খামারভেস্ট সাইলেজ · ভুট্টা সাইলেজ ১০ টাকা কেজি, ৫০ কেজি বস্তা ৫০০ টাকা
+খামারভেস্ট সাইলেজ · ভুট্টা সাইলেজ ৮.৫০ টাকা কেজি, ৫০ কেজি বস্তা ৪২৫ টাকা
 অর্ডার (WhatsApp): https://wa.me/8801303438063
 দাম, পরিমাণ ও খামারি গাইড: https://silage.khamarvest.com
 
@@ -212,7 +212,6 @@ because YouTube hides the rest behind "show more".
 
 ফ্রি ক্যালকুলেটর ও প্রিন্ট শিট: https://silage.khamarvest.com/tools/
 সব খামারি গাইড: https://silage.khamarvest.com/blog/
-ফ্রি ক্যালকুলেটর ও প্রিন্ট শিট: https://silage.khamarvest.com/tools/
 সাইলেজ ক্যালকুলেটর (কত বস্তা লাগবে): https://silage.khamarvest.com/tools/silage-calculator
 আপনার জেলায় ডেলিভারি (৩৩ জেলা): https://silage.khamarvest.com/area/
 আমরা কারা: https://silage.khamarvest.com/about
@@ -224,13 +223,13 @@ Facebook: https://www.facebook.com/khamarvestSilage/
 
 খামারভেস্ট সাইলেজ · খাঁটি ভুট্টা সাইলেজ, সারাদেশে ডেলিভারি
 
-দাম: ১০ টাকা কেজি, ৫০ কেজি এয়ারটাইট বস্তা ৫০০ টাকা। পণ্য হাতে পেয়ে টাকা (ক্যাশ অন
+দাম: ৮.৫০ টাকা কেজি, ৫০ কেজি এয়ারটাইট বস্তা ৪২৫ টাকা। পণ্য হাতে পেয়ে টাকা (ক্যাশ অন
 ডেলিভারি)। বেশি নিলে দাম আলোচনাসাপেক্ষ।
 
 অর্ডার দিতে WhatsApp-এ নাম, এলাকা আর কত বস্তা লাগবে লিখে পাঠান: https://wa.me/8801303438063
 
 কত বস্তা লাগবে বুঝতে না পারলে ওয়েবসাইটের ক্যালকুলেটরে গরুর সংখ্যা বসিয়ে দেখুন, সঙ্গে দাম,
-খাওয়ানোর নিয়ম আর ৩১টি খামারি গাইডও আছে: https://silage.khamarvest.com
+খাওয়ানোর নিয়ম আর ৪০টির বেশি খামারি গাইডও আছে: https://silage.khamarvest.com
 
 কেনার আগে জেনে নিন: দুধের গাভী দিনে ১৫-২৫ কেজি, মোটাতাজাকরণের গরু ১০-২০ কেজি, ছাগল-ভেড়া
 ১-২ কেজি সাইলেজ খায়। নতুন গরুকে ৭ দিনে ধীরে অভ্যাস করাতে হয়।

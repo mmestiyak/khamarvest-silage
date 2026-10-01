@@ -27,6 +27,7 @@ const PROMISED_EARNINGS = ['লাভ করুন', 'আয় করুন', '
 // because the trust rules skipped everything that was not an article.
 const TRUST_PATTERNS = [
   [/(শত শত|হাজারো|হাজার হাজার|অসংখ্য)\s*খামারি|খামারি[^।<"]{0,40}(ভরসা রাখেন|আস্থা রাখেন)|ব্যবহারকারী[^।<"]{0,20}খামারি/, 'invented social proof (we hold no customer data or quotes). State the mechanism instead'],
+  [/(খরচ|ব্যয়)[^।<"]{0,20}[০-৯0-9]+\s*%\s*(কম|সাশ্রয়)|cut your feed costs by \d+%|[০-৯]+\s*দিনে ডেলিভারি|ডেলিভারি পান [০-৯]/, 'percentage-savings or delivery-days promise; state the price, not an imagined saving or a date'],
   [/দ্রুত ডেলিভারি|[০-৯]+\s*ঘণ্টায়\s*(পৌঁছ|ডেলিভারি)|পরদিন ডেলিভারি/, 'promises a delivery speed. Dates are confirmed on the confirmation call'],
   [/(সবসময়|সব সময়)\s*সুস্থ|(গরু|গাভী) সুস্থ থাকে(?! না)|দুধ উৎপাদন বেশি হয়|হজমশক্তি বাড়ায়/, 'health or yield promise. Cite a source or describe the feed, not the outcome'],
   [/(পচার|পচন)[^।<"]{0,15}(কোনো সমস্যা নেই|ধরে না)|নষ্ট(ের| হওয়ার) ভয় নেই/, 'absolute no-spoilage claim; the guides themselves warn about punctures and rodents'],
@@ -327,6 +328,15 @@ for (const [canonical, file] of canonicals) {
 // llms-full.txt carries the per-guide summaries. The trust, dash and digit rules
 // apply to both, because both are quoted verbatim.
 const LLMS_FILES = ['llms.txt', 'llms-full.txt'];
+// The owner's paste-in copy for GBP, Facebook and directories. Not served, but
+// once pasted it is what assistants quote, and until 2026-10-01 it still said
+// 10 tk, "দ্রুত ডেলিভারি" and "খরচ ৩০% কমান" with nothing checking it.
+const COPY_DOCS = ['BUSINESS_DESCRIPTIONS.md', 'DISTRIBUTION.md', 'GMB_SETUP.md'];
+for (const name of COPY_DOCS) {
+  const text = await readFile(join(root, name), 'utf8');
+  for (const [level, msg] of trustProblems(text)) (level === 'err' ? errors.push(`${name}: ${msg}`) : warn(name, msg));
+  if (name === 'BUSINESS_DESCRIPTIONS.md' && /[—–]/.test(text)) errors.push(`${name}: contains an em or en dash; this copy is pasted onto public profiles`);
+}
 const llmsText = {};
 for (const name of LLMS_FILES) {
   if (!await exists(join(root, name))) { errors.push(`${name}: missing`); llmsText[name] = ''; continue; }
@@ -471,6 +481,13 @@ for (const file of articles) {
     }
   }
 
+  // 3b. The homepage LocalBusiness priceRange follows the price too.
+  {
+    const range = (await readFile(join(root, 'index.html'), 'utf8')).match(/"priceRange":\s*"([^"]*)"/)?.[1];
+    const want = `৳${product.pricePerKg.toFixed(product.pricePerKg % 1 ? 2 : 0)}-${product.bagPrice}`;
+    if (range !== want) errors.push(`index.html: LocalBusiness priceRange is "${range}", expected "${want}". npm run set-price rewrites it`);
+  }
+
   // 4. No page may still show a price we have moved away from.
   const superseded = product.history
     .filter((h) => h.pricePerKg !== product.pricePerKg || h.bagPrice !== product.bagPrice);
@@ -488,7 +505,7 @@ for (const file of articles) {
       new RegExp(`BDT ${old.pricePerKg}(?:/kg| per kg)`),
       new RegExp(`BDT ${old.bagPrice}(?![\\d,])`),
     ];
-    for (const file of [...files, ...LLMS_FILES]) {
+    for (const file of [...files, ...LLMS_FILES, ...COPY_DOCS]) {
       // A page may state the old price as history ("আগে ১২ টাকা ছিল, এখন ১০"),
       // wrapped in <!-- price-history:start --> / <!-- price-history:end -->.
       const html = (await readFile(join(root, file), 'utf8')).replace(/<!-- price-history:start -->[\s\S]*?<!-- price-history:end -->/g, '');
