@@ -106,6 +106,23 @@ try {
   notes.push(`could not read blog/ for staleness (${e.message})`);
 }
 
+// --- Lead sheet: the Google Apps Script web app still answers ---------------
+// If it stops (script deleted, deployment archived, owner's Google account
+// changed), the order and callback forms keep showing "পেয়েছি" while every
+// lead silently goes nowhere. Nothing on the site would reveal it.
+try {
+  const leadsJs = await get(`${SITE}/js/leads.js`);
+  const leadsUrl = leadsJs.body.match(/LEADS_URL = '([^']*)'/)?.[1];
+  if (!leadsUrl) problems.push('js/leads.js has no LEADS_URL: website leads are not being saved to the Google Sheet.');
+  else {
+    const r = await get(leadsUrl);
+    if (r.body.includes('lead inbox is live')) notes.push('lead sheet web app answers');
+    else problems.push(`lead sheet web app did not answer (HTTP ${r.status}). Leads from the forms are being lost. Open the sheet > Extensions > Apps Script > Deploy > Manage deployments and check the Web app is still deployed with access "Anyone".`);
+  }
+} catch (e) {
+  problems.push(`could not reach the lead sheet web app (${e.message})`);
+}
+
 // --- 5. Year references that have rolled over ------------------------------
 const year = today.getFullYear();
 const bn = (n) => String(n).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[+d]);

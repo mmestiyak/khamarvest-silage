@@ -3,11 +3,16 @@
 // One-time setup (5 minutes, owner's Google account):
 //   1. Create a new Google Sheet, name it "Khamarvest Leads".
 //   2. Extensions > Apps Script. Delete what is there, paste this whole file, Save.
-//   3. Optional: put an email in NOTIFY_EMAIL below to get an email per lead.
+//   3. Pick "setup" in the function dropdown at the top, press Run, and allow
+//      the permissions. It creates the tabs, schedules the 8am daily email and
+//      sends you one right away so you know email works.
 //   4. Deploy > New deployment > type "Web app".
 //        Execute as: Me.   Who has access: Anyone.
-//      Authorise when asked, then copy the Web app URL (ends in /exec).
+//      Copy the Web app URL (ends in /exec).
 //   5. Paste that URL into LEADS_URL in js/leads.js, then `npm run verify` and push.
+//
+// Emails go to the Google account that owns this script. Put another address
+// in NOTIFY_EMAIL to send them elsewhere, or 'off' to stop them.
 //
 // After editing this script later, use Deploy > Manage deployments > Edit >
 // Version: New version, so the same /exec URL keeps working.
@@ -21,7 +26,9 @@
 // response is never read, which is why errors here are logged, not returned.
 
 var SHEET_NAME = 'Leads';
-var NOTIFY_EMAIL = ''; // e.g. 'owner@example.com'; leave empty for no email
+var NOTIFY_EMAIL = ''; // '' = this script owner's Gmail; or an address; or 'off'
+var DIGEST_HOUR = 8;  // daily summary email, Bangladesh time
+var TZ = 'Asia/Dhaka';
 var CLICKS_NAME = 'Clicks';
 var CLICK_HEADERS = ['সময়', 'মাধ্যম', 'পাতার নাম', 'পাতা', 'বোতাম', 'উৎস', 'ডিভাইস', 'কল নম্বর'];
 var HEADERS = ['সময়', 'নাম', 'মোবাইল', 'এলাকা', 'বস্তা', 'অতিরিক্ত তথ্য', 'পাতা', 'উৎস', 'মাধ্যম', 'অবস্থা', 'নোট (নিজের)'];
@@ -51,8 +58,9 @@ function doPost(e) {
       ''
     ]);
 
-    if (NOTIFY_EMAIL) {
-      MailApp.sendEmail(NOTIFY_EMAIL, 'নতুন লিড: ' + name + ' (' + clip(d.location, 40) + ')',
+    var to = ownerEmail();
+    if (to) {
+      MailApp.sendEmail(to, 'নতুন লিড: ' + name + ' (' + clip(d.location, 40) + ')',
         'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + clip(d.location, 120) +
         '\nবস্তা: ' + clip(d.bags, 20) + '\nতথ্য: ' + clip(d.note, 500) +
         '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
@@ -89,6 +97,69 @@ function logClick(d) {
     clip(d.number, 20)
   ]);
   return ok();
+}
+
+function ownerEmail() {
+  if (NOTIFY_EMAIL === 'off') return '';
+  return NOTIFY_EMAIL || Session.getEffectiveUser().getEmail();
+}
+
+// Run once from the editor (step 3). Safe to run again: it replaces its trigger.
+function setup() {
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === 'dailyDigest') ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger('dailyDigest').timeBased().everyDays(1).atHour(DIGEST_HOUR).inTimezone(TZ).create();
+  getSheet();
+  dailyDigest(true);
+}
+
+// Every morning: who still has not been called, and what the site did in the
+// last 24 hours. Skipped on a day with nothing to report.
+function dailyDigest(force) {
+  var to = ownerEmail();
+  if (!to) return;
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var since = new Date(Date.now() - 24 * 3600 * 1000);
+  var leads = dataRows(ss.getSheetByName(SHEET_NAME));
+  var clicks = dataRows(ss.getSheetByName(CLICKS_NAME));
+  var fresh = leads.filter(function (r) { return r[0] instanceof Date && r[0] >= since; });
+  var waiting = leads.filter(function (r) { return r[9] === 'নতুন'; });
+  var dayClicks = clicks.filter(function (r) { return r[0] instanceof Date && r[0] >= since; });
+  if (force !== true && !fresh.length && !waiting.length && !dayClicks.length) return;
+
+  var wa = dayClicks.filter(function (r) { return r[1] === 'WhatsApp'; }).length;
+  var lines = [
+    'গত ২৪ ঘণ্টা: ' + fresh.length + 'টি নতুন লিড (ফর্ম), ' + wa + ' বার WhatsApp, ' + (dayClicks.length - wa) + ' বার কল বোতামে ট্যাপ।',
+    ''
+  ];
+  if (waiting.length) {
+    lines.push('এখনো ফোন করা হয়নি (' + waiting.length + 'জন), অবস্থা "নতুন":');
+    waiting.slice(0, 40).forEach(function (r) {
+      lines.push('  - ' + r[1] + ', ' + r[2] + ', ' + r[3] + (r[4] ? ', ' + r[4] + ' বস্তা' : '') + ' (' + Utilities.formatDate(r[0], TZ, 'dd/MM HH:mm') + ')');
+    });
+    lines.push('ফোন করার পর শিটে "অবস্থা" বদলে দিন, তাহলে কাল আর এই তালিকায় আসবে না।', '');
+  }
+  if (dayClicks.length) {
+    lines.push('কোন পাতা থেকে বেশি ট্যাপ:');
+    top(dayClicks, 2, 5).forEach(function (t) { lines.push('  - ' + t[0] + ': ' + t[1]); });
+    lines.push('', 'কোথা থেকে এসেছেন:');
+    top(dayClicks, 5, 5).forEach(function (t) { lines.push('  - ' + t[0] + ': ' + t[1]); });
+  }
+  lines.push('', 'শিট: ' + ss.getUrl());
+  MailApp.sendEmail(to, 'খামারভেস্ট লিড: ' + fresh.length + ' নতুন, ' + waiting.length + ' জনকে ফোন বাকি', lines.join('\n'));
+}
+
+function dataRows(sheet) {
+  if (!sheet || sheet.getLastRow() < 2) return [];
+  return sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn()).getValues();
+}
+
+function top(rows, col, n) {
+  var c = {};
+  rows.forEach(function (r) { var k = String(r[col] || '(জানা নেই)'); c[k] = (c[k] || 0) + 1; });
+  return Object.keys(c).map(function (k) { return [k, c[k]]; })
+    .sort(function (a, b) { return b[1] - a[1]; }).slice(0, n);
 }
 
 function getSheet() {

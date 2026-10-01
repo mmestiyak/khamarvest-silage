@@ -4,6 +4,9 @@
 //  - every WhatsApp / call tap on any page goes to the sheet's "Clicks" tab with
 //    the page, button and source. No phone number (the site never sees it),
 //    but the owner can match a chat's time to the page that sent it.
+//  - any <form data-lead-form> (the "নম্বর দিন, আমরা ফোন করব" box on district
+//    pages): saves name, mobile, upazila and bags as a lead and shows a
+//    confirmation. If the sheet is not set up, it falls back to WhatsApp.
 // Homepage loads this directly; every other page gets it from /js/ga.js.
 // Until LEADS_URL is filled in, nothing is sent.
 (function () {
@@ -46,6 +49,41 @@
     var h = a.closest('section') && a.closest('section').querySelector('h2');
     return h ? h.textContent.replace(/\s+/g, ' ').trim().slice(0, 40) : 'page';
   }
+
+  function toAscii(v) {
+    return String(v || '').replace(/[০-৯]/g, function (c) { return String(c.charCodeAt(0) - 0x09E6); });
+  }
+
+  function bindForms() {
+    document.querySelectorAll('form[data-lead-form]').forEach(function (f) {
+      var phone = f.elements.phone;
+      phone.addEventListener('input', function () { phone.setCustomValidity(''); });
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (toAscii(phone.value).replace(/\D/g, '').length < 11) {
+          phone.setCustomValidity('১১ সংখ্যার মোবাইল নম্বর লিখুন, যেমন ০১৭১২৩৪৫৬৭৮');
+          phone.reportValidity();
+          return;
+        }
+        var v = function (n) { return f.elements[n] ? f.elements[n].value.trim() : ''; };
+        var area = [v('upazila'), f.getAttribute('data-district')].filter(Boolean).join(', ');
+        var saved = window.saveLead({
+          name: v('name'), phone: v('phone'), location: area, bags: v('bags'),
+          note: 'ফোন করতে বলেছেন' + (v('note') ? ': ' + v('note') : ''), website: v('website')
+        });
+        if (typeof window.gaEvent === 'function') window.gaEvent('order_details_submitted', { submission_method: saved ? 'callback' : 'whatsapp', page_path: location.pathname });
+        if (saved) {
+          f.querySelector('[data-lead-status]').hidden = false;
+          f.querySelector('button[type="submit"]').disabled = true;
+          return;
+        }
+        var msg = 'আসসালামু আলাইকুম, ভুট্টা সাইলেজ নিতে চাই।\nনাম: ' + v('name') + '\nমোবাইল: ' + v('phone') + '\nএলাকা: ' + area + (v('bags') ? '\nবস্তা: ' + v('bags') : '');
+        window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindForms);
+  else bindForms();
 
   var last = '', lastAt = 0;
   document.addEventListener('click', function (e) {

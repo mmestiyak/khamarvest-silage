@@ -632,6 +632,19 @@ for (const f of ['js/ga.js', 'index.html']) {
   if (!src.includes('phone_click')) errors.push(`${f}: does not fire phone_click for tel: links (see AGENTS.md > Analytics)`);
 }
 
+// --- Lead capture (AGENTS.md > Lead capture) ---
+// Leads go to the owner's Google Sheet; a page that stops loading js/leads.js
+// loses them without any visible sign.
+{
+  const leads = await readFile(join(root, 'js/leads.js'), 'utf8');
+  if (!/LEADS_URL = 'https:\/\/script\.google\.com\/macros\/s\/[^']+\/exec'/.test(leads)) errors.push('js/leads.js: LEADS_URL is not a Google Apps Script /exec URL, so no lead is saved');
+  if (!(await readFile(join(root, 'js/ga.js'), 'utf8')).includes("'/js/leads.js'")) errors.push('js/ga.js: no longer loads /js/leads.js, so WhatsApp and call taps are not logged');
+  if (!(await readFile(join(root, 'index.html'), 'utf8')).includes('src="/js/leads.js"')) errors.push('index.html: does not load /js/leads.js, so the order form saves nothing');
+  for (const f of (await readdir(join(root, 'area'))).filter((f) => f.startsWith('silage-') && f.endsWith('.html'))) {
+    if (!(await readFile(join(root, 'area', f), 'utf8')).includes('data-lead-form')) errors.push(`area/${f}: has no callback form (data-lead-form). Run npm run build:areas`);
+  }
+}
+
 // --- Report ---
 const label = `${files.length} pages, ${articles.length} articles`;
 if (warnings.length) console.log(`\nWarnings (${warnings.length}):\n` + warnings.map((w) => `  ~ ${w}`).join('\n'));

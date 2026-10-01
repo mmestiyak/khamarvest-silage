@@ -108,6 +108,23 @@
         <a href="tel:+8801334211984" class="inline-flex rounded-xl border border-[#0b5b38]/30 bg-white px-5 py-2.5 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]">কল করুন</a>
       </div>
 
+      <!-- Callback request: saved to the owner's lead sheet by /js/leads.js, for
+           farmers who would rather be called than type on WhatsApp. -->
+      <section id="callback" data-cta="callback" class="mt-6 rounded-2xl border border-[#184d32]/15 bg-white p-5 sm:p-6">
+        <h2 class="text-xl font-bold text-[#123b28]">WhatsApp নেই? নম্বর দিন, আমরা ফোন করব</h2>
+        <p class="mt-2 text-[#33483a]">বরিশালে ডেলিভারিসহ মোট খরচ ফোনেই জানিয়ে দেওয়া হবে। আগে কোনো টাকা দিতে হয় না।</p>
+        <form data-lead-form data-district="বরিশাল" class="mt-4 grid gap-3 sm:grid-cols-2">
+          <label class="text-base font-semibold text-[#123b28]">আপনার নাম<input name="name" required autocomplete="name" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
+          <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
+          <label class="text-base font-semibold text-[#123b28]">উপজেলা<input name="upazila" required autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="বরিশালর কোন উপজেলা"></label>
+          <label class="text-base font-semibold text-[#123b28]">কত বস্তা? <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="bags" inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১০"></label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+          <button type="submit" class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">ফোন করে দাম জানান</button>
+          <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই অর্ডারের যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
+          <p data-lead-status hidden role="status" class="rounded-lg bg-[#eaf5eb] p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আমরা এই নম্বরে ফোন করে দাম আর ডেলিভারির খরচ জানাব।</p>
+        </form>
+      </section>
+
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">কত বস্তা লাগবে?</h2>
       <div class="mt-4 overflow-x-auto rounded-xl border border-[#184d32]/10 bg-white">
         <table class="w-full text-left text-base">
