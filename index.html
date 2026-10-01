@@ -1196,7 +1196,10 @@
           <label class="md:col-span-2 font-hind text-[16px] text-[rgb(0,105,68)]">অতিরিক্ত তথ্য <span class="text-[rgb(84,89,95)]">(ঐচ্ছিক)</span>
             <textarea name="note" rows="2" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="গরুর সংখ্যা, পছন্দের ডেলিভারি সময় বা প্রশ্ন লিখুন"></textarea>
           </label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+          <p class="md:col-span-2 font-hind text-[14px] text-[rgb(84,89,95)] text-center">নাম আর নম্বর শুধু এই অর্ডারের যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
           <button type="submit" class="md:col-span-2 justify-self-center inline-flex items-center rounded-full bg-[rgb(0,105,68)] px-6 py-3 font-hind text-[19px] font-semibold text-white transition hover:bg-[rgb(14,124,75)]">তথ্যসহ WhatsApp-এ পাঠান</button>
+          <p id="order-form-status" class="md:col-span-2 hidden font-hind text-[16px] text-[rgb(0,105,68)] text-center" role="status">তথ্য পেয়েছি। WhatsApp না খুললেও চিন্তা নেই, আমরা এই নম্বরে ফোন করব।</p>
         </form>
       </div>
       <p class="font-hind text-[17px] md:text-[20px] text-[rgb(84,89,95)] text-center mt-2">অথবা সরাসরি কল করুন এই নাম্বারে</p>
@@ -1332,6 +1335,11 @@
       form.addEventListener('submit', function (event) {
         event.preventDefault();
         var data = new FormData(form);
+        // Keep the lead even if WhatsApp never opens (js/leads.js).
+        if (typeof saveLead === 'function' && saveLead({
+          name: data.get('name'), phone: data.get('phone'), location: data.get('location'),
+          bags: data.get('bags'), note: data.get('note'), website: data.get('website')
+        })) document.getElementById('order-form-status').classList.remove('hidden');
         var message = [
           'আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ অর্ডার করতে চাই।',
           '',
@@ -1513,5 +1521,6 @@
       recalc();
     })();
   </script>
+  <script src="/js/leads.js" defer></script>
 </body>
 </html>

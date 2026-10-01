@@ -92,6 +92,13 @@
   }
   prefillWhatsApp();
 
+  // Lead sheet: logs WhatsApp / call taps (js/leads.js). Before the GA early
+  // return, so leads are kept even with analytics off.
+  var ls = document.createElement('script');
+  ls.src = '/js/leads.js';
+  ls.defer = true;
+  document.head.appendChild(ls);
+
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID.indexOf('G-XXXX') === 0) return;
 
   var s = document.createElement('script');

@@ -25,6 +25,7 @@ is published until you push.
 | **"Price valid until" date** (Google shows the price until then) | `scripts/product.json` > `priceValidUntil` | `npm run verify` |
 | **A district** (add or remove) | `districts` list in `scripts/generate-area-pages.mjs` | `npm run verify` |
 | **An FAQ question or answer** | the visible FAQ on that page, between `<!-- faq:start -->` and `<!-- faq:end -->` | `npm run verify` (the Google schema copy is rewritten from it) |
+| **Where order-form leads are saved** (Google Sheet) | `LEADS_URL` in `js/leads.js`; setup steps at the top of `scripts/leads-apps-script.gs` | `npm run verify` |
 | **A new guide** | ask Claude: `/write-article` | it follows `.claude/skills/write-article/SKILL.md` |
 
 Write phone numbers in `site.json` the local way, `01303-438063`. The build
