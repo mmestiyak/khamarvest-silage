@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Wed, 30 Sep 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>মোটাতাজাকরণে গরু দিনে কত বাড়ে: গবেষণার হিসাব</title>
+      <link>https://silage.khamarvest.com/blog/goru-motatajakoron-dainik-ojon-briddhi</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/goru-motatajakoron-dainik-ojon-briddhi</guid>
+      <pubDate>Thu, 01 Oct 2026 00:00:00 GMT</pubDate>
+      <description>বাংলাদেশের গবেষণায় মাপা দৈনিক ওজন বৃদ্ধি: শুধু সাইলেজে ৬৪ গ্রাম, শুধু খড়-ভিত্তিক খাবারে প্রায় ২০০ গ্রাম, সঠিক দানাদারে ৮০০-৯০০ গ্রাম। ওজন মাপার হিসাব, কতটা দানাদার দেবেন, আর ১২০ দিনে কত বস্তা সাইলেজ লাগে।</description>
+    </item>
     <item>
       <title>শীতের জন্য সাইলেজ মজুদ: কত বস্তা, কবে কিনবেন, কীভাবে রাখবেন</title>
       <link>https://silage.khamarvest.com/blog/shiter-jonno-silage-mojud</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/borshakale-gorur-khaddo-babosthapona</guid>
       <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
       <description>বর্ষায় ভেজা ঘাসে পেট ফাঁপা, কৃমি ও খুরা রোগের ঝুঁকি বাড়ে। ভেজা মৌসুমে গরুকে কী খাওয়াবেন, খড় শুকনো রাখবেন কীভাবে, তার পুরো নিয়ম।</description>
-    </item>
-    <item>
-      <title>গরুর খামার শুরু করার উপায়: পরিকল্পনা, খরচের হিসাব ও নতুনদের ভুল</title>
-      <link>https://silage.khamarvest.com/blog/gorur-khamar-shuru-korar-upay</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorur-khamar-shuru-korar-upay</guid>
-      <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
-      <description>২টি গাভী দিয়ে খামার শুরু করবেন কীভাবে? গোয়াল, গরু কেনা, খাদ্য খরচের মাসিক হিসাব আর নতুন খামারিদের যে ভুলে লস হয়, সব এক গাইডে।</description>
     </item>
   </channel>
 </rss>

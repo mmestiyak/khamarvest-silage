@@ -50,6 +50,7 @@ const TAGS = {
   'kom-jaiyay-gavir-palan-labh': ['dairy', 'management'],
   'goru-motatajakoron-khaddo-talika': ['beef', 'feeding'],
   'qurbani-goru-motatajakoron-porikolpona': ['beef', 'management'],
+  'goru-motatajakoron-dainik-ojon-briddhi': ['beef', 'feeding'],
   'gorur-ojon-mapar-niyom': ['management', 'feeding'],
   'gorur-khamar-shuru-korar-upay': ['management', 'cost'],
   'goru-tika-o-krimi-tarik-talika': ['health', 'management'],

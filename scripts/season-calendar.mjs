@@ -41,7 +41,7 @@ const SEASONS = [
     guides: ['blog/silage-ki-kivabe-toiri-upokarita', 'blog/silage-kinben-naki-nije-banaben'],
     why: 'ভুট্টা কাটার সময়েই খামারি ঠিক করেন নিজে বানাবেন না কিনবেন, তাই তৈরির পদ্ধতি ও কেনা-বানানোর হিসাব তখন সবচেয়ে বেশি খোঁজা হয়।' },
   { name: 'কোরবানি (মোটাতাজাকরণ)', peak: 'qurbani', lead: 20, leadNew: 32,
-    guides: ['blog/qurbani-goru-motatajakoron-porikolpona', 'blog/goru-motatajakoron-khaddo-talika', 'blog/gorur-ojon-mapar-niyom'],
+    guides: ['blog/qurbani-goru-motatajakoron-porikolpona', 'blog/goru-motatajakoron-dainik-ojon-briddhi', 'blog/goru-motatajakoron-khaddo-talika', 'blog/gorur-ojon-mapar-niyom'],
     why: 'ঈদের ৪-৫ মাস আগে গরু কেনা ও মোটাতাজাকরণের পরিকল্পনা শুরু হয়, তখনই খোঁজ সবচেয়ে বেশি।' },
 ];
 
