@@ -678,13 +678,13 @@
   </script>
   <link rel="preload" href="/fonts/noto-sans-bengali-300-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
   <!-- JPEG, not WebP: on this photo mozjpeg is the smaller file at every width (see scripts/optimize-images.mjs). -->
-  <link rel="preload" as="image" href="/img/silage-production-1400-800w.jpeg" media="(max-width: 899px)" fetchpriority="high">
   <link rel="preload" as="image" href="/img/silage-production-1400-1200w.jpeg" media="(min-width: 900px)" fetchpriority="high">
   <link rel="stylesheet" href="/css/site.css">
   <style>
     /* Hero background: own khamar photo (silage processing beside the corn field) */
+    /* Desktop only: on a phone the photo sat under a 92% white overlay, and its
+       115 KB competed with the CSS and font for a rural connection. */
     .hero-pattern {
-      background-image: url("img/silage-production-1400-800w.jpeg");
       background-size: cover;
       background-position: center;
     }
@@ -762,29 +762,34 @@
 
   <!-- ═══════════ SECTION 1 · HERO  (bg #f5fff8 + mandala pattern) ═══════════ -->
   <main id="main">
-  <section class="hero-pattern relative bg-[rgb(245,255,248)] px-[10px] anim-fadeIn">
+  <section class="hero-pattern relative bg-[rgb(245,255,248)] px-[10px]">
     <div class="relative max-w-[1140px] mx-auto flex flex-col md:flex-row gap-5 py-[35px]">
       <!-- Left column -->
-      <div class="w-full md:w-1/2 flex flex-col justify-center gap-5 px-[10px] anim-fadeInLeft">
+      <div class="w-full md:w-1/2 flex flex-col justify-center gap-5 px-[10px]">
         <h1 class="font-hind font-semibold text-[rgb(0,105,68)] text-[28px] leading-[1.3] md:text-[52px] md:leading-[52px] text-center md:text-left">
           মাত্র ৮.৫০ টাকা কেজিতে গরুর পুষ্টিকর সবুজ খাদ্য, খাঁটি ভুট্টা সাইলেজ!
         </h1>
         <p class="font-hind font-light text-black text-[19px] leading-[24.7px] md:text-[32px] md:leading-[34px] text-center md:text-left">
           মোটাতাজাকরণ, দুধের গাভী কিংবা ছাগল ভেড়া, যে খামারই চালান না কেন। সঠিক বয়সে কাটা আস্ত ভুট্টা গাছ, প্রাকৃতিক ফার্মেন্টেশনে তৈরি। এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য পর্দার আড়ালে বিপুল পরিমাণ সাইলেজ বানিয়েছি, এখন সেই একই দল নিজেদের নামে সরাসরি আপনার খামারে। সারা বছর একই মান, একই দাম।
         </p>
-        <div class="flex justify-center md:justify-start">
+        <div class="flex flex-wrap items-center gap-3 justify-center md:justify-start">
           <a href="https://wa.me/8801303438063?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%B9%E0%A7%8B%E0%A6%AE%E0%A6%AA%E0%A7%87%E0%A6%9C%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%9B%E0%A6%BF%E0%A5%A4%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%8F%E0%A6%B2%E0%A6%BE%E0%A6%95%E0%A6%BE%3A%20%0A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%3A%20" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(194,65,12)] hover:bg-[rgb(154,52,18)] text-white font-hind font-semibold text-[28px] leading-none rounded-[6px] px-7 py-3.5 shadow-[0_6px_20px_0_rgba(241,99,52,0.45)] transition hover:-translate-y-0.5">
             <svg aria-hidden="true" class="w-[28px] h-[28px] fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
             অর্ডার করতে চাই
           </a>
+          <a href="tel:+8801334211984" class="inline-flex items-center gap-2 rounded-[6px] border-2 border-[rgb(0,105,68)] bg-white px-6 py-3 font-hind text-[22px] font-semibold leading-none text-[rgb(0,105,68)] transition hover:bg-[rgb(234,245,235)]">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
+            কল করুন
+          </a>
         </div>
+        <p class="font-hind font-medium text-[16px] md:text-[18px] leading-[26px] text-[#111111] text-center md:text-left">আগে টাকা নয়, বস্তা হাতে পেয়ে টাকা · এক বস্তাও অর্ডার করা যায় · ৫০ কেজি বস্তা ৪২৫ টাকা, পরিবহন আলাদা</p>
         <p class="font-hind text-[15px] md:text-[17px] text-[rgb(0,105,68)] text-center md:text-left">
           ✅ বগুড়া, পাবনা, সিরাজগঞ্জ, রংপুর, ময়মনসিংহ, চট্টগ্রাম, কক্সবাজারসহ <strong>সারাদেশে ডেলিভারি</strong>
         </p>
       </div>
       <!-- Right column: khamar photo -->
       <div class="w-full md:w-1/2 flex justify-center md:justify-end px-[10px]">
-        <img src="img/corn-harvest-1200.jpeg" decoding="async"
+        <img src="img/corn-harvest-1200.jpeg" srcset="img/corn-harvest-1200-480w.jpeg 480w, img/corn-harvest-1200-800w.jpeg 800w, img/corn-harvest-1200.jpeg 1200w" sizes="(min-width: 768px) 540px, 92vw" decoding="async"
              alt="Meer Estiyak, Co-founder Khamarvest Silage, ভুট্টা খেতে সদ্য কাটা ভুট্টা হাতে" width="540" height="540"
              class="w-full max-w-[540px] aspect-square object-cover rounded-[8px] border-[5px] border-[rgb(14,124,75)]">
       </div>
@@ -897,7 +902,7 @@
           <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
             <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c0-6 0-10 4-14M12 22c0-6 0-10-4-14"/><path d="M16 8c2-2 4-2 5-2 0 3-1 5-3 6s-4 0-4 0M8 8c-2-2-4-2-5-2 0 3 1 5 3 6s4 0 4 0"/></svg>
           </span>
-          <p class="font-noto text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">সঠিক সময়ে কাটা ভুট্টা</p>
+          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">সঠিক সময়ে কাটা ভুট্টা</p>
           <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">ভুট্টা দুধ-দানা অবস্থায় কাটা হয়, যখন গাছে পুষ্টি থাকে সবচেয়ে বেশি।</p>
         </div>
         <!-- Card 2 · গবাদি পশুর প্রিয় খাদ্য -->
@@ -905,7 +910,7 @@
           <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
             <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7c0-1.5 1-2 2-1.5L8 6M20 7c0-1.5-1-2-2-1.5L16 6"/><path d="M6 8c1.5 2 3.5 3 6 3s4.5-1 6-3v4a6 6 0 0 1-12 0z"/><path d="M9 20v-2M15 20v-2M9.5 12h.01M14.5 12h.01"/></svg>
           </span>
-          <p class="font-noto text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">গবাদি পশুর প্রিয় খাদ্য</p>
+          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">গবাদি পশুর প্রিয় খাদ্য</p>
           <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">সুগন্ধি ও সুস্বাদু হওয়ায় গরু, ছাগল, ভেড়া সবাই আগ্রহ নিয়ে খায়।</p>
         </div>
         <!-- Card 3 · প্রাকৃতিক ফার্মেন্টেশন -->
@@ -913,7 +918,7 @@
           <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
             <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
           </span>
-          <p class="font-noto text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">প্রাকৃতিক ফার্মেন্টেশন</p>
+          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">প্রাকৃতিক ফার্মেন্টেশন</p>
           <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">প্রাকৃতিক উপায়ে তৈরি, কোনো ক্ষতিকর কেমিক্যাল বা প্রিজারভেটিভ ছাড়াই।</p>
         </div>
         <!-- Card 4 · ল্যাব টেস্টেড পুষ্টিমান -->
@@ -921,7 +926,7 @@
           <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
             <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-4.5 8A2 2 0 0 0 7.3 20h9.4a2 2 0 0 0 1.8-3L14 9V3"/><path d="M7.5 15h9"/></svg>
           </span>
-          <p class="font-noto text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">ভালোভাবে চাপা ও সংরক্ষিত</p>
+          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">ভালোভাবে চাপা ও সংরক্ষিত</p>
           <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">বাতাস বের করে শক্ত করে চাপা দেওয়া হয়। সাইলেজের শত্রু বাতাস, তাই বস্তার মুখ বন্ধ থাকা পর্যন্ত মান ঠিক থাকে।</p>
         </div>
         <!-- Card 5 · টক-মিষ্টি ঘ্রাণ -->
@@ -929,7 +934,7 @@
           <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
             <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.09 4.9 5.31.46-4.02 3.5 1.2 5.19L12 14.8l-4.58 2.75 1.2-5.19-4.02-3.5 5.31-.46z"/></svg>
           </span>
-          <p class="font-noto text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">টক-মিষ্টি ঘ্রাণ</p>
+          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">টক-মিষ্টি ঘ্রাণ</p>
           <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">ঠিকমতো ফার্মেন্ট হলে সাইলেজে টক-মিষ্টি ঘ্রাণ থাকে। পচা বা ঝাঁঝালো গন্ধ পেলে সেই বস্তা খাওয়াবেন না।</p>
         </div>
         <!-- Card 6 · শুধু ভুট্টা গাছ -->
@@ -937,7 +942,7 @@
           <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
             <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
           </span>
-          <p class="font-noto text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">শুধু ভুট্টা গাছ</p>
+          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">শুধু ভুট্টা গাছ</p>
           <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">আস্ত ভুট্টা গাছ ছাড়া কিছু মেশানো হয় না। বস্তা হাতে পেয়ে খুলে মান দেখে তারপর টাকা দেবেন।</p>
         </div>
         <!-- Card 7 · এয়ারটাইট প্যাকেজিং -->
@@ -945,7 +950,7 @@
           <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
             <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg>
           </span>
-          <p class="font-noto text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">এয়ারটাইট প্যাকেজিং</p>
+          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">এয়ারটাইট প্যাকেজিং</p>
           <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">এয়ারটাইট বস্তায় প্যাক করা হয়, যাতে মান দীর্ঘদিন অক্ষুণ্ণ থাকে।</p>
         </div>
         <!-- Card 8 · হোম ডেলিভারি -->
@@ -953,7 +958,7 @@
           <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
             <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
           </span>
-          <p class="font-noto text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">হোম ডেলিভারি</p>
+          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">হোম ডেলিভারি</p>
           <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">কোনো মধ্যস্বত্বভোগী ছাড়াই সাইলেজ পৌঁছে যাবে সরাসরি আপনার খামারে।</p>
         </div>
       </div>
@@ -972,7 +977,7 @@
       </p>
       <button id="yt-facade" type="button" aria-label="ভিডিও দেখুন"
               class="group relative w-full max-w-[304px] aspect-[9/16] rounded-[8px] border-[5px] border-[rgb(14,124,75)] overflow-hidden bg-black cursor-pointer">
-        <img src="https://i.ytimg.com/vi/n8sSOV0KQ64/oardefault.jpg" alt="ভুট্টা সাইলেজ তৈরির ভিডিও, খামারভেস্ট"
+        <img src="https://i.ytimg.com/vi/n8sSOV0KQ64/oardefault.jpg" loading="lazy" decoding="async" alt="ভুট্টা সাইলেজ তৈরির ভিডিও, খামারভেস্ট"
              class="w-full h-full object-cover transition group-hover:scale-105" onerror="this.src='https://i.ytimg.com/vi/n8sSOV0KQ64/hqdefault.jpg'">
         <span class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition">
           <span class="w-[72px] h-[52px] rounded-[14px] bg-[#f00] flex items-center justify-center shadow-lg group-hover:scale-110 transition">
@@ -1221,8 +1226,8 @@
         WhatsApp-এ অর্ডার করুন
       </a>
       <div class="w-full max-w-[760px] rounded-[12px] border border-[rgb(14,124,75)]/30 bg-[rgb(250,251,252)] p-5 md:p-7">
-        <h3 class="font-hind font-semibold text-[22px] md:text-[28px] text-[rgb(0,105,68)] text-center">সময় থাকলে অর্ডারের তথ্য পাঠান</h3>
-        <p class="font-hind text-[16px] md:text-[18px] text-[rgb(84,89,95)] text-center mt-1">ফর্মটি পূরণ করলে WhatsApp-এ সব তথ্য একসাথে চলে যাবে।</p>
+        <h3 class="font-hind font-semibold text-[22px] md:text-[28px] text-[rgb(0,105,68)] text-center">নাম আর নম্বর দিন, অর্ডার এক ক্লিকে</h3>
+        <p class="font-hind text-[16px] md:text-[18px] text-[rgb(84,89,95)] text-center mt-1">তথ্য WhatsApp-এ একসাথে চলে যাবে। WhatsApp না খুললেও নম্বরটি আমাদের কাছে পৌঁছে যায়, আমরা ফোন করব।</p>
         <form id="order-details-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
           <label class="font-hind text-[16px] text-[rgb(0,105,68)]">আপনার নাম
             <input name="name" required autocomplete="name" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="যেমন: রহিম উদ্দিন">
@@ -1233,8 +1238,8 @@
           <label class="font-hind text-[16px] text-[rgb(0,105,68)]">জেলা / উপজেলা
             <input name="location" required autocomplete="address-level2" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="যেমন: বগুড়া সদর">
           </label>
-          <label class="font-hind text-[16px] text-[rgb(0,105,68)]">কত বস্তা লাগবে?
-            <input name="bags" required inputmode="numeric" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="যেমন: ১০">
+          <label class="font-hind text-[16px] text-[rgb(0,105,68)]">কত বস্তা লাগবে? <span class="text-[rgb(84,89,95)]">(ঐচ্ছিক)</span>
+            <input name="bags" inputmode="numeric" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="যেমন: ১০">
           </label>
           <label class="md:col-span-2 font-hind text-[16px] text-[rgb(0,105,68)]">অতিরিক্ত তথ্য <span class="text-[rgb(84,89,95)]">(ঐচ্ছিক)</span>
             <textarea name="note" rows="2" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="গরুর সংখ্যা, পছন্দের ডেলিভারি সময় বা প্রশ্ন লিখুন"></textarea>
@@ -1248,12 +1253,13 @@
       <p class="font-hind text-[17px] md:text-[20px] text-[rgb(84,89,95)] text-center mt-2">অথবা সরাসরি কল করুন এই নাম্বারে</p>
       <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 md:gap-4">
         <a href="tel:+8801334211984" class="inline-flex items-center gap-2 font-hind font-bold text-[rgb(0,105,68)] text-[24px] md:text-[32px] leading-none border-2 border-[rgb(14,124,75)]/30 hover:border-[rgb(14,124,75)] hover:bg-[rgb(14,124,75)]/5 rounded-[10px] px-5 py-3 transition"><svg class="w-6 h-6 md:w-7 md:h-7 fill-[rgb(14,124,75)]" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>01334-211984</a>
-        <a href="tel:+8801300886298" class="inline-flex items-center gap-2 font-hind font-bold text-[rgb(0,105,68)] text-[24px] md:text-[32px] leading-none border-2 border-[rgb(14,124,75)]/30 hover:border-[rgb(14,124,75)] hover:bg-[rgb(14,124,75)]/5 rounded-[10px] px-5 py-3 transition">
-          <svg class="w-6 h-6 md:w-7 md:h-7 fill-[rgb(14,124,75)]" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
+        <span class="basis-full text-center font-hind text-[16px] text-[rgb(84,89,95)]">না পেলে এই নম্বরে:</span>
+        <a href="tel:+8801300886298" class="inline-flex min-h-11 items-center gap-1.5 font-hind font-semibold text-[rgb(0,105,68)] text-[18px] leading-none underline-offset-4 hover:underline px-2">
+          <svg class="w-4 h-4 fill-[rgb(14,124,75)]" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
           01300-886298
         </a>
-        <a href="tel:+8801575805542" class="inline-flex items-center gap-2 font-hind font-bold text-[rgb(0,105,68)] text-[24px] md:text-[32px] leading-none border-2 border-[rgb(14,124,75)]/30 hover:border-[rgb(14,124,75)] hover:bg-[rgb(14,124,75)]/5 rounded-[10px] px-5 py-3 transition">
-          <svg class="w-6 h-6 md:w-7 md:h-7 fill-[rgb(14,124,75)]" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
+        <a href="tel:+8801575805542" class="inline-flex min-h-11 items-center gap-1.5 font-hind font-semibold text-[rgb(0,105,68)] text-[18px] leading-none underline-offset-4 hover:underline px-2">
+          <svg class="w-4 h-4 fill-[rgb(14,124,75)]" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
           01575-805542
         </a>
       </div>
@@ -1278,7 +1284,7 @@
   <!-- ═══════════ GLOWING WHATSAPP BUTTON (fixed) ═══════════ -->
   <a href="https://wa.me/8801303438063?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%B9%E0%A7%8B%E0%A6%AE%E0%A6%AA%E0%A7%87%E0%A6%9C%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20%E0%A6%B2%E0%A6%BF%E0%A6%96%E0%A6%9B%E0%A6%BF%E0%A5%A4%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%8F%E0%A6%B2%E0%A6%BE%E0%A6%95%E0%A6%BE%3A%20%0A%E0%A6%AC%E0%A6%B8%E0%A7%8D%E0%A6%A4%E0%A6%BE%3A%20"
      target="_blank" rel="noopener" aria-label="WhatsApp-এ অর্ডার করুন"
-     class="wa-glow fixed bottom-5 right-5 z-50 inline-flex items-center gap-3 bg-[#0e7c4b] hover:bg-[#0b6a3e] text-white font-hind font-semibold text-[18px] md:text-[22px] leading-none pl-4 pr-5 py-3.5 md:py-4 rounded-full transition hover:scale-105">
+     class="wa-glow fixed bottom-5 right-5 z-50 hidden md:inline-flex items-center gap-3 bg-[#0e7c4b] hover:bg-[#0b6a3e] text-white font-hind font-semibold text-[18px] md:text-[22px] leading-none pl-4 pr-5 py-3.5 md:py-4 rounded-full transition hover:scale-105">
     <svg class="w-8 h-8 md:w-9 md:h-9 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     WhatsApp-এ অর্ডার করুন
   </a>
@@ -1389,7 +1395,7 @@
           'নাম: ' + data.get('name'),
           'মোবাইল: ' + data.get('phone'),
           'এলাকা: ' + data.get('location'),
-          'প্রয়োজন: ' + data.get('bags') + ' বস্তা',
+          data.get('bags') ? 'প্রয়োজন: ' + data.get('bags') + ' বস্তা' : '',
           data.get('note') ? 'অতিরিক্ত তথ্য: ' + data.get('note') : ''
         ].filter(Boolean).join('\n');
         if (typeof gaEvent === 'function') {
@@ -1565,5 +1571,15 @@
     })();
   </script>
   <script src="/js/leads.js" defer></script>
+  <!-- order-bar:start -->
+  <div class="h-20 md:hidden print:hidden" aria-hidden="true"></div>
+  <div data-cta="sticky_bar" class="fixed inset-x-0 bottom-0 z-40 border-t border-[#184d32]/15 bg-white px-3 py-2 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] md:hidden print:hidden">
+    <div class="mx-auto flex max-w-lg items-center gap-2">
+      <p class="min-w-0 flex-1 text-sm leading-tight text-[#456451]"><strong class="block whitespace-nowrap text-base text-[#0b5b38]">৮.৫০ টাকা কেজি</strong><span class="block whitespace-nowrap">হাতে পেয়ে টাকা</span></p>
+      <a href="tel:+8801334211984" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 px-3.5 text-sm font-bold text-[#0b5b38]">কল করুন</a>
+      <a href="https://wa.me/8801303438063" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0b5b38] px-4 text-sm font-bold text-white">WhatsApp-এ অর্ডার</a>
+    </div>
+  </div>
+  <!-- order-bar:end -->
 </body>
 </html>

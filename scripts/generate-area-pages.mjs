@@ -180,6 +180,7 @@ function page(d) {
           <a href="${wa}" target="_blank" rel="noopener" class="inline-flex rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b]">WhatsApp-এ অর্ডার করুন</a>
           ${callBtn('inline-flex rounded-xl border border-[#0b5b38]/30 bg-white px-5 py-3 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]')}
         </div>
+        <p class="mt-3"><a href="#callback" class="inline-flex min-h-11 items-center font-semibold text-[#0b6a3e] underline underline-offset-4">WhatsApp নেই? নম্বর দিন, আমরা ফোন করব</a></p>
       </div>
     </section>
 
@@ -211,10 +212,10 @@ ${ORIGIN(d)}${PROOF}
       <section id="callback" data-cta="callback" class="mt-6 rounded-2xl border border-[#184d32]/15 bg-white p-5 sm:p-6">
         <h2 class="text-xl font-bold text-[#123b28]">WhatsApp নেই? নম্বর দিন, আমরা ফোন করব</h2>
         <p class="mt-2 text-[#33483a]">${d.loc} ডেলিভারিসহ মোট খরচ ফোনেই জানিয়ে দেওয়া হবে। আগে কোনো টাকা দিতে হয় না।</p>
-        <form data-lead-form data-district="${d.name}" class="mt-4 grid gap-3 sm:grid-cols-2">
-          <label class="text-base font-semibold text-[#123b28]">আপনার নাম<input name="name" required autocomplete="name" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
+        <form data-lead-form data-district="${d.name}" onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
+          <label class="text-base font-semibold text-[#123b28]">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="name" autocomplete="name" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
           <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
-          <label class="text-base font-semibold text-[#123b28]">উপজেলা<input name="upazila" required autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="${d.name}র কোন উপজেলা"></label>
+          <label class="text-base font-semibold text-[#123b28]">উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="upazila" autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="${d.name}র কোন উপজেলা"></label>
           <label class="text-base font-semibold text-[#123b28]">কত বস্তা? <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="bags" inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১০"></label>
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
           <button type="submit" class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">ফোন করে দাম জানান</button>
@@ -258,6 +259,7 @@ ${ORIGIN(d)}${PROOF}
   </main>
 
   <footer class="border-t border-[#184d32]/10 bg-white px-5 py-7 text-center text-sm text-[#54705d]">© ২০২৬ খামারভেস্ট সাইলেজ · <a href="/area/" class="font-medium text-[#0b6a3e] underline">ডেলিভারি এলাকা</a> · <a href="/blog/" class="font-medium text-[#0b6a3e] underline">সব গাইড</a> · <a href="/tools/" class="font-medium text-[#0b6a3e] underline">ফ্রি টুলস</a> · <a href="/about" class="font-medium text-[#0b6a3e] underline">আমাদের সম্পর্কে</a></footer>
+<script src="/js/leads.js" defer></script>
 <script src="/js/ga.js" defer></script></body>
 </html>
 `;
@@ -314,6 +316,7 @@ const indexHtml = `<!DOCTYPE html>
     </section>
   </main>
   <footer class="border-t border-[#184d32]/10 bg-white px-5 py-7 text-center text-sm text-[#54705d]">© ২০২৬ খামারভেস্ট সাইলেজ · <a href="/blog/" class="font-medium text-[#0b6a3e] underline">সব গাইড</a> · <a href="/tools/" class="font-medium text-[#0b6a3e] underline">ফ্রি টুলস</a> · <a href="/corn-silage-bangladesh" lang="en" class="font-medium text-[#0b6a3e] underline">Corn silage in Bangladesh (English)</a></footer>
+<script src="/js/leads.js" defer></script>
 <script src="/js/ga.js" defer></script></body>
 </html>
 `;

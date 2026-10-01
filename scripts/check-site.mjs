@@ -607,7 +607,7 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
 // scrolled 11-13 screens to the first WhatsApp link. scripts/order-bar.mjs
 // writes the bar into every page except the two with a bottom bar of their own.
 {
-  const OWN_BAR = new Set(['index.html', 'tools/ration-generator.html', 'guide-book.html']);
+  const OWN_BAR = new Set(['tools/ration-generator.html', 'guide-book.html']);
   const missing = [];
   for (const file of files) {
     if (OWN_BAR.has(file)) continue;

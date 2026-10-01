@@ -17,24 +17,27 @@ const OPEN = '<!-- order-bar:start -->';
 const CLOSE = '<!-- order-bar:end -->';
 
 // Pages that already have their own bottom bar, or are not public pages.
+// The homepage used to be skipped for its floating WhatsApp pill, but that
+// pill offered no call button (the first tel: link was 18 screens down) and
+// covered the hero on a 360px phone; it is now desktop-only and the homepage
+// gets this bar like every other page.
 const SKIP = new Set([
-  'index.html', // floating WhatsApp button of its own
   'tools/ration-generator.html', // mobile result bar sits in the same spot
   'gmb-cover-photo.html',
   'guide-book.html',
 ]);
 
 const bar = (t) => `${OPEN}
-  <div class="h-24 md:hidden print:hidden" aria-hidden="true"></div>
-  <div data-cta="sticky_bar" class="fixed inset-x-0 bottom-0 z-40 border-t border-[#184d32]/15 bg-white/95 px-3 py-2 backdrop-blur md:hidden print:hidden">
+  <div class="h-20 md:hidden print:hidden" aria-hidden="true"></div>
+  <div data-cta="sticky_bar" class="fixed inset-x-0 bottom-0 z-40 border-t border-[#184d32]/15 bg-white px-3 py-2 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] md:hidden print:hidden">
     <div class="mx-auto flex max-w-lg items-center gap-2">
-      <p class="min-w-0 flex-1 text-sm leading-tight text-[#456451]"><strong class="block text-base text-[#0b5b38]">${t.price}</strong>${t.pay}</p>
+      <p class="min-w-0 flex-1 text-sm leading-tight text-[#456451]"><strong class="block whitespace-nowrap text-base text-[#0b5b38]">${t.price}</strong><span class="block whitespace-nowrap">${t.pay}</span></p>
       <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 px-3.5 text-sm font-bold text-[#0b5b38]">${t.call}</a>
       <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0b5b38] px-4 text-sm font-bold text-white">${t.wa}</a>
     </div>
   </div>
   ${CLOSE}`;
-const BN = bar({ price: `${product.perKgBn} টাকা কেজি`, pay: 'পণ্য হাতে পেয়ে টাকা', call: 'কল করুন', wa: 'WhatsApp-এ অর্ডার' });
+const BN = bar({ price: `${product.perKgBn} টাকা কেজি`, pay: 'হাতে পেয়ে টাকা', call: 'কল করুন', wa: 'WhatsApp-এ অর্ডার' });
 // corn-silage-bangladesh is lang="en": a Bengali bar on it read as a mistake.
 const EN = bar({ price: `BDT ${product.perKgEn}/kg`, pay: 'Pay on delivery', call: 'Call', wa: 'Order on WhatsApp' });
 

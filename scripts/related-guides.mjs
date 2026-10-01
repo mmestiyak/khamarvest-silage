@@ -16,6 +16,8 @@
 // Idempotent: it strips any block it previously wrote before adding a new one.
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { CALL_TEL, WA_NUMBER } from './contact.mjs';
+import { product } from './product.mjs';
 
 const BUY_ROW = [
   ['/blog/silage-kothay-pawa-jay', 'সাইলেজ কোথায় পাওয়া যায়'],
@@ -152,6 +154,15 @@ for (const a of articles) {
 
   const block = `
           ${MARKER_OPEN}
+          <section data-cta="next_step" class="mt-10 rounded-2xl border border-[#0b5b38]/20 bg-white p-5 sm:p-6">
+            <h2 class="text-lg font-bold text-[#123b28]">পরের ধাপ: সাইলেজ নিতে চাইলে</h2>
+            <p class="mt-1 text-[#456451]">খামারভেস্ট সাইলেজ ${product.perKgBn} টাকা কেজি, ৫০ কেজি বস্তা ${product.bagPriceBn} টাকা। আগে টাকা নয়, বস্তা হাতে পেয়ে টাকা; পরিবহন খরচ কনফার্মেশন কলে জানানো হয়।</p>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0b5b38] px-5 py-2.5 text-base font-bold text-white hover:bg-[#0e7c4b]">WhatsApp-এ অর্ডার</a>
+              <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 bg-white px-5 py-2.5 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]">কল করুন</a>
+              <a href="/area/" class="inline-flex min-h-11 items-center rounded-xl px-3 py-2.5 text-base font-semibold text-[#0b6a3e] underline underline-offset-4">আপনার জেলায় দাম ও ডেলিভারি</a>
+            </div>
+          </section>
           <section class="mt-10 border-t border-[#184d32]/10 pt-7">
             <h2 class="text-lg font-bold text-[#123b28]">সম্পর্কিত গাইড</h2>
             <div class="mt-4 grid gap-3 sm:grid-cols-2">${cards}
