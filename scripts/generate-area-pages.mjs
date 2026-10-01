@@ -85,6 +85,8 @@ const PROOF = `      <figure class="mt-5">
       </figure>
 `;
 
+// Bengali digits for counts written into copy, so "৩৩টি জেলা" cannot go stale again.
+const bnNum = (n) => String(n).replace(/[0-9]/g, (x) => '০১২৩৪৫৬৭৮৯'[+x]);
 const bySlug = Object.fromEntries(districts.map((d) => [d.slug, d]));
 const fbSvg = '<svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
 
@@ -94,7 +96,11 @@ function page(d) {
   // the owner needs before quoting transport. Also tells the owner which page sent the lead.
   const wa = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, ${d.name} জেলার পাতা থেকে লিখছি। ভুট্টা সাইলেজ নিতে চাই।\nউপজেলা: \nবস্তা: `)}`;
   const callBtn = (cls) => `<a href="tel:${CALL_TEL}" class="${cls}">কল করুন</a>`;
-  const title = `${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি | খামারভেস্ট সাইলেজ`;
+  // Google cuts a title around 60 characters; long district names drop "ভুট্টা".
+  const titleSpan = `${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি`;
+  const title = titleSpan.length > 60
+    ? `${d.loc} সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি | খামারভেস্ট`
+    : `${titleSpan} | খামারভেস্ট সাইলেজ`;
   const desc = `${d.name} জেলার সব উপজেলায় খাঁটি ভুট্টা সাইলেজ ডেলিভারি। দাম ${product.perKgBn} টাকা কেজি, ${product.bagKgBn} কেজি এয়ারটাইট বস্তা ${product.bagPriceBn} টাকা, টাকা পণ্য হাতে পেয়ে। WhatsApp: +880 1303-438063।`;
   const nearLinks = d.near.map((s) => `<a href="/area/silage-${s}" class="font-semibold text-[#0b6a3e] underline underline-offset-4">${bySlug[s].name}</a>`).join(', ');
 
@@ -228,7 +234,7 @@ ${ORIGIN(d)}${PROOF}
           </tbody>
         </table>
       </div>
-      <p class="mt-3 text-[#33483a]">নিজের খামারের হিসাব করতে <a href="/#calculator" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সাইলেজ ক্যালকুলেটর</a> ব্যবহার করুন, আর ফ্রি চার্ট-খাতা পাবেন <a href="/tools/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">টুলস পাতায়</a>।</p>
+      <p class="mt-3 text-[#33483a]">নিজের খামারের হিসাব করতে <a href="/tools/silage-calculator" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সাইলেজ ক্যালকুলেটর</a> ব্যবহার করুন, অন্য কোথাও কম দর শুনলে আগে দেখে নিন <a href="/blog/vutta-silage-dam-koto-kothay-kinben" class="font-semibold text-[#0b6a3e] underline underline-offset-4">দাম কীভাবে মিলিয়ে দেখবেন</a>, আর ফ্রি চার্ট-খাতা পাবেন <a href="/tools/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">টুলস পাতায়</a>।</p>
 
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.loc} ডেলিভারি নিয়ে সাধারণ প্রশ্ন</h2>
       <div class="mt-4 space-y-3">
@@ -270,15 +276,15 @@ const indexHtml = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>যেসব জেলায় ভুট্টা সাইলেজ ডেলিভারি দিই | খামারভেস্ট সাইলেজ</title>
-  <meta name="description" content="বগুড়া, পাবনা, সিরাজগঞ্জ, ঢাকা, চট্টগ্রামসহ ১৮টি জেলার পাতায় দাম, অর্ডারের নিয়ম ও ডেলিভারির তথ্য। সারা বাংলাদেশেই ডেলিভারি হয়।">
+  <title>ভুট্টা সাইলেজ হোম ডেলিভারি: ${bnNum(districts.length)} জেলা, পণ্য হাতে পেয়ে টাকা | খামারভেস্ট সাইলেজ</title>
+  <meta name="description" content="বগুড়া থেকে ঢাকা, চট্টগ্রাম, সিলেটসহ ${bnNum(districts.length)}টি জেলার পাতায় দাম, অর্ডারের নিয়ম ও ডেলিভারির তথ্য। সারা বাংলাদেশেই ডেলিভারি হয়।">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="${siteUrl}/area/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="bn_BD">
   <meta property="og:site_name" content="খামারভেস্ট (Khamarvest)">
   <meta property="og:title" content="যেসব জেলায় ভুট্টা সাইলেজ ডেলিভারি দিই">
-  <meta property="og:description" content="১৮টি জেলার পাতা, আর সারা বাংলাদেশেই ডেলিভারি। টাকা পণ্য হাতে পেয়ে।">
+  <meta property="og:description" content="${bnNum(districts.length)}টি জেলার পাতা, আর সারা বাংলাদেশেই ডেলিভারি। টাকা পণ্য হাতে পেয়ে।">
   <meta property="og:url" content="${siteUrl}/area/">
   <meta property="og:image" content="${siteUrl}/img/silage-production-1400.jpeg">
   <link rel="preload" href="/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
@@ -307,7 +313,7 @@ const indexHtml = `<!DOCTYPE html>
       <a href="https://wa.me/8801303438063?text=${encodeURIComponent('আসসালামু আলাইকুম, আমার এলাকায় সাইলেজ ডেলিভারির খরচ জানতে চাই।')}" target="_blank" rel="noopener" class="mt-5 inline-flex rounded-xl bg-white px-5 py-3 text-base font-bold text-[#075a35] hover:bg-[#e5f5e9]">WhatsApp-এ কথা বলুন</a>
     </section>
   </main>
-  <footer class="border-t border-[#184d32]/10 bg-white px-5 py-7 text-center text-sm text-[#54705d]">© ২০২৬ খামারভেস্ট সাইলেজ · <a href="/blog/" class="font-medium text-[#0b6a3e] underline">সব গাইড</a> · <a href="/tools/" class="font-medium text-[#0b6a3e] underline">ফ্রি টুলস</a></footer>
+  <footer class="border-t border-[#184d32]/10 bg-white px-5 py-7 text-center text-sm text-[#54705d]">© ২০২৬ খামারভেস্ট সাইলেজ · <a href="/blog/" class="font-medium text-[#0b6a3e] underline">সব গাইড</a> · <a href="/tools/" class="font-medium text-[#0b6a3e] underline">ফ্রি টুলস</a> · <a href="/corn-silage-bangladesh" lang="en" class="font-medium text-[#0b6a3e] underline">Corn silage in Bangladesh (English)</a></footer>
 <script src="/js/ga.js" defer></script></body>
 </html>
 `;

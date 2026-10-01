@@ -106,6 +106,17 @@ try {
   notes.push(`could not read blog/ for staleness (${e.message})`);
 }
 
+// --- Response headers from _headers -------------------------------------
+{
+  const llmsHead = await fetch(`${SITE}/llms.txt`, { method: 'HEAD' }).catch(() => null);
+  const ct = llmsHead?.headers.get('content-type') || '';
+  if (LIVE && !/charset=utf-8/i.test(ct)) problems.push(`/llms.txt is served as "${ct}" with no utf-8 charset, so some AI fetchers read the Bengali as garbage. Check _headers is deployed.`);
+  const cssHead = await fetch(`${SITE}/css/site.css`, { method: 'HEAD' }).catch(() => null);
+  const cc = cssHead?.headers.get('cache-control') || '';
+  if (LIVE && !/max-age=[1-9]/.test(cc)) problems.push(`/css/site.css is served with cache-control "${cc}", so every page view re-fetches the stylesheet. Check _headers is deployed.`);
+  if (LIVE && /charset=utf-8/i.test(ct) && /max-age=[1-9]/.test(cc)) notes.push('_headers is live (utf-8 llms.txt, cached CSS)');
+}
+
 // --- Lead sheet: the Google Apps Script web app still answers ---------------
 // If it stops (script deleted, deployment archived, owner's Google account
 // changed), the order and callback forms keep showing "পেয়েছি" while every

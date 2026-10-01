@@ -17,6 +17,13 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
+const BUY_ROW = [
+  ['/blog/silage-kothay-pawa-jay', 'সাইলেজ কোথায় পাওয়া যায়'],
+  ['/blog/vutta-silage-dam-koto-kothay-kinben', 'দাম যাচাইয়ের নিয়ম'],
+  ['/blog/nirapode-silage-kenar-niyom', 'নিরাপদে কেনার নিয়ম'],
+  ['/tools/silage-calculator', 'কত বস্তা লাগবে: ক্যালকুলেটর'],
+];
+
 const root = process.cwd();
 const MARKER_OPEN = '<!-- related-guides:start -->';
 const MARKER_CLOSE = '<!-- related-guides:end -->';
@@ -135,11 +142,25 @@ for (const a of articles) {
             <span class="block font-semibold leading-7 text-[#0b6a3e]">${b.title}</span>
           </a>`).join('');
 
+  // A fixed "before you buy" row on every article. Tag matching rarely picked
+  // the sourcing and price-check guides, which are the ones that turn a reader
+  // into a buyer; /blog/silage-kothay-pawa-jay had 2 in-text links site-wide.
+  const buyLinks = BUY_ROW
+    .filter(([url]) => url !== a.url && !url.endsWith(`/${a.slug}`))
+    .map(([url, label]) => `<a href="${url}" class="inline-flex min-h-11 items-center rounded-full border border-[#0b5b38]/25 bg-white px-4 py-2 text-[15px] font-semibold text-[#0b5b38] hover:border-[#0b5b38]">${label}</a>`)
+    .join('\n              ');
+
   const block = `
           ${MARKER_OPEN}
           <section class="mt-10 border-t border-[#184d32]/10 pt-7">
             <h2 class="text-lg font-bold text-[#123b28]">সম্পর্কিত গাইড</h2>
             <div class="mt-4 grid gap-3 sm:grid-cols-2">${cards}
+            </div>
+          </section>
+          <section class="mt-8">
+            <h2 class="text-lg font-bold text-[#123b28]">সাইলেজ কেনার আগে</h2>
+            <div class="mt-3 flex flex-wrap gap-2">
+              ${buyLinks}
             </div>
           </section>
           <section class="mt-8 rounded-2xl bg-[#eaf5eb] p-5">

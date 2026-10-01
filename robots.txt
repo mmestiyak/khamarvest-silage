@@ -1,4 +1,4 @@
-# খামারভেস্ট সাইলেজ — all crawlers welcome, including AI assistants.
+# খামারভেস্ট সাইলেজ: all crawlers welcome, including AI assistants.
 
 User-agent: *
 Allow: /

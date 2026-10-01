@@ -1,0 +1,24 @@
+# Cloudflare Workers Assets response headers (parsed at deploy, not served).
+# Checked daily by scripts/watch-site.mjs.
+
+# Bengali text: without a charset, many fetchers (Python requests among them)
+# decode text/plain as ISO-8859-1 and an AI assistant reads garbage.
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+/llms-full.txt
+  Content-Type: text/plain; charset=utf-8
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+
+# Static files were all max-age=0, so every page view on rural 3G re-checked
+# the render-blocking CSS and the fonts before first paint. Names are stable
+# but contents can change (npm run images / fonts / build:css), so no
+# "immutable", and CSS/JS stay short enough that a deploy shows within an hour.
+/fonts/*
+  Cache-Control: public, max-age=2592000
+/img/*
+  Cache-Control: public, max-age=2592000
+/css/*
+  Cache-Control: public, max-age=3600
+/js/*
+  Cache-Control: public, max-age=3600
