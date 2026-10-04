@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Thu, 01 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>গরুর খাদ্য খরচ কমানোর ৮ উপায়: কোনটা কাটবেন, কোনটা নয়</title>
+      <link>https://silage.khamarvest.com/blog/gorur-khaddo-khoroch-komanor-upay</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorur-khaddo-khoroch-komanor-upay</guid>
+      <pubDate>Mon, 05 Oct 2026 00:00:00 GMT</pubDate>
+      <description>খাদ্যই গরু পালনের মোট খরচের ৫৮ থেকে ৭২ শতাংশ। কেজির দামে নয়, শক্তি ও প্রোটিনের দামে কীভাবে কিনবেন, খড়-দানাদার-সাইলেজের টাকা প্রতি MJ টেবিল, অপচয় ও ভেজালে কোথায় টাকা যায়, আর কোন খরচ কাটলে লোকসান। বাংলাদেশি গবেষণার সূত্রসহ।</description>
+    </item>
     <item>
       <title>মোটাতাজাকরণে গরু দিনে কত বাড়ে: গবেষণার হিসাব</title>
       <link>https://silage.khamarvest.com/blog/goru-motatajakoron-dainik-ojon-briddhi</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/nepier-ghas-vs-vutta-silage</guid>
       <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
       <description>নেপিয়ার ঘাস চাষ করবেন নাকি সাইলেজ কিনবেন? জমি, সেচ, শ্রম ও সারা বছরের জোগান ধরে দুটির বাস্তব তুলনা, আর দুটো মিলিয়ে ব্যবহারের কৌশল।</description>
-    </item>
-    <item>
-      <title>বর্ষাকালে গরুর খাদ্য ব্যবস্থাপনা: ভেজা ঘাসের বিপদ ও সমাধান</title>
-      <link>https://silage.khamarvest.com/blog/borshakale-gorur-khaddo-babosthapona</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/borshakale-gorur-khaddo-babosthapona</guid>
-      <pubDate>Mon, 24 Aug 2026 00:00:00 GMT</pubDate>
-      <description>বর্ষায় ভেজা ঘাসে পেট ফাঁপা, কৃমি ও খুরা রোগের ঝুঁকি বাড়ে। ভেজা মৌসুমে গরুকে কী খাওয়াবেন, খড় শুকনো রাখবেন কীভাবে, তার পুরো নিয়ম।</description>
     </item>
   </channel>
 </rss>

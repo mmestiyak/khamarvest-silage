@@ -72,6 +72,7 @@ const TAGS = {
   'silage-poribohon-khoroch': ['cost', 'buying'],
   'go-khaddo-mousumi-calendar': ['seasonal', 'feeding'],
   'borshakale-gorur-khaddo-babosthapona': ['seasonal', 'feeding'],
+  'gorur-khaddo-khoroch-komanor-upay': ['cost', 'feeding', 'buying'],
 };
 
 function slugOf(file) {
