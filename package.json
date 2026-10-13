@@ -3,7 +3,7 @@
   "scripts": {
     "build:blog": "node scripts/generate-blog-index.mjs",
     "build:areas": "node scripts/generate-area-pages.mjs",
-    "build": "npm run build:facts && npm run build:year && npm run build:areas && npm run build:related && npm run build:ration && npm run build:calc && npm run build:faq && npm run build:blog && npm run build:images && npm run build:favicon && npm run build:orderbar && npm run build:css",
+    "build": "npm run build:facts && npm run build:year && npm run build:areas && npm run build:related && npm run build:ration && npm run build:calc && npm run build:faq && npm run build:blog && npm run build:trust && npm run build:images && npm run build:favicon && npm run build:orderbar && npm run build:css",
     "build:facts": "node scripts/sync-facts.mjs",
     "build:year": "node scripts/year.mjs",
     "check": "node scripts/check-site.mjs",
@@ -27,6 +27,7 @@
     "social:gbp": "node scripts/social-posts.mjs -- --gbp",
     "build:favicon": "node scripts/favicon-links.mjs",
     "build:orderbar": "node scripts/order-bar.mjs",
+    "build:trust": "node scripts/trust-blocks.mjs",
     "favicon": "node scripts/make-favicon.mjs"
   },
   "devDependencies": {

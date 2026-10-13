@@ -79,12 +79,6 @@ const ORIGIN = (d) => d.slug === 'bogura'
 // A real production photo and the video, then the trust page. District pages
 // had no image at all, while a cash-on-delivery buyer ordering from a website
 // they have never seen needs to see that the product and the people are real.
-const PROOF = `      <figure class="mt-5">
-        <img src="/img/silage-production-1400.jpeg" alt="মাঠে ভুট্টা চপ করে সাইলেজের বস্তা ভরা হচ্ছে, খামারভেস্ট সাইলেজ" width="1400" height="1050" loading="lazy" decoding="async" class="aspect-[16/9] w-full rounded-2xl object-cover shadow-sm">
-        <figcaption class="mt-2 text-sm text-[#54705d]">মাঠেই ভুট্টা চপ করে বস্তা ভরার কাজ চলছে। <a href="https://www.youtube.com/shorts/n8sSOV0KQ64" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-4">ভিডিওতে দেখুন</a> · <a href="/about" class="font-semibold text-[#0b6a3e] underline underline-offset-4">আমরা কারা</a></figcaption>
-      </figure>
-`;
-
 // Bengali digits for counts written into copy, so "৩৩টি জেলা" cannot go stale again.
 const bnNum = (n) => String(n).replace(/[0-9]/g, (x) => '০১২৩৪৫৬৭৮৯'[+x]);
 const bySlug = Object.fromEntries(districts.map((d) => [d.slug, d]));
@@ -195,7 +189,7 @@ function page(d) {
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${CONTEXT[d.ctx](d)}</p>
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">ভুট্টা সাইলেজে আস্ত ভুট্টা গাছ দানাসহ কুচি করা থাকে বলে আঁশ ও শক্তি একসাথে মেলে। দুধের গাভীকে দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি আর ছাগল-ভেড়াকে ১-২ কেজি দেওয়া হয়। নতুন হলে আগে পড়ুন: <a href="/blog/silage-ki-kivabe-toiri-upokarita" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সাইলেজ কী?</a> আর <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">প্রথমবার খাওয়ানোর নিয়ম</a>।</p>
 
-${ORIGIN(d)}${PROOF}
+${ORIGIN(d)}
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.name} থেকে অর্ডারের নিয়ম (৩ ধাপ)</h2>
       <ol class="mt-4 grid gap-4 sm:grid-cols-3">
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">১. মেসেজ পাঠান</strong>নাম, ${d.name}র ঠিকানা ও কত বস্তা লাগবে লিখে WhatsApp করুন: +880 1303-438063</li>

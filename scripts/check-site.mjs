@@ -617,6 +617,21 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
   if (missing.length) errors.push(`${missing.length} page(s) have no mobile order bar, run npm run build:orderbar: ${missing.slice(0, 3).join(', ')}`);
 }
 
+// --- Trust blocks ---
+// scripts/trust-blocks.mjs writes the field-to-bag photo strip (homepage,
+// /about, district pages) and the three buying steps (homepage). They are the
+// site's proof that the silage, the machine and the people are real.
+{
+  const need = [['index.html', 'photo-strip'], ['index.html', 'buy-steps'], ['about.html', 'photo-strip']];
+  for (const file of files.filter((f) => /^area\/silage-.+\.html$/.test(f))) need.push([file, 'photo-strip']);
+  const missing = [];
+  for (const [file, name] of need) {
+    const html = await readFile(join(root, file), 'utf8');
+    if (!html.includes(`<!-- ${name}:start -->`)) missing.push(`${file} (${name})`);
+  }
+  if (missing.length) errors.push(`${missing.length} trust block(s) missing, run npm run build:trust: ${missing.slice(0, 3).join(', ')}`);
+}
+
 // --- District links from articles ---
 // District pages convert best (11.2% CTR) but 34 of 38 articles linked none.
 // The related-guides block carries a strip of every district page.
