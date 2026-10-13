@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Mon, 05 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 13 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>সাইলেজ দিয়ে TMR: হাতে মিশ্র খাদ্য তৈরির নিয়ম</title>
+      <link>https://silage.khamarvest.com/blog/silage-diye-tmr-mishro-khaddo</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-diye-tmr-mishro-khaddo</guid>
+      <pubDate>Tue, 13 Oct 2026 00:00:00 GMT</pubDate>
+      <description>TMR (টোটাল মিক্সড রেশন) মানে সাইলেজ, খড়, দানাদার আর খনিজ এক সাথে মিশিয়ে খাওয়ানো, যাতে গরু বেছে খেতে না পারে। মেশিন ছাড়া হাতে মেশানোর ধাপ, মেশানোর ক্রম, খড় কত ছোট করবেন, একটা গাভীর উদাহরণ আর বাংলাদেশের BLRI গবেষণা, সূত্রসহ।</description>
+    </item>
     <item>
       <title>গরুর খাদ্য খরচ কমানোর ৮ উপায়: কোনটা কাটবেন, কোনটা নয়</title>
       <link>https://silage.khamarvest.com/blog/gorur-khaddo-khoroch-komanor-upay</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorur-pet-fapa-hole-koronio</guid>
       <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
       <description>গরুর পেট হঠাৎ ফুলে গেলে কী করবেন, কোন লক্ষণে সঙ্গে সঙ্গে চিকিৎসক ডাকবেন, আর খাওয়ানোর কোন নিয়ম মানলে পেট ফাঁপার ঝুঁকি কমে।</description>
-    </item>
-    <item>
-      <title>নেপিয়ার ঘাস নাকি ভুট্টা সাইলেজ? খরচ ও পুষ্টির তুলনা</title>
-      <link>https://silage.khamarvest.com/blog/nepier-ghas-vs-vutta-silage</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/nepier-ghas-vs-vutta-silage</guid>
-      <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
-      <description>নেপিয়ার ঘাস চাষ করবেন নাকি সাইলেজ কিনবেন? জমি, সেচ, শ্রম ও সারা বছরের জোগান ধরে দুটির বাস্তব তুলনা, আর দুটো মিলিয়ে ব্যবহারের কৌশল।</description>
     </item>
   </channel>
 </rss>

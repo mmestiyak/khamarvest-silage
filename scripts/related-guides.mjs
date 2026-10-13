@@ -73,6 +73,7 @@ const TAGS = {
   'go-khaddo-mousumi-calendar': ['seasonal', 'feeding'],
   'borshakale-gorur-khaddo-babosthapona': ['seasonal', 'feeding'],
   'gorur-khaddo-khoroch-komanor-upay': ['cost', 'feeding', 'buying'],
+  'silage-diye-tmr-mishro-khaddo': ['feeding', 'dairy'],
 };
 
 function slugOf(file) {
