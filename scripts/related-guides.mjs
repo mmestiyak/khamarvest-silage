@@ -75,6 +75,7 @@ const TAGS = {
   'gorur-khaddo-khoroch-komanor-upay': ['cost', 'feeding', 'buying'],
   'silage-diye-tmr-mishro-khaddo': ['feeding', 'dairy'],
   'gorur-khoil-sorisha-til-soybean': ['feeding', 'cost', 'dairy'],
+  'gavir-olan-fola-mastitis': ['health', 'dairy'],
 };
 
 function slugOf(file) {
