@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Tue, 13 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 17 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>গরুর পানির চাহিদা: দিনে কত লিটার, কেমন পানি</title>
+      <link>https://silage.khamarvest.com/blog/gorur-panir-chahida</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorur-panir-chahida</guid>
+      <pubDate>Sat, 17 Oct 2026 00:00:00 GMT</pubDate>
+      <description>গরু দিনে কত লিটার পানি খায়? গাভী, ষাঁড় ও বাড়ন্ত গরুর হিসাব, গরমে কতটা বাড়ে, সাইলেজ খেলে কেন কম পানি লাগে, আর কোন পানি গরুকে দেওয়া যাবে না, NASEM ও মার্কিন এক্সটেনশনের সূত্রসহ।</description>
+    </item>
     <item>
       <title>ওলান ফোলা রোগ (ম্যাস্টাইটিস): লক্ষণ ও প্রতিরোধ</title>
       <link>https://silage.khamarvest.com/blog/gavir-olan-fola-mastitis</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-mano-jachai</guid>
       <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
       <description>টাকা দেওয়ার আগে সাইলেজ ভালো না খারাপ বুঝবেন যেভাবে: গন্ধ, রং, মুঠো পরীক্ষা, ছত্রাক ও তাপ, চপের আকার এবং বস্তা ও ওজন। যেকোনো ব্র্যান্ডের সাইলেজে খাটে, কোনো যন্ত্র লাগে না।</description>
-    </item>
-    <item>
-      <title>বাছুরের যত্ন ও খাদ্য: জন্ম থেকে ৬ মাস, সাইলেজ কখন থেকে</title>
-      <link>https://silage.khamarvest.com/blog/bachur-jotno-o-khaddo</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/bachur-jotno-o-khaddo</guid>
-      <pubDate>Wed, 26 Aug 2026 00:00:00 GMT</pubDate>
-      <description>নবজাতক বাছুরের শাল দুধ, নাভির যত্ন, দুধ খাওয়ানোর সময়, কখন থেকে দানাদার ও ঘাস, আর কেন ৩ মাসের আগে সাইলেজ দেওয়া ঠিক নয়।</description>
     </item>
   </channel>
 </rss>

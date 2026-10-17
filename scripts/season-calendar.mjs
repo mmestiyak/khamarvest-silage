@@ -29,7 +29,7 @@ const QURBANI = { 2027: '2027-05-16', 2028: '2028-05-05' };
 // which is how winter arrived with one 681-word guide behind it.
 const SEASONS = [
   { name: 'গরম ও হিট স্ট্রেস', peak: [3, 4, 5], lead: 6, leadNew: 18,
-    guides: ['blog/gorome-gorur-jotno-heat-stress', 'blog/silage-songrokkhon-niyom'],
+    guides: ['blog/gorome-gorur-jotno-heat-stress', 'blog/gorur-panir-chahida', 'blog/silage-songrokkhon-niyom'],
     why: 'গরমে খোলা বস্তা দ্রুত নষ্ট হয়, আর হিট স্ট্রেসে দুধ পড়ে যায়। সংরক্ষণ গাইডের মৌসুম অংশটি গরম শুরুর আগেই ক্রল হওয়া দরকার।' },
   { name: 'বর্ষা', peak: [6, 7, 8, 9], lead: 6, leadNew: 18,
     guides: ['blog/borshakale-gorur-khaddo-babosthapona', 'blog/gorur-pet-fapa-hole-koronio'],
