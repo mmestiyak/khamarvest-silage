@@ -12,7 +12,7 @@
     "build:calc": "node scripts/calc.mjs",
     "build:faq": "node scripts/faq.mjs",
     "verify": "npm run build && npm run test:ration && npm run check",
-    "build:css": "tailwindcss -c tailwind.config.js -i css/src.css -o css/tailwind.css --minify && cat css/fonts.css css/tailwind.css > css/site.css",
+    "build:css": "tailwindcss -c tailwind.config.js -i css/src.css -o css/tailwind.css --minify && cat css/fonts.css css/tailwind.css > css/site.css && node scripts/css-version.mjs",
     "fonts": "node scripts/fetch-fonts.mjs",
     "check:links": "node scripts/check-external-links.mjs",
     "indexnow:dry": "INDEXNOW_DRY_RUN=1 node scripts/indexnow.mjs",
@@ -28,6 +28,7 @@
     "build:favicon": "node scripts/favicon-links.mjs",
     "build:orderbar": "node scripts/order-bar.mjs",
     "build:credit": "node scripts/credit.mjs",
+    "build:cssver": "node scripts/css-version.mjs",
     "build:trust": "node scripts/trust-blocks.mjs",
     "favicon": "node scripts/make-favicon.mjs"
   },

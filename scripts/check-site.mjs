@@ -10,6 +10,8 @@ import { join, dirname, resolve, relative } from 'node:path';
 import { product as PRODUCT, money } from './product.mjs';
 import { evaluate, MARKER } from './calc.mjs';
 import { parse as parseFaq } from './faq.mjs';
+import { cssHash } from './css-version.mjs';
+const CSS_V = await cssHash();
 
 const root = process.cwd();
 const site = 'https://silage.khamarvest.com';
@@ -192,7 +194,8 @@ for (const file of files) {
 
   if (isUtility) continue;
 
-  if (!/<link rel="stylesheet" href="\/css\/site\.css">/.test(html)) err(file, 'missing /css/site.css stylesheet');
+  if (!/<link rel="stylesheet" href="\/css\/site\.css\?v=[0-9a-f]{8}">/.test(html)) err(file, 'missing /css/site.css?v=<hash> stylesheet (npm run build:css)');
+  else if (!html.includes(`/css/site.css?v=${CSS_V}"`)) err(file, `stylesheet version is stale, css/site.css is now ?v=${CSS_V} (npm run build:css)`);
   if (!/<link rel="preload" href="\/fonts\/[^"]+\.woff2" as="font" type="font\/woff2" crossorigin>/.test(html)) warn(file, 'no font preload, first Bengali paint will be late');
 
   // --- SEO rules for real pages ---
@@ -379,7 +382,7 @@ for (const file of articles) {
 {
   const html = await readFile(join(root, '404.html'), 'utf8');
   if (!/<meta name="robots" content="noindex/i.test(html)) errors.push('404.html: must be noindex, it is not a real page');
-  if (!/<link rel="stylesheet" href="\/css\/site\.css">/.test(html)) errors.push('404.html: missing /css/site.css');
+  if (!/<link rel="stylesheet" href="\/css\/site\.css\?v=[0-9a-f]{8}">/.test(html)) errors.push('404.html: missing /css/site.css');
   const links = new Set([...html.matchAll(/href="(\/[^"]*)"/g)].map((m) => m[1]));
   for (const must of ['/', '/blog/', '/tools/', '/area/']) {
     if (!links.has(must)) errors.push(`404.html: no way back to ${must}`);
