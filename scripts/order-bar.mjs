@@ -32,8 +32,8 @@ const bar = (t) => `${OPEN}
   <div data-cta="sticky_bar" class="fixed inset-x-0 bottom-0 z-40 border-t border-[#184d32]/15 bg-white px-3 py-2 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] md:hidden print:hidden">
     <div class="mx-auto flex max-w-lg items-center gap-2">
       <p class="min-w-0 flex-1 text-sm leading-tight text-[#456451]"><strong class="block whitespace-nowrap text-base text-[#0b5b38]">${t.price}</strong><span class="block whitespace-nowrap">${t.pay}</span></p>
-      <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 px-3.5 text-sm font-bold text-[#0b5b38]">${t.call}</a>
-      <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0b5b38] px-4 text-sm font-bold text-white">${t.wa}</a>
+      <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 px-3 text-[15px] font-bold text-[#0b5b38]">${t.call}</a>
+      <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0b5b38] px-3.5 text-[15px] font-bold text-white">${t.wa}</a>
     </div>
   </div>
   ${CLOSE}`;

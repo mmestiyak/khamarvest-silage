@@ -2,7 +2,7 @@
 // Run: npm run build:areas (then npm run build:blog to refresh the sitemap).
 // Content rules: everything must stay truthful — no depots, no delivery-time
 // promises, transport cost "জানানো হয়" only. Keep facts in sync with AGENTS.md.
-import { writeFile, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 // Price comes from scripts/product.json so 33 generated pages can never drift
 // from it. Change it with `npm run set-price`, never by hand.
@@ -26,8 +26,8 @@ const CONTEXT = {
 
 const districts = [
   { name: 'বগুড়া', loc: 'বগুড়ায়', slug: 'bogura', en: 'Bogura', division: 'রাজশাহী', near: ['joypurhat', 'naogaon', 'gaibandha', 'sirajganj'], ctx: 'north', upazilas: 'বগুড়া সদর, শেরপুর, ধুনট, শাজাহানপুর, গাবতলী, সারিয়াকান্দি, সোনাতলা, শিবগঞ্জ, কাহালু, নন্দীগ্রাম, দুপচাঁচিয়া, আদমদীঘি' },
-  { name: 'পাবনা', loc: 'পাবনায়', slug: 'pabna', en: 'Pabna', division: 'রাজশাহী', near: ['sirajganj', 'natore', 'kushtia'], ctx: 'dairy', upazilas: 'পাবনা সদর, ঈশ্বরদী, আটঘরিয়া, চাটমোহর, ভাঙ্গুড়া, ফরিদপুর, সুজানগর, বেড়া, সাঁথিয়া' },
-  { name: 'সিরাজগঞ্জ', loc: 'সিরাজগঞ্জে', slug: 'sirajganj', en: 'Sirajganj', division: 'রাজশাহী', near: ['pabna', 'bogura', 'tangail'], ctx: 'dairy', upazilas: 'সিরাজগঞ্জ সদর, শাহজাদপুর, উল্লাপাড়া, বেলকুচি, চৌহালি, কাজীপুর, কামারখন্দ, রায়গঞ্জ, তাড়াশ' },
+  { name: 'পাবনা', loc: 'পাবনায়', slug: 'pabna', en: 'Pabna', division: 'রাজশাহী', near: ['sirajganj', 'natore', 'kushtia'], ctx: 'dairy', upazilas: 'পাবনা সদর, ঈশ্বরদী, আটঘরিয়া, চাটমোহর, ভাঙ্গুড়া, ফরিদপুর, সুজানগর, বেড়া, সাঁথিয়া', localCall: '01575-805542' },
+  { name: 'সিরাজগঞ্জ', loc: 'সিরাজগঞ্জে', slug: 'sirajganj', en: 'Sirajganj', division: 'রাজশাহী', near: ['pabna', 'bogura', 'tangail'], ctx: 'dairy', upazilas: 'সিরাজগঞ্জ সদর, শাহজাদপুর, উল্লাপাড়া, বেলকুচি, চৌহালি, কাজীপুর, কামারখন্দ, রায়গঞ্জ, তাড়াশ', localCall: '01575-805542' },
   { name: 'নাটোর', loc: 'নাটোরে', slug: 'natore', en: 'Natore', division: 'রাজশাহী', near: ['rajshahi', 'pabna', 'bogura', 'naogaon'], ctx: 'general', upazilas: 'নাটোর সদর, সিংড়া, বড়াইগ্রাম, গুরুদাসপুর, লালপুর, বাগাতিপাড়া, নলডাঙ্গা' },
   { name: 'রংপুর', loc: 'রংপুরে', slug: 'rangpur', en: 'Rangpur', division: 'রংপুর', near: ['gaibandha', 'nilphamari', 'kurigram', 'lalmonirhat'], ctx: 'north', upazilas: 'রংপুর সদর, বদরগঞ্জ, গঙ্গাচড়া, কাউনিয়া, মিঠাপুকুর, পীরগাছা, পীরগঞ্জ, তারাগঞ্জ' },
   { name: 'দিনাজপুর', loc: 'দিনাজপুরে', slug: 'dinajpur', en: 'Dinajpur', division: 'রংপুর', near: ['thakurgaon', 'nilphamari', 'joypurhat', 'rangpur'], ctx: 'north', upazilas: 'দিনাজপুর সদর, বিরল, বীরগঞ্জ, বিরামপুর, বোচাগঞ্জ, চিরিরবন্দর, ফুলবাড়ী, ঘোড়াঘাট, হাকিমপুর, কাহারোল, খানসামা, নবাবগঞ্জ, পার্বতীপুর' },
@@ -35,7 +35,7 @@ const districts = [
   { name: 'টাঙ্গাইল', loc: 'টাঙ্গাইলে', slug: 'tangail', en: 'Tangail', division: 'ঢাকা', near: ['sirajganj', 'gazipur', 'mymensingh'], ctx: 'general', upazilas: 'টাঙ্গাইল সদর, বাসাইল, ভূঞাপুর, দেলদুয়ার, ধনবাড়ী, ঘাটাইল, গোপালপুর, কালিহাতী, মধুপুর, মির্জাপুর, নাগরপুর, সখিপুর' },
   { name: 'ঢাকা', loc: 'ঢাকায়', slug: 'dhaka', en: 'Dhaka', division: 'ঢাকা', near: ['gazipur', 'tangail'], ctx: 'urban', upazilas: 'সাভার, ধামরাই, কেরানীগঞ্জ, দোহার, নবাবগঞ্জ' },
   { name: 'গাজীপুর', loc: 'গাজীপুরে', slug: 'gazipur', en: 'Gazipur', division: 'ঢাকা', near: ['dhaka', 'tangail', 'mymensingh'], ctx: 'urban', upazilas: 'গাজীপুর সদর, কালিয়াকৈর, কালীগঞ্জ, কাপাসিয়া, শ্রীপুর' },
-  { name: 'কুষ্টিয়া', loc: 'কুষ্টিয়ায়', slug: 'kushtia', en: 'Kushtia', division: 'খুলনা', near: ['pabna', 'natore', 'jashore'], ctx: 'general', upazilas: 'কুষ্টিয়া সদর, কুমারখালী, খোকসা, মিরপুর, ভেড়ামারা, দৌলতপুর' },
+  { name: 'কুষ্টিয়া', loc: 'কুষ্টিয়ায়', slug: 'kushtia', en: 'Kushtia', division: 'খুলনা', near: ['pabna', 'natore', 'jashore'], ctx: 'general', upazilas: 'কুষ্টিয়া সদর, কুমারখালী, খোকসা, মিরপুর, ভেড়ামারা, দৌলতপুর', localCall: '01575-805542' },
   { name: 'যশোর', loc: 'যশোরে', slug: 'jashore', en: 'Jashore', division: 'খুলনা', near: ['khulna', 'satkhira', 'kushtia'], ctx: 'general', upazilas: 'যশোর সদর, অভয়নগর, বাঘারপাড়া, চৌগাছা, ঝিকরগাছা, কেশবপুর, মনিরামপুর, শার্শা' },
   { name: 'খুলনা', loc: 'খুলনায়', slug: 'khulna', en: 'Khulna', division: 'খুলনা', near: ['jashore', 'satkhira', 'barishal'], ctx: 'coastal', upazilas: 'বটিয়াঘাটা, দাকোপ, ডুমুরিয়া, দিঘলিয়া, কয়রা, পাইকগাছা, ফুলতলা, রূপসা, তেরখাদা' },
   { name: 'সাতক্ষীরা', loc: 'সাতক্ষীরায়', slug: 'satkhira', en: 'Satkhira', division: 'খুলনা', near: ['khulna', 'jashore'], ctx: 'coastal', upazilas: 'সাতক্ষীরা সদর, আশাশুনি, দেবহাটা, কলারোয়া, কালীগঞ্জ, শ্যামনগর, তালা' },
@@ -193,6 +193,7 @@ function page(d) {
           ${callBtn('inline-flex rounded-xl border border-[#0b5b38]/30 bg-white px-5 py-3 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]')}
         </div>
         <p class="mt-3"><a href="#callback" class="inline-flex min-h-11 items-center font-semibold text-[#0b6a3e] underline underline-offset-4">WhatsApp নেই? নম্বর দিন, আমরা ফোন করব</a></p>
+${d.localCall ? `        <p class="mt-1 text-base text-[#33483a]">${d.slug === 'pabna' ? 'পাবনা ও ঈশ্বরদী' : d.name} অঞ্চলের জন্য আরেকটি নম্বর: <a href="tel:+88${d.localCall.replace('-', '')}" class="inline-flex min-h-11 items-center font-bold text-[#0b6a3e] underline underline-offset-4">${d.localCall}</a></p>` : ''}
       </div>
     </section>
 
@@ -336,3 +337,18 @@ const indexHtml = `<!DOCTYPE html>
 `;
 await writeFile(join(areaDir, 'index.html'), indexHtml);
 console.log(`Generated ${districts.length} district pages + area/index.html`);
+
+// Homepage: the district chips and every "৪১ জেলা" count are written from
+// this list. Until 2026-10-20 the chips were hand-kept and lagged 8 pages.
+{
+  const homePath = join(root, 'index.html');
+  const bn = (n) => String(n).replace(/[0-9]/g, (c) => '০১২৩৪৫৬৭৮৯'[c]);
+  const chipCls = 'inline-flex min-h-11 items-center font-hind text-[15px] md:text-[17px] bg-white border border-[rgb(14,124,75)] text-[rgb(0,105,68)] rounded-full px-4 hover:bg-[rgb(14,124,75)] hover:text-white';
+  const chips = [...districts].sort((a, b) => a.name.localeCompare(b.name, 'bn'))
+    .map((d) => `        <a href="/area/silage-${d.slug}" class="${chipCls}">${d.name}</a>`).join('\n');
+  let home = await readFile(homePath, 'utf8');
+  home = home.replace(/<!-- area-chips:start -->[\s\S]*?<!-- area-chips:end -->/,
+    `<!-- area-chips:start -->\n${chips}\n        <a href="/area/" class="inline-flex min-h-11 items-center font-hind text-[15px] md:text-[17px] bg-[rgb(14,124,75)] text-white rounded-full px-4 font-medium">সব জেলা</a>\n<!-- area-chips:end -->`);
+  home = home.replace(/<!--area-count-->[^<]*<!--\/area-count-->/g, `<!--area-count-->${bn(districts.length)}<!--/area-count-->`);
+  await writeFile(homePath, home);
+}

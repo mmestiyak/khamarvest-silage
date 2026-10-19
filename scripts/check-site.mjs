@@ -434,6 +434,12 @@ for (const file of articles) {
 
   // 1. The offers Google reads must match the source of truth.
   const home = await readFile(join(root, 'index.html'), 'utf8');
+  // The homepage is the strongest page; every district page must be one click
+  // from it. The chips are written by build:areas, so a miss means a stale build.
+  for (const f of await readdir(join(root, 'area'))) {
+    const m = f.match(/^(silage-[a-z]+)\.html$/);
+    if (m && !home.includes(`href="/area/${m[1]}"`)) errors.push(`index.html: no link to /area/${m[1]} (run npm run build:areas)`);
+  }
   // Compared as numbers: the schema writes a non-whole price as "8.50".
   const schemaPrices = [...home.matchAll(/"price":\s*"([\d.]+)"/g)].map((m) => Number(m[1]));
   for (const [label, value] of [['per kg', product.pricePerKg], ['per bag', product.bagPrice]]) {
