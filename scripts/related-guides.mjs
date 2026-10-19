@@ -77,6 +77,7 @@ const TAGS = {
   'gorur-khoil-sorisha-til-soybean': ['feeding', 'cost', 'dairy'],
   'gavir-olan-fola-mastitis': ['health', 'dairy'],
   'gorur-panir-chahida': ['feeding', 'dairy', 'health'],
+  'khor-urea-prokriyajat-korar-niyom': ['feeding', 'seasonal', 'cost'],
 };
 
 function slugOf(file) {

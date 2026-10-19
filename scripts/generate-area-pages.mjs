@@ -25,39 +25,47 @@ const CONTEXT = {
 };
 
 const districts = [
-  { name: 'বগুড়া', loc: 'বগুড়ায়', slug: 'bogura', en: 'Bogura', division: 'রাজশাহী', near: ['joypurhat', 'naogaon', 'gaibandha', 'sirajganj'], ctx: 'north' },
-  { name: 'পাবনা', loc: 'পাবনায়', slug: 'pabna', en: 'Pabna', division: 'রাজশাহী', near: ['sirajganj', 'natore', 'kushtia'], ctx: 'dairy' },
-  { name: 'সিরাজগঞ্জ', loc: 'সিরাজগঞ্জে', slug: 'sirajganj', en: 'Sirajganj', division: 'রাজশাহী', near: ['pabna', 'bogura', 'tangail'], ctx: 'dairy' },
-  { name: 'নাটোর', loc: 'নাটোরে', slug: 'natore', en: 'Natore', division: 'রাজশাহী', near: ['rajshahi', 'pabna', 'bogura', 'naogaon'], ctx: 'general' },
-  { name: 'রংপুর', loc: 'রংপুরে', slug: 'rangpur', en: 'Rangpur', division: 'রংপুর', near: ['gaibandha', 'nilphamari', 'kurigram', 'lalmonirhat'], ctx: 'north' },
-  { name: 'দিনাজপুর', loc: 'দিনাজপুরে', slug: 'dinajpur', en: 'Dinajpur', division: 'রংপুর', near: ['thakurgaon', 'nilphamari', 'joypurhat', 'rangpur'], ctx: 'north' },
-  { name: 'ময়মনসিংহ', loc: 'ময়মনসিংহে', slug: 'mymensingh', en: 'Mymensingh', division: 'ময়মনসিংহ', near: ['jamalpur', 'kishoreganj', 'tangail', 'gazipur'], ctx: 'general' },
-  { name: 'টাঙ্গাইল', loc: 'টাঙ্গাইলে', slug: 'tangail', en: 'Tangail', division: 'ঢাকা', near: ['sirajganj', 'gazipur', 'mymensingh'], ctx: 'general' },
-  { name: 'ঢাকা', loc: 'ঢাকায়', slug: 'dhaka', en: 'Dhaka', division: 'ঢাকা', near: ['gazipur', 'tangail'], ctx: 'urban' },
-  { name: 'গাজীপুর', loc: 'গাজীপুরে', slug: 'gazipur', en: 'Gazipur', division: 'ঢাকা', near: ['dhaka', 'tangail', 'mymensingh'], ctx: 'urban' },
-  { name: 'কুষ্টিয়া', loc: 'কুষ্টিয়ায়', slug: 'kushtia', en: 'Kushtia', division: 'খুলনা', near: ['pabna', 'natore', 'jashore'], ctx: 'general' },
-  { name: 'যশোর', loc: 'যশোরে', slug: 'jashore', en: 'Jashore', division: 'খুলনা', near: ['khulna', 'satkhira', 'kushtia'], ctx: 'general' },
-  { name: 'খুলনা', loc: 'খুলনায়', slug: 'khulna', en: 'Khulna', division: 'খুলনা', near: ['jashore', 'satkhira', 'barishal'], ctx: 'coastal' },
-  { name: 'সাতক্ষীরা', loc: 'সাতক্ষীরায়', slug: 'satkhira', en: 'Satkhira', division: 'খুলনা', near: ['khulna', 'jashore'], ctx: 'coastal' },
-  { name: 'কুমিল্লা', loc: 'কুমিল্লায়', slug: 'cumilla', en: 'Cumilla', division: 'চট্টগ্রাম', near: ['brahmanbaria', 'noakhali', 'habiganj'], ctx: 'general' },
-  { name: 'নোয়াখালী', loc: 'নোয়াখালীতে', slug: 'noakhali', en: 'Noakhali', division: 'চট্টগ্রাম', near: ['cumilla', 'chattogram'], ctx: 'coastal' },
-  { name: 'চট্টগ্রাম', loc: 'চট্টগ্রামে', slug: 'chattogram', en: 'Chattogram', division: 'চট্টগ্রাম', near: ['coxsbazar', 'noakhali'], ctx: 'urban' },
-  { name: 'কক্সবাজার', loc: 'কক্সবাজারে', slug: 'coxsbazar', en: "Cox's Bazar", division: 'চট্টগ্রাম', near: ['chattogram'], ctx: 'coastal' },
-  { name: 'রাজশাহী', loc: 'রাজশাহীতে', slug: 'rajshahi', en: 'Rajshahi', division: 'রাজশাহী', near: ['natore', 'naogaon', 'bogura'], ctx: 'north' },
-  { name: 'নওগাঁ', loc: 'নওগাঁয়', slug: 'naogaon', en: 'Naogaon', division: 'রাজশাহী', near: ['bogura', 'joypurhat', 'rajshahi'], ctx: 'north' },
-  { name: 'জয়পুরহাট', loc: 'জয়পুরহাটে', slug: 'joypurhat', en: 'Joypurhat', division: 'রাজশাহী', near: ['bogura', 'naogaon', 'dinajpur'], ctx: 'north' },
-  { name: 'গাইবান্ধা', loc: 'গাইবান্ধায়', slug: 'gaibandha', en: 'Gaibandha', division: 'রংপুর', near: ['bogura', 'rangpur', 'kurigram'], ctx: 'north' },
-  { name: 'নীলফামারী', loc: 'নীলফামারীতে', slug: 'nilphamari', en: 'Nilphamari', division: 'রংপুর', near: ['rangpur', 'dinajpur', 'lalmonirhat'], ctx: 'north' },
-  { name: 'কুড়িগ্রাম', loc: 'কুড়িগ্রামে', slug: 'kurigram', en: 'Kurigram', division: 'রংপুর', near: ['rangpur', 'gaibandha', 'lalmonirhat'], ctx: 'north' },
-  { name: 'লালমনিরহাট', loc: 'লালমনিরহাটে', slug: 'lalmonirhat', en: 'Lalmonirhat', division: 'রংপুর', near: ['rangpur', 'nilphamari', 'kurigram'], ctx: 'north' },
-  { name: 'ঠাকুরগাঁও', loc: 'ঠাকুরগাঁওয়ে', slug: 'thakurgaon', en: 'Thakurgaon', division: 'রংপুর', near: ['dinajpur', 'nilphamari', 'rangpur'], ctx: 'north' },
-  { name: 'জামালপুর', loc: 'জামালপুরে', slug: 'jamalpur', en: 'Jamalpur', division: 'ময়মনসিংহ', near: ['mymensingh', 'tangail', 'sirajganj'], ctx: 'general' },
-  { name: 'কিশোরগঞ্জ', loc: 'কিশোরগঞ্জে', slug: 'kishoreganj', en: 'Kishoreganj', division: 'ঢাকা', near: ['mymensingh', 'brahmanbaria', 'gazipur'], ctx: 'general' },
-  { name: 'ব্রাহ্মণবাড়িয়া', loc: 'ব্রাহ্মণবাড়িয়ায়', slug: 'brahmanbaria', en: 'Brahmanbaria', division: 'চট্টগ্রাম', near: ['cumilla', 'kishoreganj', 'habiganj'], ctx: 'general' },
-  { name: 'সিলেট', loc: 'সিলেটে', slug: 'sylhet', en: 'Sylhet', division: 'সিলেট', near: ['habiganj', 'brahmanbaria', 'mymensingh'], ctx: 'general' },
-  { name: 'হবিগঞ্জ', loc: 'হবিগঞ্জে', slug: 'habiganj', en: 'Habiganj', division: 'সিলেট', near: ['sylhet', 'brahmanbaria', 'cumilla'], ctx: 'general' },
-  { name: 'ফরিদপুর', loc: 'ফরিদপুরে', slug: 'faridpur', en: 'Faridpur', division: 'ঢাকা', near: ['dhaka', 'kushtia', 'jashore'], ctx: 'general' },
-  { name: 'বরিশাল', loc: 'বরিশালে', slug: 'barishal', en: 'Barishal', division: 'বরিশাল', near: ['khulna', 'faridpur', 'noakhali'], ctx: 'coastal' },
+  { name: 'বগুড়া', loc: 'বগুড়ায়', slug: 'bogura', en: 'Bogura', division: 'রাজশাহী', near: ['joypurhat', 'naogaon', 'gaibandha', 'sirajganj'], ctx: 'north', upazilas: 'বগুড়া সদর, শেরপুর, ধুনট, শাজাহানপুর, গাবতলী, সারিয়াকান্দি, সোনাতলা, শিবগঞ্জ, কাহালু, নন্দীগ্রাম, দুপচাঁচিয়া, আদমদীঘি' },
+  { name: 'পাবনা', loc: 'পাবনায়', slug: 'pabna', en: 'Pabna', division: 'রাজশাহী', near: ['sirajganj', 'natore', 'kushtia'], ctx: 'dairy', upazilas: 'পাবনা সদর, ঈশ্বরদী, আটঘরিয়া, চাটমোহর, ভাঙ্গুড়া, ফরিদপুর, সুজানগর, বেড়া, সাঁথিয়া' },
+  { name: 'সিরাজগঞ্জ', loc: 'সিরাজগঞ্জে', slug: 'sirajganj', en: 'Sirajganj', division: 'রাজশাহী', near: ['pabna', 'bogura', 'tangail'], ctx: 'dairy', upazilas: 'সিরাজগঞ্জ সদর, শাহজাদপুর, উল্লাপাড়া, বেলকুচি, চৌহালি, কাজীপুর, কামারখন্দ, রায়গঞ্জ, তাড়াশ' },
+  { name: 'নাটোর', loc: 'নাটোরে', slug: 'natore', en: 'Natore', division: 'রাজশাহী', near: ['rajshahi', 'pabna', 'bogura', 'naogaon'], ctx: 'general', upazilas: 'নাটোর সদর, সিংড়া, বড়াইগ্রাম, গুরুদাসপুর, লালপুর, বাগাতিপাড়া, নলডাঙ্গা' },
+  { name: 'রংপুর', loc: 'রংপুরে', slug: 'rangpur', en: 'Rangpur', division: 'রংপুর', near: ['gaibandha', 'nilphamari', 'kurigram', 'lalmonirhat'], ctx: 'north', upazilas: 'রংপুর সদর, বদরগঞ্জ, গঙ্গাচড়া, কাউনিয়া, মিঠাপুকুর, পীরগাছা, পীরগঞ্জ, তারাগঞ্জ' },
+  { name: 'দিনাজপুর', loc: 'দিনাজপুরে', slug: 'dinajpur', en: 'Dinajpur', division: 'রংপুর', near: ['thakurgaon', 'nilphamari', 'joypurhat', 'rangpur'], ctx: 'north', upazilas: 'দিনাজপুর সদর, বিরল, বীরগঞ্জ, বিরামপুর, বোচাগঞ্জ, চিরিরবন্দর, ফুলবাড়ী, ঘোড়াঘাট, হাকিমপুর, কাহারোল, খানসামা, নবাবগঞ্জ, পার্বতীপুর' },
+  { name: 'ময়মনসিংহ', loc: 'ময়মনসিংহে', slug: 'mymensingh', en: 'Mymensingh', division: 'ময়মনসিংহ', near: ['jamalpur', 'kishoreganj', 'tangail', 'gazipur'], ctx: 'general', upazilas: 'ময়মনসিংহ সদর, ভালুকা, ত্রিশাল, মুক্তাগাছা, ফুলবাড়ীয়া, গফরগাঁও, ঈশ্বরগঞ্জ, নান্দাইল, গৌরীপুর, ফুলপুর, হালুয়াঘাট, ধোবাউড়া, তারাকান্দা' },
+  { name: 'টাঙ্গাইল', loc: 'টাঙ্গাইলে', slug: 'tangail', en: 'Tangail', division: 'ঢাকা', near: ['sirajganj', 'gazipur', 'mymensingh'], ctx: 'general', upazilas: 'টাঙ্গাইল সদর, বাসাইল, ভূঞাপুর, দেলদুয়ার, ধনবাড়ী, ঘাটাইল, গোপালপুর, কালিহাতী, মধুপুর, মির্জাপুর, নাগরপুর, সখিপুর' },
+  { name: 'ঢাকা', loc: 'ঢাকায়', slug: 'dhaka', en: 'Dhaka', division: 'ঢাকা', near: ['gazipur', 'tangail'], ctx: 'urban', upazilas: 'সাভার, ধামরাই, কেরানীগঞ্জ, দোহার, নবাবগঞ্জ' },
+  { name: 'গাজীপুর', loc: 'গাজীপুরে', slug: 'gazipur', en: 'Gazipur', division: 'ঢাকা', near: ['dhaka', 'tangail', 'mymensingh'], ctx: 'urban', upazilas: 'গাজীপুর সদর, কালিয়াকৈর, কালীগঞ্জ, কাপাসিয়া, শ্রীপুর' },
+  { name: 'কুষ্টিয়া', loc: 'কুষ্টিয়ায়', slug: 'kushtia', en: 'Kushtia', division: 'খুলনা', near: ['pabna', 'natore', 'jashore'], ctx: 'general', upazilas: 'কুষ্টিয়া সদর, কুমারখালী, খোকসা, মিরপুর, ভেড়ামারা, দৌলতপুর' },
+  { name: 'যশোর', loc: 'যশোরে', slug: 'jashore', en: 'Jashore', division: 'খুলনা', near: ['khulna', 'satkhira', 'kushtia'], ctx: 'general', upazilas: 'যশোর সদর, অভয়নগর, বাঘারপাড়া, চৌগাছা, ঝিকরগাছা, কেশবপুর, মনিরামপুর, শার্শা' },
+  { name: 'খুলনা', loc: 'খুলনায়', slug: 'khulna', en: 'Khulna', division: 'খুলনা', near: ['jashore', 'satkhira', 'barishal'], ctx: 'coastal', upazilas: 'বটিয়াঘাটা, দাকোপ, ডুমুরিয়া, দিঘলিয়া, কয়রা, পাইকগাছা, ফুলতলা, রূপসা, তেরখাদা' },
+  { name: 'সাতক্ষীরা', loc: 'সাতক্ষীরায়', slug: 'satkhira', en: 'Satkhira', division: 'খুলনা', near: ['khulna', 'jashore'], ctx: 'coastal', upazilas: 'সাতক্ষীরা সদর, আশাশুনি, দেবহাটা, কলারোয়া, কালীগঞ্জ, শ্যামনগর, তালা' },
+  { name: 'কুমিল্লা', loc: 'কুমিল্লায়', slug: 'cumilla', en: 'Cumilla', division: 'চট্টগ্রাম', near: ['brahmanbaria', 'noakhali', 'habiganj'], ctx: 'general', upazilas: 'কুমিল্লা সদর, সদর দক্ষিণ, লালমাই, বরুড়া, ব্রাহ্মণপাড়া, বুড়িচং, চান্দিনা, চৌদ্দগ্রাম, দাউদকান্দি, দেবিদ্বার, হোমনা, লাকসাম, মনোহরগঞ্জ, মেঘনা, মুরাদনগর, নাঙ্গলকোট, তিতাস' },
+  { name: 'নোয়াখালী', loc: 'নোয়াখালীতে', slug: 'noakhali', en: 'Noakhali', division: 'চট্টগ্রাম', near: ['cumilla', 'chattogram'], ctx: 'coastal', upazilas: 'নোয়াখালী সদর, বেগমগঞ্জ, চাটখিল, কোম্পানীগঞ্জ, হাতিয়া, সেনবাগ, সোনাইমুড়ী, সুবর্ণচর, কবিরহাট' },
+  { name: 'চট্টগ্রাম', loc: 'চট্টগ্রামে', slug: 'chattogram', en: 'Chattogram', division: 'চট্টগ্রাম', near: ['coxsbazar', 'noakhali'], ctx: 'urban', upazilas: 'আনোয়ারা, বাঁশখালী, বোয়ালখালী, চন্দনাইশ, ফটিকছড়ি, হাটহাজারী, লোহাগাড়া, মিরসরাই, পটিয়া, রাঙ্গুনিয়া, রাউজান, সন্দ্বীপ, সাতকানিয়া, সীতাকুণ্ড, কর্ণফুলী' },
+  { name: 'কক্সবাজার', loc: 'কক্সবাজারে', slug: 'coxsbazar', en: "Cox's Bazar", division: 'চট্টগ্রাম', near: ['chattogram'], ctx: 'coastal', upazilas: 'কক্সবাজার সদর, চকরিয়া, কুতুবদিয়া, মহেশখালী, রামু, টেকনাফ, উখিয়া, পেকুয়া, ঈদগাঁও' },
+  { name: 'রাজশাহী', loc: 'রাজশাহীতে', slug: 'rajshahi', en: 'Rajshahi', division: 'রাজশাহী', near: ['natore', 'naogaon', 'bogura'], ctx: 'north', upazilas: 'পবা, গোদাগাড়ী, তানোর, মোহনপুর, বাগমারা, দুর্গাপুর, পুঠিয়া, চারঘাট, বাঘা' },
+  { name: 'নওগাঁ', loc: 'নওগাঁয়', slug: 'naogaon', en: 'Naogaon', division: 'রাজশাহী', near: ['bogura', 'joypurhat', 'rajshahi'], ctx: 'north', upazilas: 'নওগাঁ সদর, আত্রাই, বদলগাছী, ধামইরহাট, মান্দা, মহাদেবপুর, নিয়ামতপুর, পত্নীতলা, পোরশা, রাণীনগর, সাপাহার' },
+  { name: 'জয়পুরহাট', loc: 'জয়পুরহাটে', slug: 'joypurhat', en: 'Joypurhat', division: 'রাজশাহী', near: ['bogura', 'naogaon', 'dinajpur'], ctx: 'north', upazilas: 'জয়পুরহাট সদর, আক্কেলপুর, কালাই, ক্ষেতলাল, পাঁচবিবি' },
+  { name: 'গাইবান্ধা', loc: 'গাইবান্ধায়', slug: 'gaibandha', en: 'Gaibandha', division: 'রংপুর', near: ['bogura', 'rangpur', 'kurigram'], ctx: 'north', upazilas: 'গাইবান্ধা সদর, ফুলছড়ি, গোবিন্দগঞ্জ, পলাশবাড়ী, সাদুল্লাপুর, সাঘাটা, সুন্দরগঞ্জ' },
+  { name: 'নীলফামারী', loc: 'নীলফামারীতে', slug: 'nilphamari', en: 'Nilphamari', division: 'রংপুর', near: ['rangpur', 'dinajpur', 'lalmonirhat'], ctx: 'north', upazilas: 'নীলফামারী সদর, ডিমলা, ডোমার, জলঢাকা, কিশোরগঞ্জ, সৈয়দপুর' },
+  { name: 'কুড়িগ্রাম', loc: 'কুড়িগ্রামে', slug: 'kurigram', en: 'Kurigram', division: 'রংপুর', near: ['rangpur', 'gaibandha', 'lalmonirhat'], ctx: 'north', upazilas: 'কুড়িগ্রাম সদর, ভুরুঙ্গামারী, চর রাজিবপুর, চিলমারী, ফুলবাড়ী, নাগেশ্বরী, রাজারহাট, রৌমারী, উলিপুর' },
+  { name: 'লালমনিরহাট', loc: 'লালমনিরহাটে', slug: 'lalmonirhat', en: 'Lalmonirhat', division: 'রংপুর', near: ['rangpur', 'nilphamari', 'kurigram'], ctx: 'north', upazilas: 'লালমনিরহাট সদর, আদিতমারী, হাতীবান্ধা, কালীগঞ্জ, পাটগ্রাম' },
+  { name: 'ঠাকুরগাঁও', loc: 'ঠাকুরগাঁওয়ে', slug: 'thakurgaon', en: 'Thakurgaon', division: 'রংপুর', near: ['dinajpur', 'nilphamari', 'rangpur'], ctx: 'north', upazilas: 'ঠাকুরগাঁও সদর, বালিয়াডাঙ্গী, হরিপুর, পীরগঞ্জ, রাণীশংকৈল' },
+  { name: 'জামালপুর', loc: 'জামালপুরে', slug: 'jamalpur', en: 'Jamalpur', division: 'ময়মনসিংহ', near: ['mymensingh', 'tangail', 'sirajganj'], ctx: 'general', upazilas: 'জামালপুর সদর, বকশীগঞ্জ, দেওয়ানগঞ্জ, ইসলামপুর, মাদারগঞ্জ, মেলান্দহ, সরিষাবাড়ী' },
+  { name: 'কিশোরগঞ্জ', loc: 'কিশোরগঞ্জে', slug: 'kishoreganj', en: 'Kishoreganj', division: 'ঢাকা', near: ['mymensingh', 'brahmanbaria', 'gazipur'], ctx: 'general', upazilas: 'কিশোরগঞ্জ সদর, অষ্টগ্রাম, বাজিতপুর, ভৈরব, হোসেনপুর, ইটনা, করিমগঞ্জ, কটিয়াদী, কুলিয়ারচর, মিঠামইন, নিকলী, পাকুন্দিয়া, তাড়াইল' },
+  { name: 'ব্রাহ্মণবাড়িয়া', loc: 'ব্রাহ্মণবাড়িয়ায়', slug: 'brahmanbaria', en: 'Brahmanbaria', division: 'চট্টগ্রাম', near: ['cumilla', 'kishoreganj', 'habiganj'], ctx: 'general', upazilas: 'ব্রাহ্মণবাড়িয়া সদর, আখাউড়া, আশুগঞ্জ, বাঞ্ছারামপুর, বিজয়নগর, কসবা, নবীনগর, নাসিরনগর, সরাইল' },
+  { name: 'সিলেট', loc: 'সিলেটে', slug: 'sylhet', en: 'Sylhet', division: 'সিলেট', near: ['habiganj', 'brahmanbaria', 'mymensingh'], ctx: 'general', upazilas: 'সিলেট সদর, বালাগঞ্জ, বিয়ানীবাজার, বিশ্বনাথ, কোম্পানীগঞ্জ, দক্ষিণ সুরমা, ফেঞ্চুগঞ্জ, গোলাপগঞ্জ, গোয়াইনঘাট, জৈন্তাপুর, কানাইঘাট, জকিগঞ্জ, ওসমানীনগর' },
+  { name: 'হবিগঞ্জ', loc: 'হবিগঞ্জে', slug: 'habiganj', en: 'Habiganj', division: 'সিলেট', near: ['sylhet', 'brahmanbaria', 'cumilla'], ctx: 'general', upazilas: 'হবিগঞ্জ সদর, আজমিরীগঞ্জ, বাহুবল, বানিয়াচং, চুনারুঘাট, লাখাই, মাধবপুর, নবীগঞ্জ, শায়েস্তাগঞ্জ' },
+  { name: 'ফরিদপুর', loc: 'ফরিদপুরে', slug: 'faridpur', en: 'Faridpur', division: 'ঢাকা', near: ['dhaka', 'kushtia', 'jashore'], ctx: 'general', upazilas: 'ফরিদপুর সদর, আলফাডাঙ্গা, ভাঙ্গা, বোয়ালমারী, চরভদ্রাসন, মধুখালী, নগরকান্দা, সদরপুর, সালথা' },
+  { name: 'বরিশাল', loc: 'বরিশালে', slug: 'barishal', en: 'Barishal', division: 'বরিশাল', near: ['khulna', 'faridpur', 'noakhali'], ctx: 'coastal', upazilas: 'বরিশাল সদর, আগৈলঝাড়া, বাবুগঞ্জ, বাকেরগঞ্জ, বানারীপাড়া, গৌরনদী, হিজলা, মেহেন্দিগঞ্জ, মুলাদী, উজিরপুর' },
+  { name: 'চাঁপাইনবাবগঞ্জ', loc: 'চাঁপাইনবাবগঞ্জে', slug: 'chapainawabganj', en: 'Chapainawabganj', division: 'রাজশাহী', near: ['rajshahi', 'naogaon'], ctx: 'north', upazilas: 'চাঁপাইনবাবগঞ্জ সদর, শিবগঞ্জ, গোমস্তাপুর, নাচোল, ভোলাহাট' },
+  { name: 'পঞ্চগড়', loc: 'পঞ্চগড়ে', slug: 'panchagarh', en: 'Panchagarh', division: 'রংপুর', near: ['thakurgaon', 'dinajpur', 'nilphamari'], ctx: 'north', upazilas: 'পঞ্চগড় সদর, আটোয়ারী, বোদা, দেবীগঞ্জ, তেঁতুলিয়া' },
+  { name: 'শেরপুর', loc: 'শেরপুরে', slug: 'sherpur', en: 'Sherpur', division: 'ময়মনসিংহ', near: ['jamalpur', 'mymensingh', 'netrokona'], ctx: 'general', upazilas: 'শেরপুর সদর, নকলা, নালিতাবাড়ী, ঝিনাইগাতী, শ্রীবরদী' },
+  { name: 'নেত্রকোনা', loc: 'নেত্রকোনায়', slug: 'netrokona', en: 'Netrokona', division: 'ময়মনসিংহ', near: ['mymensingh', 'kishoreganj', 'sherpur'], ctx: 'general', upazilas: 'নেত্রকোনা সদর, আটপাড়া, বারহাট্টা, দুর্গাপুর, খালিয়াজুরী, কলমাকান্দা, কেন্দুয়া, মদন, মোহনগঞ্জ, পূর্বধলা' },
+  { name: 'মানিকগঞ্জ', loc: 'মানিকগঞ্জে', slug: 'manikganj', en: 'Manikganj', division: 'ঢাকা', near: ['dhaka', 'tangail', 'faridpur'], ctx: 'general', upazilas: 'মানিকগঞ্জ সদর, দৌলতপুর, ঘিওর, হরিরামপুর, সাটুরিয়া, শিবালয়, সিংগাইর' },
+  { name: 'ঝিনাইদহ', loc: 'ঝিনাইদহে', slug: 'jhenaidah', en: 'Jhenaidah', division: 'খুলনা', near: ['kushtia', 'jashore', 'chuadanga'], ctx: 'general', upazilas: 'ঝিনাইদহ সদর, হরিণাকুণ্ডু, কালীগঞ্জ, কোটচাঁদপুর, মহেশপুর, শৈলকুপা' },
+  { name: 'চুয়াডাঙ্গা', loc: 'চুয়াডাঙ্গায়', slug: 'chuadanga', en: 'Chuadanga', division: 'খুলনা', near: ['kushtia', 'jhenaidah', 'meherpur'], ctx: 'general', upazilas: 'চুয়াডাঙ্গা সদর, আলমডাঙ্গা, দামুড়হুদা, জীবননগর' },
+  { name: 'মেহেরপুর', loc: 'মেহেরপুরে', slug: 'meherpur', en: 'Meherpur', division: 'খুলনা', near: ['kushtia', 'chuadanga'], ctx: 'general', upazilas: 'মেহেরপুর সদর, গাংনী, মুজিবনগর' },
 ];
 
 // Production base. The silage is mainly made in Bogura district, around the
@@ -81,6 +89,16 @@ const ORIGIN = (d) => d.slug === 'bogura'
 // they have never seen needs to see that the product and the people are real.
 // Bengali digits for counts written into copy, so "৩৩টি জেলা" cannot go stale again.
 const bnNum = (n) => String(n).replace(/[0-9]/g, (x) => '০১২৩৪৫৬৭৮৯'[+x]);
+// Bengali genitive: vowel-ending names take র (বগুড়ার), consonant-ending
+// names take ের (দিনাজপুরের), ও-ending take য়ের (ঠাকুরগাঁওয়ের).
+// Until 2026-10-20 the template appended র everywhere and printed "দিনাজপুরর".
+const gen = (n) => {
+  const base = n.replace(/\u0981$/, '');
+  if (/[\u09BE-\u09CC]$/.test(base)) return n + 'র';
+  if (/ও$/.test(base)) return n + 'য়ের';
+  return n + 'ের';
+};
+
 const bySlug = Object.fromEntries(districts.map((d) => [d.slug, d]));
 const fbSvg = '<svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
 
@@ -190,9 +208,11 @@ function page(d) {
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">ভুট্টা সাইলেজে আস্ত ভুট্টা গাছ দানাসহ কুচি করা থাকে বলে আঁশ ও শক্তি একসাথে মেলে। দুধের গাভীকে দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি আর ছাগল-ভেড়াকে ১-২ কেজি দেওয়া হয়। নতুন হলে আগে পড়ুন: <a href="/blog/silage-ki-kivabe-toiri-upokarita" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সাইলেজ কী?</a> আর <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">প্রথমবার খাওয়ানোর নিয়ম</a>।</p>
 
 ${ORIGIN(d)}
-      <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.name} থেকে অর্ডারের নিয়ম (৩ ধাপ)</h2>
+${d.upazilas ? `      <h2 id="upazila" class="mt-9 text-2xl font-bold text-[#123b28]">${gen(d.name)} যেসব উপজেলায় ডেলিভারি</h2>
+      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${d.name} জেলার প্রতিটি উপজেলায় বস্তা পৌঁছে দেওয়া হয়: ${d.upazilas}। পরিবহন খরচ উপজেলা ও বস্তার সংখ্যা দেখে কনফার্মেশন কলে জানানো হয়; পাশের খামারিরা মিলে এক গাড়িতে নিলে কেজিপ্রতি পরিবহন কম পড়ে।</p>
+` : ''}      <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.name} থেকে অর্ডারের নিয়ম (৩ ধাপ)</h2>
       <ol class="mt-4 grid gap-4 sm:grid-cols-3">
-        <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">১. মেসেজ পাঠান</strong>নাম, ${d.name}র ঠিকানা ও কত বস্তা লাগবে লিখে WhatsApp করুন: +880 1303-438063</li>
+        <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">১. মেসেজ পাঠান</strong>নাম, ${gen(d.name)} ঠিকানা ও কত বস্তা লাগবে লিখে WhatsApp করুন: +880 1303-438063</li>
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">২. কনফার্মেশন কল</strong>ডেলিভারির তারিখ ও পরিবহনসহ মোট খরচ আগেই জানানো হবে</li>
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">৩. পণ্য বুঝে টাকা</strong>বস্তা হাতে পেয়ে মান দেখে টাকা দেবেন: নগদে বা খামারভেস্টের নামের ব্যাংক অ্যাকাউন্টে</li>
       </ol>
@@ -209,7 +229,7 @@ ${ORIGIN(d)}
         <form data-lead-form data-district="${d.name}" onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
           <label class="text-base font-semibold text-[#123b28]">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="name" autocomplete="name" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
           <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
-          <label class="text-base font-semibold text-[#123b28]">উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="upazila" autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="${d.name}র কোন উপজেলা"></label>
+          <label class="text-base font-semibold text-[#123b28]">উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="upazila" autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="${gen(d.name)} কোন উপজেলা"></label>
           <label class="text-base font-semibold text-[#123b28]">কত বস্তা? <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="bags" inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১০"></label>
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
           <button type="submit" class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">ফোন করে দাম জানান</button>
@@ -233,7 +253,7 @@ ${ORIGIN(d)}
 
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.loc} ডেলিভারি নিয়ে সাধারণ প্রশ্ন</h2>
       <div class="mt-4 space-y-3">
-        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5" open><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">${d.name}র সব উপজেলায় কি ডেলিভারি হয়?</summary><p class="mt-2 text-[#33483a]">হ্যাঁ। WhatsApp-এ ঠিকানা জানালে আপনার উপজেলা-গ্রামসহ মোট খরচ জানিয়ে দেওয়া হয়।</p></details>
+        <details class="rounded-xl border border-[#184d32]/10 bg-white p-5" open><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">${gen(d.name)} সব উপজেলায় কি ডেলিভারি হয়?</summary><p class="mt-2 text-[#33483a]">হ্যাঁ। WhatsApp-এ ঠিকানা জানালে আপনার উপজেলা-গ্রামসহ মোট খরচ জানিয়ে দেওয়া হয়।</p></details>
         <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">ডেলিভারি চার্জ কত?</summary><p class="mt-2 text-[#33483a]">দূরত্ব ও বস্তার সংখ্যাভেদে আলাদা। কনফার্মেশন কলে আগেই মোট খরচ বলা হয়, পরে বাড়তি কিছু নেই। এলাকার কয়েকজন মিলে অর্ডার করলে খরচ ভাগ হয়ে যায়; হিসাবের উদাহরণ আছে <a href="/blog/silage-poribohon-khoroch" class="font-semibold text-[#0b6a3e] underline underline-offset-4">পরিবহন খরচের গাইডে</a>।</p></details>
         <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">আগে অল্প নিয়ে পরীক্ষা করা যাবে?</summary><p class="mt-2 text-[#33483a]">যাবে, কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়। দূরের জেলায় অল্প বস্তায় পরিবহন খরচ তুলনায় বেশি পড়ে। প্রথমে কয়েক বস্তা নিয়ে <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">৭ দিনের নিয়মে</a> গরুকে অভ্যাস করান, তারপর প্রয়োজনমতো নিয়মিত অর্ডার দিন।</p></details>
       </div>

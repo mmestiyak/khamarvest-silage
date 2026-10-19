@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Sat, 17 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>ইউরিয়া দিয়ে খড় প্রক্রিয়াজাত করার নিয়ম</title>
+      <link>https://silage.khamarvest.com/blog/khor-urea-prokriyajat-korar-niyom</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/khor-urea-prokriyajat-korar-niyom</guid>
+      <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+      <description>১০০ কেজি খড়ে কত কেজি ইউরিয়া, কত লিটার পানি, কত দিন ঢেকে রাখবেন, কোন গরুকে দেবেন না আর বিষক্রিয়ার লক্ষণ কী, FAO-র Feedipedia, CGIAR ও MSD ভেটেরিনারি ম্যানুয়ালের সূত্রসহ ধাপে ধাপে।</description>
+    </item>
     <item>
       <title>গরুর পানির চাহিদা: দিনে কত লিটার, কেমন পানি</title>
       <link>https://silage.khamarvest.com/blog/gorur-panir-chahida</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/nirapode-silage-kenar-niyom</guid>
       <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
       <description>অগ্রিম টাকা পাঠিয়ে সাইলেজ না পাওয়ার ঘটনা বাড়ছে। ক্যাশ অন ডেলিভারিতে কেনার নিয়ম, অর্ডারের আগে বিক্রেতা যাচাইয়ের ৭টি ধাপ, ডেলিভারির দিন কী মিলিয়ে দেখবেন এবং ঠকে গেলে কোথায় অভিযোগ করবেন।</description>
-    </item>
-    <item>
-      <title>সাইলেজের মান যাচাই: ডেলিভারির দিনেই করা যায় এমন ৬টি পরীক্ষা</title>
-      <link>https://silage.khamarvest.com/blog/silage-mano-jachai</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-mano-jachai</guid>
-      <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
-      <description>টাকা দেওয়ার আগে সাইলেজ ভালো না খারাপ বুঝবেন যেভাবে: গন্ধ, রং, মুঠো পরীক্ষা, ছত্রাক ও তাপ, চপের আকার এবং বস্তা ও ওজন। যেকোনো ব্র্যান্ডের সাইলেজে খাটে, কোনো যন্ত্র লাগে না।</description>
     </item>
   </channel>
 </rss>

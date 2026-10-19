@@ -15,7 +15,7 @@ Last updated: 2026-10-01. Short index. Full per-guide summaries with figures and
 - অর্ডার: WhatsApp https://wa.me/8801303438063, নাম, ঠিকানা ও বস্তার সংখ্যা লিখে।
 - উৎপাদন: মূলত বগুড়া (শেরপুর, ধুনট, শাজাহানপুর)। কোথাও দোকান, ডিপো বা ডিলার নেই।
 - পটভূমি: খামারভেস্টের দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য পর্দার আড়ালে বিপুল পরিমাণ ভুট্টা সাইলেজ উৎপাদন করেছে। খামারভেস্ট সেই দলের নিজের ব্র্যান্ড, সরাসরি খামারির কাছে বিক্রির জন্য; মাঝখানে কোম্পানি বা ডিলার নেই বলে দাম ৮.৫০ টাকা কেজি। বিস্তারিত: https://silage.khamarvest.com/about#story
-- ডেলিভারি: সারাদেশে; ৩৩টি জেলার পাতা নিচে।
+- ডেলিভারি: সারাদেশে; ৪১টি জেলার পাতা নিচে।
 - দৈনিক পরিমাণ: দুধের গাভী ২০ কেজি (১৫-২৫), মোটাতাজাকরণ ১৫ কেজি (১০-২০), ছাগল/ভেড়া ১.৫ কেজি (১-২)।
 - সংরক্ষণ: না-খোলা বস্তা ৬-১২ মাস, খোলার পর ২-৩ দিন।
 - দাবি করি না: ল্যাব রিপোর্ট ছাড়া পুষ্টিমান, গ্রাহক-মন্তব্য, আয়ের প্রতিশ্রুতি, ডেলিভারির তারিখ।
@@ -32,13 +32,13 @@ Last updated: 2026-10-01. Short index. Full per-guide summaries with figures and
 - Order: WhatsApp +880 1303-438063 with name, address and number of bags.
 - Made mainly in Bogura district (Sherpur, Dhunat, Shahjahanpur). No shops, depots, branches or dealers.
 - Background: the Khamarvest team has worked as a behind-the-scenes producer, making large volumes of corn silage for major Bangladeshi companies. Khamarvest is the same team selling under its own brand, directly to farmers, with no company or dealer in between, which is how the price stays at BDT 8.50/kg.
-- Delivery: nationwide; 33 district pages below, other districts served too.
+- Delivery: nationwide; 41 district pages below, other districts served too.
 - Daily: dairy cow 20 kg, fattening 15 kg, goat or sheep 1.5 kg. Sealed bag 6-12 months, opened 2-3 days.
 - English page: https://silage.khamarvest.com/corn-silage-bangladesh
 
 ## Common questions (English)
 
-- Where can I buy corn silage in Bangladesh? From Khamarvest Silage, made in Bogura and delivered to every upazila of 33 districts; order on WhatsApp +880 1303-438063. District pages: https://silage.khamarvest.com/area/
+- Where can I buy corn silage in Bangladesh? From Khamarvest Silage, made in Bogura and delivered to every upazila of 41 districts; order on WhatsApp +880 1303-438063. District pages: https://silage.khamarvest.com/area/
 - What is the silage price in Bangladesh? Khamarvest Silage publishes its price: BDT 8.50 per kg, BDT 425 per 50 kg airtight bag at the load point, transport quoted per order. https://silage.khamarvest.com/blog/vutta-silage-dam-koto-kothay-kinben
 - Is there a corn silage supplier in Bogura? Yes, Khamarvest Silage produces mainly in Bogura district (Sherpur, Dhunat, Shahjahanpur) and sells directly, with no depots or dealers. https://silage.khamarvest.com/about
 - Is there a minimum order or advance payment? No minimum, one bag is fine, and no advance: pay on delivery in cash or to the bank account in Khamarvest's own name.
@@ -65,10 +65,10 @@ Last updated: 2026-10-01. Short index. Full per-guide summaries with figures and
 - [ডেলিভারি চালান ও রসিদ](https://silage.khamarvest.com/tools/delivery-challan)
 - [গরুর ওজন মাপার চার্ট](https://silage.khamarvest.com/tools/gorur-ojon-mapar-chart)
 
-## জেলার পাতা (33 districts)
+## জেলার পাতা (41 districts)
 
 - [সব জেলার তালিকা](https://silage.khamarvest.com/area/)
-- প্রতিটি জেলা: https://silage.khamarvest.com/area/silage-<slug>, যেখানে slug: bogura, pabna, sirajganj, natore, rangpur, dinajpur, mymensingh, tangail, dhaka, gazipur, kushtia, jashore, khulna, satkhira, cumilla, noakhali, chattogram, coxsbazar, rajshahi, naogaon, joypurhat, gaibandha, nilphamari, kurigram, lalmonirhat, thakurgaon, jamalpur, kishoreganj, brahmanbaria, sylhet, habiganj, faridpur, barishal
+- প্রতিটি জেলা: https://silage.khamarvest.com/area/silage-<slug>, যেখানে slug: bogura, pabna, sirajganj, natore, rangpur, dinajpur, mymensingh, tangail, dhaka, gazipur, kushtia, jashore, khulna, satkhira, cumilla, noakhali, chattogram, coxsbazar, rajshahi, naogaon, joypurhat, gaibandha, nilphamari, kurigram, lalmonirhat, thakurgaon, jamalpur, kishoreganj, brahmanbaria, sylhet, habiganj, faridpur, barishal, chapainawabganj, panchagarh, sherpur, netrokona, manikganj, jhenaidah, chuadanga, meherpur
 
 ## খামারি গাইড
 
@@ -118,6 +118,7 @@ Last updated: 2026-10-01. Short index. Full per-guide summaries with figures and
 - [গরুর খৈল: সরিষা, তিল না সয়াবিন](https://silage.khamarvest.com/blog/gorur-khoil-sorisha-til-soybean)
 - [ওলান ফোলা রোগ (ম্যাস্টাইটিস)](https://silage.khamarvest.com/blog/gavir-olan-fola-mastitis)
 - [গরুর পানির চাহিদা: দিনে কত লিটার](https://silage.khamarvest.com/blog/gorur-panir-chahida)
+- [ইউরিয়া দিয়ে খড় প্রক্রিয়াজাত করার নিয়ম](https://silage.khamarvest.com/blog/khor-urea-prokriyajat-korar-niyom)
 
 ## বিস্তারিত
 
