@@ -39,9 +39,9 @@ export const FOUNDER = {
 };
 
 const line = (dark, en) => `${OPEN}
-    <p class="mx-auto max-w-[1140px] px-2 pb-3 text-center text-[14px] ${dark ? 'text-white/80' : 'text-[#54705d]'}">${en
+    <p class="mx-auto max-w-[1140px] px-2 pb-3 text-center text-[14px] ${dark ? 'text-[#a9c3b2]' : 'text-[#54705d]'}">${en
       ? 'Website built and maintained by'
-      : 'ওয়েবসাইট তৈরি ও দেখাশোনা:'} <a href="${SITE}" rel="author" class="underline underline-offset-2">${en ? 'Meer Estiyak' : 'মীর ইশতিয়াক (Meer Estiyak)'}</a>, ${en ? 'co-founder, Khamarvest' : 'সহপ্রতিষ্ঠাতা, খামারভেস্ট'}</p>
+      : 'ওয়েবসাইট তৈরি ও দেখাশোনা:'} <a href="${SITE}" rel="author" class="underline underline-offset-2${dark ? ' text-[#d7e6dc] hover:text-white' : ''}">${en ? 'Meer Estiyak' : 'মীর ইশতিয়াক (Meer Estiyak)'}</a>, ${en ? 'co-founder, Khamarvest' : 'সহপ্রতিষ্ঠাতা, খামারভেস্ট'}</p>
     ${CLOSE}`;
 
 const SKIP = new Set(['gmb-cover-photo.html', 'guide-book.html']);
@@ -75,7 +75,7 @@ for (const file of await walk('')) {
   let html = before.replace(new RegExp(`\\s*${OPEN}[\\s\\S]*?${CLOSE}\\s*(?=</footer>)`, 'g'), '');
   if (!SKIP.has(file) && html.includes('</footer>')) {
     const footer = html.slice(html.lastIndexOf('<footer'), html.lastIndexOf('</footer>'));
-    const dark = /<footer[^>]*bg-black/.test(footer);
+    const dark = /<footer[^>]*bg-(black|\[#0b2e1f\])/.test(footer);
     // Footers that are one inline <footer>…text…</footer> line need the credit on its own line.
     html = html.replace(/<\/footer>(?![\s\S]*<\/footer>)/, `\n    ${line(dark, /<html lang="en"/.test(html))}\n  </footer>`);
   }
