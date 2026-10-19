@@ -24,7 +24,15 @@ export const FOUNDER = {
   alternateName: ['মীর মোঃ ইশতিয়াক আহমেদ', 'মীর ইশতিয়াক', 'mmestiyak'],
   jobTitle: 'Co-founder, Khamarvest',
   url: SITE,
-  sameAs: [SITE],
+  // Same @id and profiles as the Person on mmestiyak.com, whose /farm/ page
+  // links back to this site, so both sides describe one entity.
+  sameAs: [
+    `${SITE}/farm/`,
+    'https://www.linkedin.com/in/mmestiyak',
+    'https://github.com/mmestiyak',
+    'https://twitter.com/mmestiyak',
+    'https://www.instagram.com/mmestiyak/',
+  ],
 };
 
 const line = (dark, en) => `${OPEN}
