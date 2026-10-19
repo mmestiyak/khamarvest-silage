@@ -623,6 +623,19 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
   if (missing.length) errors.push(`${missing.length} page(s) have no mobile order bar, run npm run build:orderbar: ${missing.slice(0, 3).join(', ')}`);
 }
 
+// --- Footer credit and founder schema (scripts/credit.mjs) ---
+{
+  const missing = [];
+  for (const file of files) {
+    const html = await readFile(join(root, file), 'utf8');
+    if (html.includes('</footer>') && !html.includes('<!-- credit:start -->')) missing.push(file);
+  }
+  if (missing.length) errors.push(`${missing.length} page(s) have a footer without the credit line, run npm run build:credit: ${missing.slice(0, 3).join(', ')}`);
+  for (const f of ['index.html', 'about.html']) {
+    if (!(await readFile(join(root, f), 'utf8')).includes('"founder"')) errors.push(`${f}: LocalBusiness has no founder, run npm run build:credit`);
+  }
+}
+
 // --- Trust blocks ---
 // scripts/trust-blocks.mjs writes the field-to-bag photo strip (homepage,
 // /about, district pages) and the three buying steps (homepage). They are the
