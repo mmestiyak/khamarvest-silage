@@ -24,6 +24,9 @@ export const FOUNDER = {
   alternateName: ['মীর মোঃ ইশতিয়াক আহমেদ', 'মীর ইশতিয়াক', 'mmestiyak'],
   jobTitle: 'Co-founder, Khamarvest',
   url: SITE,
+  // Hugo-hashed filename: it changes if the portrait is re-processed, so
+  // update it here when mmestiyak.com's portrait changes.
+  image: `${SITE}/images/portrait_hu_dc0191509f7398fe.webp`,
   // Same @id and profiles as the Person on mmestiyak.com, whose /farm/ page
   // links back to this site, so both sides describe one entity.
   sameAs: [
