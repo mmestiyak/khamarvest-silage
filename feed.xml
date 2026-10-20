@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Tue, 20 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 21 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>সাইলেজের জন্য ভুট্টা চাষ: কখন বুনবেন, কখন কাটবেন</title>
+      <link>https://silage.khamarvest.com/blog/silage-er-jonno-vutta-chash</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-er-jonno-vutta-chash</guid>
+      <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
+      <description>সাইলেজের ভুট্টা দানার ভুট্টার মতো পাকতে দিলে চলে না। রবি মৌসুমে কখন বুনবেন, বিঘায় কত বীজ-সার-সেচ, দানার দুধরেখা দেখে কাটার সঠিক সময় কীভাবে বুঝবেন, বিঘায় কত সাইলেজ হয় আর এক গাভীর বছরের জন্য কত বিঘা লাগে।</description>
+    </item>
     <item>
       <title>ইউরিয়া দিয়ে খড় প্রক্রিয়াজাত করার নিয়ম</title>
       <link>https://silage.khamarvest.com/blog/khor-urea-prokriyajat-korar-niyom</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorur-ojon-mapar-niyom</guid>
       <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
       <description>খামারে স্কেল নেই? শুধু একটি ফিতা দিয়ে বুকের বেড় ও দেহের দৈর্ঘ্য মেপে গরুর ওজন বের করার নিয়ম, সূত্র, সঠিক মাপের শর্ত ও সাধারণ ভুল। সাথে ফ্রি প্রিন্টযোগ্য ওজন চার্ট।</description>
-    </item>
-    <item>
-      <title>সাইলেজ কেনার নিরাপদ নিয়ম: আগে মাল, পরে টাকা</title>
-      <link>https://silage.khamarvest.com/blog/nirapode-silage-kenar-niyom</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/nirapode-silage-kenar-niyom</guid>
-      <pubDate>Thu, 27 Aug 2026 00:00:00 GMT</pubDate>
-      <description>অগ্রিম টাকা পাঠিয়ে সাইলেজ না পাওয়ার ঘটনা বাড়ছে। ক্যাশ অন ডেলিভারিতে কেনার নিয়ম, অর্ডারের আগে বিক্রেতা যাচাইয়ের ৭টি ধাপ, ডেলিভারির দিন কী মিলিয়ে দেখবেন এবং ঠকে গেলে কোথায় অভিযোগ করবেন।</description>
     </item>
   </channel>
 </rss>

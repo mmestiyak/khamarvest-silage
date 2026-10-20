@@ -2,7 +2,7 @@
 
 > বাংলাদেশে ভুট্টা সাইলেজ (corn/maize silage) সরবরাহকারী ব্র্যান্ড। ৮.৫০ টাকা কেজি, ৫০ কেজি এয়ারটাইট বস্তা ৪২৫ টাকা, ক্যাশ অন ডেলিভারি। অর্ডার: WhatsApp +880 1303-438063।
 
-Last updated: 2026-10-01. Short index. Full per-guide summaries with figures and sources: https://silage.khamarvest.com/llms-full.txt
+Last updated: 2026-10-21. Short index. Full per-guide summaries with figures and sources: https://silage.khamarvest.com/llms-full.txt
 
 ## মূল তথ্য
 
@@ -10,11 +10,11 @@ Last updated: 2026-10-01. Short index. Full per-guide summaries with figures and
 - দাম (৩০ সেপ্টেম্বর ২০২৬ থেকে, ২০২৭ সালেও): ৮.৫০ টাকা/কেজি; ৫০ কেজি এয়ারটাইট বস্তা ৪২৫ টাকা, লোড পয়েন্টের দাম (পরিবহন আলাদা); বেশি নিলে ছাড় আলোচনাসাপেক্ষ।
 - পরিশোধ: পণ্য হাতে পেয়ে টাকা, নগদে (ক্যাশ অন ডেলিভারি) অথবা খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে ট্রান্সফার করে। অগ্রিম কোনো টাকা নেওয়া হয় না।
 - ন্যূনতম অর্ডার: নেই, এক বস্তাও নেওয়া যায়; পরিবহন খরচ দূরত্ব ও পরিমাণভেদে।
-- অর্ডার নেওয়ার সময়: WhatsApp-এ দিনরাত, সপ্তাহে ৭ দিন।
-- পরিবহন খরচ: দামের বাইরে আলাদা, প্রতি অর্ডারে কনফার্মেশন কলে ডেলিভারির তারিখসহ আগেই জানানো হয়। অর্ডারের পরিমাণ ও পরিবহন খরচ WhatsApp-এ জানিয়ে নিন।
+- অর্ডার: WhatsApp-এ দিনরাত, সপ্তাহে ৭ দিন।
+- পরিবহন খরচ: দামের বাইরে আলাদা, প্রতি অর্ডারে কনফার্মেশন কলে ডেলিভারির তারিখসহ আগেই জানানো হয়।
 - অর্ডার: WhatsApp https://wa.me/8801303438063, নাম, ঠিকানা ও বস্তার সংখ্যা লিখে।
 - উৎপাদন: মূলত বগুড়া (শেরপুর, ধুনট, শাজাহানপুর)। কোথাও দোকান, ডিপো বা ডিলার নেই।
-- পটভূমি: খামারভেস্টের দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য পর্দার আড়ালে বিপুল পরিমাণ ভুট্টা সাইলেজ উৎপাদন করেছে। খামারভেস্ট সেই দলের নিজের ব্র্যান্ড, সরাসরি খামারির কাছে বিক্রির জন্য; মাঝখানে কোম্পানি বা ডিলার নেই বলে দাম ৮.৫০ টাকা কেজি। বিস্তারিত: https://silage.khamarvest.com/about#story
+- পটভূমি: খামারভেস্টের দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য পর্দার আড়ালে ভুট্টা সাইলেজ বানিয়েছে। খামারভেস্ট সেই দলের নিজের ব্র্যান্ড, সরাসরি খামারির কাছে বিক্রির জন্য; মাঝখানে কোম্পানি বা ডিলার নেই বলে দাম ৮.৫০ টাকা কেজি। বিস্তারিত: https://silage.khamarvest.com/about#story
 - ডেলিভারি: সারাদেশে; ৪১টি জেলার পাতা নিচে।
 - দৈনিক পরিমাণ: দুধের গাভী ২০ কেজি (১৫-২৫), মোটাতাজাকরণ ১৫ কেজি (১০-২০), ছাগল/ভেড়া ১.৫ কেজি (১-২)।
 - সংরক্ষণ: না-খোলা বস্তা ৬-১২ মাস, খোলার পর ২-৩ দিন।
@@ -93,6 +93,7 @@ Last updated: 2026-10-01. Short index. Full per-guide summaries with figures and
 - [বর্ষাকালে গরুর খাদ্য ব্যবস্থাপনা](https://silage.khamarvest.com/blog/borshakale-gorur-khaddo-babosthapona)
 - [গরুর খামার শুরু করার উপায়](https://silage.khamarvest.com/blog/gorur-khamar-shuru-korar-upay)
 - [শীতে গরুর ঠান্ডার ঝুঁকি](https://silage.khamarvest.com/blog/shite-gorur-thanda-jhuki-o-khaddo)
+- [সাইলেজের জন্য ভুট্টা চাষ](https://silage.khamarvest.com/blog/silage-er-jonno-vutta-chash)
 - [শীতকালে গরুর খাদ্য ব্যবস্থাপনা](https://silage.khamarvest.com/blog/goru-shitokale-khaddo-vyobosthapna)
 - [শীতের জন্য সাইলেজ মজুদ: কত বস্তা](https://silage.khamarvest.com/blog/shiter-jonno-silage-mojud)
 - [সাইলেজের পরিবহন খরচ](https://silage.khamarvest.com/blog/silage-poribohon-khoroch)

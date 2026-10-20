@@ -44,6 +44,7 @@ const TAGS = {
   'vutta-silage-dam-koto-kothay-kinben': ['cost', 'buying'],
   'silage-vs-kacha-ghas-vs-khor': ['cost', 'feeding'],
   'silage-kinben-naki-nije-banaben': ['cost', 'silage-basics'],
+  'silage-er-jonno-vutta-chash': ['silage-basics', 'cost', 'seasonal'],
   'nepier-ghas-vs-vutta-silage': ['feeding', 'cost'],
   'silage-niye-vul-dharona': ['silage-basics', 'feeding'],
   'mohisher-khaddo-o-silage': ['feeding', 'dairy'],
@@ -168,6 +169,19 @@ for (const a of articles) {
               <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 bg-white px-5 py-2.5 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]">কল করুন</a>
               <a href="/area/" class="inline-flex min-h-11 items-center rounded-xl px-3 py-2.5 text-base font-semibold text-[#0b6a3e] underline underline-offset-4">আপনার জেলায় দাম ও ডেলিভারি</a>
             </div>
+            <!-- Callback request, same handler as the district pages (/js/leads.js):
+                 saved to the owner's lead sheet, confirmation shown in place. A
+                 reader with no WhatsApp, or one who would rather be called, had
+                 no path to a lead from a guide before this. -->
+            <form data-lead-form onsubmit="event.preventDefault()" class="mt-5 grid gap-3 border-t border-[#184d32]/10 pt-5 sm:grid-cols-[1fr_1fr_auto]">
+              <p class="text-base font-bold text-[#123b28] sm:col-span-3">WhatsApp নেই? নম্বর দিন, আমরা ফোন করে দাম ও পরিবহন খরচ জানাব</p>
+              <label class="text-sm font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
+              <label class="text-sm font-semibold text-[#123b28]">জেলা ও উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="upazila" autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: বগুড়া, শেরপুর"></label>
+              <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+              <button type="submit" class="min-h-11 self-end rounded-xl border border-[#0b5b38]/40 bg-white px-5 py-2.5 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9] disabled:opacity-60">ফোন করে জানান</button>
+              <p class="text-sm text-[#456451] sm:col-span-3">আগে কোনো টাকা দিতে হয় না। নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
+              <p data-lead-status hidden role="status" class="rounded-lg bg-[#eaf5eb] p-3 font-semibold text-[#0b5b38] sm:col-span-3">পেয়েছি, ধন্যবাদ। আমরা এই নম্বরে ফোন করে দাম আর ডেলিভারির খরচ জানাব।</p>
+            </form>
           </section>
           <section class="mt-10 border-t border-[#184d32]/10 pt-7">
             <h2 class="text-lg font-bold text-[#123b28]">সম্পর্কিত গাইড</h2>
