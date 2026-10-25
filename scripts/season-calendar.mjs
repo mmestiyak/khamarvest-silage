@@ -38,7 +38,7 @@ const SEASONS = [
     guides: ['blog/shiter-jonno-silage-mojud', 'blog/goru-shitokale-khaddo-vyobosthapna', 'blog/shite-gorur-thanda-jhuki-o-khaddo', 'blog/khor-urea-prokriyajat-korar-niyom', 'blog/go-khaddo-mousumi-calendar', 'blog/bachur-jotno-o-khaddo', 'blog/silage-poribohon-khoroch'],
     why: 'শীতে ঘাসের বাড়ন কমে, খড়ের দাম চড়ে, আর খামারি বিকল্প খোঁজেন।' },
   { name: 'ভুট্টা কাটা ও সাইলেজ তৈরির মৌসুম', peak: [3, 4, 5], lead: 8, leadNew: 20,
-    guides: ['blog/silage-ki-kivabe-toiri-upokarita', 'blog/silage-kinben-naki-nije-banaben', 'blog/silage-er-jonno-vutta-chash'],
+    guides: ['blog/silage-ki-kivabe-toiri-upokarita', 'blog/silage-kinben-naki-nije-banaben', 'blog/silage-er-jonno-vutta-chash', 'blog/silage-additive-molasses-inoculant', 'blog/silage-songrokkhon-poddhoti-bag-drum-pit-bunker'],
     why: 'ভুট্টা কাটার সময়েই খামারি ঠিক করেন নিজে বানাবেন না কিনবেন, তাই তৈরির পদ্ধতি ও কেনা-বানানোর হিসাব তখন সবচেয়ে বেশি খোঁজা হয়।' },
   { name: 'কোরবানি (মোটাতাজাকরণ)', peak: 'qurbani', lead: 20, leadNew: 32,
     guides: ['blog/qurbani-goru-motatajakoron-porikolpona', 'blog/goru-motatajakoron-dainik-ojon-briddhi', 'blog/goru-motatajakoron-khaddo-talika', 'blog/gorur-ojon-mapar-niyom'],

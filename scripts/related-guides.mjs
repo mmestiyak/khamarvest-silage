@@ -37,6 +37,8 @@ const TAGS = {
   'vutta-silage-prothombar-khawano-rules': ['feeding', 'silage-basics'],
   'vutta-silage-khawanor-poriman-o-hishab': ['feeding', 'cost'],
   'silage-songrokkhon-niyom': ['storage', 'silage-basics'],
+  'silage-additive-molasses-inoculant': ['silage-basics', 'feeding', 'seasonal'],
+  'silage-songrokkhon-poddhoti-bag-drum-pit-bunker': ['storage', 'silage-basics', 'seasonal'],
   'vutta-silage-noshto-chinben': ['storage', 'buying'],
   'silage-mano-jachai': ['buying', 'storage'],
   'silage-kothay-pawa-jay': ['buying', 'cost'],
