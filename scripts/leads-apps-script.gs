@@ -43,6 +43,9 @@ function doPost(e) {
     var name = clip(d.name, 80);
     if (!name && !phone) return ok();
 
+    // Advance booking (আগাম চাহিদা) form: same tab, মাধ্যম says so. The months, animals and
+    // yearly answers arrive inside the note (and as d.months, d.animals, d.yearly).
+    var booking = d.form_type === 'advance_booking';
     var sheet = getSheet();
     sheet.appendRow([
       new Date(),
@@ -53,14 +56,14 @@ function doPost(e) {
       clip(d.note, 500),
       clip(d.page, 200),
       clip(d.source, 80),
-      'ওয়েবসাইট ফর্ম',
+      booking ? 'আগাম চাহিদা' : 'ওয়েবসাইট ফর্ম',
       'নতুন',
       ''
     ]);
 
     var to = ownerEmail();
     if (to) {
-      MailApp.sendEmail(to, 'নতুন লিড: ' + name + ' (' + clip(d.location, 40) + ')',
+      MailApp.sendEmail(to, (booking ? 'আগাম চাহিদা: ' : 'নতুন লিড: ') + name + ' (' + clip(d.location, 40) + ')',
         'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + clip(d.location, 120) +
         '\nবস্তা: ' + clip(d.bags, 20) + '\nতথ্য: ' + clip(d.note, 500) +
         '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +

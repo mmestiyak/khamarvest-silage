@@ -697,6 +697,14 @@ for (const f of ['js/ga.js', 'index.html']) {
   for (const f of (await readdir(join(root, 'area'))).filter((f) => f.startsWith('silage-') && f.endsWith('.html'))) {
     if (!(await readFile(join(root, 'area', f), 'utf8')).includes('data-lead-form')) errors.push(`area/${f}: has no callback form (data-lead-form). Run npm run build:areas`);
   }
+  // Advance booking (আগাম চাহিদা): homepage, every district page, four harvest guides.
+  const bookingPages = ['index.html', ...(await readdir(join(root, 'area'))).filter((f) => f.startsWith('silage-') && f.endsWith('.html')).map((f) => `area/${f}`),
+    ...['silage-er-jonno-vutta-chash', 'silage-kinben-naki-nije-banaben', 'shiter-jonno-silage-mojud', 'silage-ki-kivabe-toiri-upokarita'].map((g) => `blog/${g}.html`)];
+  for (const f of bookingPages) {
+    const h = await readFile(join(root, f), 'utf8');
+    if (!h.includes('data-booking-form') || !h.includes('<!-- advance-booking:start -->')) errors.push(`${f}: has no advance-booking form (data-booking-form). Run npm run build:trust`);
+  }
+  if (!leads.includes("form_type: 'advance_booking'") || !leads.includes("'advance_booking'")) errors.push('js/leads.js: advance-booking form no longer tags leads form_type advance_booking');
 }
 
 // --- Report ---

@@ -7,6 +7,7 @@
 //  - any <form data-lead-form> (the "নম্বর দিন, আমরা ফোন করব" box on district
 //    pages): saves name, mobile, upazila and bags as a lead and shows a
 //    confirmation. If the sheet is not set up, it falls back to WhatsApp.
+//  - any <form data-booking-form>: the advance-booking (আগাম চাহিদা) form, below.
 // Homepage loads this directly; every other page gets it from /js/ga.js.
 // Until LEADS_URL is filled in, nothing is sent.
 (function () {
@@ -84,6 +85,49 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindForms);
   else bindForms();
+
+  // "নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন" (<form data-booking-form>):
+  // saved like any lead but tagged form_type advance_booking, with the extra
+  // answers also written into the note so an older deployed Apps Script, which
+  // ignores unknown fields, still stores everything. Promises a call when the
+  // new season's silage is ready, takes no payment, reserves no stock.
+  function bindBookingForms() {
+    document.querySelectorAll('form[data-booking-form]').forEach(function (f) {
+      var phone = f.elements.phone;
+      phone.addEventListener('input', function () { phone.setCustomValidity(''); });
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (toAscii(phone.value).replace(/\D/g, '').length < 11) {
+          phone.setCustomValidity('১১ সংখ্যার মোবাইল নম্বর লিখুন, যেমন ০১৭১২৩৪৫৬৭৮');
+          phone.reportValidity();
+          return;
+        }
+        var v = function (n) { return f.elements[n] && f.elements[n].value ? f.elements[n].value.trim() : ''; };
+        var yearly = !!(f.elements.yearly && f.elements.yearly.checked);
+        var parts = ['আগাম চাহিদা (নতুন মৌসুম, তৈরি হলে আগে ফোন করবেন)'];
+        if (v('animals')) parts.push('গরু: ' + v('animals'));
+        if (v('bags')) parts.push('মাসে বস্তা: ' + v('bags'));
+        if (v('months')) parts.push('মাস: ' + v('months'));
+        if (yearly) parts.push('সারা বছরের সাইলেজ পরিকল্পনায় রাখতে বলেছেন');
+        if (v('note')) parts.push('নোট: ' + v('note'));
+        var saved = window.saveLead({
+          form_type: 'advance_booking', name: v('name'), phone: v('phone'), location: v('location'),
+          bags: v('bags'), animals: v('animals'), months: v('months'), yearly: yearly,
+          note: parts.join(' | '), website: v('website')
+        });
+        if (typeof window.gaEvent === 'function') window.gaEvent('order_details_submitted', { submission_method: saved ? 'advance_booking' : 'advance_booking_whatsapp', page_path: location.pathname });
+        if (saved) {
+          f.querySelector('[data-lead-status]').hidden = false;
+          f.querySelector('button[type="submit"]').disabled = true;
+          return;
+        }
+        var msg = 'আসসালামু আলাইকুম, নতুন মৌসুমের সাইলেজ তৈরি হলে আগে জানাবেন, আমি আগাম জানিয়ে রাখছি।\nনাম: ' + v('name') + '\nমোবাইল: ' + v('phone') + '\nএলাকা: ' + v('location') + (v('animals') ? '\nগরু: ' + v('animals') : '') + (v('bags') ? '\nমাসে বস্তা: ' + v('bags') : '') + (v('months') ? '\nকোন মাসে লাগবে: ' + v('months') : '') + (yearly ? '\nসারা বছরের সাইলেজ পরিকল্পনায় রাখুন' : '') + (v('note') ? '\nনোট: ' + v('note') : '');
+        window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindBookingForms);
+  else bindBookingForms();
 
   var last = '', lastAt = 0;
   document.addEventListener('click', function (e) {

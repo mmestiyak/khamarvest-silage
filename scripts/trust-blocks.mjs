@@ -15,6 +15,12 @@
 //    only order link in a guide sat after 11-13 screens of reading. Health and
 //    general guides do not get it: an order box in a mastitis guide is pushy.
 //
+// 4. advance-booking: the "নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন" form
+//    (owner decision 2026-10-27, see AGENTS.md) on the homepage after the buy
+//    steps, on every district page after the FAQ, and in four harvest-season
+//    guides before the FAQ. It never touches the callback form: on district
+//    pages the FAQ sits between them, in guides the references do.
+//
 // Idempotent: each block is stripped and rewritten on every run.
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -23,7 +29,7 @@ import { CALL_TEL, WA_NUMBER } from './contact.mjs';
 
 const root = process.cwd();
 const block = (name, body) => `<!-- ${name}:start -->\n${body}\n<!-- ${name}:end -->`;
-const strip = (html, name) => html.replace(new RegExp(`[ \\t]*<!-- ${name}:start -->[\\s\\S]*?<!-- ${name}:end -->\\n?`, 'g'), '');
+const strip = (html, name) => html.replace(new RegExp(`[ \\t]*<!-- ${name}:start -->[\\s\\S]*?<!-- ${name}:end -->\\n{0,2}`, 'g'), '');
 const link = 'font-semibold text-[#0b6a3e] underline underline-offset-4';
 
 const PHOTOS = [
@@ -71,6 +77,36 @@ const midGuide = `          <aside data-cta="mid_guide" class="mt-9 rounded-2xl 
             </div>
           </aside>`;
 
+const fieldCls = 'mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]';
+const labelCls = 'text-base font-semibold text-[#123b28]';
+const optional = ' <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span>';
+const advanceCard = `<section id="advance-booking" data-cta="advance_booking" class="rounded-2xl border border-[#0b5b38]/25 bg-[#eaf5eb] p-5 sm:p-6">
+        <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন</h2>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">ভুট্টা কাটা আর সাইলেজ তৈরি হয় ডিসেম্বর-জানুয়ারিতে, আর সেই সাইলেজ দিয়েই সারা বছরের সরবরাহ চলে। আপনার কত লাগবে আগে জানালে আমরা পরিমাণ ঠিক করে নিতে পারি। তৈরি হলে আপনাকে আগে ফোন করব। এখন কোনো টাকা দিতে হবে না, আর সারা বছরের সরবরাহের শর্ত ফোনে দুই পক্ষের সুবিধামতো ঠিক হবে।</p>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">দাম <!--=price-->${product.perKgBn}<!--/=--> টাকা কেজি (লোড পয়েন্টে, পরিবহন আলাদা), সারা বছর একই, ২০২৭ সাল পর্যন্ত। এটা জানিয়ে রাখার ফর্ম, বস্তা আটকে রাখার নিশ্চয়তা নয়।</p>
+        <form data-booking-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
+          <label class="${labelCls}">আপনার নাম${optional}<input name="name" autocomplete="name" class="${fieldCls}" placeholder="যেমন: রহিম উদ্দিন"></label>
+          <label class="${labelCls}">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="${fieldCls}" placeholder="01XXXXXXXXX"></label>
+          <label class="${labelCls}">জেলা ও উপজেলা${optional}<input name="location" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: বগুড়া, শেরপুর"></label>
+          <label class="${labelCls}">গরুর সংখ্যা${optional}<input name="animals" inputmode="numeric" class="${fieldCls}" placeholder="যেমন: ১৫"></label>
+          <label class="${labelCls}">মাসে আনুমানিক কত বস্তা${optional}<input name="bags" inputmode="numeric" class="${fieldCls}" placeholder="যেমন: ২০"></label>
+          <label class="${labelCls}">কোন মাসগুলোতে লাগবে${optional}<input name="months" class="${fieldCls}" placeholder="যেমন: সারা বছর, বা মার্চ থেকে জুন"></label>
+          <label class="flex min-h-11 items-start gap-3 text-base font-semibold text-[#123b28] sm:col-span-2"><input type="checkbox" name="yearly" class="mt-1 h-6 w-6 shrink-0 accent-[#0b5b38]"><span>সারা বছরের সাইলেজ আমার জন্য পরিকল্পনায় রাখুন</span></label>
+          <label class="${labelCls} sm:col-span-2">কিছু জানাতে চান?${optional}<textarea name="note" rows="2" class="${fieldCls}"></textarea></label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+          <button type="submit" class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">আগে থেকে জানিয়ে রাখুন</button>
+          <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
+          <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। নতুন মৌসুমের সাইলেজ তৈরি হলে আমরা আপনাকে এই নম্বরে আগে ফোন করব। এখন কোনো টাকা লাগবে না।</p>
+        </form>
+      </section>`;
+const advanceHome = `  <div class="bg-white px-4 pb-10">
+    <div class="mx-auto max-w-[1140px]">
+      ${advanceCard}
+    </div>
+  </div>`;
+const advanceGuide = advanceCard.replace('<section id="advance-booking"', '<section id="advance-booking"').replace(/^/, '          ').replace('data-cta="advance_booking" class="', 'data-cta="advance_booking" class="mt-11 ');
+const ADVANCE_GUIDES = ['silage-er-jonno-vutta-chash', 'silage-kinben-naki-nije-banaben', 'shiter-jonno-silage-mojud', 'silage-ki-kivabe-toiri-upokarita'].map((s) => `blog/${s}.html`);
+
 async function update(file, fn) {
   const path = join(root, file);
   const before = await readFile(path, 'utf8');
@@ -90,8 +126,8 @@ function before(html, anchor, text, file) {
 let changed = 0;
 
 changed += await update('index.html', (h) => {
-  h = strip(strip(h, 'photo-strip'), 'buy-steps');
-  h = before(h, /[ \t]*<!-- ═+ SECTION 3 · /, block('buy-steps', buySteps), 'index.html');
+  h = strip(strip(strip(h, 'photo-strip'), 'buy-steps'), 'advance-booking');
+  h = before(h, /[ \t]*<!-- ═+ SECTION 3 · /, block('buy-steps', buySteps) + '\n\n' + block('advance-booking', advanceHome), 'index.html');
   h = before(h, /[ \t]*<!-- ═+ DELIVERY AREAS/, block('photo-strip', `  <div class="bg-white px-4 pb-10">\n${photoStrip}\n  </div>`), 'index.html');
   return h;
 });
@@ -100,7 +136,10 @@ changed += await update('about.html', (h) => before(strip(h, 'photo-strip'), /[ 
 
 for (const f of (await readdir(join(root, 'area'))).filter((f) => /^silage-.+\.html$/.test(f))) {
   const file = `area/${f}`;
-  changed += await update(file, (h) => before(strip(h, 'photo-strip'), /[ \t]*<h2[^>]*>[^<]*থেকে অর্ডারের নিয়ম/, block('photo-strip', photoStrip), file));
+  changed += await update(file, (h) => {
+    h = before(strip(strip(h, 'photo-strip'), 'advance-booking'), /[ \t]*<h2[^>]*>[^<]*থেকে অর্ডারের নিয়ম/, block('photo-strip', photoStrip), file);
+    return before(h, /[ \t]*<section class="mt-9 rounded-2xl bg-\[#0b5b38\]/, block('advance-booking', '      ' + advanceCard), file);
+  });
 }
 
 // Guides about silage itself: the slug says so. Placed before the article's
@@ -119,6 +158,10 @@ for (const file of guides) {
     const at = body + ids[2].index;
     return h.slice(0, at) + block('mid-guide', midGuide) + '\n\n' + h.slice(at);
   });
+}
+
+for (const file of ADVANCE_GUIDES) {
+  changed += await update(file, (h) => before(strip(h, 'advance-booking'), /[ \t]*<!-- faq:start -->/, block('advance-booking', advanceGuide), file));
 }
 
 console.log(`Trust blocks written into ${changed} page(s) (${guides.length} silage guides checked).`);

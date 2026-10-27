@@ -161,6 +161,28 @@
 
       <p class="mt-8 text-[#456451]">কাছাকাছি জেলায়ও ডেলিভারি: <a href="/area/silage-bogura" class="font-semibold text-[#0b6a3e] underline underline-offset-4">বগুড়া</a>, <a href="/area/silage-naogaon" class="font-semibold text-[#0b6a3e] underline underline-offset-4">নওগাঁ</a>, <a href="/area/silage-dinajpur" class="font-semibold text-[#0b6a3e] underline underline-offset-4">দিনাজপুর</a> · <a href="/area/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সব এলাকা দেখুন</a></p>
 
+<!-- advance-booking:start -->
+      <section id="advance-booking" data-cta="advance_booking" class="rounded-2xl border border-[#0b5b38]/25 bg-[#eaf5eb] p-5 sm:p-6">
+        <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন</h2>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">ভুট্টা কাটা আর সাইলেজ তৈরি হয় ডিসেম্বর-জানুয়ারিতে, আর সেই সাইলেজ দিয়েই সারা বছরের সরবরাহ চলে। আপনার কত লাগবে আগে জানালে আমরা পরিমাণ ঠিক করে নিতে পারি। তৈরি হলে আপনাকে আগে ফোন করব। এখন কোনো টাকা দিতে হবে না, আর সারা বছরের সরবরাহের শর্ত ফোনে দুই পক্ষের সুবিধামতো ঠিক হবে।</p>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">দাম <!--=price-->৮.৫০<!--/=--> টাকা কেজি (লোড পয়েন্টে, পরিবহন আলাদা), সারা বছর একই, ২০২৭ সাল পর্যন্ত। এটা জানিয়ে রাখার ফর্ম, বস্তা আটকে রাখার নিশ্চয়তা নয়।</p>
+        <form data-booking-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
+          <label class="text-base font-semibold text-[#123b28]">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="name" autocomplete="name" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
+          <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
+          <label class="text-base font-semibold text-[#123b28]">জেলা ও উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="location" autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: বগুড়া, শেরপুর"></label>
+          <label class="text-base font-semibold text-[#123b28]">গরুর সংখ্যা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="animals" inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১৫"></label>
+          <label class="text-base font-semibold text-[#123b28]">মাসে আনুমানিক কত বস্তা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="bags" inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ২০"></label>
+          <label class="text-base font-semibold text-[#123b28]">কোন মাসগুলোতে লাগবে <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="months" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: সারা বছর, বা মার্চ থেকে জুন"></label>
+          <label class="flex min-h-11 items-start gap-3 text-base font-semibold text-[#123b28] sm:col-span-2"><input type="checkbox" name="yearly" class="mt-1 h-6 w-6 shrink-0 accent-[#0b5b38]"><span>সারা বছরের সাইলেজ আমার জন্য পরিকল্পনায় রাখুন</span></label>
+          <label class="text-base font-semibold text-[#123b28] sm:col-span-2">কিছু জানাতে চান? <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><textarea name="note" rows="2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]"></textarea></label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+          <button type="submit" class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">আগে থেকে জানিয়ে রাখুন</button>
+          <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
+          <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। নতুন মৌসুমের সাইলেজ তৈরি হলে আমরা আপনাকে এই নম্বরে আগে ফোন করব। এখন কোনো টাকা লাগবে না।</p>
+        </form>
+      </section>
+<!-- advance-booking:end -->
+
       <section class="mt-9 rounded-2xl bg-[#0b5b38] px-6 py-8 text-white sm:px-8">
         <p class="text-sm font-semibold text-[#b8e5c8]">খামারভেস্ট সাইলেজ (Khamarvest Silage)</p>
         <h2 class="mt-2 text-2xl font-bold">জয়পুরহাটে ডেলিভারিসহ দাম জানতে চান?</h2>
