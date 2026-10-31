@@ -12,7 +12,7 @@
 // Until LEADS_URL is filled in, nothing is sent.
 (function () {
   if (window.saveLead) return;
-  var LEADS_URL = 'https://script.google.com/macros/s/AKfycbx_UlR76fDtfA8yzqY2IEbtLYXZ37dm0DZxDfFio5LaJlYpWsCfsLRIwoamdGYLLKtV/exec';
+  var LEADS_URL = 'https://script.google.com/macros/s/AKfycbwSc5OzLRgkDEU7lV0niQPe8R1g-BBAF_ZDz__A-ZI1MX5k46b0fzEhH-aR_xKhT-7_/exec';
 
   function source() {
     try {
