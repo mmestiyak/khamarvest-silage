@@ -28,12 +28,12 @@ const SKIP = new Set([
 ]);
 
 const bar = (t) => `${OPEN}
-  <div class="h-20 md:hidden print:hidden" aria-hidden="true"></div>
+  <div class="h-24 min-[420px]:h-20 md:hidden print:hidden" aria-hidden="true"></div>
   <div data-cta="sticky_bar" class="fixed inset-x-0 bottom-0 z-40 border-t border-[#184d32]/15 bg-white px-3 py-2 shadow-[0_-2px_8px_rgba(0,0,0,0.06)] md:hidden print:hidden">
-    <div class="mx-auto flex max-w-lg items-center gap-2">
-      <p class="min-w-0 flex-1 overflow-hidden text-sm leading-tight text-[#456451]"><strong class="block text-[15px] text-[#0b5b38]">${t.price}</strong><span class="block whitespace-nowrap max-[389px]:hidden">${t.pay}</span></p>
-      <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-xl border border-[#0b5b38]/40 px-2.5 text-[15px] font-bold text-[#0b5b38]">${t.call}</a>
-      <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-xl bg-[#0b5b38] px-3.5 text-[15px] font-bold text-white">${t.wa}</a>
+    <div class="mx-auto flex max-w-lg flex-wrap items-center gap-x-2 gap-y-1.5 min-[420px]:flex-nowrap">
+      <p class="min-w-0 flex-1 overflow-hidden text-sm leading-tight text-[#456451] max-[419px]:basis-full max-[419px]:whitespace-nowrap"><strong class="block text-[15px] text-[#0b5b38] max-[419px]:inline">${t.price}</strong><span class="hidden max-[419px]:inline"> · </span><span class="block whitespace-nowrap max-[419px]:inline">${t.pay}</span></p>
+      <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap max-[419px]:flex-1 rounded-xl border border-[#0b5b38]/40 px-2.5 text-[15px] font-bold text-[#0b5b38]">${t.call}</a>
+      <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap max-[419px]:flex-1 rounded-xl bg-[#0b5b38] px-3.5 text-[15px] font-bold text-white">${t.wa}</a>
     </div>
   </div>
   ${CLOSE}`;
