@@ -632,6 +632,7 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
   for (const file of files) {
     const html = await readFile(join(root, file), 'utf8');
     if (html.includes('</footer>') && !html.includes('<!-- credit:start -->')) missing.push(file);
+    else if (html.includes('<!-- credit:start -->') && !/<!-- credit:start -->[\s\S]*href="https:\/\/compost\.khamarvest\.com\/"[\s\S]*<!-- credit:end -->/.test(html)) errors.push(`${file}: footer lacks the compost.khamarvest.com cross-link, run npm run build:credit`);
   }
   if (missing.length) errors.push(`${missing.length} page(s) have a footer without the credit line, run npm run build:credit: ${missing.slice(0, 3).join(', ')}`);
   for (const f of ['index.html', 'about.html']) {
