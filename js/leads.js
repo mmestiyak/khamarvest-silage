@@ -78,7 +78,11 @@
           f.querySelector('button[type="submit"]').disabled = true;
           return;
         }
-        var msg = 'আসসালামু আলাইকুম, ভুট্টা সাইলেজ নিতে চাই।\nনাম: ' + v('name') + '\nমোবাইল: ' + v('phone') + '\nএলাকা: ' + area + (v('bags') ? '\nবস্তা: ' + v('bags') : '');
+        // Only filled fields: no blank labels. Ends with a question to reply to.
+        var msg = ['আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ নিতে চাই।',
+          v('name') ? 'নাম: ' + v('name') : '', v('phone') ? 'মোবাইল: ' + v('phone') : '',
+          area ? 'এলাকা: ' + area : '', v('bags') ? 'বস্তা: ' + v('bags') : '',
+          'পরিবহনসহ দাম জানাবেন?'].filter(Boolean).join('\n');
         window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       });
     });
@@ -121,7 +125,12 @@
           f.querySelector('button[type="submit"]').disabled = true;
           return;
         }
-        var msg = 'আসসালামু আলাইকুম, নতুন মৌসুমের সাইলেজ তৈরি হলে আগে জানাবেন, আমি আগাম জানিয়ে রাখছি।\nনাম: ' + v('name') + '\nমোবাইল: ' + v('phone') + '\nএলাকা: ' + v('location') + (v('animals') ? '\nগরু: ' + v('animals') : '') + (v('bags') ? '\nমাসে বস্তা: ' + v('bags') : '') + (v('months') ? '\nকোন মাসে লাগবে: ' + v('months') : '') + (yearly ? '\nসারা বছরের সাইলেজ পরিকল্পনায় রাখুন' : '') + (v('note') ? '\nনোট: ' + v('note') : '');
+        var msg = ['আসসালামু আলাইকুম, নতুন মৌসুমের সাইলেজ তৈরি হলে আগে জানাবেন, আমি আগাম জানিয়ে রাখছি।',
+          v('name') ? 'নাম: ' + v('name') : '', v('phone') ? 'মোবাইল: ' + v('phone') : '',
+          v('location') ? 'এলাকা: ' + v('location') : '', v('animals') ? 'গরু: ' + v('animals') : '',
+          v('bags') ? 'মাসে বস্তা: ' + v('bags') : '', v('months') ? 'কোন মাসে লাগবে: ' + v('months') : '',
+          yearly ? 'সারা বছরের সাইলেজ পরিকল্পনায় রাখুন' : '', v('note') ? 'নোট: ' + v('note') : '',
+          'তৈরি হলে আমাকে ফোন করবেন?'].filter(Boolean).join('\n');
         window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       });
     });

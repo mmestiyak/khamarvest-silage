@@ -686,6 +686,41 @@ for (const f of ['js/ga.js', 'index.html']) {
   if (!src.includes('phone_click')) errors.push(`${f}: does not fire phone_click for tel: links (see AGENTS.md > Analytics)`);
 }
 
+// --- WhatsApp prefills must be complete as sent (AGENTS.md > WhatsApp prefill) ---
+// Farmers press send without editing, so a prefill ending in a blank label
+// ("এলাকা: ", "বস্তা: ") reaches the owner as an incomplete message.
+{
+  const BLANK = /(?:^|\n|[।.?!] )[^\n:]{1,40}:[ \t]*(?:\n|$)/;
+  const jsFiles = (await readdir(join(root, 'js'))).filter((f) => f.endsWith('.js')).map((f) => `js/${f}`);
+  const walkHtml = async (dir) => {
+    const out = [];
+    for (const e of await readdir(join(root, dir), { withFileTypes: true })) {
+      if (['node_modules', '.git', '.wrangler', '.claude', 'img', 'js', 'css', 'fonts', 'scripts'].includes(e.name)) continue;
+      const rel = dir ? `${dir}/${e.name}` : e.name;
+      if (e.isDirectory()) out.push(...await walkHtml(rel));
+      else if (e.name.endsWith('.html')) out.push(rel);
+    }
+    return out;
+  };
+  for (const f of [...await walkHtml(''), ...jsFiles]) {
+    const src = await readFile(join(root, f), 'utf8');
+    for (const m of src.matchAll(/wa\.me\/\d*\?text=([^"'<>\s]+)/g)) {
+      let text; try { text = decodeURIComponent(m[1]); } catch { continue; }
+      if (/:\s*$/.test(text) || BLANK.test(text)) errors.push(`${f}: WhatsApp prefill ends in a blank field, so it is incomplete when sent: ${JSON.stringify(text.slice(-40))}`);
+    }
+    // Raw (unencoded) hand-written texts, with spaces.
+    for (const m of src.matchAll(/wa\.me\/\d*\?text=([^"'<>]+)"/g)) {
+      let text; try { text = decodeURIComponent(m[1]); } catch { continue; }
+      if (/:\s*$/.test(text) || BLANK.test(text)) errors.push(`${f}: WhatsApp prefill ends in a blank field: ${JSON.stringify(text.slice(-40))}`);
+    }
+    // Template strings in scripts: a label with nothing after it, as in '\nএলাকা: ' or 'বস্তা: '.
+    for (const m of src.matchAll(/'((?:\\n)?[^'\n+]{1,30}: ?)'(?!\s*\+)/g)) {
+      if (/(এলাকা|বস্তা|উপজেলা|জেলা|নাম|মোবাইল|পশু|গরু)\s*:\s*$/.test(m[1]) && /(msg|message|text=|PREFILL)/.test(src.slice(Math.max(0, m.index - 200), m.index + 200)))
+        errors.push(`${f}: WhatsApp message template ends in a blank label ${JSON.stringify(m[1])}`);
+    }
+  }
+}
+
 // --- Lead capture (AGENTS.md > Lead capture) ---
 // Leads go to the owner's Google Sheet; a page that stops loading js/leads.js
 // loses them without any visible sign.

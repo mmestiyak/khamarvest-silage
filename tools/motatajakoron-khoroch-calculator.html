@@ -157,7 +157,7 @@
         $('r-other-cost').textContent = bn(otherCost) + ' টাকা';
         $('r-total').textContent = bn(total) + ' টাকা';
         $('r-percattle').textContent = cattle > 0 ? bn(total / cattle) + ' টাকা' : '০ টাকা';
-        var msg = 'আসসালামু আলাইকুম, মোটাতাজাকরণের ' + Math.round(cattle) + 'টি গরুর জন্য প্রায় ' + Math.round(bags) + ' বস্তা সাইলেজ লাগবে। দাম ও ডেলিভারি জানতে চাই।';
+        var msg = 'আসসালামু আলাইকুম, মোটাতাজাকরণের ' + Math.round(cattle) + 'টি গরুর জন্য প্রায় ' + Math.round(bags) + ' বস্তা সাইলেজ লাগবে। পরিবহনসহ মোট খরচ জানাবেন?';
         $('wa-cta').href = 'https://wa.me/8801303438063?text=' + encodeURIComponent(msg);
         clearTimeout(gaTimer);
         gaTimer = setTimeout(function () {

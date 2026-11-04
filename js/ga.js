@@ -85,7 +85,16 @@
   function prefillWhatsApp() {
     var h1 = document.querySelector('h1');
     var name = ((h1 && h1.textContent) || document.title.split('|')[0]).replace(/\s+/g, ' ').trim().slice(0, 70);
-    var msg = 'আসসালামু আলাইকুম, "' + name + '" পাতা থেকে লিখছি। ভুট্টা সাইলেজ নিতে চাই।\nএলাকা: \nবস্তা: ';
+    // Every message must be complete as sent (farmers press send without
+    // editing), so no blank "এলাকা:" labels, and it ends with a question.
+    var p = location.pathname;
+    var isGuide = /^\/blog\/[^\/]+/.test(p);
+    var msg = isGuide
+      ? 'আসসালামু আলাইকুম, «' + name + '» লেখাটি পড়ে সাইলেজ নিয়ে জানতে চাই।'
+      : 'আসসালামু আলাইকুম, আমি খামারভেস্ট ভুট্টা সাইলেজ নিতে চাই। পরিবহনসহ দাম জানাবেন?';
+    // District pages already carry a message naming the district: reuse it.
+    var own = document.querySelector('a[href*="wa.me/"][href*="text="]');
+    if (/^\/area\/silage-/.test(p) && own) msg = decodeURIComponent(own.href.split('text=')[1]);
     document.querySelectorAll('a[href*="wa.me/"]').forEach(function (a) {
       if (a.href.indexOf('text=') === -1) a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(msg);
     });
