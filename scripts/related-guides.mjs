@@ -34,6 +34,7 @@ const MARKER_CLOSE = '<!-- related-guides:end -->';
 const TAGS = {
   'silage-ki-kivabe-toiri-upokarita': ['silage-basics', 'feeding'],
   'silage-pushtiman-dm-cp-tdn': ['silage-basics', 'buying'],
+  'silage-gajon-report-bujhben': ['silage-basics', 'buying'],
   'vutta-silage-prothombar-khawano-rules': ['feeding', 'silage-basics'],
   'vutta-silage-khawanor-poriman-o-hishab': ['feeding', 'cost'],
   'silage-songrokkhon-niyom': ['storage', 'silage-basics'],
@@ -47,6 +48,7 @@ const TAGS = {
   'silage-vs-kacha-ghas-vs-khor': ['cost', 'feeding'],
   'silage-kinben-naki-nije-banaben': ['cost', 'silage-basics'],
   'silage-er-jonno-vutta-chash': ['silage-basics', 'cost', 'seasonal'],
+  'silage-er-jonno-vutta-kuchi-chopper': ['silage-basics', 'seasonal', 'storage'],
   'nepier-ghas-vs-vutta-silage': ['feeding', 'cost'],
   'silage-niye-vul-dharona': ['silage-basics', 'feeding'],
   'mohisher-khaddo-o-silage': ['feeding', 'dairy'],
@@ -80,6 +82,7 @@ const TAGS = {
   'gorur-khoil-sorisha-til-soybean': ['feeding', 'cost', 'dairy'],
   'gavir-olan-fola-mastitis': ['health', 'dairy'],
   'gorur-panir-chahida': ['feeding', 'dairy', 'health'],
+  'gobor-diye-compost-vermicompost-toiri': ['management', 'storage'],
   'khor-urea-prokriyajat-korar-niyom': ['feeding', 'seasonal', 'cost'],
 };
 

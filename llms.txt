@@ -73,6 +73,7 @@ Last updated: 2026-10-26. Short index. Full per-guide summaries with figures and
 - [সাইলেজ কেনার নিরাপদ নিয়ম](https://silage.khamarvest.com/blog/nirapode-silage-kenar-niyom)
 - [সাইলেজের পুষ্টিমান](https://silage.khamarvest.com/blog/silage-pushtiman-dm-cp-tdn)
 - [সাইলেজের মান যাচাই](https://silage.khamarvest.com/blog/silage-mano-jachai)
+- [সাইলেজের গাঁজন রিপোর্ট বোঝার নিয়ম](https://silage.khamarvest.com/blog/silage-gajon-report-bujhben)
 - [বাছুরের যত্ন ও খাদ্য](https://silage.khamarvest.com/blog/bachur-jotno-o-khaddo)
 - [গরমে গরুর যত্ন ও খাদ্য ব্যবস্থাপনা](https://silage.khamarvest.com/blog/gorome-gorur-jotno-heat-stress)
 - [নেপিয়ার ঘাস নাকি ভুট্টা সাইলেজ?](https://silage.khamarvest.com/blog/nepier-ghas-vs-vutta-silage)
@@ -85,6 +86,7 @@ Last updated: 2026-10-26. Short index. Full per-guide summaries with figures and
 - [শীতে গরুর ঠান্ডার ঝুঁকি](https://silage.khamarvest.com/blog/shite-gorur-thanda-jhuki-o-khaddo)
 - [সাইলেজের জন্য ভুট্টা চাষ](https://silage.khamarvest.com/blog/silage-er-jonno-vutta-chash)
 - [সাইলেজে মোলাসেস, ইউরিয়া, ইনোকুলেন্ট](https://silage.khamarvest.com/blog/silage-additive-molasses-inoculant)
+- [ভুট্টা সাইলেজের কুচির মাপ ও চপার](https://silage.khamarvest.com/blog/silage-er-jonno-vutta-kuchi-chopper)
 - [সাইলেজ রাখার পদ্ধতি: ব্যাগ, পিট, বাংকার](https://silage.khamarvest.com/blog/silage-songrokkhon-poddhoti-bag-drum-pit-bunker)
 - [শীতকালে গরুর খাদ্য ব্যবস্থাপনা](https://silage.khamarvest.com/blog/goru-shitokale-khaddo-vyobosthapna)
 - [শীতের জন্য সাইলেজ মজুদ: কত বস্তা](https://silage.khamarvest.com/blog/shiter-jonno-silage-mojud)
@@ -111,6 +113,7 @@ Last updated: 2026-10-26. Short index. Full per-guide summaries with figures and
 - [গরুর খৈল: সরিষা, তিল না সয়াবিন](https://silage.khamarvest.com/blog/gorur-khoil-sorisha-til-soybean)
 - [ওলান ফোলা রোগ (ম্যাস্টাইটিস)](https://silage.khamarvest.com/blog/gavir-olan-fola-mastitis)
 - [গরুর পানির চাহিদা: দিনে কত লিটার](https://silage.khamarvest.com/blog/gorur-panir-chahida)
+- [গোবর কম্পোস্ট ও ভার্মি কম্পোস্ট](https://silage.khamarvest.com/blog/gobor-diye-compost-vermicompost-toiri)
 - [ইউরিয়া দিয়ে খড় প্রক্রিয়াজাত করার নিয়ম](https://silage.khamarvest.com/blog/khor-urea-prokriyajat-korar-niyom)
 
 ## বিস্তারিত

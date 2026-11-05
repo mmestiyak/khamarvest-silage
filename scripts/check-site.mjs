@@ -11,6 +11,7 @@ import { product as PRODUCT, money } from './product.mjs';
 import { evaluate, MARKER } from './calc.mjs';
 import { parse as parseFaq } from './faq.mjs';
 import { cssHash } from './css-version.mjs';
+import { bareNumbers } from './link-contact.mjs';
 const CSS_V = await cssHash();
 
 const root = process.cwd();
@@ -624,6 +625,13 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
     if (!html.includes('<!-- order-bar:start -->')) missing.push(file);
   }
   if (missing.length) errors.push(`${missing.length} page(s) have no mobile order bar, run npm run build:orderbar: ${missing.slice(0, 3).join(', ')}`);
+}
+
+// --- Tap-to-open phone numbers (scripts/link-contact.mjs) ---
+{
+  const bare = [];
+  for (const file of files) if (bareNumbers(await readFile(join(root, file), 'utf8')).length) bare.push(file);
+  if (bare.length) errors.push(`${bare.length} page(s) show a phone number as plain text, run npm run build:contact: ${bare.slice(0, 3).join(', ')}`);
 }
 
 // --- Footer credit and founder schema (scripts/credit.mjs) ---
