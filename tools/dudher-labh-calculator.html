@@ -150,7 +150,7 @@
         $('r-daily').style.color = daily >= 0 ? '#ffd166' : '#ffb3ab';
         $('r-monthly').textContent = taka(daily * 30);
         $('r-perliter').textContent = totalMilk > 0 ? taka(feed / totalMilk) : '০ টাকা';
-        var msg = 'আসসালামু আলাইকুম, আমার ' + Math.round(cows) + 'টি দুধের গাভীর জন্য সাইলেজ নিতে চাই। দৈনিক প্রায় ' + Math.round(cows * num('silage')) + ' কেজি লাগবে। পরিবহনসহ মোট খরচ জানাবেন?';
+        var msg = 'আসসালামু আলাইকুম, আমার ' + Math.round(cows) + 'টি দুধের গাভীর জন্য সাইলেজ নিতে চাই। দৈনিক প্রায় ' + Math.round(cows * num('silage')) + ' কেজি লাগবে। মোট খরচ জানাবেন?';
         $('wa-cta').href = 'https://wa.me/8801303438063?text=' + encodeURIComponent(msg);
         clearTimeout(gaTimer);
         gaTimer = setTimeout(function () {

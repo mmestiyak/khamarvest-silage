@@ -82,7 +82,7 @@
         var msg = ['আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ নিতে চাই।',
           v('name') ? 'নাম: ' + v('name') : '', v('phone') ? 'মোবাইল: ' + v('phone') : '',
           area ? 'এলাকা: ' + area : '', v('bags') ? 'বস্তা: ' + v('bags') : '',
-          'পরিবহনসহ দাম জানাবেন?'].filter(Boolean).join('\n');
+          'দাম জানাবেন?'].filter(Boolean).join('\n');
         window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       });
     });

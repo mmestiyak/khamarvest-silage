@@ -91,7 +91,7 @@
     var isGuide = /^\/blog\/[^\/]+/.test(p);
     var msg = isGuide
       ? 'আসসালামু আলাইকুম, «' + name + '» লেখাটি পড়ে সাইলেজ নিয়ে জানতে চাই।'
-      : 'আসসালামু আলাইকুম, আমি খামারভেস্ট ভুট্টা সাইলেজ নিতে চাই। পরিবহনসহ দাম জানাবেন?';
+      : 'আসসালামু আলাইকুম, আমি খামারভেস্ট ভুট্টা সাইলেজ নিতে চাই। দাম জানাবেন?';
     // District pages already carry a message naming the district: reuse it.
     var own = document.querySelector('a[href*="wa.me/"][href*="text="]');
     if (/^\/area\/silage-/.test(p) && own) msg = decodeURIComponent(own.href.split('text=')[1]);

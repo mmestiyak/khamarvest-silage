@@ -764,7 +764,7 @@
       $('mb-cost').textContent = r.items.length ? bn(r.cost.perAnimal) + ' টাকা' : '০ টাকা';
 
       if (r.silage) {
-        var msg = 'আসসালামু আলাইকুম, রেশন জেনারেটরে আমার ' + count + 'টি ' + a.short + ' এর জন্য দৈনিক ' + Math.round(r.silage.kgPerDay * 10) / 10 + ' কেজি সাইলেজ এসেছে, মাসে প্রায় ' + r.silage.bagsPerMonth + ' বস্তা। পরিবহনসহ মোট খরচ জানাবেন?';
+        var msg = 'আসসালামু আলাইকুম, রেশন জেনারেটরে আমার ' + count + 'টি ' + a.short + ' এর জন্য দৈনিক ' + Math.round(r.silage.kgPerDay * 10) / 10 + ' কেজি সাইলেজ এসেছে, মাসে প্রায় ' + r.silage.bagsPerMonth + ' বস্তা। মোট খরচ জানাবেন?';
         $('wa-cta').href = 'https://wa.me/8801303438063?text=' + encodeURIComponent(msg);
         $('wa-cta').addEventListener('click', function () {
           if (typeof gaEvent === 'function') gaEvent('calculator_order_click', { tool: TOOL, animal_type: input.animal.type, animal_count: count, bags: r.silage.bagsPerMonth });

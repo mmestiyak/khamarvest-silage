@@ -257,7 +257,7 @@
         $('baglife-note').textContent = bagLife > 3
           ? 'খোলা বস্তা ২-৩ দিনে শেষ করা ভালো। আপনার পালে এক বস্তা এর চেয়ে বেশি দিন চলবে, তাই প্রতিবার বের করার পর মুখ ভালো করে বেঁধে ছায়ায় রাখুন।'
           : 'খোলা বস্তা ২-৩ দিনের মধ্যে শেষ হয়ে যাচ্ছে, এটাই আদর্শ।';
-        var msg = 'আসসালামু আলাইকুম, সাইলেজ ক্যালকুলেটর থেকে লিখছি। আমার ' + bn(Math.round(count)) + 'টি ' + ANIMAL[animal] + ' জন্য ' + bn(Math.round(days)) + ' দিনের সাইলেজ নিতে চাই, প্রায় ' + bn(bags) + ' বস্তা। পরিবহনসহ মোট খরচ জানাবেন?';
+        var msg = 'আসসালামু আলাইকুম, সাইলেজ ক্যালকুলেটর থেকে লিখছি। আমার ' + bn(Math.round(count)) + 'টি ' + ANIMAL[animal] + ' জন্য ' + bn(Math.round(days)) + ' দিনের সাইলেজ নিতে চাই, প্রায় ' + bn(bags) + ' বস্তা। মোট খরচ জানাবেন?';
         $('wa-cta').href = 'https://wa.me/8801303438063?text=' + encodeURIComponent(msg);
         clearTimeout(gaTimer);
         gaTimer = setTimeout(function () {

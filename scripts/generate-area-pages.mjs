@@ -106,7 +106,7 @@ function page(d) {
   const url = `${siteUrl}/area/silage-${d.slug}`;
   // Names the district page and asks for upazila and bag count, the two facts
   // the owner needs before quoting transport. Also tells the owner which page sent the lead.
-  const wa = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.loc} সাইলেজ নিতে চাই। পরিবহনসহ দাম জানাবেন?`)}`;
+  const wa = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.loc} সাইলেজ নিতে চাই। দাম জানাবেন?`)}`;
   const callBtn = (cls) => `<a href="tel:${CALL_TEL}" class="${cls}">কল করুন</a>`;
   // Google cuts a title around 60 characters; long district names drop "ভুট্টা".
   const titleSpan = `${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি`;

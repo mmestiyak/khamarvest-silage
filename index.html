@@ -1528,7 +1528,7 @@
       }
       // A bare wa.me link opens an empty chat, and the owner cannot tell which
       // part of the site sent the farmer. Give it the same prefill as the rest of the site.
-      var PREFILL = 'আসসালামু আলাইকুম, আমি খামারভেস্ট ভুট্টা সাইলেজ নিতে চাই। পরিবহনসহ দাম জানাবেন?';
+      var PREFILL = 'আসসালামু আলাইকুম, আমি খামারভেস্ট ভুট্টা সাইলেজ নিতে চাই। দাম জানাবেন?';
       document.querySelectorAll('a[href*="wa.me"]').forEach(function (a) {
         if (a.href.indexOf('text=') === -1) a.href = a.href.split('?')[0] + '?text=' + encodeURIComponent(PREFILL);
         a.addEventListener('click', function () {
@@ -1575,7 +1575,7 @@
           data.get('location') ? 'এলাকা: ' + data.get('location') : '',
           data.get('bags') ? 'প্রয়োজন: ' + data.get('bags') + ' বস্তা' : '',
           data.get('note') ? 'অতিরিক্ত তথ্য: ' + data.get('note') : '',
-          'পরিবহনসহ মোট খরচ জানাবেন?'
+          'মোট খরচ জানাবেন?'
         ].filter(Boolean).join('\n');
         if (typeof gaEvent === 'function') {
           gaEvent('order_details_submitted', { submission_method: 'whatsapp' });
@@ -1691,7 +1691,7 @@
           'দৈনিক সাইলেজ: ' + fmt(dailyKg) + ' কেজি',
           'মোট বস্তা (৫০ কেজি): ' + fmt(bags) + ' বস্তা',
           'আনুমানিক খরচ: ৳' + fmt(totalCost),
-          'পরিবহনসহ মোট খরচ জানাবেন?'
+          'মোট খরচ জানাবেন?'
         ].join('\n');
         waBtn.href = 'https://wa.me/8801303438063?text=' + encodeURIComponent(msg);
       }
