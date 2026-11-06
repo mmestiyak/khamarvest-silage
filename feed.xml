@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Thu, 05 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 06 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>ভুট্টা সাইলেজে ছত্রাক ও মাইকোটক্সিন: ঝুঁকি, লক্ষণ ও প্রতিরোধ</title>
+      <link>https://silage.khamarvest.com/blog/silage-chhatrak-mycotoxin</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-chhatrak-mycotoxin</guid>
+      <pubDate>Fri, 06 Nov 2026 00:00:00 GMT</pubDate>
+      <description>ভুট্টা সাইলেজে ছত্রাক ও মাইকোটক্সিনের ঝুঁকি: মাঠের ও গুদামের ছত্রাক, আফলাটক্সিন, ডিওএন, জিয়ারালেনোন, ফিউমোনিসিন, দুধে আফলাটক্সিন M1 (বাংলাদেশের জরিপ), বাতাস ঢোকা ঠেকানো, ছত্রাকের অংশ ফেলার নিয়ম ও ল্যাব পরীক্ষা।</description>
+    </item>
     <item>
       <title>গোবর দিয়ে কম্পোস্ট ও ভার্মি কম্পোস্ট: খামারে সহজ নিয়ম</title>
       <link>https://silage.khamarvest.com/blog/gobor-diye-compost-vermicompost-toiri</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/goru-tika-o-krimi-tarik-talika</guid>
       <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
       <description>গরুর ক্ষুরা রোগ, তড়কা, গলাফুলা ও বাদলা রোগের টিকা কোন বয়সে দিতে হয়, বুস্টার কখন, কত মাস পরপর কৃমিনাশক এবং কেন সময়মতো টিকা না দিলে বড় ক্ষতি হতে পারে তার সহজ তালিকা।</description>
-    </item>
-    <item>
-      <title>গরুর ক্ষুরা (খুরা) রোগ FMD: লক্ষণ, টিকা ও করণীয়</title>
-      <link>https://silage.khamarvest.com/blog/gorur-khura-rog-fmd-lokkhon-o-koronio</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/gorur-khura-rog-fmd-lokkhon-o-koronio</guid>
-      <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
-      <description>গরুর মুখে-পায়ে ফোস্কা, জ্বর ও খোঁড়ানো দেখলে করণীয়। ক্ষুরা রোগ (FMD) কেন এত দ্রুত ছড়ায়, বাংলাদেশে কোন মাসে ঝুঁকি বেশি, ভ্যাকসিনের নিয়ম, অসুস্থ গরুকে কী খাওয়াবেন এবং সন্দেহ হলে কাকে জানাবেন।</description>
     </item>
   </channel>
 </rss>

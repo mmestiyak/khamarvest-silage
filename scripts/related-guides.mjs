@@ -49,6 +49,7 @@ const TAGS = {
   'silage-kinben-naki-nije-banaben': ['cost', 'silage-basics'],
   'silage-er-jonno-vutta-chash': ['silage-basics', 'cost', 'seasonal'],
   'silage-er-jonno-vutta-kuchi-chopper': ['silage-basics', 'seasonal', 'storage'],
+  'silage-chhatrak-mycotoxin': ['storage', 'silage-basics', 'buying'],
   'nepier-ghas-vs-vutta-silage': ['feeding', 'cost'],
   'silage-niye-vul-dharona': ['silage-basics', 'feeding'],
   'mohisher-khaddo-o-silage': ['feeding', 'dairy'],
