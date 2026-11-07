@@ -108,6 +108,9 @@ function page(d) {
   // the owner needs before quoting transport. Also tells the owner which page sent the lead.
   const wa = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.loc} সাইলেজ নিতে চাই। দাম জানাবেন?`)}`;
   const callBtn = (cls) => `<a href="tel:${CALL_TEL}" class="${cls}">কল করুন</a>`;
+  // Returning customers are the bulk of a monthly consumable's revenue. One tap
+  // with a complete message beats asking them to find the number again.
+  const waReorder = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.loc} আগে খামারভেস্টের সাইলেজ নিয়েছিলাম। আবার নিতে চাই, এই মাসে কত বস্তা লাগবে জানাবেন?`)}`;
   // Google cuts a title around 60 characters; long district names drop "ভুট্টা".
   const titleSpan = `${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি`;
   const title = titleSpan.length > 60
@@ -222,6 +225,8 @@ ${d.upazilas ? `      <h2 id="upazila" class="mt-9 text-2xl font-bold text-[#123
         <a href="${wa}" target="_blank" rel="noopener" class="inline-flex rounded-xl bg-[#0b5b38] px-5 py-2.5 text-base font-bold text-white hover:bg-[#0e7c4b]">১ম ধাপ: WhatsApp-এ মেসেজ পাঠান</a>
         ${callBtn('inline-flex rounded-xl border border-[#0b5b38]/30 bg-white px-5 py-2.5 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]')}
       </div>
+
+      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">আগে খামারভেস্টের সাইলেজ নিয়ে থাকলে হিসাব আবার করতে হবে না: <a href="${waReorder}" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-4">এক ট্যাপে আবার অর্ডার করুন</a>, শুধু এই মাসে কত বস্তা লাগবে বলুন।</p>
 
       <!-- Callback request: saved to the owner's lead sheet by /js/leads.js, for
            farmers who would rather be called than type on WhatsApp. -->
