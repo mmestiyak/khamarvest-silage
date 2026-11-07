@@ -1578,10 +1578,10 @@
           'মোট খরচ জানাবেন?'
         ].filter(Boolean).join('\n');
         if (typeof gaEvent === 'function') {
-          gaEvent('order_details_submitted', { submission_method: 'whatsapp' });
+          gaEvent('order_details_submitted', { submission_method: 'whatsapp', page_path: location.pathname });
           // window.open bypasses the link listener above, so the richest leads
           // never reached the primary conversion. Fire it here too.
-          gaEvent('whatsapp_click', { link_location: 'order_form', link_url: 'https://wa.me/8801303438063' });
+          gaEvent('whatsapp_click', { link_location: 'order_form', link_url: 'https://wa.me/8801303438063', page_path: location.pathname });
         }
         window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(message), '_blank', 'noopener');
       });
