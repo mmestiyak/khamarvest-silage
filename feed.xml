@@ -6,7 +6,14 @@
     <atom:link href="https://silage.khamarvest.com/feed.xml" rel="self" type="application/rss+xml"/>
     <description>ভুট্টা সাইলেজ, গরুর খাদ্য ও খামার ব্যবস্থাপনা নিয়ে বাংলা গাইড।</description>
     <language>bn-BD</language>
-    <lastBuildDate>Fri, 06 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 07 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>সাইলেজ কত দিনে তৈরি হয়: কখন খুলবেন, কীভাবে বুঝবেন</title>
+      <link>https://silage.khamarvest.com/blog/silage-koto-dine-toiri-hoy</link>
+      <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-koto-dine-toiri-hoy</guid>
+      <pubDate>Sat, 07 Nov 2026 00:00:00 GMT</pubDate>
+      <description>সাইলেজ কত দিনে তৈরি হয়: গাঁজনের চার ধাপ, ২১ দিন না ৪-৬ সপ্তাহ, গন্ধ ও তাপ দেখে তৈরি হওয়ার ৫টি পরীক্ষা, শীত-গরমে সময়ের পার্থক্য, খোলার পর ২-৩ দিনের নিয়ম আর প্রথমবার খাওয়ানোর ধাপ, সূত্রসহ।</description>
+    </item>
     <item>
       <title>ভুট্টা সাইলেজে ছত্রাক ও মাইকোটক্সিন: ঝুঁকি, লক্ষণ ও প্রতিরোধ</title>
       <link>https://silage.khamarvest.com/blog/silage-chhatrak-mycotoxin</link>
@@ -174,13 +181,6 @@
       <guid isPermaLink="true">https://silage.khamarvest.com/blog/silage-pushtiman-dm-cp-tdn</guid>
       <pubDate>Tue, 15 Sep 2026 00:00:00 GMT</pubDate>
       <description>সাইলেজের বিজ্ঞাপনে লেখা ড্রাই ম্যাটার, ক্রুড প্রোটিন ও TDN আসলে কী বোঝায়, ভুট্টা সাইলেজের প্রকাশিত সাধারণ মান কত, আর ল্যাব রিপোর্ট ছাড়া কোনো সংখ্যাকে কেন স্পেসিফিকেশন বলা যায় না।</description>
-    </item>
-    <item>
-      <title>গরুর টিকা ও কৃমিনাশকের সময়সূচি: কোন বয়সে কোনটা দরকার</title>
-      <link>https://silage.khamarvest.com/blog/goru-tika-o-krimi-tarik-talika</link>
-      <guid isPermaLink="true">https://silage.khamarvest.com/blog/goru-tika-o-krimi-tarik-talika</guid>
-      <pubDate>Mon, 14 Sep 2026 00:00:00 GMT</pubDate>
-      <description>গরুর ক্ষুরা রোগ, তড়কা, গলাফুলা ও বাদলা রোগের টিকা কোন বয়সে দিতে হয়, বুস্টার কখন, কত মাস পরপর কৃমিনাশক এবং কেন সময়মতো টিকা না দিলে বড় ক্ষতি হতে পারে তার সহজ তালিকা।</description>
     </item>
   </channel>
 </rss>

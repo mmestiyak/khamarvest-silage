@@ -2,7 +2,7 @@
 
 > বাংলাদেশে ভুট্টা সাইলেজ (corn/maize silage) সরবরাহকারী ব্র্যান্ড। ৮.৫০ টাকা কেজি, ৫০ কেজি এয়ারটাইট বস্তা ৪২৫ টাকা, ক্যাশ অন ডেলিভারি। অর্ডার: WhatsApp +880 1303-438063।
 
-Last updated: 2026-10-26. Short index. Full per-guide summaries with figures and sources, plus common questions: https://silage.khamarvest.com/llms-full.txt
+Last updated: 2026-11-07. Short index. Full per-guide summaries with figures and sources, plus common questions: https://silage.khamarvest.com/llms-full.txt
 
 ## মূল তথ্য
 
@@ -75,11 +75,11 @@ Last updated: 2026-10-26. Short index. Full per-guide summaries with figures and
 - [সাইলেজের মান যাচাই](https://silage.khamarvest.com/blog/silage-mano-jachai)
 - [সাইলেজের গাঁজন রিপোর্ট বোঝার নিয়ম](https://silage.khamarvest.com/blog/silage-gajon-report-bujhben)
 - [বাছুরের যত্ন ও খাদ্য](https://silage.khamarvest.com/blog/bachur-jotno-o-khaddo)
-- [গরমে গরুর যত্ন ও খাদ্য ব্যবস্থাপনা](https://silage.khamarvest.com/blog/gorome-gorur-jotno-heat-stress)
+- [গরমে গরুর যত্ন](https://silage.khamarvest.com/blog/gorome-gorur-jotno-heat-stress)
 - [নেপিয়ার ঘাস নাকি ভুট্টা সাইলেজ?](https://silage.khamarvest.com/blog/nepier-ghas-vs-vutta-silage)
 - [গরুর পেট ফাঁপা (ব্লোট)](https://silage.khamarvest.com/blog/gorur-pet-fapa-hole-koronio)
 - [কোরবানির গরু মোটাতাজাকরণ](https://silage.khamarvest.com/blog/qurbani-goru-motatajakoron-porikolpona)
-- [মোটাতাজাকরণে দৈনিক ওজন বৃদ্ধি: গবেষণার হিসাব](https://silage.khamarvest.com/blog/goru-motatajakoron-dainik-ojon-briddhi)
+- [মোটাতাজাকরণে দৈনিক ওজন বৃদ্ধি](https://silage.khamarvest.com/blog/goru-motatajakoron-dainik-ojon-briddhi)
 - [Corn Silage Price in Bangladesh 2026](https://silage.khamarvest.com/corn-silage-bangladesh)
 - [বর্ষাকালে গরুর খাদ্য ব্যবস্থাপনা](https://silage.khamarvest.com/blog/borshakale-gorur-khaddo-babosthapona)
 - [গরুর খামার শুরু করার উপায়](https://silage.khamarvest.com/blog/gorur-khamar-shuru-korar-upay)
@@ -89,7 +89,7 @@ Last updated: 2026-10-26. Short index. Full per-guide summaries with figures and
 - [ভুট্টা সাইলেজের কুচির মাপ ও চপার](https://silage.khamarvest.com/blog/silage-er-jonno-vutta-kuchi-chopper)
 - [সাইলেজ রাখার পদ্ধতি: ব্যাগ, পিট, বাংকার](https://silage.khamarvest.com/blog/silage-songrokkhon-poddhoti-bag-drum-pit-bunker)
 - [শীতকালে গরুর খাদ্য ব্যবস্থাপনা](https://silage.khamarvest.com/blog/goru-shitokale-khaddo-vyobosthapna)
-- [শীতের জন্য সাইলেজ মজুদ: কত বস্তা](https://silage.khamarvest.com/blog/shiter-jonno-silage-mojud)
+- [শীতের জন্য সাইলেজ মজুদ](https://silage.khamarvest.com/blog/shiter-jonno-silage-mojud)
 - [সাইলেজের পরিবহন খরচ](https://silage.khamarvest.com/blog/silage-poribohon-khoroch)
 - [কম জায়গায় দুধের গাভী পালন](https://silage.khamarvest.com/blog/kom-jaiyay-gavir-palan-labh)
 - [সাইলেজের দাম যাচাই](https://silage.khamarvest.com/blog/vutta-silage-dam-koto-kothay-kinben)
@@ -100,7 +100,8 @@ Last updated: 2026-10-26. Short index. Full per-guide summaries with figures and
 - [ছাগল-ভেড়াকে সাইলেজ খাওয়ানোর নিয়ম](https://silage.khamarvest.com/blog/chagol-vera-silage-khawano-guide)
 - [সাইলেজ নাকি কাঁচা ঘাস নাকি খড়?](https://silage.khamarvest.com/blog/silage-vs-kacha-ghas-vs-khor)
 - [সাইলেজ সংরক্ষণের নিয়ম](https://silage.khamarvest.com/blog/silage-songrokkhon-niyom)
-- [গরুর ওজন অনুযায়ী সাইলেজ খাওয়ানোর পরিমাণ ও হিসাব](https://silage.khamarvest.com/blog/vutta-silage-khawanor-poriman-o-hishab)
+- [সাইলেজ কত দিনে তৈরি হয়](https://silage.khamarvest.com/blog/silage-koto-dine-toiri-hoy)
+- [গরুর ওজন অনুযায়ী সাইলেজ খাওয়ানোর পরিমাণ](https://silage.khamarvest.com/blog/vutta-silage-khawanor-poriman-o-hishab)
 - [প্রথমবার সাইলেজ খাওয়ানোর নিয়ম](https://silage.khamarvest.com/vutta-silage-prothombar-khawano-rules)
 - [কোন মাসে ঘাস বাড়ে না](https://silage.khamarvest.com/blog/go-khaddo-mousumi-calendar)
 - [গরুর খনিজ ও লবণ](https://silage.khamarvest.com/blog/khonij-lobon-mineral-mixture)

@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://silage.khamarvest.com/</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://silage.khamarvest.com/blog/silage-koto-dine-toiri-hoy</loc>
+    <lastmod>2026-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://silage.khamarvest.com/blog/silage-chhatrak-mycotoxin</loc>
@@ -332,7 +338,7 @@
   </url>
   <url>
     <loc>https://silage.khamarvest.com/tools/ration-generator</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -398,7 +404,7 @@
   </url>
   <url>
     <loc>https://silage.khamarvest.com/corn-silage-bangladesh</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
