@@ -211,7 +211,7 @@ for (const file of files) {
     // wider than Latin, so anything past that is written for nobody. The
     // homepage was 91 characters, 40 of which never rendered.
     const visible = title.split('|')[0].trim();
-    if (visible.length > 60) warn(file, `title's visible span is ${visible.length} chars and will be cut off in search results`);
+    if (visible.length > 60) err(file, `title's visible span is ${visible.length} chars and will be cut off in search results`);
     if (titles.has(title)) err(file, `duplicate <title>, same as ${titles.get(title)}`);
     titles.set(title, file);
   }
@@ -306,6 +306,21 @@ for (const file of files) {
   if (!html.includes('<!-- related-guides:start -->')) err(file, 'no related-guides block, run npm run build:related');
   if (!/"@type"\s*:\s*"FAQPage"/.test(html)) warn(file, 'no FAQPage schema (AI assistants pull answers from it)');
   if (!/"@type"\s*:\s*"BreadcrumbList"/.test(html)) warn(file, 'no BreadcrumbList schema');
+
+  // --- Ranking rules (AGENTS.md > Ranking, retention and the monthly rhythm) ---
+  // A guide must answer before it explains: two to four sentences with the
+  // number, the condition and the caveat, before the first numbered section.
+  // That block is what AI assistants quote, and ai_referral is now ~15% of
+  // users. New articles fail without it; the older ones are nudged until they
+  // are refreshed, so the rule cannot silently rot.
+  if (!/এক কথায় উত্তর|সংক্ষেপে উত্তর/.test(body)) {
+    const published = (html.match(/"datePublished"\s*:\s*"([^"]+)"/) || [])[1] || '';
+    if (published >= '2026-11-07') err(file, 'new article has no direct answer block (এক কথায় উত্তর)');
+    else warn(file, 'no direct answer block (এক কথায় উত্তর), add one when this guide is next refreshed');
+  }
+  // A claim without a source is the one thing a competitor can copy faster than
+  // the claim itself. Every article carries at least one external source link.
+  if (!/href="https?:\/\/(?!silage\.khamarvest\.com)/.test(body)) err(file, 'article has no external source link (তথ্যসূত্র)');
 }
 
 // --- Facebook posts (scripts/social-posts.json) ---

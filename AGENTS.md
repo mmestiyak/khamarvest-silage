@@ -131,6 +131,19 @@ The audience is often older farmers on low-end Android phones, outdoors. A WCAG 
 - Content is Bengali with combining characters (e.g. য়, ড়, "সাশ্রয়"). Manual find/replace of Bengali often fails on encoding (precomposed vs decomposed). Prefer a Python script that matches ASCII anchors or uses `[^<]*` for the Bengali, rather than retyping Bengali into an edit tool.
 - Keep `lang="bn"`. Homepage `font-hind` maps to "Noto Sans Bengali"; blog pages use "Hind Siliguri" — keep consistent with the file you're editing.
 
+## Ranking, retention and the monthly rhythm (added 2026-11-07)
+
+The Search Console export for the three months to 7 November 2026 is the reference point: 312 clicks from 6,975 impressions (4.5%). District pages converted at 14.0% CTR, the homepage at 7.5%, and the blog at 1.1% over 3,735 impressions. Those three numbers should decide where work goes. The rules below are the ones that follow from them; the checkable ones are enforced in `scripts/check-site.mjs`, and the two owner-facing companions are `MEASUREMENT.md` and `RETENTION.md`.
+
+- **A guide answers before it explains.** Every new guide opens with `এক কথায় উত্তর`, two to four sentences with the number, the condition and the caveat, before the first numbered section. `npm run check` fails a new article without one and warns on the older ones until they are refreshed. That block is what AI assistants quote, and GA4 shows `chatgpt.com` is about 15% of users, roughly a third the size of Google organic.
+- **A title changes once a month at most.** Google needs 3-6 weeks to settle a title change. Changing it again inside that window destroys the comparison and usually the result. Change it only using the query's own wording from Search Console.
+- **Striking distance before new pages.** Work queries at positions 8-15 first. The protein cluster was 14 query variants, 141 impressions and 1 click at position 7.2; fixing that one page was worth more than another guide. Same page, exact wording, one number in the first sentence.
+- **No new district pages without demand evidence.** The 41 pages produce 655 impressions at 14% CTR. The constraint is demand, not coverage, and more near-identical pages raise the doorway risk. Deepen a district only when it already has impressions.
+- **Every article cites an external source.** `npm run check` fails an article whose body has no external `তথ্যসূত্র` link. Sourcing is the one advantage a competitor cannot copy quickly, and a checker can never catch an invented figure, only a human can.
+- **One guide refreshed per month, not more.** Update the figures, bump `dateModified`, and let the truthful sitemap `lastmod` carry it. A site that changes everything at once looks unstable, and Google stops trusting the dates.
+- **External signals are the ceiling.** On-page work moves a page from 10 to 6; getting from 6 to 3 needs reviews, links and citations. Ask for a Google review after the second order (`RETENTION.md`). The Business Profile still has none.
+- **The rhythm.** Weekly: the watchdog runs itself, reply on WhatsApp, send the day-21 reorder messages. Monthly: Search Console, at most two title changes and one guide refresh, and read `ai_source`. Quarterly: `npm run season`, then the price page and its Product offer. `MEASUREMENT.md` lists the key events and the traps: data-centre traffic, historical titles from before a price change, and the fact that GA4 has no impressions.
+
 ## Blog workflow
 
 - **Writing a new guide: follow `.claude/skills/write-article/SKILL.md`.** It is the full procedure, and it exists because the same mistakes kept recurring: titles too long to render, the sidebar table of contents renumbered out of order, and new pages not registered in all five places. In Claude Code it loads as the `write-article` skill or the `/write-article` command; read the file directly if neither is available (skills register at session start, so a newly added one needs a restart).
