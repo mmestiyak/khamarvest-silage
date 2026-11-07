@@ -266,9 +266,17 @@ for (const file of files) {
           else if (article.datePublished && article.dateModified < article.datePublished) err(file, 'dateModified is earlier than datePublished');
         }
         if (article.mainEntityOfPage && canonical && article.mainEntityOfPage !== canonical) err(file, 'JSON-LD mainEntityOfPage does not match canonical');
-        for (const who of ['author', 'publisher']) {
-          if (article[who]?.name !== 'খামারভেস্ট (Khamarvest)') err(file, `Article ${who} should be "খামারভেস্ট (Khamarvest)"`);
-        }
+        if (article.publisher?.name !== 'খামারভেস্ট (Khamarvest)') err(file, 'Article publisher should be "খামারভেস্ট (Khamarvest)"');
+        // Authorship rule (AGENTS.md > Ranking...): the brand owns the page, but
+        // product and buying guides may carry a real person. A Person author only
+        // counts if it points at the on-site author page and is corroborated by
+        // the personal site; otherwise it is a name with nothing behind it.
+        const byline = article.author || {};
+        const orgAuthor = byline.name === 'খামারভেস্ট (Khamarvest)';
+        const personAuthor = byline['@type'] === 'Person' && byline.name === 'Meer Estiyak'
+          && byline.url === `${site}/author/meer-estiyak`
+          && [].concat(byline.sameAs || []).some((u) => /mmestiyak\.com/.test(u));
+        if (!orgAuthor && !personAuthor) err(file, 'Article author must be the Organization, or Meer Estiyak as a Person with url /author/meer-estiyak and sameAs mmestiyak.com');
       }
       if (file === 'index.html') {
         const product = nodes.find((n) => n['@type'] === 'Product');

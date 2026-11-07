@@ -92,7 +92,7 @@ const staticPages = (await readdir(root, { withFileTypes: true }))
 const areaPages = (await readdir(join(root, 'area')))
   .filter((file) => file.endsWith('.html'))
   .map((file) => (file === 'index.html' ? '/area/' : `/area/${file.replace(/\.html$/, '')}`));
-const sitemapUrls = ['/', ...posts.map((post) => post.url), ...toolPages, ...staticPages, ...areaPages];
+const sitemapUrls = ['/', ...posts.map((post) => post.url), ...toolPages, ...staticPages, '/author/meer-estiyak', ...areaPages];
 const today = new Date().toISOString().slice(0, 10);
 
 // lastmod has to be truthful. A sitemap that stamps every URL with today's date
