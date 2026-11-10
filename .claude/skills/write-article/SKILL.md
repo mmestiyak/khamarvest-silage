@@ -81,7 +81,7 @@ Required, and mostly enforced by `npm run check`:
   Names: `price`, `bag`, `bagKg`, `prev`; filters `|round`, `|en`. See `scripts/calc.mjs`.
   A typed total goes stale silently at the next price change.
 - Phone numbers and links come from `scripts/site.json`; write them as the site already
-  does (`wa.me/8801303438063`, `+880 1303-438063`) and the build keeps them current.
+  does (`wa.me/8801334211984`, `+880 1334-211984`) and the build keeps them current.
 - Brand named naturally in the `<article>` body **at least twice**, woven into value.
 - A `তথ্যসূত্র` section with the verified source links.
 - No em or en dashes anywhere. Bengali digits ০-৯, never Devanagari ०-९, and no Devanagari

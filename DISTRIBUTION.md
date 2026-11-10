@@ -10,7 +10,7 @@ Facts to keep consistent everywhere (change them here first if they ever change)
 - Daily feeding: দুধের গাভী ১৫-২৫ কেজি, মোটাতাজাকরণ ১০-২০ কেজি, ছাগল/ভেড়া ১-২ কেজি.
 - Storage: unopened airtight bag ৬-১২ মাস; after opening use within ২-৩ দিন.
 - Payment: cash on delivery, nationwide. Transport quoted per order on the confirmation call.
-- WhatsApp: +880 1303-438063 · Website: https://silage.khamarvest.com
+- WhatsApp: +880 1334-211984 · Website: https://silage.khamarvest.com
 - Facebook: https://www.facebook.com/khamarvestSilage/ · YouTube: https://www.youtube.com/@khamarvest
 
 Rule: never promise a delivery date, a guaranteed weight gain, or a profit figure. Those are
@@ -49,7 +49,7 @@ fattening feed, silage supplier Bangladesh
 ### Short listing (about 250 characters)
 Khamarvest Silage supplies fresh corn (maize) silage to dairy and beef farms across
 Bangladesh. Whole corn plants chopped at the correct maturity stage and naturally fermented
-in 50 kg airtight bags. BDT 8.50/kg. Cash on delivery nationwide. WhatsApp +880 1303-438063.
+in 50 kg airtight bags. BDT 8.50/kg. Cash on delivery nationwide. WhatsApp +880 1334-211984.
 
 ### Long listing (about 900 characters)
 Khamarvest Silage is a Bangladeshi supplier of corn (maize) silage for dairy cattle, beef
@@ -67,7 +67,7 @@ We deliver across Bangladesh with cash on delivery, including Bogura, Pabna, Sir
 Natore, Rangpur, Dinajpur, Mymensingh, Tangail, Dhaka, Gazipur, Kushtia, Jashore, Khulna,
 Satkhira, Cumilla, Noakhali, Chattogram and Cox's Bazar. Transport cost is quoted per order.
 
-Order or ask for a quote on WhatsApp: +880 1303-438063.
+Order or ask for a quote on WhatsApp: +880 1334-211984.
 Website: https://silage.khamarvest.com
 
 ### Company Profile / About Us (for the big text box on TradeFord, TradeKey, Alibaba-style sites)
@@ -93,7 +93,7 @@ farmers at https://silage.khamarvest.com, covering feeding rates, storage, seaso
 planning and farm economics.
 
 We welcome enquiries from dairy and beef farms, feed traders, agricultural projects and
-institutional buyers. Contact us on WhatsApp at +880 1303-438063.
+institutional buyers. Contact us on WhatsApp at +880 1334-211984.
 
 ### The other fields on those forms
 
@@ -109,7 +109,7 @@ complete profile, but an inflated one costs you the deal when a buyer checks.
 - Year established, number of employees, annual revenue, production capacity: only we know
   these. Enter the real figures or leave them blank.
 - Certifications, ISO, export licences: leave blank unless we hold the document.
-- Contact: WhatsApp +880 1303-438063
+- Contact: WhatsApp +880 1334-211984
 
 ### Product listing (for directories with a product field)
 Product: Corn Silage, 50 kg airtight bag
@@ -203,7 +203,7 @@ Paste at the top of every video description. The link must be in the first two l
 because YouTube hides the rest behind "show more".
 
 খামারভেস্ট সাইলেজ · ভুট্টা সাইলেজ ৮.৫০ টাকা কেজি, ৫০ কেজি বস্তা ৪২৫ টাকা
-অর্ডার (WhatsApp): https://wa.me/8801303438063
+অর্ডার (WhatsApp): https://wa.me/8801334211984
 দাম, পরিমাণ ও খামারি গাইড: https://silage.khamarvest.com
 
 দৈনিক খাওয়ানোর পরিমাণ: দুধের গাভী ১৫-২৫ কেজি, মোটাতাজাকরণের গরু ১০-২০ কেজি,
@@ -226,7 +226,7 @@ Facebook: https://www.facebook.com/khamarvestSilage/
 দাম: ৮.৫০ টাকা কেজি, ৫০ কেজি এয়ারটাইট বস্তা ৪২৫ টাকা। পণ্য হাতে পেয়ে টাকা (ক্যাশ অন
 ডেলিভারি)। বেশি নিলে দাম আলোচনাসাপেক্ষ।
 
-অর্ডার দিতে WhatsApp-এ নাম, এলাকা আর কত বস্তা লাগবে লিখে পাঠান: https://wa.me/8801303438063
+অর্ডার দিতে WhatsApp-এ নাম, এলাকা আর কত বস্তা লাগবে লিখে পাঠান: https://wa.me/8801334211984
 
 কত বস্তা লাগবে বুঝতে না পারলে ওয়েবসাইটের ক্যালকুলেটরে গরুর সংখ্যা বসিয়ে দেখুন, সঙ্গে দাম,
 খাওয়ানোর নিয়ম আর ৪০টির বেশি খামারি গাইডও আছে: https://silage.khamarvest.com

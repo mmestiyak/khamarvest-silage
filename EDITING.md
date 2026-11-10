@@ -28,9 +28,9 @@ is published until you push.
 | **Where order-form leads are saved** (Google Sheet) | `LEADS_URL` in `js/leads.js`; setup steps at the top of `scripts/leads-apps-script.gs` | `npm run verify` |
 | **A new guide** | ask Claude: `/write-article` | it follows `.claude/skills/write-article/SKILL.md` |
 
-Write phone numbers in `site.json` the local way, `01303-438063`. The build
-writes every other form itself (`wa.me/8801303438063`, `+880 1303-438063`,
-`tel:+8801303438063`).
+Write phone numbers in `site.json` the local way, `01334-211984`. The build
+writes every other form itself (`wa.me/8801334211984`, `+880 1334-211984`,
+`tel:+8801334211984`).
 
 ## What changes by itself
 

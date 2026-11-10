@@ -21,7 +21,7 @@ This is now live on your homepage. Google Search & Maps will recognize you as a 
 ### Step 2: Fill in Basic Info
 - **Business Name**: খামারভেস্ট সাইলেজ (or Khamarvest Silage)
 - **Category**: Choose "Agricultural Services" or "Wholesaler"
-- **Phone**: +880 1303-438063
+- **Phone**: +880 1334-211984
 - **Website**: https://silage.khamarvest.com
 - **Address**: Leave blank if you're delivery-only (WhatsApp-based ordering) OR enter your physical location if you have one
 
@@ -66,7 +66,7 @@ Once verified:
 ### Step 6: Link Your Website
 - GMB will automatically find your website
 - It will also recognize the schema markup I added
-- Make sure the phone number in GMB matches your website (+880 1303-438063) ✓
+- Make sure the phone number in GMB matches your website (+880 1334-211984) ✓
 
 ---
 

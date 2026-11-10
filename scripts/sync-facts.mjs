@@ -21,15 +21,15 @@ const site = JSON.parse(await readFile(SITE, 'utf8'));
 let applied;
 try { applied = JSON.parse(await readFile(APPLIED, 'utf8')); } catch { applied = null; }
 
-/** Every way a Bangladeshi mobile number is written on the site, from "01303-438063". */
+/** Every way a Bangladeshi mobile number is written on the site, from "01334-211984". */
 export function phoneFormats(local) {
   const digits = local.replace(/\D/g, '');           // 01303438063
   if (!/^01\d{9}$/.test(digits)) throw new Error(`scripts/site.json: "${local}" is not an 11-digit Bangladeshi mobile number`);
   const rest = digits.slice(1);                       // 1303438063
   return [
-    `880${rest}`,                                     // wa.me/8801303438063, tel:+8801303438063, JSON-LD
-    `+880 ${rest.slice(0, 4)}-${rest.slice(4)}`,      // +880 1303-438063 (visible)
-    `0${rest.slice(0, 4)}-${rest.slice(4)}`,          // 01303-438063 (visible, local)
+    `880${rest}`,                                     // wa.me/8801334211984, tel:+8801334211984, JSON-LD
+    `+880 ${rest.slice(0, 4)}-${rest.slice(4)}`,      // +880 1334-211984 (visible)
+    `0${rest.slice(0, 4)}-${rest.slice(4)}`,          // 01334-211984 (visible, local)
   ];
 }
 

@@ -83,7 +83,7 @@
           v('name') ? 'নাম: ' + v('name') : '', v('phone') ? 'মোবাইল: ' + v('phone') : '',
           area ? 'এলাকা: ' + area : '', v('bags') ? 'বস্তা: ' + v('bags') : '',
           'দাম জানাবেন?'].filter(Boolean).join('\n');
-        window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+        window.open('https://wa.me/8801334211984?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       });
     });
   }
@@ -131,7 +131,7 @@
           v('bags') ? 'মাসে বস্তা: ' + v('bags') : '', v('months') ? 'কোন মাসে লাগবে: ' + v('months') : '',
           yearly ? 'সারা বছরের সাইলেজ পরিকল্পনায় রাখুন' : '', v('note') ? 'নোট: ' + v('note') : '',
           'তৈরি হলে আমাকে ফোন করবেন?'].filter(Boolean).join('\n');
-        window.open('https://wa.me/8801303438063?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+        window.open('https://wa.me/8801334211984?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       });
     });
   }

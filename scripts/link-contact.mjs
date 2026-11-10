@@ -2,7 +2,7 @@
 // the WhatsApp number opens wa.me, the call numbers open tel:. Run: npm run build:contact
 // (part of npm run build, before build:css).
 //
-// Why: a farmer on a phone who reads "WhatsApp +880 1303-438063" had to copy the
+// Why: a farmer on a phone who reads "WhatsApp +880 1334-211984" had to copy the
 // number by hand. A wa.me link also lets /js/ga.js prefill the message with the
 // page's H1 and count the tap, exactly like every other WhatsApp link.
 //
@@ -18,7 +18,7 @@ const site = JSON.parse(await readFile(join(root, 'scripts/site.json'), 'utf8'))
 
 const digits = (n) => n.replace(/\D/g, '');
 const intl = (local) => `880${digits(local).slice(1)}`;
-// "01303-438063" and "+880 1303-438063": the two ways the site writes a number.
+// "01334-211984" and "+880 1334-211984": the two ways the site writes a number.
 const forms = (local) => {
   const d = digits(local);
   return [`${d.slice(0, 5)}-${d.slice(5)}`, `+880 ${d.slice(1, 5)}-${d.slice(5)}`, d];

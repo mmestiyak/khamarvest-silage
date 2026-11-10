@@ -13,37 +13,37 @@ at the load point, transport quoted per order on the confirmation call; payment
 on delivery in cash or by bank transfer to the account in Khamarvest's own name,
 no advance; no minimum order; made mainly in Bogura (Sherpur, Dhunat,
 Shahjahanpur); delivery to every upazila of the 33 districts on /area/; no depots
-or dealers; WhatsApp +880 1303-438063, call 01334-211984.
+or dealers; WhatsApp +880 1334-211984, call 01334-211984.
 
 ---
 
 ## 1. Google Business Profile description (up to 750 characters)
 
 ### Bengali
-খামারভেস্ট সাইলেজ: বগুড়ায় নিজস্ব উৎপাদনের খাঁটি ভুট্টা সাইলেজ, ৫০ কেজির এয়ারটাইট বস্তায়। দাম প্রতি কেজি ৮.৫০ টাকা, বস্তা ৪২৫ টাকা, লোডিং পয়েন্টে। পরিবহন খরচ ঠিকানা ও পরিমাণভেদে, কনফার্মেশন কলে আগেই জানানো হয়। টাকা পণ্য হাতে পেয়ে, নগদে বা খামারভেস্টের নামের ব্যাংক অ্যাকাউন্টে; অগ্রিম লাগে না। এক বস্তাও অর্ডার করা যায়। ৩৩টি জেলার সব উপজেলায় ডেলিভারি। আমাদের কোনো ডিপো বা ডিলার নেই, অর্ডার শুধু এই নম্বরে। WhatsApp: +880 1303-438063, কল: 01334-211984। খাওয়ানোর নিয়ম ও ফ্রি ক্যালকুলেটর: silage.khamarvest.com
+খামারভেস্ট সাইলেজ: বগুড়ায় নিজস্ব উৎপাদনের খাঁটি ভুট্টা সাইলেজ, ৫০ কেজির এয়ারটাইট বস্তায়। দাম প্রতি কেজি ৮.৫০ টাকা, বস্তা ৪২৫ টাকা, লোডিং পয়েন্টে। পরিবহন খরচ ঠিকানা ও পরিমাণভেদে, কনফার্মেশন কলে আগেই জানানো হয়। টাকা পণ্য হাতে পেয়ে, নগদে বা খামারভেস্টের নামের ব্যাংক অ্যাকাউন্টে; অগ্রিম লাগে না। এক বস্তাও অর্ডার করা যায়। ৩৩টি জেলার সব উপজেলায় ডেলিভারি। আমাদের কোনো ডিপো বা ডিলার নেই, অর্ডার শুধু এই নম্বরে। WhatsApp: +880 1334-211984, কল: 01334-211984। খাওয়ানোর নিয়ম ও ফ্রি ক্যালকুলেটর: silage.khamarvest.com
 
 ### English
-Khamarvest Silage: whole-plant corn silage made in Bogura, in 50 kg airtight bags. BDT 8.50 per kg, BDT 425 per bag at the load point; transport is quoted per order on the confirmation call. Pay on delivery, in cash or by bank transfer to the account in Khamarvest's own name; no advance. No minimum order. Delivery to every upazila of 33 districts. No depots or dealers: order only on WhatsApp +880 1303-438063 or call 01334-211984. Feeding guides and free calculators: silage.khamarvest.com
+Khamarvest Silage: whole-plant corn silage made in Bogura, in 50 kg airtight bags. BDT 8.50 per kg, BDT 425 per bag at the load point; transport is quoted per order on the confirmation call. Pay on delivery, in cash or by bank transfer to the account in Khamarvest's own name; no advance. No minimum order. Delivery to every upazila of 33 districts. No depots or dealers: order only on WhatsApp +880 1334-211984 or call 01334-211984. Feeding guides and free calculators: silage.khamarvest.com
 
 ---
 
 ## 2. Short description (directories, about fields, ~250 characters)
 
 ### Bengali
-বগুড়ায় তৈরি খাঁটি ভুট্টা সাইলেজ। প্রতি কেজি ৮.৫০ টাকা, ৫০ কেজি বস্তা ৪২৫ টাকা। পণ্য হাতে পেয়ে টাকা, অগ্রিম নেই। ৩৩টি জেলায় ডেলিভারি। WhatsApp: +880 1303-438063
+বগুড়ায় তৈরি খাঁটি ভুট্টা সাইলেজ। প্রতি কেজি ৮.৫০ টাকা, ৫০ কেজি বস্তা ৪২৫ টাকা। পণ্য হাতে পেয়ে টাকা, অগ্রিম নেই। ৩৩টি জেলায় ডেলিভারি। WhatsApp: +880 1334-211984
 
 ### English
-Corn silage made in Bogura, Bangladesh. BDT 8.50/kg, BDT 425 per 50 kg airtight bag. Pay on delivery, no advance. Delivery to 33 districts. WhatsApp +880 1303-438063 · silage.khamarvest.com
+Corn silage made in Bogura, Bangladesh. BDT 8.50/kg, BDT 425 per 50 kg airtight bag. Pay on delivery, no advance. Delivery to 33 districts. WhatsApp +880 1334-211984 · silage.khamarvest.com
 
 ---
 
 ## 3. Facebook page "About" / Intro
 
 ### Bengali
-খাঁটি ভুট্টা সাইলেজ, বগুড়ায় নিজস্ব উৎপাদন। ৮.৫০ টাকা কেজি, বস্তা ৪২৫ টাকা, টাকা পণ্য হাতে পেয়ে। খাওয়ানোর নিয়ম ও ফ্রি ক্যালকুলেটর: silage.khamarvest.com · WhatsApp: +880 1303-438063
+খাঁটি ভুট্টা সাইলেজ, বগুড়ায় নিজস্ব উৎপাদন। ৮.৫০ টাকা কেজি, বস্তা ৪২৫ টাকা, টাকা পণ্য হাতে পেয়ে। খাওয়ানোর নিয়ম ও ফ্রি ক্যালকুলেটর: silage.khamarvest.com · WhatsApp: +880 1334-211984
 
 ### English
-Corn silage made in Bogura. BDT 8.50/kg, BDT 425 a bag, pay on delivery. Feeding guides and free calculators at silage.khamarvest.com · WhatsApp +880 1303-438063
+Corn silage made in Bogura. BDT 8.50/kg, BDT 425 a bag, pay on delivery. Feeding guides and free calculators at silage.khamarvest.com · WhatsApp +880 1334-211984
 
 ---
 
@@ -59,7 +59,7 @@ Welcome to Khamarvest Silage. Corn silage at BDT 8.50/kg, BDT 425 per 50 kg bag.
 
 ## 5. YouTube channel "About"
 
-খামারভেস্ট সাইলেজের চ্যানেল। বগুড়ায় কীভাবে ভুট্টা সাইলেজ তৈরি, বস্তাজাত ও লোড হয় তা দেখাই, আর খাওয়ানোর নিয়ম, পরিমাণের হিসাব ও সংরক্ষণের নিয়ম বুঝিয়ে বলি। সব গাইড ও ফ্রি ক্যালকুলেটর: https://silage.khamarvest.com · অর্ডার: WhatsApp +880 1303-438063
+খামারভেস্ট সাইলেজের চ্যানেল। বগুড়ায় কীভাবে ভুট্টা সাইলেজ তৈরি, বস্তাজাত ও লোড হয় তা দেখাই, আর খাওয়ানোর নিয়ম, পরিমাণের হিসাব ও সংরক্ষণের নিয়ম বুঝিয়ে বলি। সব গাইড ও ফ্রি ক্যালকুলেটর: https://silage.khamarvest.com · অর্ডার: WhatsApp +880 1334-211984
 
 ---
 
@@ -76,7 +76,7 @@ Welcome to Khamarvest Silage. Corn silage at BDT 8.50/kg, BDT 425 per 50 kg bag.
 
 **খামারিদের জন্য ফ্রি:** খাওয়ানোর নিয়ম ও সংরক্ষণের সূত্রসহ গাইড, সাইলেজ ক্যালকুলেটর, কম খরচের রেশন তৈরির টুল, প্রিন্ট করার খাদ্য তালিকা ও হিসাব খাতা: https://silage.khamarvest.com
 
-যোগাযোগ: WhatsApp +880 1303-438063 (দিনরাত), কল 01334-211984।
+যোগাযোগ: WhatsApp +880 1334-211984 (দিনরাত), কল 01334-211984।
 
 ### English
 Khamarvest Silage sells corn silage directly to cattle farmers in Bangladesh. The team spent years producing large volumes of silage behind the scenes for major Bangladeshi companies; Khamarvest is its own brand. Production is mainly in Bogura district, around Sherpur, Dhunat and Shahjahanpur.
@@ -89,7 +89,7 @@ Khamarvest Silage sells corn silage directly to cattle farmers in Bangladesh. Th
 
 **Free for farmers:** sourced feeding and storage guides, a silage quantity calculator, a least-cost ration formulator, printable feeding charts and record books: https://silage.khamarvest.com
 
-Contact: WhatsApp +880 1303-438063 (answered day and night), call 01334-211984.
+Contact: WhatsApp +880 1334-211984 (answered day and night), call 01334-211984.
 
 ---
 

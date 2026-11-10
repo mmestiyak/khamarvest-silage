@@ -106,17 +106,17 @@ function page(d) {
   const url = `${siteUrl}/area/silage-${d.slug}`;
   // Names the district page and asks for upazila and bag count, the two facts
   // the owner needs before quoting transport. Also tells the owner which page sent the lead.
-  const wa = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.loc} সাইলেজ নিতে চাই। দাম জানাবেন?`)}`;
+  const wa = `https://wa.me/8801334211984?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.loc} সাইলেজ নিতে চাই। দাম জানাবেন?`)}`;
   const callBtn = (cls) => `<a href="tel:${CALL_TEL}" class="${cls}">কল করুন</a>`;
   // Returning customers are the bulk of a monthly consumable's revenue. One tap
   // with a complete message beats asking them to find the number again.
-  const waReorder = `https://wa.me/8801303438063?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.loc} আগে খামারভেস্টের সাইলেজ নিয়েছিলাম। আবার নিতে চাই, এই মাসে কত বস্তা লাগবে জানাবেন?`)}`;
+  const waReorder = `https://wa.me/8801334211984?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি ${d.loc} আগে খামারভেস্টের সাইলেজ নিয়েছিলাম। আবার নিতে চাই, এই মাসে কত বস্তা লাগবে জানাবেন?`)}`;
   // Google cuts a title around 60 characters; long district names drop "ভুট্টা".
   const titleSpan = `${d.loc} ভুট্টা সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি`;
   const title = titleSpan.length > 60
     ? `${d.loc} সাইলেজ: ${product.perKgBn} টাকা কেজি, হোম ডেলিভারি | খামারভেস্ট`
     : `${titleSpan} | খামারভেস্ট সাইলেজ`;
-  const desc = `${d.name} জেলার সব উপজেলায় খাঁটি ভুট্টা সাইলেজ ডেলিভারি। দাম ${product.perKgBn} টাকা কেজি, ${product.bagKgBn} কেজি এয়ারটাইট বস্তা ${product.bagPriceBn} টাকা, টাকা পণ্য হাতে পেয়ে। WhatsApp: +880 1303-438063।`;
+  const desc = `${d.name} জেলার সব উপজেলায় খাঁটি ভুট্টা সাইলেজ ডেলিভারি। দাম ${product.perKgBn} টাকা কেজি, ${product.bagKgBn} কেজি এয়ারটাইট বস্তা ${product.bagPriceBn} টাকা, টাকা পণ্য হাতে পেয়ে। WhatsApp: +880 1334-211984।`;
   const nearLinks = d.near.map((s) => `<a href="/area/silage-${s}" class="font-semibold text-[#0b6a3e] underline underline-offset-4">${bySlug[s].name}</a>`).join(', ');
 
   return `<!DOCTYPE html>
@@ -149,7 +149,7 @@ function page(d) {
         "inLanguage":"bn-BD",
         "url":"${url}",
         "areaServed":{"@type":"AdministrativeArea","name":"${d.en} District, Bangladesh"},
-        "provider":{"@type":"Organization","name":"খামারভেস্ট (Khamarvest)","telephone":"+8801303438063","url":"${siteUrl}/","address":{"@type":"PostalAddress","addressLocality":"বগুড়া","addressRegion":"রাজশাহী","addressCountry":"BD"}}
+        "provider":{"@type":"Organization","name":"খামারভেস্ট (Khamarvest)","telephone":"+8801334211984","url":"${siteUrl}/","address":{"@type":"PostalAddress","addressLocality":"বগুড়া","addressRegion":"রাজশাহী","addressCountry":"BD"}}
       },
       {
         "@type":"BreadcrumbList",
@@ -162,7 +162,7 @@ function page(d) {
       {
         "@type":"FAQPage",
         "mainEntity":[
-          {"@type":"Question","name":"${d.loc} কি ভুট্টা সাইলেজ ডেলিভারি হয়?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ, খামারভেস্ট সাইলেজ ${d.name} জেলার সব উপজেলায় হোম ডেলিভারি দেয়। WhatsApp-এ (+880 1303-438063) নাম, ঠিকানা ও বস্তার সংখ্যা লিখে পাঠালেই অর্ডার হয়ে যায়।"}},
+          {"@type":"Question","name":"${d.loc} কি ভুট্টা সাইলেজ ডেলিভারি হয়?","acceptedAnswer":{"@type":"Answer","text":"হ্যাঁ, খামারভেস্ট সাইলেজ ${d.name} জেলার সব উপজেলায় হোম ডেলিভারি দেয়। WhatsApp-এ (+880 1334-211984) নাম, ঠিকানা ও বস্তার সংখ্যা লিখে পাঠালেই অর্ডার হয়ে যায়।"}},
           {"@type":"Question","name":"${d.loc} ডেলিভারি চার্জ কত?","acceptedAnswer":{"@type":"Answer","text":"পরিবহন খরচ ঠিকানার দূরত্ব ও বস্তার সংখ্যাভেদে আলাদা হয়। অর্ডারের পর কনফার্মেশন কলে ডেলিভারিসহ মোট খরচ আগেই জানিয়ে দেওয়া হয়, পরে বাড়তি কিছু চাওয়া হয় না।"}},
           {"@type":"Question","name":"কত দিনে পৌঁছায়?","acceptedAnswer":{"@type":"Answer","text":"অর্ডার কনফার্ম করার সময়ই ডেলিভারির তারিখ জানিয়ে দেওয়া হয়। এলাকা ও পরিমাণ অনুযায়ী তারিখ ঠিক হয়।"}},
           {"@type":"Question","name":"টাকা কীভাবে দিতে হয়?","acceptedAnswer":{"@type":"Answer","text":"পণ্য হাতে পেয়ে, বস্তা ও মান দেখে তারপর টাকা দেবেন: নগদে (ক্যাশ অন ডেলিভারি), অথবা খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে ট্রান্সফার করে। আগে কোনো টাকা দিতে হয় না।"}},
@@ -217,7 +217,7 @@ ${d.upazilas ? `      <h2 id="upazila" class="mt-9 text-2xl font-bold text-[#123
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${d.name} জেলার প্রতিটি উপজেলায় বস্তা পৌঁছে দেওয়া হয়: ${d.upazilas}। পরিবহন খরচ উপজেলা ও বস্তার সংখ্যা দেখে কনফার্মেশন কলে জানানো হয়; পাশের খামারিরা মিলে এক গাড়িতে নিলে কেজিপ্রতি পরিবহন কম পড়ে।</p>
 ` : ''}      <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.name} থেকে অর্ডারের নিয়ম (৩ ধাপ)</h2>
       <ol class="mt-4 grid gap-4 sm:grid-cols-3">
-        <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">১. মেসেজ পাঠান</strong>নাম, ${gen(d.name)} ঠিকানা ও কত বস্তা লাগবে লিখে WhatsApp করুন: +880 1303-438063</li>
+        <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">১. মেসেজ পাঠান</strong>নাম, ${gen(d.name)} ঠিকানা ও কত বস্তা লাগবে লিখে WhatsApp করুন: +880 1334-211984</li>
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">২. কনফার্মেশন কল</strong>ডেলিভারির তারিখ ও পরিবহনসহ মোট খরচ আগেই জানানো হবে</li>
         <li class="rounded-xl border border-[#184d32]/10 bg-white p-5"><strong class="block text-[#0b6a3e]">৩. পণ্য বুঝে টাকা</strong>বস্তা হাতে পেয়ে মান দেখে টাকা দেবেন: নগদে বা খামারভেস্টের নামের ব্যাংক অ্যাকাউন্টে</li>
       </ol>
@@ -338,7 +338,7 @@ const indexHtml = `<!DOCTYPE html>
     <section class="mt-10 rounded-2xl bg-[#0b5b38] px-6 py-8 text-white sm:px-8">
       <h2 class="text-2xl font-bold">তালিকার বাইরের জেলা থেকে বলছেন?</h2>
       <p class="mt-3 max-w-2xl text-lg leading-8 text-[#e1f5e6]">সমস্যা নেই। নাম, ঠিকানা ও বস্তার সংখ্যা লিখে WhatsApp করুন, ডেলিভারিসহ মোট খরচ জানিয়ে দেওয়া হবে।</p>
-      <a href="https://wa.me/8801303438063?text=${encodeURIComponent('আসসালামু আলাইকুম, আমার এলাকায় সাইলেজ ডেলিভারির খরচ জানতে চাই।')}" target="_blank" rel="noopener" class="mt-5 inline-flex rounded-xl bg-white px-5 py-3 text-base font-bold text-[#075a35] hover:bg-[#e5f5e9]">WhatsApp-এ কথা বলুন</a>
+      <a href="https://wa.me/8801334211984?text=${encodeURIComponent('আসসালামু আলাইকুম, আমার এলাকায় সাইলেজ ডেলিভারির খরচ জানতে চাই।')}" target="_blank" rel="noopener" class="mt-5 inline-flex rounded-xl bg-white px-5 py-3 text-base font-bold text-[#075a35] hover:bg-[#e5f5e9]">WhatsApp-এ কথা বলুন</a>
     </section>
   </main>
   <footer class="border-t border-[#184d32]/10 bg-white px-5 py-7 text-center text-sm text-[#54705d]">© ২০২৬ খামারভেস্ট সাইলেজ · <a href="/blog/" class="font-medium text-[#0b6a3e] underline">সব গাইড</a> · <a href="/tools/" class="font-medium text-[#0b6a3e] underline">ফ্রি টুলস</a> · <a href="/corn-silage-bangladesh" lang="en" class="font-medium text-[#0b6a3e] underline">Corn silage in Bangladesh (English)</a></footer>
