@@ -15,7 +15,15 @@
 // in NOTIFY_EMAIL to send them elsewhere, or 'off' to stop them.
 //
 // After editing this script later, use Deploy > Manage deployments > Edit >
-// Version: New version, so the same /exec URL keeps working.
+// Version: New version > Deploy, so the same /exec URL keeps working.
+// (Needed once now: the script also receives silagebd.com questions, see below.
+// Redeploy as a NEW VERSION of the SAME deployment, never a new deployment.)
+//
+// Third tab, "SilageBD প্রশ্ন": questions from the question box on silagebd.com
+// (public/js/questions.js there posts to this same /exec URL with form_type
+// 'silagebd_question'). Columns: তারিখ, প্রশ্ন, জেলা, মোবাইল, পেজ, গাইড, উৎস,
+// অবস্থা ("নতুন"). Each question emails the owner "SilageBD: নতুন প্রশ্ন (<জেলা>)",
+// with a WhatsApp reply link when a number was given. They never go to the Leads tab.
 //
 // Two tabs: "Leads" (homepage order form: name, mobile, area, bags) and
 // "Clicks" (every WhatsApp / call tap on any page: time, page, button, source;
@@ -38,6 +46,7 @@ function doPost(e) {
     var d = JSON.parse((e && e.postData && e.postData.contents) || '{}');
     if (d.website) return ok(); // honeypot: real farmers never see this field
     if (d.type === 'click') return logClick(d);
+    if (d.form_type === 'silagebd_question') return logQuestion(d);
 
     var phone = toAsciiDigits(clip(d.phone, 30)).replace(/[^\d+]/g, '');
     var name = clip(d.name, 80);
@@ -102,6 +111,45 @@ function logClick(d) {
   return ok();
 }
 
+// silagebd.com question box: own tab, own email. Rejects empty or oversize text.
+var QUESTIONS_NAME = 'SilageBD প্রশ্ন';
+var QUESTION_HEADERS = ['তারিখ', 'প্রশ্ন', 'জেলা', 'মোবাইল', 'পেজ', 'গাইড', 'উৎস', 'অবস্থা'];
+
+function logQuestion(d) {
+  var question = clip(d.question, 100000);
+  if (question.length < 10 || question.length > 1000) return ok();
+  var district = clip(d.district, 60);
+  var phone = toAsciiDigits(clip(d.phone, 20)).replace(/[^\d+]/g, '');
+  var page = clip(d.page, 200);
+  var source = clip(d.ai_source, 40) || clip(d.referrer_host, 80) || clip(d.source, 80) || 'direct';
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(QUESTIONS_NAME) || ss.insertSheet(QUESTIONS_NAME);
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(QUESTION_HEADERS);
+    sheet.setFrozenRows(1);
+    sheet.getRange(1, 1, 1, QUESTION_HEADERS.length).setFontWeight('bold');
+    sheet.getRange('A:A').setNumberFormat('dd/MM/yyyy HH:mm');
+    sheet.getRange('H2:H').setDataValidation(SpreadsheetApp.newDataValidation()
+      .requireValueInList(['নতুন', 'উত্তর দেওয়া হয়েছে', 'প্রশ্নোত্তর পেজে গেছে', 'বাদ'], true).build());
+  }
+  sheet.appendRow([new Date(), question, district, "'" + phone, page, clip(d.guide_slug, 100), source, 'নতুন']);
+  var to = ownerEmail();
+  if (to) {
+    var body = 'প্রশ্ন:\n' + question + '\n\nজেলা: ' + (district || '(দেননি)') + '\nপেজ: ' + page + '\nউৎস: ' + source;
+    if (phone) {
+      var n = phone.replace(/\D/g, '');
+      if (n.indexOf('88') !== 0) n = '88' + n;
+      var msg = 'আসসালামু আলাইকুম, SilageBD-তে আপনি একটা প্রশ্ন পাঠিয়েছিলেন। এখন কি উত্তরটা জানানো যাবে?';
+      body += '\nমোবাইল: ' + phone + '\n\nWhatsApp-এ উত্তর দিতে: https://wa.me/' + n + '?text=' + encodeURIComponent(msg);
+    } else {
+      body += '\nমোবাইল: (দেননি, তাই শুধু প্রশ্নোত্তর পেজের জন্য)';
+    }
+    body += '\n\nশিট: ' + ss.getUrl();
+    MailApp.sendEmail(to, 'SilageBD: নতুন প্রশ্ন (' + (district || 'জেলা জানা নেই') + ')', body);
+  }
+  return ok();
+}
+
 function ownerEmail() {
   if (NOTIFY_EMAIL === 'off') return '';
   return NOTIFY_EMAIL || Session.getEffectiveUser().getEmail();
@@ -149,6 +197,8 @@ function dailyDigest(force) {
     lines.push('', 'কোথা থেকে এসেছেন:');
     top(dayClicks, 5, 5).forEach(function (t) { lines.push('  - ' + t[0] + ': ' + t[1]); });
   }
+  var qs = dataRows(ss.getSheetByName(QUESTIONS_NAME)).filter(function (r) { return r[7] === 'নতুন'; });
+  if (qs.length) lines.push('', 'SilageBD প্রশ্ন: ' + qs.length);
   lines.push('', 'শিট: ' + ss.getUrl());
   MailApp.sendEmail(to, 'খামারভেস্ট লিড: ' + fresh.length + ' নতুন, ' + waiting.length + ' জনকে ফোন বাকি', lines.join('\n'));
 }
