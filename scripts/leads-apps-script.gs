@@ -302,6 +302,10 @@ function bn(n) {
 function ownerEmail() {
   if (NOTIFY_EMAIL === 'off') return '';
   if (NOTIFY_EMAIL) return NOTIFY_EMAIL;
+  // Preferred: Project Settings > Script properties > NOTIFY_EMAIL = your Gmail.
+  // Keeps the address out of this public file and needs no extra permission.
+  var prop = PropertiesService.getScriptProperties().getProperty('NOTIFY_EMAIL');
+  if (prop) return prop.trim();
   // Needs the "see your email address" permission; if it was not granted,
   // skip the email instead of crashing the whole request.
   try { return Session.getEffectiveUser().getEmail(); } catch (e) { console.error(e); return ''; }
