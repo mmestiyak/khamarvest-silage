@@ -98,6 +98,7 @@ function doPost(e) {
       ''
     ]);
 
+    if (shared) logShared(d, name, phone);
     var to = ownerEmail();
     if (to) {
       MailApp.sendEmail(to, (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : 'নতুন লিড: ')) + name + ' (' + clip(d.location, 40) + ')',
@@ -106,7 +107,6 @@ function doPost(e) {
         '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
         '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
     }
-    if (shared) logShared(d, name, phone);
   } catch (err) {
     console.error(err);
   }
@@ -301,7 +301,10 @@ function bn(n) {
 
 function ownerEmail() {
   if (NOTIFY_EMAIL === 'off') return '';
-  return NOTIFY_EMAIL || Session.getEffectiveUser().getEmail();
+  if (NOTIFY_EMAIL) return NOTIFY_EMAIL;
+  // Needs the "see your email address" permission; if it was not granted,
+  // skip the email instead of crashing the whole request.
+  try { return Session.getEffectiveUser().getEmail(); } catch (e) { console.error(e); return ''; }
 }
 
 // Run once from the editor (step 3). Safe to run again: it replaces its trigger.
