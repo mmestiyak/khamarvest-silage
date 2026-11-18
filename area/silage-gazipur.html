@@ -16,7 +16,7 @@
   <meta property="og:url" content="https://silage.khamarvest.com/area/silage-gazipur">
   <meta property="og:image" content="https://silage.khamarvest.com/img/silage-production-1400.jpeg">
   <link rel="preload" href="/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/site.css?v=cbc60661">
+  <link rel="stylesheet" href="/css/site.css?v=38a3ce2c">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -168,6 +168,27 @@
       </div>
 
       <p class="mt-8 text-[#456451]">কাছাকাছি জেলায়ও ডেলিভারি: <a href="/area/silage-dhaka" class="font-semibold text-[#0b6a3e] underline underline-offset-4">ঢাকা</a>, <a href="/area/silage-tangail" class="font-semibold text-[#0b6a3e] underline underline-offset-4">টাঙ্গাইল</a>, <a href="/area/silage-mymensingh" class="font-semibold text-[#0b6a3e] underline underline-offset-4">ময়মনসিংহ</a> · <a href="/area/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সব এলাকা দেখুন</a></p>
+
+<!-- shared-delivery:start -->
+      <section id="shared-delivery" data-cta="shared_delivery" class="rounded-2xl border border-[#0b5b38]/25 bg-[#f3f8ee] p-5 sm:p-6">
+        <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন</h2>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">খামারভেস্ট সাইলেজে ন্যূনতম অর্ডার নেই, এক বস্তাও নিতে পারেন। তবে অল্প বস্তার জন্য আলাদা গাড়ি গেলে কেজিপ্রতি পরিবহন খরচ বেশি পড়ে। একই এলাকার কয়েকজন খামারি একসাথে নিলে একটা গাড়িতেই সবার বস্তা যায়, তখন কেজিপ্রতি পরিবহন খরচ কমে আসে।</p>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">আপনার এলাকার অর্ডার একসাথে হলে আমরা ফোন করে ডেলিভারির তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না, আর আগাম টাকা আমরা কখনোই নিই না। এটা জানিয়ে রাখার ফর্ম।</p>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">এখনই লাগবে? তাহলে <a href="https://wa.me/8801334211984" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সরাসরি WhatsApp-এ অর্ডার করুন</a>।</p>
+        <form data-shared-delivery-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
+          <label class="text-base font-semibold text-[#123b28]">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="name" autocomplete="name" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
+          <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
+          <label class="text-base font-semibold text-[#123b28]">জেলা<input name="district" autocomplete="address-level1" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: পাবনা" value="গাজীপুর"></label>
+          <label class="text-base font-semibold text-[#123b28]">উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="upazila" autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ঈশ্বরদী"></label>
+          <label class="text-base font-semibold text-[#123b28]">কত বস্তা লাগবে (৫০ কেজির বস্তা)<input name="bags" type="number" min="1" required inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১০"></label>
+          <label class="text-base font-semibold text-[#123b28]">কবে লাগবে<select name="when" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]"><option value="যেকোনো সময়">যেকোনো সময়</option><option value="এই মাসে">এই মাসে</option><option value="আগামী মাসে">আগামী মাসে</option></select></label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+          <button type="submit" class="min-h-11 rounded-xl bg-[#0e7c4b] px-5 py-3 text-base font-bold text-white hover:bg-[#0b6a3e] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">একসাথে ডেলিভারিতে যোগ দিন</button>
+          <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
+          <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আপনার এলাকার অর্ডার একসাথে হলে আমরা এই নম্বরে ফোন করে তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না।</p>
+        </form>
+      </section>
+<!-- shared-delivery:end -->
 
 <!-- advance-booking:start -->
       <section id="advance-booking" data-cta="advance_booking" class="rounded-2xl border border-[#0b5b38]/25 bg-[#eaf5eb] p-5 sm:p-6">

@@ -8,6 +8,7 @@
 //    pages): saves name, mobile, upazila and bags as a lead and shows a
 //    confirmation. If the sheet is not set up, it falls back to WhatsApp.
 //  - any <form data-booking-form>: the advance-booking (আগাম চাহিদা) form, below.
+//  - any <form data-shared-delivery-form>: the shared-delivery (একসাথে ডেলিভারি) form, below.
 // Homepage loads this directly; every other page gets it from /js/ga.js.
 // Until LEADS_URL is filled in, nothing is sent.
 (function () {
@@ -137,6 +138,52 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindBookingForms);
   else bindBookingForms();
+
+  // "অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন" (<form data-shared-delivery-form>):
+  // tagged form_type shared_delivery; district, upazila, bags and when also go
+  // into the note so an older deployed Apps Script still stores them. The owner
+  // pools sign-ups per district and calls when a truck can be filled. No payment.
+  function bindSharedDeliveryForms() {
+    document.querySelectorAll('form[data-shared-delivery-form]').forEach(function (f) {
+      var phone = f.elements.phone;
+      phone.addEventListener('input', function () { phone.setCustomValidity(''); });
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (toAscii(phone.value).replace(/\D/g, '').length < 11) {
+          phone.setCustomValidity('১১ সংখ্যার মোবাইল নম্বর লিখুন, যেমন ০১৭১২৩৪৫৬৭৮');
+          phone.reportValidity();
+          return;
+        }
+        var v = function (n) { return f.elements[n] && f.elements[n].value ? f.elements[n].value.trim() : ''; };
+        var bags = toAscii(v('bags')).replace(/\D/g, '');
+        var parts = ['একসাথে ডেলিভারি (এলাকার অর্ডার জমলে ফোন করবেন)'];
+        if (v('district')) parts.push('জেলা: ' + v('district'));
+        if (v('upazila')) parts.push('উপজেলা: ' + v('upazila'));
+        if (bags) parts.push('বস্তা: ' + bags);
+        if (v('when')) parts.push('কবে লাগবে: ' + v('when'));
+        var saved = window.saveLead({
+          form_type: 'shared_delivery', name: v('name'), phone: v('phone'),
+          location: [v('district'), v('upazila')].filter(Boolean).join(', '),
+          district: v('district'), upazila: v('upazila'), bags: bags, when: v('when'),
+          note: parts.join(' | '), website: v('website')
+        });
+        if (typeof window.gaEvent === 'function') window.gaEvent('order_details_submitted', { submission_method: saved ? 'shared_delivery' : 'shared_delivery_whatsapp', page_path: location.pathname });
+        if (saved) {
+          f.querySelector('[data-lead-status]').hidden = false;
+          f.querySelector('button[type="submit"]').disabled = true;
+          return;
+        }
+        var msg = ['আসসালামু আলাইকুম, আমি একসাথে ডেলিভারিতে যোগ দিতে চাই।',
+          v('name') ? 'নাম: ' + v('name') : '', v('phone') ? 'মোবাইল: ' + v('phone') : '',
+          v('district') ? 'জেলা: ' + v('district') : '', v('upazila') ? 'উপজেলা: ' + v('upazila') : '',
+          bags ? 'বস্তা: ' + bags : '', v('when') ? 'কবে লাগবে: ' + v('when') : '',
+          'আমার এলাকায় গাড়ি গেলে জানাবেন?'].filter(Boolean).join('\n');
+        window.open('https://wa.me/8801334211984?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindSharedDeliveryForms);
+  else bindSharedDeliveryForms();
 
   var last = '', lastAt = 0;
   document.addEventListener('click', function (e) {

@@ -772,6 +772,12 @@ for (const f of ['js/ga.js', 'index.html']) {
     if (!h.includes('data-booking-form') || !h.includes('<!-- advance-booking:start -->')) errors.push(`${f}: has no advance-booking form (data-booking-form). Run npm run build:trust`);
   }
   if (!leads.includes("form_type: 'advance_booking'") || !leads.includes("'advance_booking'")) errors.push('js/leads.js: advance-booking form no longer tags leads form_type advance_booking');
+  // Shared delivery (একসাথে ডেলিভারি): homepage, every district page, the price guide.
+  for (const f of ['index.html', ...bookingPages.filter((x) => x.startsWith('area/')), 'blog/vutta-silage-dam-koto-kothay-kinben.html']) {
+    const h = await readFile(join(root, f), 'utf8');
+    if (!h.includes('data-shared-delivery-form') || !h.includes('<!-- shared-delivery:start -->')) errors.push(`${f}: has no shared-delivery form (data-shared-delivery-form). Run npm run build:trust`);
+  }
+  if (!leads.includes("form_type: 'shared_delivery'") || !leads.includes("'shared_delivery'")) errors.push('js/leads.js: shared-delivery form no longer tags leads form_type shared_delivery');
 }
 
 // --- Report ---

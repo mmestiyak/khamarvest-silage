@@ -15,6 +15,7 @@
 //    only order link in a guide sat after 11-13 screens of reading. Health and
 //    general guides do not get it: an order box in a mastitis guide is pushy.
 //
+// 4b. shared-delivery: "অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন" form (homepage, district pages, price guide)
 // 4. advance-booking: the "নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন" form
 //    (owner decision 2026-10-27, see AGENTS.md) on the homepage after the buy
 //    steps, on every district page after the FAQ, and in four harvest-season
@@ -107,6 +108,35 @@ const advanceHome = `  <div class="bg-white px-4 pb-10">
 const advanceGuide = advanceCard.replace('<section id="advance-booking"', '<section id="advance-booking"').replace(/^/, '          ').replace('data-cta="advance_booking" class="', 'data-cta="advance_booking" class="mt-11 ');
 const ADVANCE_GUIDES = ['silage-er-jonno-vutta-chash', 'silage-kinben-naki-nije-banaben', 'shiter-jonno-silage-mojud', 'silage-ki-kivabe-toiri-upokarita'].map((s) => `blog/${s}.html`);
 
+// Shared delivery ("একসাথে ডেলিভারি"): farmers who want only a few bags leave their need,
+// the owner pools them per district and sends one truck. No dates, no amounts, no counter.
+const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="shared_delivery" class="rounded-2xl border border-[#0b5b38]/25 bg-[#f3f8ee] p-5 sm:p-6">
+        <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন</h2>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">খামারভেস্ট সাইলেজে ন্যূনতম অর্ডার নেই, এক বস্তাও নিতে পারেন। তবে অল্প বস্তার জন্য আলাদা গাড়ি গেলে কেজিপ্রতি পরিবহন খরচ বেশি পড়ে। একই এলাকার কয়েকজন খামারি একসাথে নিলে একটা গাড়িতেই সবার বস্তা যায়, তখন কেজিপ্রতি পরিবহন খরচ কমে আসে।</p>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">আপনার এলাকার অর্ডার একসাথে হলে আমরা ফোন করে ডেলিভারির তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না, আর আগাম টাকা আমরা কখনোই নিই না। এটা জানিয়ে রাখার ফর্ম।</p>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">এখনই লাগবে? তাহলে <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="${link}">সরাসরি WhatsApp-এ অর্ডার করুন</a>।</p>
+        <form data-shared-delivery-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
+          <label class="${labelCls}">আপনার নাম${optional}<input name="name" autocomplete="name" class="${fieldCls}" placeholder="যেমন: রহিম উদ্দিন"></label>
+          <label class="${labelCls}">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="${fieldCls}" placeholder="01XXXXXXXXX"></label>
+          <label class="${labelCls}">জেলা<input name="district" autocomplete="address-level1" class="${fieldCls}" placeholder="যেমন: পাবনা"${district ? ` value="${district}"` : ''}></label>
+          <label class="${labelCls}">উপজেলা${optional}<input name="upazila" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: ঈশ্বরদী"></label>
+          <label class="${labelCls}">কত বস্তা লাগবে (৫০ কেজির বস্তা)<input name="bags" type="number" min="1" required inputmode="numeric" class="${fieldCls}" placeholder="যেমন: ১০"></label>
+          <label class="${labelCls}">কবে লাগবে<select name="when" class="${fieldCls}"><option value="যেকোনো সময়">যেকোনো সময়</option><option value="এই মাসে">এই মাসে</option><option value="আগামী মাসে">আগামী মাসে</option></select></label>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+          <button type="submit" class="min-h-11 rounded-xl bg-[#0e7c4b] px-5 py-3 text-base font-bold text-white hover:bg-[#0b6a3e] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">একসাথে ডেলিভারিতে যোগ দিন</button>
+          <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
+          <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আপনার এলাকার অর্ডার একসাথে হলে আমরা এই নম্বরে ফোন করে তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না।</p>
+        </form>
+      </section>`;
+const sharedHome = `  <div class="bg-white px-4 pb-10">
+    <div class="mx-auto max-w-[1140px]">
+      ${sharedCard()}
+    </div>
+  </div>`;
+const sharedGuide = '          ' + sharedCard().replace('data-cta="shared_delivery" class="', 'data-cta="shared_delivery" class="mt-11 ');
+const districtNames = {};
+for (const m of (await readFile(join(root, 'scripts/generate-area-pages.mjs'), 'utf8')).matchAll(/\{ name: '([^']+)', loc: '[^']+', slug: '([^']+)'/g)) districtNames[m[2]] = m[1];
+
 async function update(file, fn) {
   const path = join(root, file);
   const before = await readFile(path, 'utf8');
@@ -126,8 +156,8 @@ function before(html, anchor, text, file) {
 let changed = 0;
 
 changed += await update('index.html', (h) => {
-  h = strip(strip(strip(h, 'photo-strip'), 'buy-steps'), 'advance-booking');
-  h = before(h, /[ \t]*<!-- ═+ SECTION 3 · /, block('buy-steps', buySteps) + '\n\n' + block('advance-booking', advanceHome), 'index.html');
+  h = strip(strip(strip(strip(h, 'photo-strip'), 'buy-steps'), 'advance-booking'), 'shared-delivery');
+  h = before(h, /[ \t]*<!-- ═+ SECTION 3 · /, block('buy-steps', buySteps) + '\n\n' + block('shared-delivery', sharedHome) + '\n\n' + block('advance-booking', advanceHome), 'index.html');
   h = before(h, /[ \t]*<!-- ═+ DELIVERY AREAS/, block('photo-strip', `  <div class="bg-white px-4 pb-10">\n${photoStrip}\n  </div>`), 'index.html');
   return h;
 });
@@ -137,8 +167,12 @@ changed += await update('about.html', (h) => before(strip(h, 'photo-strip'), /[ 
 for (const f of (await readdir(join(root, 'area'))).filter((f) => /^silage-.+\.html$/.test(f))) {
   const file = `area/${f}`;
   changed += await update(file, (h) => {
-    h = before(strip(strip(h, 'photo-strip'), 'advance-booking'), /[ \t]*<h2[^>]*>[^<]*থেকে অর্ডারের নিয়ম/, block('photo-strip', photoStrip), file);
-    return before(h, /[ \t]*<section class="mt-9 rounded-2xl bg-\[#0b5b38\]/, block('advance-booking', '      ' + advanceCard), file);
+    h = before(strip(strip(strip(h, 'photo-strip'), 'advance-booking'), 'shared-delivery'), /[ \t]*<h2[^>]*>[^<]*থেকে অর্ডারের নিয়ম/, block('photo-strip', photoStrip), file);
+    const dn = districtNames[f.replace(/^silage-|\.html$/g, '')];
+    if (!dn) throw new Error(`${file}: district name not found in generator`);
+    const anchor = /[ \t]*<section class="mt-9 rounded-2xl bg-\[#0b5b38\]/;
+    h = before(h, anchor, block('shared-delivery', '      ' + sharedCard(dn)), file);
+    return before(h, anchor, block('advance-booking', '      ' + advanceCard), file);
   });
 }
 
@@ -163,5 +197,7 @@ for (const file of guides) {
 for (const file of ADVANCE_GUIDES) {
   changed += await update(file, (h) => before(strip(h, 'advance-booking'), /[ \t]*<!-- faq:start -->/, block('advance-booking', advanceGuide), file));
 }
+
+changed += await update('blog/vutta-silage-dam-koto-kothay-kinben.html', (h) => before(strip(h, 'shared-delivery'), /[ \t]*<!-- faq:start -->/, block('shared-delivery', sharedGuide), 'blog/vutta-silage-dam-koto-kothay-kinben.html'));
 
 console.log(`Trust blocks written into ${changed} page(s) (${guides.length} silage guides checked).`);
