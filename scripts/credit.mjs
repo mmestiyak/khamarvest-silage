@@ -8,7 +8,7 @@
 // name pairs Bengali with "Meer Estiyak", the name he is known by online, so
 // entity matching works; the full Bengali name lives in alternateName.
 //
-// Also writes a one-line cross-link to the compost site (https://compost.khamarvest.com/) inside the same block.
+// Also writes a one-line cross-link to the compost site (https://compost.khamarvest.com/) inside the same block, and (2026-11-20) one to the sister reference site Silage BD (https://silagebd.com/).
 //
 // Idempotent: it strips the block it previously wrote before inserting.
 import { readdir, readFile, writeFile } from 'node:fs/promises';
@@ -41,10 +41,14 @@ export const FOUNDER = {
 };
 
 const COMPOST = 'https://compost.khamarvest.com/';
+const SILAGEBD = 'https://silagebd.com/';
 const line = (dark, en) => `${OPEN}
     <p class="mx-auto max-w-[1140px] px-2 pb-1 text-center text-[14px] ${dark ? 'text-[#a9c3b2]' : 'text-[#54705d]'}">${en
       ? 'Khamarvest also makes Trichoderma compost for rooftop gardens and pots:'
       : 'খামারভেস্ট ছাদবাগান ও টবের জন্য ট্রাইকো কম্পোস্টও বানায়:'} <a href="${COMPOST}" class="underline underline-offset-2${dark ? ' text-[#d7e6dc] hover:text-white' : ''}">compost.khamarvest.com</a></p>
+    <p class="mx-auto max-w-[1140px] px-2 pb-1 text-center text-[14px] ${dark ? 'text-[#a9c3b2]' : 'text-[#54705d]'}">${en
+      ? 'Simple silage guide with references:'
+      : 'সাইলেজের সহজ গাইড ও তথ্যসূত্র:'} <a href="${SILAGEBD}" class="underline underline-offset-2${dark ? ' text-[#d7e6dc] hover:text-white' : ''}">Silage BD</a></p>
         <p class="mx-auto max-w-[1140px] px-2 pb-3 text-center text-[14px] ${dark ? 'text-[#a9c3b2]' : 'text-[#54705d]'}">${en
       ? 'Website built and maintained by'
       : 'ওয়েবসাইট তৈরি ও দেখাশোনা:'} <a href="${SITE}" rel="author" class="underline underline-offset-2${dark ? ' text-[#d7e6dc] hover:text-white' : ''}">${en ? 'Meer Estiyak' : 'মীর ইশতিয়াক (Meer Estiyak)'}</a>, ${en ? 'co-founder, Khamarvest' : 'সহপ্রতিষ্ঠাতা, খামারভেস্ট'}</p>
