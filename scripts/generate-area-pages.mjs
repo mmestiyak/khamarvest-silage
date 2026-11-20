@@ -8,6 +8,9 @@ import { join } from 'node:path';
 // from it. Change it with `npm run set-price`, never by hand.
 import { CALL_TEL } from './contact.mjs';
 import { product } from './product.mjs';
+import { readFileSync } from 'node:fs';
+// Official per-district figures (BBS), copied from the SilageBD table. Edit scripts/district-stats.json, never the HTML.
+const stats = JSON.parse(readFileSync(new URL('./district-stats.json', import.meta.url), 'utf8')).districts;
 
 const root = process.cwd();
 const siteUrl = 'https://silage.khamarvest.com';
@@ -88,6 +91,8 @@ const ORIGIN = (d) => d.slug === 'bogura'
 // had no image at all, while a cash-on-delivery buyer ordering from a website
 // they have never seen needs to see that the product and the people are real.
 // Bengali digits for counts written into copy, so "৩৩টি জেলা" cannot go stale again.
+// Bangla digits with lakh grouping (১,২৩,৪৫৬), as the rest of the site writes numbers.
+const bnGroup = (n) => bnNum(Number(n).toLocaleString('en-IN'));
 const bnNum = (n) => String(n).replace(/[0-9]/g, (x) => '০১২৩৪৫৬৭৮৯'[+x]);
 // Bengali genitive: vowel-ending names take র (বগুড়ার), consonant-ending
 // names take ের (দিনাজপুরের), ও-ending take য়ের (ঠাকুরগাঁওয়ের).
@@ -97,6 +102,16 @@ const gen = (n) => {
   if (/[\u09BE-\u09CC]$/.test(base)) return n + 'র';
   if (/ও$/.test(base)) return n + 'য়ের';
   return n + 'ের';
+};
+
+// One short, sourced line of the district's own figures, linking the SilageBD table.
+// No line (and no guess) when a district is missing from district-stats.json.
+const STATS_URL = 'https://silagebd.com/guides/bangladesh-district-maize-cattle';
+const statsLine = (d) => {
+  const s = stats[d.slug];
+  if (!s) return '';
+  return `      <p data-cta="district_data" class="mt-3 max-w-3xl leading-8 text-[#33483a]">${d.loc} ২০২৪-২৫ সালে ${bnGroup(s.maizeTonnes)} টন ভুট্টা হয়েছে, আর গরু আছে ${bnGroup(s.cattle)}টি (কৃষি শুমারি ২০১৯)। <a href="${STATS_URL}" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সব জেলার হিসাব</a> দেখুন Silage BD-তে।</p>
+`;
 };
 
 const bySlug = Object.fromEntries(districts.map((d) => [d.slug, d]));
@@ -210,7 +225,7 @@ ${d.localCall ? `        <p class="mt-1 text-base text-[#33483a]">${d.slug === '
 
       <h2 class="mt-9 text-2xl font-bold text-[#123b28]">${d.loc} খামারিদের জন্য সাইলেজ কেন</h2>
       <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">${CONTEXT[d.ctx](d)}</p>
-      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">ভুট্টা সাইলেজে আস্ত ভুট্টা গাছ দানাসহ কুচি করা থাকে বলে আঁশ ও শক্তি একসাথে মেলে। দুধের গাভীকে দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি আর ছাগল-ভেড়াকে ১-২ কেজি দেওয়া হয়। নতুন হলে আগে পড়ুন: <a href="/blog/silage-ki-kivabe-toiri-upokarita" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সাইলেজ কী?</a> আর <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">প্রথমবার খাওয়ানোর নিয়ম</a>।</p>
+${statsLine(d)}      <p class="mt-3 max-w-3xl leading-8 text-[#33483a]">ভুট্টা সাইলেজে আস্ত ভুট্টা গাছ দানাসহ কুচি করা থাকে বলে আঁশ ও শক্তি একসাথে মেলে। দুধের গাভীকে দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি আর ছাগল-ভেড়াকে ১-২ কেজি দেওয়া হয়। নতুন হলে আগে পড়ুন: <a href="/blog/silage-ki-kivabe-toiri-upokarita" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সাইলেজ কী?</a> আর <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">প্রথমবার খাওয়ানোর নিয়ম</a>।</p>
 
 ${ORIGIN(d)}
 ${d.upazilas ? `      <h2 id="upazila" class="mt-9 text-2xl font-bold text-[#123b28]">${gen(d.name)} যেসব উপজেলায় ডেলিভারি</h2>

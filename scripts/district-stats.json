@@ -1,0 +1,169 @@
+{
+ "_source": "maizeTonnes: BBS Yearbook of Agricultural Statistics 2025 (2024-25). cattle: BBS Agriculture Census 2019. Full table: https://silagebd.com/guides/bangladesh-district-maize-cattle",
+ "districts": {
+  "bogura": {
+   "maizeTonnes": 150066,
+   "cattle": 973030
+  },
+  "pabna": {
+   "maizeTonnes": 10239,
+   "cattle": 524171
+  },
+  "sirajganj": {
+   "maizeTonnes": 155960,
+   "cattle": 789738
+  },
+  "natore": {
+   "maizeTonnes": 143921,
+   "cattle": 323028
+  },
+  "rangpur": {
+   "maizeTonnes": 256629,
+   "cattle": 1071077
+  },
+  "dinajpur": {
+   "maizeTonnes": 720808,
+   "cattle": 1411852
+  },
+  "mymensingh": {
+   "maizeTonnes": 2368,
+   "cattle": 1300472
+  },
+  "tangail": {
+   "maizeTonnes": 46234,
+   "cattle": 852713
+  },
+  "dhaka": {
+   "maizeTonnes": 33799,
+   "cattle": 532436
+  },
+  "gazipur": {
+   "maizeTonnes": 228,
+   "cattle": 570700
+  },
+  "kushtia": {
+   "maizeTonnes": 134192,
+   "cattle": 457332
+  },
+  "jashore": {
+   "maizeTonnes": 6833,
+   "cattle": 781684
+  },
+  "khulna": {
+   "maizeTonnes": 830,
+   "cattle": 428289
+  },
+  "satkhira": {
+   "maizeTonnes": 733,
+   "cattle": 426962
+  },
+  "cumilla": {
+   "maizeTonnes": 98994,
+   "cattle": 785599
+  },
+  "noakhali": {
+   "maizeTonnes": 1267,
+   "cattle": 396790
+  },
+  "chattogram": {
+   "maizeTonnes": 1151,
+   "cattle": 656750
+  },
+  "coxsbazar": {
+   "maizeTonnes": 866,
+   "cattle": 297940
+  },
+  "rajshahi": {
+   "maizeTonnes": 147574,
+   "cattle": 461476
+  },
+  "naogaon": {
+   "maizeTonnes": 91328,
+   "cattle": 924712
+  },
+  "joypurhat": {
+   "maizeTonnes": 7895,
+   "cattle": 309531
+  },
+  "gaibandha": {
+   "maizeTonnes": 158849,
+   "cattle": 839610
+  },
+  "nilphamari": {
+   "maizeTonnes": 367351,
+   "cattle": 605978
+  },
+  "kurigram": {
+   "maizeTonnes": 105657,
+   "cattle": 692267
+  },
+  "lalmonirhat": {
+   "maizeTonnes": 397252,
+   "cattle": 437335
+  },
+  "thakurgaon": {
+   "maizeTonnes": 544644,
+   "cattle": 674736
+  },
+  "jamalpur": {
+   "maizeTonnes": 174059,
+   "cattle": 633625
+  },
+  "kishoreganj": {
+   "maizeTonnes": 68154,
+   "cattle": 552545
+  },
+  "brahmanbaria": {
+   "maizeTonnes": 5101,
+   "cattle": 406934
+  },
+  "sylhet": {
+   "maizeTonnes": 242,
+   "cattle": 486253
+  },
+  "habiganj": {
+   "maizeTonnes": 393,
+   "cattle": 458055
+  },
+  "faridpur": {
+   "maizeTonnes": 4769,
+   "cattle": 403441
+  },
+  "barishal": {
+   "maizeTonnes": 3157,
+   "cattle": 368388
+  },
+  "chapainawabganj": {
+   "maizeTonnes": 60595,
+   "cattle": 371489
+  },
+  "panchagarh": {
+   "maizeTonnes": 373278,
+   "cattle": 423098
+  },
+  "sherpur": {
+   "maizeTonnes": 10111,
+   "cattle": 409639
+  },
+  "netrokona": {
+   "maizeTonnes": 676,
+   "cattle": 636226
+  },
+  "manikganj": {
+   "maizeTonnes": 189862,
+   "cattle": 345155
+  },
+  "jhenaidah": {
+   "maizeTonnes": 227096,
+   "cattle": 601396
+  },
+  "chuadanga": {
+   "maizeTonnes": 569875,
+   "cattle": 264722
+  },
+  "meherpur": {
+   "maizeTonnes": 122561,
+   "cattle": 157207
+  }
+ }
+}
