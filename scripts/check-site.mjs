@@ -644,7 +644,8 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
   if (strip(site) !== strip(applied)) errors.push('scripts/site.json has changes the pages do not have yet. Run npm run build');
   const ours = new Set([site.whatsapp, site.call, ...site.callExtra].map((n) => n.replace(/\D/g, '').slice(1)));
   for (const file of [...files, ...LLMS_FILES]) {
-    const text = await readFile(join(root, file), 'utf8');
+    // An input's placeholder is an example ("যেমন: 01712-345678" on /form), never a contact number.
+    const text = (await readFile(join(root, file), 'utf8')).replace(/placeholder="[^"]*"/g, '');
     for (const m of text.matchAll(/(?:\+?880[ -]?|(?<![0-9])0)(1[3-9]\d{2})-?(\d{6})(?![0-9])/g)) {
       if (!ours.has(m[1] + m[2])) err(file, `phone number ${m[0]} is not in scripts/site.json`);
     }
