@@ -9,9 +9,12 @@
 import { createHash } from 'node:crypto';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const root = process.cwd();
-export const cssHash = async () => createHash('sha256').update(await readFile(join(root, 'css/site.css'))).digest('hex').slice(0, 8);
+// Hash with LF line endings: a Windows checkout (core.autocrlf) holds the file
+// with CRLF, and the stamp must match the bytes git commits and Cloudflare serves.
+export const cssHash = async () => createHash('sha256').update((await readFile(join(root, 'css/site.css'), 'utf8')).replace(/\r\n/g, '\n')).digest('hex').slice(0, 8);
 
 async function walk(dir) {
   const out = [];
@@ -24,7 +27,7 @@ async function walk(dir) {
   return out;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const v = await cssHash();
   let changed = 0;
   for (const file of await walk('')) {

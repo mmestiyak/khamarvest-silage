@@ -17,8 +17,8 @@ module.exports = {
     extend: {
       // Mirrors the inline tailwind.config the homepage used with the CDN build.
       fontFamily: {
-        hind: ['"Noto Sans Bengali"', 'sans-serif'],
-        noto: ['"Noto Serif Bengali"', 'sans-serif'],
+        hind: ['"Plus Jakarta Sans"', '"Noto Serif Bengali"', 'serif'],
+        noto: ['"Plus Jakarta Sans"', '"Noto Serif Bengali"', 'serif'],
         sys: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Oxygen-Sans', 'Ubuntu', 'Cantarell', '"Helvetica Neue"', 'sans-serif'],
       },
     },

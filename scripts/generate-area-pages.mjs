@@ -151,7 +151,7 @@ function page(d) {
   <meta property="og:description" content="${d.name} জেলার সব উপজেলায় ডেলিভারি। টাকা পণ্য হাতে পেয়ে।">
   <meta property="og:url" content="${url}">
   <meta property="og:image" content="${siteUrl}/img/silage-production-1400.jpeg">
-  <link rel="preload" href="/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/noto-serif-bengali-400-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <script type="application/ld+json">
   {
@@ -189,7 +189,7 @@ function page(d) {
   }
   </script>
 </head>
-<body class="bg-[#f7f8f4] font-['Hind_Siliguri'] text-[#233126] antialiased">
+<body class="bg-[#f7f8f4] font-noto text-[#233126] antialiased">
   <header class="sticky top-0 z-20 border-b border-[#184d32]/10 bg-white/95 backdrop-blur">
     <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
       <a href="/" class="text-lg font-bold tracking-tight text-[#075a35]">খামারভেস্ট সাইলেজ</a>
@@ -330,11 +330,11 @@ const indexHtml = `<!DOCTYPE html>
   <meta property="og:description" content="${bnNum(districts.length)}টি জেলার পাতা, আর সারা বাংলাদেশেই ডেলিভারি। টাকা পণ্য হাতে পেয়ে।">
   <meta property="og:url" content="${siteUrl}/area/">
   <meta property="og:image" content="${siteUrl}/img/silage-production-1400.jpeg">
-  <link rel="preload" href="/fonts/hind-siliguri-400-bengali.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/noto-serif-bengali-400-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"ডেলিভারি এলাকা","inLanguage":"bn-BD","url":"${siteUrl}/area/"}</script>
 </head>
-<body class="bg-[#f7f8f4] font-['Hind_Siliguri'] text-[#233126] antialiased">
+<body class="bg-[#f7f8f4] font-noto text-[#233126] antialiased">
   <header class="sticky top-0 z-20 border-b border-[#184d32]/10 bg-white/95 backdrop-blur">
     <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
       <a href="/" class="text-lg font-bold tracking-tight text-[#075a35]">খামারভেস্ট সাইলেজ</a>

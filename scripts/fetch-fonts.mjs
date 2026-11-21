@@ -17,9 +17,12 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
 const CSS_URLS = [
   'https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap',
   'https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap',
+  // Latin text (WhatsApp, Facebook, Khamarvest) is set in Plus Jakarta Sans; Bengali falls through to Noto Serif Bengali.
+  'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
 ];
 
-const subsetOf = (range) => range.startsWith('U+0951') ? 'bengali' : range.startsWith('U+0100') ? 'latin-ext' : 'latin';
+// Only the subsets this site needs; Google also serves cyrillic and vietnamese for some families.
+const subsetOf = (range) => range.startsWith('U+0951') ? 'bengali' : range.startsWith('U+0100') ? 'latin-ext' : range.startsWith('U+0000-00FF') ? 'latin' : null;
 const slug = (family) => family.toLowerCase().replace(/\s+/g, '-');
 
 // url -> { family, subset, range, weights:Set }
@@ -33,6 +36,7 @@ for (const cssUrl of CSS_URLS) {
     const weight = block.match(/font-weight:\s*(\d+)/)[1];
     const url = block.match(/url\(([^)]+)\)/)[1];
     const range = block.match(/unicode-range:\s*([^;]+);/)[1].trim();
+    if (!subsetOf(range)) continue;
     const face = faces.get(url) || { family, subset: subsetOf(range), range, weights: new Set() };
     face.weights.add(Number(weight));
     faces.set(url, face);
