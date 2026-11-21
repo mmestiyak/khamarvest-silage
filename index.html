@@ -87,17 +87,17 @@
     },
     {
       "@type": "VideoObject",
-      "@id": "https://silage.khamarvest.com/#silage-video",
-      "name": "খামারভেস্ট সাইলেজ: আপনার খামার, আমাদের দেখভাল",
-      "description": "খামারভেস্টের ভুট্টা সাইলেজ কেমন দেখতে, বস্তা কীভাবে প্যাক করা হয় এবং খামারে কীভাবে পৌঁছে দেওয়া হয় তার সংক্ষিপ্ত ভিডিও।",
+      "@id": "https://silage.khamarvest.com/#drone-video",
+      "name": "khamarvest silage - the takeover is coming",
+      "description": "ড্রোন থেকে খামারভেস্টের ভুট্টা খেত, তারপর মাঠে মেশিনে আস্ত গাছ কুচি করে বস্তায় ভরা পর্যন্ত খামারভেস্ট সাইলেজের কাজ।",
       "thumbnailUrl": [
-        "https://i.ytimg.com/vi/n8sSOV0KQ64/hqdefault.jpg",
-        "https://i.ytimg.com/vi/n8sSOV0KQ64/maxresdefault.jpg"
+        "https://i.ytimg.com/vi/nMe4kThhAEg/maxresdefault.jpg",
+        "https://i.ytimg.com/vi/nMe4kThhAEg/hqdefault.jpg"
       ],
-      "uploadDate": "2026-06-13",
-      "duration": "PT1M2S",
-      "contentUrl": "https://www.youtube.com/shorts/n8sSOV0KQ64",
-      "embedUrl": "https://www.youtube.com/embed/n8sSOV0KQ64",
+      "uploadDate": "2026-11-20T06:20:18-08:00",
+      "duration": "PT59S",
+      "contentUrl": "https://www.youtube.com/watch?v=nMe4kThhAEg",
+      "embedUrl": "https://www.youtube.com/embed/nMe4kThhAEg",
       "inLanguage": "bn-BD",
       "publisher": {
         "@id": "https://silage.khamarvest.com/#business"
@@ -749,19 +749,8 @@
   </script>
   <link rel="preload" href="/fonts/noto-serif-bengali-400-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
   <!-- JPEG, not WebP: on this photo mozjpeg is the smaller file at every width (see scripts/optimize-images.mjs). -->
-  <link rel="stylesheet" href="/css/site.css?v=d7ca42b4">
+  <link rel="stylesheet" href="/css/site.css?v=7c501ff9">
   <style>
-    /* Hero background: plain light green, no photo (owner, 2026-11-21). */
-    .hero-pattern::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(245,255,248,.92);
-      pointer-events: none;
-    }
-    @media (min-width: 900px) {
-      .hero-pattern::before { background: linear-gradient(to right, rgba(245,255,248,.95) 0%, rgba(245,255,248,.88) 50%, rgba(245,255,248,.7) 100%); }
-    }
     /* Range sliders: a 10px track with a ~16px thumb is too small a target for a farmer's thumb */
     input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 9999px; background: rgb(14,124,75); border: 3px solid #fff; box-shadow: 0 0 0 1px rgb(14,124,75); cursor: pointer; }
     input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border-radius: 9999px; background: rgb(14,124,75); border: 3px solid #fff; box-shadow: 0 0 0 1px rgb(14,124,75); cursor: pointer; }
@@ -806,7 +795,7 @@
 <body class="font-sys text-base text-[#111111] bg-[rgb(244,248,250)] antialiased">
 
   <nav class="bg-white border-b border-[rgb(14,124,75)]/15 px-[10px]" aria-label="প্রধান নেভিগেশন">
-    <div class="max-w-[1140px] mx-auto flex items-center justify-between gap-4 py-2.5">
+    <div class="max-w-[1140px] mx-auto flex items-center justify-between gap-4 py-3.5 md:py-4">
       <a href="/" class="font-hind font-semibold text-[18px] text-[rgb(0,105,68)]">খামারভেস্ট সাইলেজ</a>
       <div class="flex items-center gap-3 md:gap-5">
         <a href="blog/" class="font-hind font-medium text-[15px] md:text-[17px] text-[rgb(0,105,68)] underline underline-offset-4">সাইলেজ গাইড</a>
@@ -822,14 +811,14 @@
 
   <!-- ═══════════ SECTION 1 · HERO  (bg #f5fff8 + mandala pattern) ═══════════ -->
   <main id="main">
-  <section class="hero-pattern relative bg-[rgb(245,255,248)] px-[10px]">
-    <div class="relative max-w-[1140px] mx-auto flex flex-col md:flex-row gap-5 py-[35px]">
+  <section class="relative bg-[rgb(245,255,248)] px-[10px]">
+    <div class="relative max-w-[1140px] mx-auto flex flex-col md:flex-row md:items-center gap-10 md:gap-14 py-12 md:py-24">
       <!-- Left column -->
-      <div class="w-full md:w-1/2 flex flex-col justify-center gap-5 px-[10px]">
-        <h1 class="font-hind font-semibold text-[rgb(0,105,68)] text-[28px] leading-[1.3] md:text-[52px] md:leading-[52px] text-center md:text-left">
+      <div class="w-full md:w-1/2 flex flex-col justify-center gap-6 px-[10px]">
+        <h1 class="font-hind font-semibold text-[rgb(0,105,68)] text-[30px] leading-[1.35] md:text-[48px] md:leading-[1.25] text-center md:text-left">
           মাত্র ৮.৫০ টাকা কেজিতে গরুর পুষ্টিকর সবুজ খাদ্য, খাঁটি ভুট্টা সাইলেজ!
         </h1>
-        <p class="font-hind font-light text-black text-[17px] leading-[27px] md:text-[22px] md:leading-[34px] text-center md:text-left">
+        <p class="max-w-[34em] font-hind text-[#2b3a31] text-[17px] leading-[30px] md:text-[19px] md:leading-[34px] text-center md:text-left">
           সঠিক বয়সে কাটা আস্ত ভুট্টা গাছ, কুচি করে এয়ারটাইট বস্তায়। যে দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য পর্দার আড়ালে সাইলেজ বানিয়েছে, এখন নিজেদের নামে সরাসরি আপনার খামারে। সারা বছর একই দাম।
         </p>
         <div class="flex flex-wrap items-center gap-3 justify-center md:justify-start">
@@ -837,31 +826,34 @@
             <svg aria-hidden="true" class="w-5 h-5 shrink-0 fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
             WhatsApp-এ অর্ডার
           </a>
-          <a href="tel:+8801334211984" class="inline-flex min-h-12 items-center gap-2 whitespace-nowrap rounded-[8px] border-2 border-[rgb(0,105,68)] bg-white px-5 py-3 font-hind text-[17px] font-medium leading-none text-[rgb(0,105,68)] transition hover:bg-[rgb(234,245,235)]">
+          <a href="tel:+8801334211984" class="inline-flex min-h-12 items-center gap-2 whitespace-nowrap rounded-[8px] border-2 border-[rgb(0,105,68)] bg-[rgb(0,105,68)] px-5 py-3 font-hind text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5">
             <svg class="w-[18px] h-[18px] shrink-0 fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>
             কল করুন
           </a>
         </div>
-        <p class="font-hind font-medium text-[16px] md:text-[18px] leading-[26px] text-[#111111] text-center md:text-left">আগে টাকা নয়, বস্তা হাতে পেয়ে টাকা · এক বস্তাও অর্ডার করা যায় · ৫০ কেজি বস্তা ৪২৫ টাকা, পরিবহন আলাদা</p>
-        <div class="flex flex-wrap items-center justify-center gap-x-6 font-hind text-[16px] font-medium md:justify-start">
+        <p class="font-hind text-[16px] leading-[28px] text-[#3d4b42] text-center md:text-left">আগে টাকা নয়, বস্তা হাতে পেয়ে টাকা · এক বস্তাও অর্ডার করা যায় · ৫০ কেজি বস্তা ৪২৫ টাকা, পরিবহন আলাদা</p>
+        <div class="hidden flex-wrap items-center justify-center gap-x-6 font-hind text-[16px] font-medium md:justify-start">
           <a href="#areas" class="inline-flex min-h-11 items-center border-b border-[rgb(0,105,68)]/30 text-[rgb(0,105,68)] transition-colors hover:border-[rgb(0,105,68)]"><!--area-count-->৪১<!--/area-count--> জেলার সব উপজেলায় হোম ডেলিভারি</a>
           <a href="#order" data-cta="hero_callback" class="inline-flex min-h-11 items-center border-b border-[rgb(0,105,68)]/30 text-[rgb(0,105,68)] transition-colors hover:border-[rgb(0,105,68)]">WhatsApp নেই? নম্বর দিন, আমরা ফোন করব</a>
         </div>
       </div>
       <!-- Right column: khamar photo -->
       <div class="w-full md:w-1/2 flex justify-center md:justify-end px-[10px]">
-        <img src="img/corn-harvest-1200.jpeg" srcset="img/corn-harvest-1200-480w.jpeg 480w, img/corn-harvest-1200-800w.jpeg 800w, img/corn-harvest-1200.jpeg 1200w" sizes="(min-width: 768px) 540px, 92vw" decoding="async"
-             alt="খামারভেস্টের ভুট্টা খেতে সদ্য কাটা ভুট্টা হাতে" width="540" height="540"
-             class="w-full max-w-[540px] aspect-square object-cover rounded-[8px] border-[5px] border-[rgb(14,124,75)]">
+        <picture class="block w-full max-w-[540px]">
+          <source type="image/webp" srcset="img/team-silage-bags-1200-800w.webp 800w, img/team-silage-bags-1200-1200w.webp 1200w, img/team-silage-bags-1200-1800w.webp 1800w" sizes="(min-width: 768px) 810px, 138vw">
+          <img src="img/team-silage-bags-1200-1200w.jpeg" srcset="img/team-silage-bags-1200-800w.jpeg 800w, img/team-silage-bags-1200-1200w.jpeg 1200w, img/team-silage-bags-1200-1800w.jpeg 1800w" sizes="(min-width: 768px) 810px, 138vw" decoding="async" fetchpriority="high"
+               alt="ভুট্টা খেতের পাশে বস্তায় ভরা কুচি করা খামারভেস্ট ভুট্টা সাইলেজ" width="1200" height="800"
+               class="aspect-square w-full rounded-[8px] border-[5px] border-[rgb(14,124,75)] object-cover object-[68%_50%]">
+        </picture>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ SECTION 2 · PRICE / OFFER  (white) ═══════════ -->
+  <!-- ═══════════ SECTION 2 · PRICE / OFFER  (white, calm) ═══════════ -->
   <section class="bg-white px-[10px]">
-    <div class="max-w-[1140px] mx-auto flex flex-col items-center gap-5 py-[30px]">
-      <h2 class="font-hind font-medium text-[rgb(14,124,75)] text-center text-[29px] leading-[29px] md:text-[50px] md:leading-[50px]">
-        ভুট্টা সাইলেজের দাম: কেজি ৮.৫০ টাকা, সারা বছর এক দাম
+    <div class="max-w-[880px] mx-auto flex flex-col items-center gap-7 py-16 md:py-20 text-center">
+      <h2 class="font-hind font-semibold text-[rgb(14,124,75)] text-[30px] leading-[1.35] md:text-[50px] md:leading-[1.3]">
+        ভুট্টা সাইলেজের দাম: কেজি ৮.৫০ টাকা,<br class="hidden md:block"> সারা বছর এক দাম
       </h2>
       <div class="w-[80%] border-t-2 border-[rgb(218,165,47)]"></div>
       <span class="inline-block bg-[#ea580c] text-white font-hind font-semibold text-[16px] md:text-[18px] rounded-full px-4 py-1">আগের চেয়ে প্রতি কেজিতে <!--=prev-price-->১.৫০<!--/=--> টাকা কম</span>
@@ -887,13 +879,13 @@
           </span>
         </div>
       </div>
-      <p class="font-hind text-[17px] md:text-[20px] text-[rgb(84,89,95)] text-center">
+      <p class="max-w-[780px] font-hind text-[18px] md:text-[20px] leading-[36px] md:leading-[44px] text-[#4b5a51]">
         ৫০ কেজি এয়ারটাইট বস্তা মাত্র ৪২৫ টাকা। দামটা লোড পয়েন্টের, পরিবহন খরচ আলাদা: ঠিকানা ও পরিমাণ ধরে কনফার্মেশন কলে জানানো হয়। অনেক বস্তা একসাথে নিলে দাম নিয়ে WhatsApp-এ কথা বলুন; প্রতিবেশীরা মিলে এক গাড়িতে নিলে কেজিপ্রতি পরিবহনও কম পড়ে।
       </p>
-      <p class="max-w-[820px] rounded-xl bg-[rgb(245,255,248)] p-4 font-hind text-[16px] md:text-[18px] leading-[28px] text-[#233126] text-center">এক কথায়: ভুট্টার সাইলেজ এর দাম কত, সাইলেজ কত টাকা কেজি? খামারভেস্ট সাইলেজ বগুড়ায় তৈরি ভুট্টা সাইলেজ, কেজি ৮.৫০ টাকা, ৫০ কেজি বস্তা ৪২৫ টাকা। পরিবহন আলাদা, কনফার্মেশন কলে জানানো হয়। কোনো ন্যূনতম অর্ডার নেই, টাকা বস্তা হাতে পেয়ে (নগদ বা খামারভেস্টের নামের ব্যাংক অ্যাকাউন্টে)। <!--area-count-->৪১<!--/area-count-->টি জেলার সব উপজেলায় ডেলিভারি। অর্ডার: WhatsApp <a href="https://wa.me/8801334211984" class="font-medium underline">+880 1334-211984</a>।
+      <p class="max-w-[780px] rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 md:p-8 font-hind text-[17px] md:text-[19px] leading-[34px] md:leading-[42px] text-[#33483a] text-left"><strong class="font-semibold text-[#123b28]">এক কথায়:</strong> ভুট্টার সাইলেজ এর দাম কত, সাইলেজ কত টাকা কেজি? খামারভেস্ট সাইলেজ বগুড়ায় তৈরি ভুট্টা সাইলেজ, কেজি ৮.৫০ টাকা, ৫০ কেজি বস্তা ৪২৫ টাকা। পরিবহন আলাদা, কনফার্মেশন কলে জানানো হয়। কোনো ন্যূনতম অর্ডার নেই, টাকা বস্তা হাতে পেয়ে (নগদ বা খামারভেস্টের নামের ব্যাংক অ্যাকাউন্টে)। <!--area-count-->৪১<!--/area-count-->টি জেলার সব উপজেলায় ডেলিভারি। অর্ডার: WhatsApp <a href="https://wa.me/8801334211984" class="font-medium underline">+880 1334-211984</a>।
       </p>
-      <a href="https://wa.me/8801334211984?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%96%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%AD%E0%A7%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%20%E0%A6%A6%E0%A6%BE%E0%A6%AE%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A7%87%E0%A6%A8%3F" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(0,105,68)] text-white font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
-        <svg aria-hidden="true" class="w-[28px] h-[28px] fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
+      <a href="https://wa.me/8801334211984?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%96%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%AD%E0%A7%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%20%E0%A6%A6%E0%A6%BE%E0%A6%AE%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A7%87%E0%A6%A8%3F" target="_blank" rel="noopener" class="inline-flex min-h-12 items-center gap-2 whitespace-nowrap bg-[rgb(0,105,68)] text-white font-hind font-medium text-[18px] leading-none rounded-[8px] px-6 py-3.5 transition hover:-translate-y-0.5">
+        <svg aria-hidden="true" class="w-5 h-5 shrink-0 fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
         অর্ডার করতে চাই
       </a>
     </div>
@@ -918,39 +910,39 @@
 
 
 <!-- buy-steps:start -->
-  <section data-cta="buy_steps" class="bg-white px-4 pb-10">
+  <section data-cta="buy_steps" class="bg-white px-[10px] pb-16 font-hind md:pb-20">
     <div class="mx-auto max-w-[1140px]">
-      <h2 class="text-center text-2xl font-bold text-[rgb(14,124,75)] md:text-4xl">কীভাবে কিনবেন, ৩ ধাপে</h2>
-      <ol class="mt-6 grid gap-4 md:grid-cols-3">
-        <li class="rounded-xl border border-[#184d32]/15 bg-[#f7f8f4] p-5 text-[17px] leading-7 text-[#33483a]"><strong class="block text-lg text-[#0b6a3e]">১. মেসেজ বা কল</strong>নাম, ঠিকানা আর কত বস্তা লাগবে জানান। কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়।</li>
-        <li class="rounded-xl border border-[#184d32]/15 bg-[#f7f8f4] p-5 text-[17px] leading-7 text-[#33483a]"><strong class="block text-lg text-[#0b6a3e]">২. কনফার্মেশন কল</strong>পরিবহনসহ মোট খরচ আর ডেলিভারির তারিখ আগেই জানানো হয়। পরে বাড়তি কিছু নেই।</li>
-        <li class="rounded-xl border border-[#184d32]/15 bg-[#f7f8f4] p-5 text-[17px] leading-7 text-[#33483a]"><strong class="block text-lg text-[#0b6a3e]">৩. বস্তা হাতে পেয়ে টাকা</strong>আগে কোনো টাকা নয়। নগদে, বা শুধু খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে।</li>
+      <h2 class="text-center font-semibold text-[rgb(14,124,75)] text-[30px] leading-[1.35] md:text-[44px] md:leading-[1.3]">কীভাবে কিনবেন, ৩ ধাপে</h2>
+      <ol class="mt-8 grid gap-5 md:grid-cols-3">
+        <li class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 text-[17px] leading-[32px] text-[#4b5a51] md:p-7 md:text-[18px] md:leading-[34px]"><strong class="mb-2 block text-[19px] font-bold leading-[1.4] text-[rgb(14,124,75)] md:text-[20px]">১. মেসেজ বা কল</strong>নাম, ঠিকানা আর কত বস্তা লাগবে জানান। কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়।</li>
+        <li class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 text-[17px] leading-[32px] text-[#4b5a51] md:p-7 md:text-[18px] md:leading-[34px]"><strong class="mb-2 block text-[19px] font-bold leading-[1.4] text-[rgb(14,124,75)] md:text-[20px]">২. কনফার্মেশন কল</strong>পরিবহনসহ মোট খরচ আর ডেলিভারির তারিখ আগেই জানানো হয়। পরে বাড়তি কিছু নেই।</li>
+        <li class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 text-[17px] leading-[32px] text-[#4b5a51] md:p-7 md:text-[18px] md:leading-[34px]"><strong class="mb-2 block text-[19px] font-bold leading-[1.4] text-[rgb(14,124,75)] md:text-[20px]">৩. বস্তা হাতে পেয়ে টাকা</strong>আগে কোনো টাকা নয়। নগদে, বা শুধু খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে।</li>
       </ol>
-      <div class="mt-5 flex flex-wrap justify-center gap-3">
-        <a href="https://wa.me/8801334211984" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0e7c4b] px-5 py-3 text-base font-bold text-white hover:bg-[#0b6a3e]">WhatsApp-এ মেসেজ পাঠান</a>
-        <a href="tel:+8801334211984" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 bg-white px-5 py-3 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]">কল করুন</a>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="https://wa.me/8801334211984" target="_blank" rel="noopener" class="inline-flex min-h-12 items-center whitespace-nowrap rounded-[8px] bg-[#ea580c] px-5 py-3 text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5">WhatsApp-এ মেসেজ পাঠান</a>
+        <a href="tel:+8801334211984" class="inline-flex min-h-12 items-center whitespace-nowrap rounded-[8px] border-2 border-[rgb(0,105,68)] bg-[rgb(0,105,68)] px-5 py-3 text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5">কল করুন</a>
       </div>
     </div>
   </section>
 <!-- buy-steps:end -->
 
 <!-- shared-delivery:start -->
-  <div class="bg-white px-4 pb-10">
+  <div class="bg-white px-[10px] pb-16 md:pb-20">
     <div class="mx-auto max-w-[1140px]">
-      <section id="shared-delivery" data-cta="shared_delivery" class="rounded-2xl border border-[#0b5b38]/25 bg-[#f3f8ee] p-5 sm:p-6">
-        <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন</h2>
-        <p class="mt-2 text-base leading-7 text-[#33483a]">খামারভেস্ট সাইলেজে ন্যূনতম অর্ডার নেই, এক বস্তাও নিতে পারেন। তবে অল্প বস্তার জন্য আলাদা গাড়ি গেলে কেজিপ্রতি পরিবহন খরচ বেশি পড়ে। একই এলাকার কয়েকজন খামারি একসাথে নিলে একটা গাড়িতেই সবার বস্তা যায়, তখন কেজিপ্রতি পরিবহন খরচ কমে আসে।</p>
-        <p class="mt-2 text-base leading-7 text-[#33483a]">আপনার এলাকার অর্ডার একসাথে হলে আমরা ফোন করে ডেলিভারির তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না, আর আগাম টাকা আমরা কখনোই নিই না। এটা জানিয়ে রাখার ফর্ম।</p>
-        <p class="mt-2 text-base leading-7 text-[#33483a]">এখনই লাগবে? তাহলে <a href="https://wa.me/8801334211984" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সরাসরি WhatsApp-এ অর্ডার করুন</a>।</p>
-        <form data-shared-delivery-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
-          <label class="text-base font-semibold text-[#123b28]">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="name" autocomplete="name" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
-          <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
-          <label class="text-base font-semibold text-[#123b28]">জেলা<input name="district" autocomplete="address-level1" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: পাবনা"></label>
-          <label class="text-base font-semibold text-[#123b28]">উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="upazila" autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ঈশ্বরদী"></label>
-          <label class="text-base font-semibold text-[#123b28]">কত বস্তা লাগবে (৫০ কেজির বস্তা)<input name="bags" type="number" min="1" required inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১০"></label>
-          <label class="text-base font-semibold text-[#123b28]">কবে লাগবে<select name="when" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]"><option value="যেকোনো সময়">যেকোনো সময়</option><option value="এই মাসে">এই মাসে</option><option value="আগামী মাসে">আগামী মাসে</option></select></label>
+      <section id="shared-delivery" data-cta="shared_delivery" class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 font-hind md:p-10">
+        <h2 class="text-[24px] font-semibold leading-[1.35] text-[rgb(14,124,75)] md:text-[32px]">অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন</h2>
+        <p class="mt-3 text-[17px] leading-[32px] text-[#4b5a51] md:text-[18px] md:leading-[34px]">খামারভেস্ট সাইলেজে ন্যূনতম অর্ডার নেই, এক বস্তাও নিতে পারেন। তবে অল্প বস্তার জন্য আলাদা গাড়ি গেলে কেজিপ্রতি পরিবহন খরচ বেশি পড়ে। একই এলাকার কয়েকজন খামারি একসাথে নিলে একটা গাড়িতেই সবার বস্তা যায়, তখন কেজিপ্রতি পরিবহন খরচ কমে আসে।</p>
+        <p class="mt-3 text-[17px] leading-[32px] text-[#4b5a51] md:text-[18px] md:leading-[34px]">আপনার এলাকার অর্ডার একসাথে হলে আমরা ফোন করে ডেলিভারির তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না, আর আগাম টাকা আমরা কখনোই নিই না। এটা জানিয়ে রাখার ফর্ম।</p>
+        <p class="mt-3 text-[17px] leading-[32px] text-[#4b5a51] md:text-[18px] md:leading-[34px]">এখনই লাগবে? তাহলে <a href="https://wa.me/8801334211984" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সরাসরি WhatsApp-এ অর্ডার করুন</a>।</p>
+        <form data-shared-delivery-form onsubmit="event.preventDefault()" class="mt-6 grid gap-x-5 gap-y-4 sm:grid-cols-2">
+          <label class="text-base font-semibold text-[#123b28]">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="name" autocomplete="name" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
+          <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
+          <label class="text-base font-semibold text-[#123b28]">জেলা<input name="district" autocomplete="address-level1" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: পাবনা"></label>
+          <label class="text-base font-semibold text-[#123b28]">উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="upazila" autocomplete="address-level2" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ঈশ্বরদী"></label>
+          <label class="text-base font-semibold text-[#123b28]">কত বস্তা লাগবে (৫০ কেজির বস্তা)<input name="bags" type="number" min="1" required inputmode="numeric" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১০"></label>
+          <label class="text-base font-semibold text-[#123b28]">কবে লাগবে<select name="when" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]"><option value="যেকোনো সময়">যেকোনো সময়</option><option value="এই মাসে">এই মাসে</option><option value="আগামী মাসে">আগামী মাসে</option></select></label>
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
-          <button type="submit" class="min-h-11 rounded-xl bg-[#0e7c4b] px-5 py-3 text-base font-bold text-white hover:bg-[#0b6a3e] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">একসাথে ডেলিভারিতে যোগ দিন</button>
+          <button type="submit" class="min-h-12 rounded-[8px] bg-[rgb(0,105,68)] px-6 py-3 text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5 disabled:opacity-60 sm:col-span-2 sm:justify-self-start">একসাথে ডেলিভারিতে যোগ দিন</button>
           <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
           <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আপনার এলাকার অর্ডার একসাথে হলে আমরা এই নম্বরে ফোন করে তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না।</p>
         </form>
@@ -960,23 +952,23 @@
 <!-- shared-delivery:end -->
 
 <!-- advance-booking:start -->
-  <div class="bg-white px-4 pb-10">
+  <div class="bg-white px-[10px] pb-16 md:pb-20">
     <div class="mx-auto max-w-[1140px]">
-      <section id="advance-booking" data-cta="advance_booking" class="rounded-2xl border border-[#0b5b38]/25 bg-[#eaf5eb] p-5 sm:p-6">
-        <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন</h2>
-        <p class="mt-2 text-base leading-7 text-[#33483a]">ভুট্টা কাটা আর সাইলেজ তৈরি হয় ডিসেম্বর-জানুয়ারিতে, আর সেই সাইলেজ দিয়েই সারা বছরের সরবরাহ চলে। আপনার কত লাগবে আগে জানালে আমরা পরিমাণ ঠিক করে নিতে পারি। তৈরি হলে আপনাকে আগে ফোন করব। এখন কোনো টাকা দিতে হবে না, আর সারা বছরের সরবরাহের শর্ত ফোনে দুই পক্ষের সুবিধামতো ঠিক হবে।</p>
-        <p class="mt-2 text-base leading-7 text-[#33483a]">দাম <!--=price-->৮.৫০<!--/=--> টাকা কেজি (লোড পয়েন্টে, পরিবহন আলাদা), সারা বছর একই, ২০২৭ সাল পর্যন্ত। এটা জানিয়ে রাখার ফর্ম, বস্তা আটকে রাখার নিশ্চয়তা নয়।</p>
-        <form data-booking-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
-          <label class="text-base font-semibold text-[#123b28]">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="name" autocomplete="name" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
-          <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
-          <label class="text-base font-semibold text-[#123b28]">জেলা ও উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="location" autocomplete="address-level2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: বগুড়া, শেরপুর"></label>
-          <label class="text-base font-semibold text-[#123b28]">গরুর সংখ্যা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="animals" inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১৫"></label>
-          <label class="text-base font-semibold text-[#123b28]">মাসে আনুমানিক কত বস্তা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="bags" inputmode="numeric" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ২০"></label>
-          <label class="text-base font-semibold text-[#123b28]">কোন মাসগুলোতে লাগবে <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="months" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: সারা বছর, বা মার্চ থেকে জুন"></label>
+      <section id="advance-booking" data-cta="advance_booking" class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 font-hind md:p-10">
+        <h2 class="text-[24px] font-semibold leading-[1.35] text-[rgb(14,124,75)] md:text-[32px]">নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন</h2>
+        <p class="mt-3 text-[17px] leading-[32px] text-[#4b5a51] md:text-[18px] md:leading-[34px]">ভুট্টা কাটা আর সাইলেজ তৈরি হয় ডিসেম্বর-জানুয়ারিতে, আর সেই সাইলেজ দিয়েই সারা বছরের সরবরাহ চলে। আপনার কত লাগবে আগে জানালে আমরা পরিমাণ ঠিক করে নিতে পারি। তৈরি হলে আপনাকে আগে ফোন করব। এখন কোনো টাকা দিতে হবে না, আর সারা বছরের সরবরাহের শর্ত ফোনে দুই পক্ষের সুবিধামতো ঠিক হবে।</p>
+        <p class="mt-3 text-[17px] leading-[32px] text-[#4b5a51] md:text-[18px] md:leading-[34px]">দাম <!--=price-->৮.৫০<!--/=--> টাকা কেজি (লোড পয়েন্টে, পরিবহন আলাদা), সারা বছর একই, ২০২৭ সাল পর্যন্ত। এটা জানিয়ে রাখার ফর্ম, বস্তা আটকে রাখার নিশ্চয়তা নয়।</p>
+        <form data-booking-form onsubmit="event.preventDefault()" class="mt-6 grid gap-x-5 gap-y-4 sm:grid-cols-2">
+          <label class="text-base font-semibold text-[#123b28]">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="name" autocomplete="name" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন"></label>
+          <label class="text-base font-semibold text-[#123b28]">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX"></label>
+          <label class="text-base font-semibold text-[#123b28]">জেলা ও উপজেলা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="location" autocomplete="address-level2" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: বগুড়া, শেরপুর"></label>
+          <label class="text-base font-semibold text-[#123b28]">গরুর সংখ্যা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="animals" inputmode="numeric" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১৫"></label>
+          <label class="text-base font-semibold text-[#123b28]">মাসে আনুমানিক কত বস্তা <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="bags" inputmode="numeric" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ২০"></label>
+          <label class="text-base font-semibold text-[#123b28]">কোন মাসগুলোতে লাগবে <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><input name="months" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: সারা বছর, বা মার্চ থেকে জুন"></label>
           <label class="flex min-h-11 items-start gap-3 text-base font-semibold text-[#123b28] sm:col-span-2"><input type="checkbox" name="yearly" class="mt-1 h-6 w-6 shrink-0 accent-[#0b5b38]"><span>সারা বছরের সাইলেজ আমার জন্য পরিকল্পনায় রাখুন</span></label>
-          <label class="text-base font-semibold text-[#123b28] sm:col-span-2">কিছু জানাতে চান? <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><textarea name="note" rows="2" class="mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]"></textarea></label>
+          <label class="text-base font-semibold text-[#123b28] sm:col-span-2">কিছু জানাতে চান? <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span><textarea name="note" rows="2" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280]"></textarea></label>
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
-          <button type="submit" class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">আগে থেকে জানিয়ে রাখুন</button>
+          <button type="submit" class="min-h-12 rounded-[8px] bg-[rgb(0,105,68)] px-6 py-3 text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5 disabled:opacity-60 sm:col-span-2 sm:justify-self-start">আগে থেকে জানিয়ে রাখুন</button>
           <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
           <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। নতুন মৌসুমের সাইলেজ তৈরি হলে আমরা আপনাকে এই নম্বরে আগে ফোন করব। এখন কোনো টাকা লাগবে না।</p>
         </form>
@@ -987,11 +979,11 @@
 
   <!-- ═══════════ SECTION 3 · GREEN TRUST BANNER  (bg #0e7c4b) ═══════════ -->
   <section class="bg-[rgb(14,124,75)] px-[10px]">
-    <div class="max-w-[1140px] mx-auto flex flex-col items-center gap-5 py-[40px]">
+    <div class="max-w-[1140px] mx-auto flex flex-col items-center gap-6 py-14 md:py-20">
       <h2 class="font-hind font-semibold text-white text-center text-[34px] leading-[40.8px] md:text-[56px] md:leading-[56px]">
         একটা সহজ হিসাব করে দেখুন
       </h2>
-      <p class="font-hind font-normal text-white text-center text-[19px] leading-[34px] md:text-[28px]">
+      <p class="max-w-[940px] font-hind font-normal text-white/90 text-center text-[19px] leading-[36px] md:text-[25px] md:leading-[46px]">
         দানাদার খাদ্যের কেজি এখন ৪০ টাকার ওপরে, খড়ের দাম এলাকা ও মৌসুমভেদে মণে ৩০০ থেকে ১,২০০ টাকা (কেজিতে প্রায় ৮-৩২ টাকা), অথচ খড়ে পুষ্টি নামমাত্র। ভুট্টা সাইলেজ ৮.৫০ টাকা কেজি, আর এতে আঁশের সাথে দানার শক্তিও আসে, তাই রেশনে দামি দানাদারের একটা অংশের জায়গা নিতে পারে। কতটা কমানো যায় তা আপনার পশু আর রেশনের উপর নির্ভর করে: নিজের খাদ্য ও দাম বসিয়ে <a href="/tools/ration-generator" class="underline underline-offset-4">ফ্রি রেশন জেনারেটরে</a> হিসাব করে নিন। ঘাস কাটার লোক লাগে না, জমি লাগে না, বস্তা খুলে দিলেই হলো।
       </p>
       <a href="https://wa.me/8801334211984?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%96%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%AD%E0%A7%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%20%E0%A6%A6%E0%A6%BE%E0%A6%AE%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A7%87%E0%A6%A8%3F" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white text-black font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
@@ -1003,112 +995,112 @@
 
   <!-- ═══════════ SECTION 4 · BENEFITS  (bg #fafbfc) ═══════════ -->
   <section class="bg-[rgb(250,251,252)] px-[10px]">
-    <div class="max-w-[1140px] mx-auto flex flex-col md:flex-row gap-5 py-[40px]">
+    <div class="max-w-[1140px] mx-auto flex flex-col md:flex-row md:items-center gap-10 md:gap-14 py-16 md:py-24">
       <!-- Left: heading + icon list + button -->
-      <div class="w-full md:w-1/2 flex flex-col justify-center gap-5 px-[10px]">
-        <h2 class="font-hind font-semibold text-[rgb(14,124,75)] text-[23px] leading-[23px] md:text-[55px] md:leading-[55px] text-center md:text-left">
+      <div class="w-full md:w-1/2 flex flex-col justify-center gap-6 px-[10px]">
+        <h2 class="font-hind font-semibold text-[rgb(14,124,75)] text-[28px] leading-[1.35] md:text-[40px] md:leading-[1.3] text-center md:text-left">
           ভুট্টা সাইলেজ খাওয়ালে যা পাবেন
         </h2>
         <ul class="w-full">
           <!-- 10 items, exact texts from the original -->
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">দুধের গাভীর জন্য আঁশ ও শক্তি একসাথে</span></li>
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">মোটাতাজাকরণের রেশনে দানার শক্তি যোগ করে</span></li>
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">কুচি করা নরম আঁশ, শক্ত ডাঁটা নেই</span></li>
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">দানাদারের একটা অংশের জায়গা নিতে পারে</span></li>
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">শুকনো মৌসুমেও সবুজ খাদ্যের অভাব নেই</span></li>
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">সারা বছর পাওয়া যায়, দাম একই</span></li>
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">আস্ত গাছ দানাসহ কুচি করা</span></li>
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">না-খোলা বস্তা ৬-১২ মাস ভালো থাকে</span></li>
-          <li class="flex items-center gap-[5px] py-[6px] border-b border-black/10"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">ঘাস কাটা ও বহনের ঝামেলা নেই</span></li>
-          <li class="flex items-center gap-[5px] py-[6px]"><svg class="w-[21px] h-[21px] shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[rgb(84,89,95)] text-[17px] md:text-[24px] pl-[5px]">গরু, ছাগল, ভেড়া সবার রেশনে চলে</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">দুধের গাভীর জন্য আঁশ ও শক্তি একসাথে</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">মোটাতাজাকরণের রেশনে দানার শক্তি যোগ করে</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">কুচি করা নরম আঁশ, শক্ত ডাঁটা নেই</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">দানাদারের একটা অংশের জায়গা নিতে পারে</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">শুকনো মৌসুমেও সবুজ খাদ্যের অভাব নেই</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">সারা বছর পাওয়া যায়, দাম একই</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">আস্ত গাছ দানাসহ কুচি করা</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">না-খোলা বস্তা ৬-১২ মাস ভালো থাকে</span></li>
+          <li class="flex items-center gap-3 py-3 border-b border-[#0b5b38]/10"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">ঘাস কাটা ও বহনের ঝামেলা নেই</span></li>
+          <li class="flex items-center gap-3 py-3"><svg class="w-5 h-5 shrink-0 fill-[rgb(14,124,75)]" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/></svg><span class="font-hind font-normal text-[#4b5a51] text-[18px] leading-[1.6] md:text-[21px]">গরু, ছাগল, ভেড়া সবার রেশনে চলে</span></li>
         </ul>
         <div class="flex justify-center md:justify-start">
-          <a href="https://wa.me/8801334211984?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%96%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%AD%E0%A7%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%20%E0%A6%A6%E0%A6%BE%E0%A6%AE%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A7%87%E0%A6%A8%3F" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[rgb(0,105,68)] text-white font-hind font-medium text-[28px] leading-none rounded-[3px] px-6 py-3">
-            <svg aria-hidden="true" class="w-[28px] h-[28px] fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
+          <a href="https://wa.me/8801334211984?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%96%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%AD%E0%A7%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%20%E0%A6%A6%E0%A6%BE%E0%A6%AE%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A7%87%E0%A6%A8%3F" target="_blank" rel="noopener" class="inline-flex min-h-12 items-center gap-2 whitespace-nowrap bg-[rgb(0,105,68)] text-white font-hind font-medium text-[18px] leading-none rounded-[8px] px-6 py-3.5 transition hover:-translate-y-0.5">
+            <svg aria-hidden="true" class="w-5 h-5 shrink-0 fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg>
             অর্ডার করতে চাই
           </a>
         </div>
       </div>
       <!-- Right: framed image slider (original is a 4-slide swiper of the same photo) -->
       <div class="w-full md:w-1/2 flex items-center justify-center px-[10px]">
-        <div class="w-full max-w-[540px] rounded-[10px] border-4 border-[rgb(14,124,75)] overflow-hidden">
-          <img src="img/silage-bag-1200.jpeg" srcset="img/silage-bag-1200-480w.jpeg 480w, img/silage-bag-1200-800w.jpeg 800w, img/silage-bag-1200-1200w.jpeg 1200w" sizes="(min-width: 768px) 540px, 100vw" loading="lazy" decoding="async" alt="ভুট্টা সাইলেজের ৫০ কেজি এয়ারটাইট বস্তা" width="540" height="540" class="aspect-square w-full object-cover">
+        <div class="w-full max-w-[460px] rounded-[10px] border-4 border-[rgb(14,124,75)] overflow-hidden">
+          <img src="img/silage-bag-1200.jpeg" srcset="img/silage-bag-1200-480w.jpeg 480w, img/silage-bag-1200-800w.jpeg 800w, img/silage-bag-1200-1200w.jpeg 1200w" sizes="(min-width: 768px) 580px, 125vw" loading="lazy" decoding="async" alt="ভুট্টা সাইলেজের ৫০ কেজি এয়ারটাইট বস্তা" width="540" height="540" class="aspect-[4/5] w-full object-cover">
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══════════ SECTION 5 · WHY BUY FROM US  (bg #f3f3f3) ═══════════ -->
-  <section class="bg-[rgb(243,243,243)] px-[10px]">
-    <div class="max-w-[1140px] mx-auto flex flex-col gap-5 py-[40px]">
-      <h2 class="font-hind font-semibold text-[rgb(53,122,31)] text-center text-[30px] leading-[30px] md:text-[55px] md:leading-[55px]">
-        খামারভেস্ট সাইলেজে কী থাকে, আর আপনি কী যাচাই করবেন
+  <section class="bg-white px-[10px]">
+    <div class="max-w-[1140px] mx-auto flex flex-col gap-6 py-16 md:py-24">
+      <h2 class="font-hind font-semibold text-[rgb(14,124,75)] text-center text-[30px] leading-[1.35] md:text-[50px] md:leading-[1.3]">
+        খামারভেস্ট সাইলেজে কী থাকে,<br class="hidden md:block"> আর আপনি কী যাচাই করবেন
       </h2>
-      <p class="font-hind text-[17px] md:text-[20px] leading-[30px] md:leading-[34px] text-[rgb(84,89,95)] text-center max-w-[860px] mx-auto mt-3">খামারভেস্টের দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য বিপুল পরিমাণ ভুট্টা সাইলেজ উৎপাদন করেছে। এখন একই দল, একই নিয়মে, নিজেদের নামে সরাসরি খামারির কাছে, মাঝখানে কোনো কোম্পানি বা ডিলার নেই। <a href="/about#story" class="font-semibold text-[rgb(0,105,68)] underline underline-offset-4">আমাদের গল্প পড়ুন</a></p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-[10px] mt-3">
+      <p class="font-hind text-[18px] md:text-[20px] leading-[34px] md:leading-[38px] text-[#4b5a51] text-center max-w-[860px] mx-auto">খামারভেস্টের দল এতদিন দেশের বড় প্রতিষ্ঠানগুলোর জন্য বিপুল পরিমাণ ভুট্টা সাইলেজ উৎপাদন করেছে। এখন একই দল, একই নিয়মে, নিজেদের নামে সরাসরি খামারির কাছে, মাঝখানে কোনো কোম্পানি বা ডিলার নেই। <a href="/about#story" class="font-semibold text-[rgb(0,105,68)] underline underline-offset-4">আমাদের গল্প পড়ুন</a></p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 px-[10px] mt-6">
         <!-- Card 1 · মানসম্মত ভুট্টা -->
-        <div class="bg-white rounded-[12px] border border-[rgb(14,124,75)]/20 p-6 text-center shadow-[0_2px_10px_0_rgba(0,0,0,0.06)] hover:shadow-[0_6px_20px_0_rgba(20,148,91,0.18)] hover:-translate-y-1 transition">
-          <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22c0-6 0-10 4-14M12 22c0-6 0-10-4-14"/><path d="M16 8c2-2 4-2 5-2 0 3-1 5-3 6s-4 0-4 0M8 8c-2-2-4-2-5-2 0 3 1 5 3 6s4 0 4 0"/></svg>
+        <div class="flex flex-col items-center rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-5 py-6 text-center transition hover:-translate-y-1">
+          <span class="w-14 h-14 shrink-0 rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z"/><path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/><path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/><path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z"/></svg>
           </span>
-          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">সঠিক সময়ে কাটা ভুট্টা</p>
-          <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">ভুট্টা দুধ-দানা অবস্থায় কাটা হয়, যখন গাছে পুষ্টি থাকে সবচেয়ে বেশি।</p>
+          <p class="font-hind font-bold text-[19px] leading-[1.4] text-[rgb(14,124,75)] mt-4">সঠিক সময়ে কাটা ভুট্টা</p>
+          <p class="font-hind text-[16px] leading-[28px] text-[#4b5a51] mt-2">ভুট্টা দুধ-দানা অবস্থায় কাটা হয়, যখন গাছে পুষ্টি থাকে সবচেয়ে বেশি।</p>
         </div>
         <!-- Card 2 · গবাদি পশুর প্রিয় খাদ্য -->
-        <div class="bg-white rounded-[12px] border border-[rgb(14,124,75)]/20 p-6 text-center shadow-[0_2px_10px_0_rgba(0,0,0,0.06)] hover:shadow-[0_6px_20px_0_rgba(20,148,91,0.18)] hover:-translate-y-1 transition">
-          <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7c0-1.5 1-2 2-1.5L8 6M20 7c0-1.5-1-2-2-1.5L16 6"/><path d="M6 8c1.5 2 3.5 3 6 3s4.5-1 6-3v4a6 6 0 0 1-12 0z"/><path d="M9 20v-2M15 20v-2M9.5 12h.01M14.5 12h.01"/></svg>
+        <div class="flex flex-col items-center rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-5 py-6 text-center transition hover:-translate-y-1">
+          <span class="w-14 h-14 shrink-0 rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.12 15.88"/><path d="M14.47 14.48 20 20"/><path d="M8.12 8.12 12 12"/></svg>
           </span>
-          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">টক-মিষ্টি গন্ধ, নরম কুচি</p>
-          <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">ভালো সাইলেজে টক-মিষ্টি গন্ধ থাকে। প্রথম ৭ দিন অল্প অল্প দিয়ে অভ্যাস করান।</p>
+          <p class="font-hind font-bold text-[19px] leading-[1.4] text-[rgb(14,124,75)] mt-4">টক-মিষ্টি গন্ধ, নরম কুচি</p>
+          <p class="font-hind text-[16px] leading-[28px] text-[#4b5a51] mt-2">ভালো সাইলেজে টক-মিষ্টি গন্ধ থাকে। প্রথম ৭ দিন অল্প অল্প দিয়ে অভ্যাস করান।</p>
         </div>
         <!-- Card 3 · প্রাকৃতিক ফার্মেন্টেশন -->
-        <div class="bg-white rounded-[12px] border border-[rgb(14,124,75)]/20 p-6 text-center shadow-[0_2px_10px_0_rgba(0,0,0,0.06)] hover:shadow-[0_6px_20px_0_rgba(20,148,91,0.18)] hover:-translate-y-1 transition">
-          <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+        <div class="flex flex-col items-center rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-5 py-6 text-center transition hover:-translate-y-1">
+          <span class="w-14 h-14 shrink-0 rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
           </span>
-          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">প্রাকৃতিক ফার্মেন্টেশন</p>
-          <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">প্রাকৃতিক উপায়ে তৈরি, কোনো ক্ষতিকর কেমিক্যাল বা প্রিজারভেটিভ ছাড়াই।</p>
+          <p class="font-hind font-bold text-[19px] leading-[1.4] text-[rgb(14,124,75)] mt-4">প্রাকৃতিক ফার্মেন্টেশন</p>
+          <p class="font-hind text-[16px] leading-[28px] text-[#4b5a51] mt-2">প্রাকৃতিক উপায়ে তৈরি, কোনো ক্ষতিকর কেমিক্যাল বা প্রিজারভেটিভ ছাড়াই।</p>
         </div>
         <!-- Card 4 · ল্যাব টেস্টেড পুষ্টিমান -->
-        <div class="bg-white rounded-[12px] border border-[rgb(14,124,75)]/20 p-6 text-center shadow-[0_2px_10px_0_rgba(0,0,0,0.06)] hover:shadow-[0_6px_20px_0_rgba(20,148,91,0.18)] hover:-translate-y-1 transition">
-          <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-4.5 8A2 2 0 0 0 7.3 20h9.4a2 2 0 0 0 1.8-3L14 9V3"/><path d="M7.5 15h9"/></svg>
+        <div class="flex flex-col items-center rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-5 py-6 text-center transition hover:-translate-y-1">
+          <span class="w-14 h-14 shrink-0 rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </span>
-          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">ভালোভাবে চাপা ও সংরক্ষিত</p>
-          <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">বাতাস বের করে শক্ত করে চাপা দেওয়া হয়। সাইলেজের শত্রু বাতাস, তাই বস্তার মুখ বন্ধ থাকা পর্যন্ত মান ঠিক থাকে।</p>
+          <p class="font-hind font-bold text-[19px] leading-[1.4] text-[rgb(14,124,75)] mt-4">ভালোভাবে চাপা ও সংরক্ষিত</p>
+          <p class="font-hind text-[16px] leading-[28px] text-[#4b5a51] mt-2">বাতাস বের করে শক্ত করে চাপা দেওয়া হয়। সাইলেজের শত্রু বাতাস, তাই বস্তার মুখ বন্ধ থাকা পর্যন্ত মান ঠিক থাকে।</p>
         </div>
         <!-- Card 5 · টক-মিষ্টি ঘ্রাণ -->
-        <div class="bg-white rounded-[12px] border border-[rgb(14,124,75)]/20 p-6 text-center shadow-[0_2px_10px_0_rgba(0,0,0,0.06)] hover:shadow-[0_6px_20px_0_rgba(20,148,91,0.18)] hover:-translate-y-1 transition">
-          <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.09 4.9 5.31.46-4.02 3.5 1.2 5.19L12 14.8l-4.58 2.75 1.2-5.19-4.02-3.5 5.31-.46z"/></svg>
+        <div class="flex flex-col items-center rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-5 py-6 text-center transition hover:-translate-y-1">
+          <span class="w-14 h-14 shrink-0 rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
           </span>
-          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">টক-মিষ্টি ঘ্রাণ</p>
-          <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">ঠিকমতো ফার্মেন্ট হলে সাইলেজে টক-মিষ্টি ঘ্রাণ থাকে। পচা বা ঝাঁঝালো গন্ধ পেলে সেই বস্তা খাওয়াবেন না।</p>
+          <p class="font-hind font-bold text-[19px] leading-[1.4] text-[rgb(14,124,75)] mt-4">টক-মিষ্টি ঘ্রাণ</p>
+          <p class="font-hind text-[16px] leading-[28px] text-[#4b5a51] mt-2">ঠিকমতো ফার্মেন্ট হলে সাইলেজে টক-মিষ্টি ঘ্রাণ থাকে। পচা বা ঝাঁঝালো গন্ধ পেলে সেই বস্তা খাওয়াবেন না।</p>
         </div>
         <!-- Card 6 · শুধু ভুট্টা গাছ -->
-        <div class="bg-white rounded-[12px] border border-[rgb(14,124,75)]/20 p-6 text-center shadow-[0_2px_10px_0_rgba(0,0,0,0.06)] hover:shadow-[0_6px_20px_0_rgba(20,148,91,0.18)] hover:-translate-y-1 transition">
-          <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div class="flex flex-col items-center rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-5 py-6 text-center transition hover:-translate-y-1">
+          <span class="w-14 h-14 shrink-0 rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
           </span>
-          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">শুধু ভুট্টা গাছ</p>
-          <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">আস্ত ভুট্টা গাছ ছাড়া কিছু মেশানো হয় না: কোনো মোলাসেস, ইউরিয়া, লবণ বা ইনোকুলেন্ট নয়, শুধু কুচি করা ভুট্টা গাছ। বস্তা হাতে পেয়ে খুলে মান দেখে তারপর টাকা দেবেন।</p>
+          <p class="font-hind font-bold text-[19px] leading-[1.4] text-[rgb(14,124,75)] mt-4">শুধু ভুট্টা গাছ</p>
+          <p class="font-hind text-[16px] leading-[28px] text-[#4b5a51] mt-2">আস্ত ভুট্টা গাছ ছাড়া কিছু মেশানো হয় না: কোনো মোলাসেস, ইউরিয়া, লবণ বা ইনোকুলেন্ট নয়, শুধু কুচি করা ভুট্টা গাছ। বস্তা হাতে পেয়ে খুলে মান দেখে তারপর টাকা দেবেন।</p>
         </div>
         <!-- Card 7 · এয়ারটাইট প্যাকেজিং -->
-        <div class="bg-white rounded-[12px] border border-[rgb(14,124,75)]/20 p-6 text-center shadow-[0_2px_10px_0_rgba(0,0,0,0.06)] hover:shadow-[0_6px_20px_0_rgba(20,148,91,0.18)] hover:-translate-y-1 transition">
-          <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8M12 13v8"/></svg>
+        <div class="flex flex-col items-center rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-5 py-6 text-center transition hover:-translate-y-1">
+          <span class="w-14 h-14 shrink-0 rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"/><path d="m7.5 4.27 9 5.15"/></svg>
           </span>
-          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">এয়ারটাইট প্যাকেজিং</p>
-          <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">এয়ারটাইট বস্তায় প্যাক করা হয়, যাতে মান দীর্ঘদিন অক্ষুণ্ণ থাকে।</p>
+          <p class="font-hind font-bold text-[19px] leading-[1.4] text-[rgb(14,124,75)] mt-4">এয়ারটাইট প্যাকেজিং</p>
+          <p class="font-hind text-[16px] leading-[28px] text-[#4b5a51] mt-2">এয়ারটাইট বস্তায় প্যাক করা হয়, যাতে মান দীর্ঘদিন অক্ষুণ্ণ থাকে।</p>
         </div>
         <!-- Card 8 · হোম ডেলিভারি -->
-        <div class="bg-white rounded-[12px] border border-[rgb(14,124,75)]/20 p-6 text-center shadow-[0_2px_10px_0_rgba(0,0,0,0.06)] hover:shadow-[0_6px_20px_0_rgba(20,148,91,0.18)] hover:-translate-y-1 transition">
-          <span class="w-[64px] h-[64px] mx-auto rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
-            <svg class="w-8 h-8 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>
+        <div class="flex flex-col items-center rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-5 py-6 text-center transition hover:-translate-y-1">
+          <span class="w-14 h-14 shrink-0 rounded-full bg-[rgb(14,124,75)]/10 flex items-center justify-center">
+            <svg class="w-7 h-7 stroke-[rgb(14,124,75)] fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
           </span>
-          <p class="font-hind font-semibold text-[22px] leading-[28px] text-[rgb(53,122,31)] mt-4">হোম ডেলিভারি</p>
-          <p class="font-hind text-[17px] leading-[26px] text-[rgb(84,89,95)] mt-2">কোনো মধ্যস্বত্বভোগী ছাড়াই সাইলেজ পৌঁছে যাবে সরাসরি আপনার খামারে।</p>
+          <p class="font-hind font-bold text-[19px] leading-[1.4] text-[rgb(14,124,75)] mt-4">হোম ডেলিভারি</p>
+          <p class="font-hind text-[16px] leading-[28px] text-[#4b5a51] mt-2">কোনো মধ্যস্বত্বভোগী ছাড়াই সাইলেজ পৌঁছে যাবে সরাসরি আপনার খামারে।</p>
         </div>
       </div>
     </div>
@@ -1116,35 +1108,46 @@
 
   <!-- ═══════════ VIDEO SECTION  (white) ═══════════ -->
   <section class="bg-white px-[10px]">
-    <div class="max-w-[1140px] mx-auto flex flex-col items-center gap-5 py-[40px]">
-      <h2 class="font-hind font-medium text-[rgb(14,124,75)] text-center text-[29px] leading-[29px] md:text-[50px] md:leading-[50px]">
-        নিজের চোখে দেখুন, আমাদের খামারের কাজ
+    <div class="max-w-[1140px] mx-auto flex flex-col items-center gap-6 py-16 md:py-24">
+      <h2 class="font-hind font-semibold text-[rgb(14,124,75)] text-center text-[30px] leading-[1.35] md:text-[50px] md:leading-[1.3]">
+        নিজের চোখে দেখুন,<br class="hidden md:block"> আমাদের খামারের কাজ
       </h2>
-      <div class="w-[80%] border-t-2 border-[rgb(218,165,47)]"></div>
-      <p class="font-hind text-[17px] md:text-[20px] text-[rgb(84,89,95)] text-center max-w-[600px]">
+      <div class="w-full max-w-[440px] border-t-2 border-[rgb(218,165,47)]"></div>
+      <p class="font-hind text-[18px] md:text-[20px] leading-[34px] md:leading-[38px] text-[#4b5a51] text-center max-w-[640px]">
         ভুট্টা কেটে, মেশিনে চপ করে বস্তায় ভরা পর্যন্ত পুরো কাজটা নিজের চোখে দেখুন। ছবিতে ক্লিক করলেই ভিডিও চালু হবে।
       </p>
-      <button id="yt-facade" type="button" aria-label="ভিডিও দেখুন"
-              class="group relative w-full max-w-[304px] aspect-[9/16] rounded-[8px] border-[5px] border-[rgb(14,124,75)] overflow-hidden bg-black cursor-pointer">
-        <img src="https://i.ytimg.com/vi/n8sSOV0KQ64/oardefault.jpg" loading="lazy" decoding="async" alt="ভুট্টা সাইলেজ তৈরির ভিডিও, খামারভেস্ট"
-             class="w-full h-full object-cover transition group-hover:scale-105" onerror="this.src='https://i.ytimg.com/vi/n8sSOV0KQ64/hqdefault.jpg'">
-        <span class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition">
-          <span class="w-[72px] h-[52px] rounded-[14px] bg-[#f00] flex items-center justify-center shadow-lg group-hover:scale-110 transition">
-            <svg viewBox="0 0 24 24" class="w-8 h-8 fill-white"><path d="M8 5v14l11-7z"/></svg>
+      <div id="drone-video-box" class="mt-2 w-full max-w-[960px]">
+        <!-- YouTube drone video (owner's upload, nMe4kThhAEg). Only a thumbnail loads; the player loads on tap. -->
+        <button id="drone-video" type="button" aria-label="ড্রোন ভিডিও চালু করুন"
+                class="group relative block w-full aspect-video overflow-hidden rounded-[8px] border-[5px] border-[rgb(14,124,75)] bg-black cursor-pointer">
+          <img src="https://i.ytimg.com/vi/nMe4kThhAEg/maxresdefault.jpg" loading="lazy" decoding="async" width="1280" height="720"
+               alt="ড্রোন থেকে তোলা খামারভেস্টের ভুট্টা খেত আর সাইলেজ তৈরির ভিডিও"
+               class="h-full w-full object-cover transition group-hover:scale-105" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/nMe4kThhAEg/hqdefault.jpg'">
+          <span class="absolute inset-0 flex items-center justify-center bg-black/10 transition group-hover:bg-black/20">
+            <span class="flex h-[52px] w-[72px] items-center justify-center rounded-[14px] bg-[#f00] shadow-lg transition group-hover:scale-110">
+              <svg viewBox="0 0 24 24" class="h-8 w-8 fill-white" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            </span>
           </span>
-        </span>
-      </button>
+        </button>
+      </div>
     </div>
   </section>
-
-  <!-- Video lightbox popup -->
-  <div id="yt-modal" role="dialog" aria-modal="true" aria-label="ভুট্টা সাইলেজ তৈরির ভিডিও" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/85 p-4">
-    <div class="relative w-full max-w-[340px] aspect-[9/16]">
-      <button id="yt-close" type="button" aria-label="বন্ধ করুন"
-              class="absolute -top-12 right-0 w-11 h-11 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-[#111] text-2xl leading-none">&times;</button>
-      <div id="yt-modal-body" class="w-full h-full rounded-[10px] overflow-hidden bg-black"></div>
-    </div>
-  </div>
+  <script>
+    // Drone video: swap the thumbnail for the YouTube player on tap (no YouTube load before that).
+    (function () {
+      var btn = document.getElementById('drone-video');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        if (typeof gaEvent === 'function') gaEvent('video_play', { video_id: 'nMe4kThhAEg', video_title: 'khamarvest silage drone' });
+        if (location.protocol.indexOf('http') !== 0) { window.open('https://www.youtube.com/watch?v=nMe4kThhAEg', '_blank'); return; }
+        var box = document.createElement('div');
+        box.className = 'relative w-full aspect-video overflow-hidden rounded-[8px] border-[5px] border-[rgb(14,124,75)] bg-black';
+        box.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/nMe4kThhAEg?autoplay=1&rel=0&playsinline=1" title="খামারভেস্ট সাইলেজের ড্রোন ভিডিও" class="absolute inset-0 h-full w-full" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+        btn.replaceWith(box);
+        box.querySelector('iframe').focus();
+      });
+    })();
+  </script>
 
 
 
@@ -1165,17 +1168,17 @@
 
 
 <!-- photo-strip:start -->
-  <div class="bg-white px-4 pb-10">
-      <section data-cta="photo_strip" class="mx-auto mt-9 w-full max-w-5xl">
-        <h2 class="text-2xl font-bold text-[#123b28]">মাঠ থেকে বস্তা পর্যন্ত, আমাদের নিজেদের কাজ</h2>
-        <p class="mt-2 text-base leading-7 text-[#456451]">এগুলো আমাদের নিজেদের মাঠ আর কাজের ছবি, কোনো স্টক ছবি নয়।</p>
-        <div class="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-          <figure><picture><source type="image/webp" srcset="/img/corn-harvest-1200-480w.webp 480w, /img/corn-harvest-1200-800w.webp 800w" sizes="(min-width: 1024px) 800px, 100vw"><source type="image/jpeg" srcset="/img/corn-harvest-1200-480w.jpeg 480w, /img/corn-harvest-1200-800w.jpeg 800w" sizes="(min-width: 1024px) 800px, 100vw"><img src="/img/corn-harvest-1200.jpeg" alt="দানা-ভরা ভুট্টা কাটা হচ্ছে, খামারভেস্ট সাইলেজ" width="900" height="1200" loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-xl object-cover shadow-sm"></picture><figcaption class="mt-2 text-sm leading-6 text-[#33483a]">১. দানা আসার পর সঠিক সময়ে ভুট্টা কাটা</figcaption></figure>
-          <figure><picture><source type="image/jpeg" srcset="/img/silage-production-1400-480w.jpeg 480w, /img/silage-production-1400-800w.jpeg 800w, /img/silage-production-1400-1200w.jpeg 1200w" sizes="(min-width: 1024px) 800px, 100vw"><img src="/img/silage-production-1400.jpeg" alt="মাঠে মেশিনে ভুট্টা চপ করা হচ্ছে, খামারভেস্ট সাইলেজ" width="1400" height="1050" loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-xl object-cover shadow-sm"></picture><figcaption class="mt-2 text-sm leading-6 text-[#33483a]">২. মাঠেই মেশিনে আস্ত গাছ কুচি করা</figcaption></figure>
-          <figure><picture><source type="image/webp" srcset="/img/silage-bagging-1200-480w.webp 480w, /img/silage-bagging-1200-800w.webp 800w" sizes="(min-width: 1024px) 800px, 100vw"><source type="image/jpeg" srcset="/img/silage-bagging-1200-480w.jpeg 480w, /img/silage-bagging-1200-800w.jpeg 800w" sizes="(min-width: 1024px) 800px, 100vw"><img src="/img/silage-bagging-1200.jpeg" alt="কুচি করা ভুট্টা সাথে সাথে বস্তায় ভরা হচ্ছে, খামারভেস্ট সাইলেজ" width="900" height="1200" loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-xl object-cover shadow-sm"></picture><figcaption class="mt-2 text-sm leading-6 text-[#33483a]">৩. সাথে সাথে এয়ারটাইট বস্তায় ভরা</figcaption></figure>
-          <figure><picture><source type="image/webp" srcset="/img/silage-closeup-1200-480w.webp 480w, /img/silage-closeup-1200-800w.webp 800w, /img/silage-closeup-1200-1200w.webp 1200w" sizes="(min-width: 1024px) 800px, 100vw"><source type="image/jpeg" srcset="/img/silage-closeup-1200-480w.jpeg 480w, /img/silage-closeup-1200-800w.jpeg 800w, /img/silage-closeup-1200-1200w.jpeg 1200w" sizes="(min-width: 1024px) 800px, 100vw"><img src="/img/silage-closeup-1200.jpeg" alt="কাছ থেকে তৈরি ভুট্টা সাইলেজ, দানাসহ, খামারভেস্ট সাইলেজ" width="1200" height="900" loading="lazy" decoding="async" class="aspect-[4/3] w-full rounded-xl object-cover shadow-sm"></picture><figcaption class="mt-2 text-sm leading-6 text-[#33483a]">৪. যা আপনার খামারে পৌঁছায়: দানাসহ কুচি করা গাছ</figcaption></figure>
+  <div class="bg-white px-[10px] py-16 font-hind md:py-24">
+      <section data-cta="photo_strip" class="mx-auto w-full max-w-[1140px] px-[10px]">
+        <h2 class="text-center font-semibold text-[rgb(14,124,75)] text-[30px] leading-[1.35] md:text-[44px] md:leading-[1.3]">মাঠ থেকে বস্তা পর্যন্ত, আমাদের নিজেদের কাজ</h2>
+        <p class="mt-4 text-center text-[18px] leading-[32px] text-[#4b5a51] md:text-[20px]">এগুলো আমাদের নিজেদের মাঠ আর কাজের ছবি, কোনো স্টক ছবি নয়।</p>
+        <div class="mt-10 grid grid-cols-2 gap-5 md:grid-cols-4">
+          <figure><img src="/img/corn-harvest-1200.jpeg" alt="দানা-ভরা ভুট্টা কাটা হচ্ছে, খামারভেস্ট সাইলেজ" width="900" height="1200" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-2xl object-cover"><figcaption class="mt-3 text-[16px] leading-[26px] text-[#33483a]">১. দানা আসার পর সঠিক সময়ে ভুট্টা কাটা</figcaption></figure>
+          <figure><img src="/img/silage-production-1400.jpeg" alt="মাঠে মেশিনে ভুট্টা চপ করা হচ্ছে, খামারভেস্ট সাইলেজ" width="1400" height="1050" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-2xl object-cover"><figcaption class="mt-3 text-[16px] leading-[26px] text-[#33483a]">২. মাঠেই মেশিনে আস্ত গাছ কুচি করা</figcaption></figure>
+          <figure><img src="/img/silage-bagging-1200.jpeg" alt="কুচি করা ভুট্টা সাথে সাথে বস্তায় ভরা হচ্ছে, খামারভেস্ট সাইলেজ" width="900" height="1200" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-2xl object-cover"><figcaption class="mt-3 text-[16px] leading-[26px] text-[#33483a]">৩. সাথে সাথে এয়ারটাইট বস্তায় ভরা</figcaption></figure>
+          <figure><img src="/img/silage-closeup-1200.jpeg" alt="কাছ থেকে তৈরি ভুট্টা সাইলেজ, দানাসহ, খামারভেস্ট সাইলেজ" width="1200" height="900" loading="lazy" decoding="async" class="aspect-[4/5] w-full rounded-2xl object-cover"><figcaption class="mt-3 text-[16px] leading-[26px] text-[#33483a]">৪. যা আপনার খামারে পৌঁছায়: দানাসহ কুচি করা গাছ</figcaption></figure>
         </div>
-        <p class="mt-3 text-base text-[#456451]"><a href="https://www.youtube.com/shorts/n8sSOV0KQ64" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-4">পুরো কাজ ভিডিওতে দেখুন</a> · <a href="/about" class="font-semibold text-[#0b6a3e] underline underline-offset-4">আমরা কারা</a></p>
+        <p class="mt-8 text-center text-[17px] text-[#456451]"><a href="https://www.youtube.com/shorts/n8sSOV0KQ64" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-4">পুরো কাজ ভিডিওতে দেখুন</a> · <a href="/about" class="font-semibold text-[#0b6a3e] underline underline-offset-4">আমরা কারা</a></p>
       </section>
   </div>
 <!-- photo-strip:end -->
@@ -1240,94 +1243,94 @@
   </section>
 
   <!-- ═══════════ FAQ  (bg #f3f3f3) ═══════════ -->
-  <section class="bg-[rgb(243,243,243)] px-[10px]">
-    <div class="max-w-[900px] mx-auto flex flex-col gap-4 py-[40px]">
-      <h2 class="font-hind font-semibold text-[rgb(53,122,31)] text-center text-[26px] leading-[30px] md:text-[45px] md:leading-[50px] mb-3">
+  <section class="bg-white px-[10px]">
+    <div class="max-w-[900px] mx-auto flex flex-col gap-4 py-16 md:py-24">
+      <h2 class="font-hind font-semibold text-[rgb(14,124,75)] text-[30px] leading-[1.35] md:text-[44px] md:leading-[1.3] text-center mb-6">
         খামারি ভাইদের সাধারণ প্রশ্ন
       </h2>
       <!-- faq:start -->
-      <details class="bg-white rounded-[8px] border border-[rgb(14,124,75)]/30 p-4 font-hind">
-        <summary class="cursor-pointer font-medium text-[18px] md:text-[21px] text-[rgb(0,105,68)]">ভুট্টা সাইলেজের দাম কত?</summary>
-        <p class="mt-2 text-[16px] md:text-[18px] leading-[28px] text-[rgb(84,89,95)]">প্রতি কেজি এখন মাত্র ৮.৫০ টাকা (আগের দাম <!--=prev-->১০<!--/=--> টাকা)। ৫০ কেজি বস্তা ৪২৫ টাকা। পরিবহন খরচ আলাদা, দূরত্ব ও পরিমাণ দেখে কনফার্মেশন কলে জানানো হয়। অনেক বস্তা একসাথে নিলে দাম নিয়ে WhatsApp-এ কথা বলুন: <a href="https://wa.me/8801334211984" class="font-medium underline">+880 1334-211984</a>।</p>
+      <details class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-6 py-5 font-hind">
+        <summary class="cursor-pointer font-semibold text-[18px] md:text-[20px] leading-[1.5] text-[rgb(14,124,75)]">ভুট্টা সাইলেজের দাম কত?</summary>
+        <p class="mt-3 text-[17px] md:text-[18px] leading-[32px] text-[#4b5a51]">প্রতি কেজি এখন মাত্র ৮.৫০ টাকা (আগের দাম <!--=prev-->১০<!--/=--> টাকা)। ৫০ কেজি বস্তা ৪২৫ টাকা। পরিবহন খরচ আলাদা, দূরত্ব ও পরিমাণ দেখে কনফার্মেশন কলে জানানো হয়। অনেক বস্তা একসাথে নিলে দাম নিয়ে WhatsApp-এ কথা বলুন: <a href="https://wa.me/8801334211984" class="font-medium underline">+880 1334-211984</a>।</p>
       </details>
-      <details class="bg-white rounded-[8px] border border-[rgb(14,124,75)]/30 p-4 font-hind">
-        <summary class="cursor-pointer font-medium text-[18px] md:text-[21px] text-[rgb(0,105,68)]">সাইলেজ কতদিন সংরক্ষণ করা যায়?</summary>
-        <p class="mt-2 text-[16px] md:text-[18px] leading-[28px] text-[rgb(84,89,95)]">এয়ারটাইট বস্তা না খোলা পর্যন্ত ৬ থেকে ১২ মাস পর্যন্ত ভালো থাকে। বস্তা খোলার পর ২-৩ দিনের মধ্যে খাইয়ে ফেলা ভালো এবং মুখ ভালো করে বেঁধে ছায়ায় রাখতে হয়।</p>
+      <details class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-6 py-5 font-hind">
+        <summary class="cursor-pointer font-semibold text-[18px] md:text-[20px] leading-[1.5] text-[rgb(14,124,75)]">সাইলেজ কতদিন সংরক্ষণ করা যায়?</summary>
+        <p class="mt-3 text-[17px] md:text-[18px] leading-[32px] text-[#4b5a51]">এয়ারটাইট বস্তা না খোলা পর্যন্ত ৬ থেকে ১২ মাস পর্যন্ত ভালো থাকে। বস্তা খোলার পর ২-৩ দিনের মধ্যে খাইয়ে ফেলা ভালো এবং মুখ ভালো করে বেঁধে ছায়ায় রাখতে হয়।</p>
       </details>
-      <details class="bg-white rounded-[8px] border border-[rgb(14,124,75)]/30 p-4 font-hind">
-        <summary class="cursor-pointer font-medium text-[18px] md:text-[21px] text-[rgb(0,105,68)]">গরুকে দৈনিক কতটুকু সাইলেজ খাওয়াবো?</summary>
-        <p class="mt-2 text-[16px] md:text-[18px] leading-[28px] text-[rgb(84,89,95)]">দুধের গাভীকে ওজন অনুযায়ী দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি। প্রথম ৭ দিন অল্প অল্প করে দিয়ে অভ্যাস করালে সবচেয়ে ভালো ফল পাবেন।</p>
+      <details class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-6 py-5 font-hind">
+        <summary class="cursor-pointer font-semibold text-[18px] md:text-[20px] leading-[1.5] text-[rgb(14,124,75)]">গরুকে দৈনিক কতটুকু সাইলেজ খাওয়াবো?</summary>
+        <p class="mt-3 text-[17px] md:text-[18px] leading-[32px] text-[#4b5a51]">দুধের গাভীকে ওজন অনুযায়ী দৈনিক ১৫-২৫ কেজি, মোটাতাজাকরণের গরুকে ১০-২০ কেজি। প্রথম ৭ দিন অল্প অল্প করে দিয়ে অভ্যাস করালে সবচেয়ে ভালো ফল পাবেন।</p>
       </details>
-      <details class="bg-white rounded-[8px] border border-[rgb(14,124,75)]/30 p-4 font-hind">
-        <summary class="cursor-pointer font-medium text-[18px] md:text-[21px] text-[rgb(0,105,68)]">কোন কোন এলাকায় ডেলিভারি দেওয়া হয়?</summary>
-        <p class="mt-2 text-[16px] md:text-[18px] leading-[28px] text-[rgb(84,89,95)]"><!--area-count-->৪১<!--/area-count-->টি জেলার সব উপজেলায় হোম ডেলিভারি হয়, প্রতিটি জেলার আলাদা পাতায় উপজেলার তালিকা আছে। তালিকার বাইরের জেলাতেও পাঠানো হয়, WhatsApp-এ ঠিকানা জানালে পরিবহনসহ মোট খরচ জানিয়ে দেওয়া হয়।</p>
+      <details class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-6 py-5 font-hind">
+        <summary class="cursor-pointer font-semibold text-[18px] md:text-[20px] leading-[1.5] text-[rgb(14,124,75)]">কোন কোন এলাকায় ডেলিভারি দেওয়া হয়?</summary>
+        <p class="mt-3 text-[17px] md:text-[18px] leading-[32px] text-[#4b5a51]"><!--area-count-->৪১<!--/area-count-->টি জেলার সব উপজেলায় হোম ডেলিভারি হয়, প্রতিটি জেলার আলাদা পাতায় উপজেলার তালিকা আছে। তালিকার বাইরের জেলাতেও পাঠানো হয়, WhatsApp-এ ঠিকানা জানালে পরিবহনসহ মোট খরচ জানিয়ে দেওয়া হয়।</p>
       </details>
-      <details class="bg-white rounded-[8px] border border-[rgb(14,124,75)]/30 p-4 font-hind">
-        <summary class="cursor-pointer font-medium text-[18px] md:text-[21px] text-[rgb(0,105,68)]">কীভাবে অর্ডার করবো?</summary>
-        <p class="mt-2 text-[16px] md:text-[18px] leading-[28px] text-[rgb(84,89,95)]">WhatsApp-এ আপনার নাম, ঠিকানা আর কত বস্তা লাগবে লিখে পাঠান: <a href="https://wa.me/8801334211984" class="text-[rgb(0,105,68)] font-medium underline">+880 1334-211984</a>। আমাদের প্রতিনিধি ফোন করে অর্ডার কনফার্ম করবেন। পণ্য হাতে পেয়ে নগদে, অথবা খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে ট্রান্সফার করে টাকা দেবেন। কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়; পরিবহন খরচ দূরত্ব ও পরিমাণভেদে আলাদা। WhatsApp-এ দিনরাত যেকোনো সময় মেসেজ করতে পারেন।</p>
+      <details class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] px-6 py-5 font-hind">
+        <summary class="cursor-pointer font-semibold text-[18px] md:text-[20px] leading-[1.5] text-[rgb(14,124,75)]">কীভাবে অর্ডার করবো?</summary>
+        <p class="mt-3 text-[17px] md:text-[18px] leading-[32px] text-[#4b5a51]">WhatsApp-এ আপনার নাম, ঠিকানা আর কত বস্তা লাগবে লিখে পাঠান: <a href="https://wa.me/8801334211984" class="text-[rgb(0,105,68)] font-medium underline">+880 1334-211984</a>। আমাদের প্রতিনিধি ফোন করে অর্ডার কনফার্ম করবেন। পণ্য হাতে পেয়ে নগদে, অথবা খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে ট্রান্সফার করে টাকা দেবেন। কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়; পরিবহন খরচ দূরত্ব ও পরিমাণভেদে আলাদা। WhatsApp-এ দিনরাত যেকোনো সময় মেসেজ করতে পারেন।</p>
       </details>
       <!-- faq:end -->
     </div>
   </section>
 
   <!-- ═══════════ FARMER GUIDES ═══════════ -->
-  <section class="bg-[rgb(234,245,235)] px-[10px]">
-    <div class="max-w-[1140px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 py-[36px] md:py-[48px]">
+  <section class="bg-[#f4f9f5] px-[10px]">
+    <div class="max-w-[1140px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 pt-16 pb-10 md:pt-20">
       <div class="max-w-[700px] text-center md:text-left">
         <p class="font-hind font-semibold text-[16px] text-[rgb(14,124,75)]">খামারি গাইড</p>
-        <h2 class="font-hind font-semibold text-[27px] leading-[34px] md:text-[42px] md:leading-[48px] text-[rgb(0,105,68)] mt-1">সাইলেজ নিয়ে বাস্তব ও সহজ পরামর্শ পড়ুন</h2>
-        <p class="font-hind text-[17px] leading-[28px] md:text-[19px] md:leading-[31px] text-[rgb(84,89,95)] mt-3">প্রথমবার খাওয়ানো, নষ্ট সাইলেজ চেনা এবং খামারের দৈনন্দিন সিদ্ধান্তে কাজে লাগে এমন গাইড।</p>
+        <h2 class="font-hind font-semibold text-[28px] leading-[1.35] md:text-[40px] md:leading-[1.3] text-[rgb(14,124,75)] mt-2">সাইলেজ নিয়ে বাস্তব ও সহজ পরামর্শ পড়ুন</h2>
+        <p class="font-hind text-[17px] leading-[30px] md:text-[19px] md:leading-[34px] text-[#4b5a51] mt-4">প্রথমবার খাওয়ানো, নষ্ট সাইলেজ চেনা এবং খামারের দৈনন্দিন সিদ্ধান্তে কাজে লাগে এমন গাইড।</p>
       </div>
       <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-        <a href="/blog/" class="inline-flex rounded-full bg-[rgb(0,105,68)] px-5 py-3 font-hind font-semibold text-[17px] text-white transition hover:bg-[rgb(14,124,75)]">সব গাইড পড়ুন</a>
-        <a href="/tools/" class="inline-flex rounded-full border border-[rgb(0,105,68)] bg-white px-5 py-3 font-hind font-semibold text-[17px] text-[rgb(0,105,68)] transition hover:bg-[rgb(234,245,235)]">ফ্রি ক্যালকুলেটর ও রেশন টুলস</a>
-        <a href="https://www.facebook.com/khamarvestSilage/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-full border border-[#0b5fcc]/30 bg-white px-5 py-3 font-hind font-semibold text-[17px] text-[#0b5fcc] transition hover:bg-[#0b5fcc] hover:text-white">
+        <a href="/blog/" class="inline-flex min-h-12 items-center rounded-[8px] bg-[rgb(0,105,68)] px-5 py-3 font-hind font-medium text-[17px] text-white transition hover:-translate-y-0.5">সব গাইড পড়ুন</a>
+        <a href="/tools/" class="inline-flex min-h-12 items-center rounded-[8px] border-2 border-[rgb(0,105,68)] bg-white px-5 py-3 font-hind font-medium text-[17px] text-[rgb(0,105,68)] transition hover:-translate-y-0.5">ফ্রি ক্যালকুলেটর ও রেশন টুলস</a>
+        <a href="https://www.facebook.com/khamarvestSilage/" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-12 items-center gap-2 rounded-[8px] border-2 border-[#0b5fcc]/30 bg-white px-5 py-3 font-hind font-medium text-[17px] text-[#0b5fcc] transition hover:bg-[#0b5fcc] hover:text-white">
           <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           <span>Facebook পেজ ফলো করুন</span>
         </a>
       </div>
     </div>
-    <ul class="max-w-[1140px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pb-[36px] md:pb-[48px]">
-        <li><a href="/vutta-silage-prothombar-khawano-rules" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_0_6px_0_rgba(0,0,0,0.06)] hover:underline">প্রথমবার সাইলেজ খাওয়ানোর ৭ দিনের নিয়ম</a></li>
-        <li><a href="/blog/vutta-silage-khawanor-poriman-o-hishab" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_0_6px_0_rgba(0,0,0,0.06)] hover:underline">গরুর ওজন অনুযায়ী কত কেজি খাওয়াবেন</a></li>
-        <li><a href="/tools/silage-calculator" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_0_6px_0_rgba(0,0,0,0.06)] hover:underline">কত বস্তা লাগবে: সাইলেজ ক্যালকুলেটর</a></li>
-        <li><a href="/blog/vutta-silage-noshto-chinben" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_0_6px_0_rgba(0,0,0,0.06)] hover:underline">নষ্ট সাইলেজ চেনার উপায়</a></li>
-        <li><a href="/blog/silage-songrokkhon-niyom" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_0_6px_0_rgba(0,0,0,0.06)] hover:underline">বস্তা খোলার পর সংরক্ষণের নিয়ম</a></li>
-        <li><a href="/blog/shiter-jonno-silage-mojud" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_0_6px_0_rgba(0,0,0,0.06)] hover:underline">শীতের জন্য কত সাইলেজ মজুদ রাখবেন</a></li>
-        <li><a href="/blog/vutta-silage-dam-koto-kothay-kinben" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_0_6px_0_rgba(0,0,0,0.06)] hover:underline">সাইলেজের দাম কীভাবে যাচাই করবেন</a></li>
-        <li><a href="/blog/silage-kothay-pawa-jay" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_0_6px_0_rgba(0,0,0,0.06)] hover:underline">সাইলেজ কোথায় পাওয়া যায়, কেনার আগে যা জানবেন</a></li>
-        <li><a href="/blog/gorur-khoil-sorisha-til-soybean" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">খৈলে কত প্রোটিন, কোনটা কিনবেন</a></li>
-        <li><a href="/blog/silage-er-jonno-vutta-chash" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">সাইলেজের জন্য ভুট্টা চাষ</a></li>
-        <li><a href="/blog/danadar-khaddo-goru-ration" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">গরুর দানাদার খাদ্য</a></li>
-        <li><a href="/blog/gorur-pet-fapa-hole-koronio" class="flex h-full min-h-11 items-center rounded-lg bg-white px-4 py-2 font-hind text-[16px] font-medium text-[rgb(0,105,68)] underline-offset-4 shadow-[0_1px_2px_rgba(0,0,0,0.04)]">গরুর পেট ফাঁপা (ব্লোট)</a></li>
+    <ul class="max-w-[1140px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pb-16 md:pb-20">
+        <li><a href="/vutta-silage-prothombar-khawano-rules" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5 hover:underline">প্রথমবার সাইলেজ খাওয়ানোর ৭ দিনের নিয়ম</a></li>
+        <li><a href="/blog/vutta-silage-khawanor-poriman-o-hishab" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5 hover:underline">গরুর ওজন অনুযায়ী কত কেজি খাওয়াবেন</a></li>
+        <li><a href="/tools/silage-calculator" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5 hover:underline">কত বস্তা লাগবে: সাইলেজ ক্যালকুলেটর</a></li>
+        <li><a href="/blog/vutta-silage-noshto-chinben" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5 hover:underline">নষ্ট সাইলেজ চেনার উপায়</a></li>
+        <li><a href="/blog/silage-songrokkhon-niyom" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5 hover:underline">বস্তা খোলার পর সংরক্ষণের নিয়ম</a></li>
+        <li><a href="/blog/shiter-jonno-silage-mojud" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5 hover:underline">শীতের জন্য কত সাইলেজ মজুদ রাখবেন</a></li>
+        <li><a href="/blog/vutta-silage-dam-koto-kothay-kinben" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5 hover:underline">সাইলেজের দাম কীভাবে যাচাই করবেন</a></li>
+        <li><a href="/blog/silage-kothay-pawa-jay" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5 hover:underline">সাইলেজ কোথায় পাওয়া যায়, কেনার আগে যা জানবেন</a></li>
+        <li><a href="/blog/gorur-khoil-sorisha-til-soybean" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5">খৈলে কত প্রোটিন, কোনটা কিনবেন</a></li>
+        <li><a href="/blog/silage-er-jonno-vutta-chash" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5">সাইলেজের জন্য ভুট্টা চাষ</a></li>
+        <li><a href="/blog/danadar-khaddo-goru-ration" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5">গরুর দানাদার খাদ্য</a></li>
+        <li><a href="/blog/gorur-pet-fapa-hole-koronio" class="flex h-full min-h-12 items-center rounded-xl border border-[#0b5b38]/10 bg-white px-5 py-3 font-hind text-[16px] font-medium leading-[1.5] text-[rgb(14,124,75)] underline-offset-4 transition hover:-translate-y-0.5">গরুর পেট ফাঁপা (ব্লোট)</a></li>
     </ul>
   </section>
 
   <!-- ═══════════ INTERACTIVE SILAGE CALCULATOR SECTION ═══════════ -->
-  <section id="calculator" class="bg-white px-[10px] py-[40px] border-t border-b border-[rgb(14,124,75)]/15">
+  <section id="calculator" class="bg-white px-[10px] py-16 md:py-24">
     <div class="max-w-[1000px] mx-auto">
       <div class="text-center max-w-[700px] mx-auto">
         <span class="inline-block rounded-full bg-[rgb(14,124,75)]/10 px-4 py-1 text-[15px] font-semibold text-[rgb(0,105,68)] font-hind"><span aria-hidden="true">🧮</span> খামার ক্যালকুলেটর</span>
-        <h2 class="mt-2 font-hind font-semibold text-[rgb(0,105,68)] text-[28px] md:text-[44px] leading-tight">
+        <h2 class="mt-3 font-hind font-semibold text-[rgb(14,124,75)] text-[30px] leading-[1.35] md:text-[44px] md:leading-[1.3]">
           কত বস্তা লাগবে, খরচ কত: হিসাব করুন
         </h2>
-        <p class="mt-2 font-hind text-[16px] md:text-[18px] text-[rgb(84,89,95)]">
+        <p class="mt-4 font-hind text-[18px] leading-[32px] md:text-[20px] md:leading-[36px] text-[#4b5a51]">
           পশুর ধরন, সংখ্যা আর কত দিনের জন্য, এই তিনটা দিলেই দেখবেন দিনে কত কেজি, মোট কত বস্তা আর খরচ কত (পরিবহন ছাড়া)।
         </p>
       </div>
 
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-12 gap-6 bg-[rgb(245,255,248)] border border-[rgb(14,124,75)]/30 rounded-[16px] p-6 md:p-8 shadow-sm">
-        <div class="md:col-span-7 flex flex-col gap-5">
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-12 gap-6 bg-[#fafefb] border border-[#0b5b38]/10 rounded-2xl p-6 md:p-8">
+        <div class="md:col-span-7 flex flex-col justify-center gap-10 md:px-2">
           <div>
-            <label class="block font-hind font-semibold text-[17px] text-[rgb(0,105,68)] mb-2">১. পশুর ধরন নির্বাচন করুন</label>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              <button type="button" aria-pressed="true" class="calc-type-btn rounded-lg border-2 border-[rgb(14,124,75)] bg-white p-3 font-hind font-medium text-[14px] md:text-[16px] text-[rgb(0,105,68)] text-center transition shadow-sm hover:border-[rgb(14,124,75)]" data-type="দুধের গাভী" data-kg="20">
+            <label class="block font-hind font-semibold text-[18px] text-[rgb(14,124,75)] mb-3">১. পশুর ধরন নির্বাচন করুন</label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <button type="button" aria-pressed="true" class="calc-type-btn min-h-12 rounded-[8px] border px-3 py-3 font-hind font-medium text-[15px] md:text-[16px] text-center transition hover:border-[rgb(14,124,75)] border-[rgb(14,124,75)] bg-[rgb(14,124,75)]/10 text-[rgb(0,105,68)]" data-type="দুধের গাভী" data-kg="20">
                 <span aria-hidden="true">🥛</span> দুধের গাভী
               </button>
-              <button type="button" aria-pressed="false" class="calc-type-btn rounded-lg border-2 border-transparent bg-white p-3 font-hind font-medium text-[14px] md:text-[16px] text-stone-600 text-center transition hover:border-[rgb(14,124,75)]/50" data-type="মোটাতাজাকরণ" data-kg="15">
+              <button type="button" aria-pressed="false" class="calc-type-btn min-h-12 rounded-[8px] border px-3 py-3 font-hind font-medium text-[15px] md:text-[16px] text-center transition hover:border-[rgb(14,124,75)] border-[rgb(14,124,75)]/30 bg-white text-stone-600" data-type="মোটাতাজাকরণ" data-kg="15">
                 <span aria-hidden="true">🐂</span> মোটাতাজাকরণ
               </button>
-              <button type="button" aria-pressed="false" class="calc-type-btn rounded-lg border-2 border-transparent bg-white p-3 font-hind font-medium text-[14px] md:text-[16px] text-stone-600 text-center transition hover:border-[rgb(14,124,75)]/50" data-type="ছাগল ও ভেড়া" data-kg="1.5">
+              <button type="button" aria-pressed="false" class="calc-type-btn min-h-12 rounded-[8px] border px-3 py-3 font-hind font-medium text-[15px] md:text-[16px] text-center transition hover:border-[rgb(14,124,75)] border-[rgb(14,124,75)]/30 bg-white text-stone-600" data-type="ছাগল ও ভেড়া" data-kg="1.5">
                 <span aria-hidden="true">🐐</span> ছাগল / ভেড়া
               </button>
             </div>
@@ -1335,7 +1338,7 @@
 
           <div>
             <div class="flex justify-between items-center mb-1">
-              <label for="animal-count" class="font-hind font-semibold text-[17px] text-[rgb(0,105,68)]">২. পশুর সংখ্যা</label>
+              <label for="animal-count" class="font-hind font-semibold text-[18px] text-[rgb(14,124,75)]">২. পশুর সংখ্যা</label>
               <span id="count-val" class="font-hind font-bold text-[20px] text-[#ea580c]">৫টি</span>
             </div>
             <div class="flex items-center gap-2"><button type="button" data-step="-1" aria-label="একটি কম" class="count-step inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-[rgb(14,124,75)]/40 bg-white font-hind text-[22px] font-bold text-[rgb(0,105,68)]">−</button><input type="range" id="animal-count" min="1" max="50" value="5" class="w-full h-11 bg-transparent cursor-pointer appearance-none accent-[rgb(14,124,75)] [&::-webkit-slider-runnable-track]:h-2.5 [&::-webkit-slider-runnable-track]:rounded-lg [&::-webkit-slider-runnable-track]:bg-stone-200 [&::-webkit-slider-thumb]:-mt-[9px] [&::-webkit-slider-thumb]:h-7 [&::-webkit-slider-thumb]:w-7 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[rgb(14,124,75)] [&::-moz-range-thumb]:h-7 [&::-moz-range-thumb]:w-7 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[rgb(14,124,75)]"><button type="button" data-step="1" aria-label="একটি বেশি" class="count-step inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-[rgb(14,124,75)]/40 bg-white font-hind text-[22px] font-bold text-[rgb(0,105,68)]">+</button></div>
@@ -1344,7 +1347,7 @@
 
           <div>
             <div class="flex justify-between items-center mb-1">
-              <label for="duration-days" class="font-hind font-semibold text-[17px] text-[rgb(0,105,68)]">৩. সময়কাল (দিন)</label>
+              <label for="duration-days" class="font-hind font-semibold text-[18px] text-[rgb(14,124,75)]">৩. সময়কাল (দিন)</label>
               <span id="days-val" class="font-hind font-bold text-[20px] text-[#ea580c]">৩০ দিন (১ মাস)</span>
             </div>
             <input type="range" id="duration-days" min="7" max="180" step="1" value="30" class="w-full h-11 bg-transparent cursor-pointer appearance-none accent-[rgb(14,124,75)] [&::-webkit-slider-runnable-track]:h-2.5 [&::-webkit-slider-runnable-track]:rounded-lg [&::-webkit-slider-runnable-track]:bg-stone-200 [&::-webkit-slider-thumb]:-mt-[9px] [&::-webkit-slider-thumb]:h-7 [&::-webkit-slider-thumb]:w-7 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[rgb(14,124,75)] [&::-moz-range-thumb]:h-7 [&::-moz-range-thumb]:w-7 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[rgb(14,124,75)]">
@@ -1357,7 +1360,7 @@
           </div>
         </div>
 
-        <div class="md:col-span-5 bg-[rgb(0,105,68)] text-white rounded-[12px] p-6 flex flex-col justify-between shadow-md">
+        <div class="md:col-span-5 bg-[rgb(0,105,68)] text-white rounded-2xl p-7 flex flex-col justify-between">
           <div>
             <p class="font-hind font-medium text-[15px] text-green-200">আপনার হিসাবকৃত ফলাফল:</p>
             
@@ -1383,7 +1386,7 @@
             </div>
           </div>
 
-          <a id="calc-wa-btn" href="#" target="_blank" rel="noopener" class="mt-5 w-full inline-flex items-center justify-center gap-2 bg-[#0e7c4b] hover:bg-[#0b6a3e] text-white font-hind font-bold text-[18px] py-3 rounded-lg transition shadow">
+          <a id="calc-wa-btn" href="#" target="_blank" rel="noopener" class="mt-6 w-full inline-flex min-h-12 items-center justify-center gap-2 bg-[#ea580c] text-white font-hind font-medium text-[17px] py-3.5 rounded-[8px] transition hover:-translate-y-0.5">
             <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             এই হিসাব অনুযায়ী অর্ডার করুন
           </a>
@@ -1394,43 +1397,42 @@
 
   <!-- ═══════════ SECTION 6 · ORDER VIA WHATSAPP  (white) ═══════════ -->
   <section id="order" class="bg-white px-[10px]">
-    <div class="max-w-[1140px] mx-auto flex flex-col items-center gap-5 py-[40px]">
-      <h2 class="font-hind font-medium text-[rgb(14,124,75)] text-center text-[29px] leading-[32px] md:text-[50px] md:leading-[50px]">
+    <div class="max-w-[1140px] mx-auto flex flex-col items-center gap-6 py-16 md:py-24">
+      <h2 class="font-hind font-semibold text-[rgb(14,124,75)] text-[30px] leading-[1.35] md:text-[44px] md:leading-[1.3] text-center">
         অর্ডার করতে চান? এক মেসেজেই হয়ে যাবে
       </h2>
-      <div class="w-[80%] border-t-2 border-[rgb(218,165,47)]"></div>
       <a href="https://wa.me/8801334211984?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%96%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%AD%E0%A7%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%20%E0%A6%A6%E0%A6%BE%E0%A6%AE%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A7%87%E0%A6%A8%3F"
          target="_blank" rel="noopener"
-         class="wa-glow mt-4 inline-flex items-center gap-3 bg-[#0e7c4b] hover:bg-[#0b6a3e] text-white font-hind font-semibold text-[20px] md:text-[26px] leading-none px-8 py-4 rounded-full transition hover:scale-105">
-        <svg class="w-8 h-8 md:w-9 md:h-9 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+         class="wa-glow mt-2 inline-flex min-h-12 items-center gap-3 bg-[#25D366] text-white font-hind font-semibold text-[18px] md:text-[20px] leading-none pl-5 pr-7 py-4 rounded-full transition hover:scale-105">
+        <svg class="w-7 h-7 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp-এ অর্ডার করুন
       </a>
-      <div class="w-full max-w-[760px] rounded-[12px] border border-[rgb(14,124,75)]/30 bg-[rgb(250,251,252)] p-5 md:p-7">
-        <h3 class="font-hind font-semibold text-[22px] md:text-[28px] text-[rgb(0,105,68)] text-center">WhatsApp নেই? নাম আর নম্বর দিন, আমরা ফোন করব</h3>
-        <p class="font-hind text-[16px] md:text-[18px] text-[rgb(84,89,95)] text-center mt-1">তথ্য WhatsApp-এ একসাথে চলে যাবে। WhatsApp না খুললেও নম্বরটি আমাদের কাছে পৌঁছে যায়, আমরা ফোন করব।</p>
-        <form id="order-details-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-          <label class="font-hind text-[16px] text-[rgb(0,105,68)]">আপনার নাম
-            <input name="name" required autocomplete="name" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="যেমন: রহিম উদ্দিন">
+      <div class="w-full max-w-[760px] rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 md:p-10">
+        <h3 class="font-hind font-semibold text-[24px] md:text-[32px] leading-[1.35] text-[rgb(14,124,75)]">WhatsApp নেই?<br>নাম আর নম্বর দিন, আমরা ফোন করব</h3>
+        <p class="font-hind text-[17px] md:text-[18px] leading-[32px] md:leading-[34px] text-[#4b5a51] mt-3">তথ্য WhatsApp-এ একসাথে চলে যাবে। WhatsApp না খুললেও নম্বরটি আমাদের কাছে পৌঁছে যায়, আমরা ফোন করব।</p>
+        <form id="order-details-form" class="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4 mt-7">
+          <label class="font-hind text-[16px] font-semibold text-[#123b28]">আপনার নাম
+            <input name="name" required autocomplete="name" class="mt-2 w-full min-h-12 rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: রহিম উদ্দিন">
           </label>
-          <label class="font-hind text-[16px] text-[rgb(0,105,68)]">মোবাইল নম্বর
-            <input name="phone" required inputmode="tel" autocomplete="tel" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="01XXXXXXXXX">
+          <label class="font-hind text-[16px] font-semibold text-[#123b28]">মোবাইল নম্বর
+            <input name="phone" required inputmode="tel" autocomplete="tel" class="mt-2 w-full min-h-12 rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 font-normal text-black placeholder:text-[#6b7280]" placeholder="01XXXXXXXXX">
           </label>
-          <label class="font-hind text-[16px] text-[rgb(0,105,68)]">জেলা / উপজেলা
-            <input name="location" required autocomplete="address-level2" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="যেমন: বগুড়া সদর">
+          <label class="font-hind text-[16px] font-semibold text-[#123b28]">জেলা / উপজেলা
+            <input name="location" required autocomplete="address-level2" class="mt-2 w-full min-h-12 rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: বগুড়া সদর">
           </label>
-          <label class="font-hind text-[16px] text-[rgb(0,105,68)]">কত বস্তা লাগবে? <span class="text-[rgb(84,89,95)]">(ঐচ্ছিক)</span>
-            <input name="bags" inputmode="numeric" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="যেমন: ১০">
+          <label class="font-hind text-[16px] font-semibold text-[#123b28]">কত বস্তা লাগবে? <span class="text-[rgb(84,89,95)]">(ঐচ্ছিক)</span>
+            <input name="bags" inputmode="numeric" class="mt-2 w-full min-h-12 rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 font-normal text-black placeholder:text-[#6b7280]" placeholder="যেমন: ১০">
           </label>
-          <label class="md:col-span-2 font-hind text-[16px] text-[rgb(0,105,68)]">অতিরিক্ত তথ্য <span class="text-[rgb(84,89,95)]">(ঐচ্ছিক)</span>
-            <textarea name="note" rows="2" class="mt-1 w-full rounded-md border border-[#6f8f7c] bg-white px-3 py-3 text-black placeholder:text-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[rgb(14,124,75)]" placeholder="গরুর সংখ্যা, পছন্দের ডেলিভারি সময় বা প্রশ্ন লিখুন"></textarea>
+          <label class="md:col-span-2 font-hind text-[16px] font-semibold text-[#123b28]">অতিরিক্ত তথ্য <span class="text-[rgb(84,89,95)]">(ঐচ্ছিক)</span>
+            <textarea name="note" rows="2" class="mt-2 w-full min-h-12 rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 font-normal text-black placeholder:text-[#6b7280]" placeholder="গরুর সংখ্যা, পছন্দের ডেলিভারি সময় বা প্রশ্ন লিখুন"></textarea>
           </label>
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
-          <p class="md:col-span-2 font-hind text-[14px] text-[rgb(84,89,95)] text-center">নাম আর নম্বর শুধু এই অর্ডারের যোগাযোগের জন্য আমাদের কাছে থাকে, কাউকে দেওয়া হয় না।</p>
-          <button type="submit" class="md:col-span-2 justify-self-center inline-flex min-h-11 items-center rounded-full bg-[#0e7c4b] px-6 py-3 font-hind text-[19px] font-semibold text-white transition hover:bg-[#0b6a3e]">তথ্যসহ WhatsApp-এ পাঠান</button>
-          <p id="order-form-status" class="md:col-span-2 hidden font-hind text-[16px] text-[rgb(0,105,68)] text-center" role="status">তথ্য পেয়েছি। WhatsApp না খুললেও চিন্তা নেই, আমরা এই নম্বরে ফোন করব।</p>
+          <p class="md:col-span-2 font-hind text-[14px] text-[#456451]">নাম আর নম্বর শুধু এই অর্ডারের যোগাযোগের জন্য আমাদের কাছে থাকে, কাউকে দেওয়া হয় না।</p>
+          <button type="submit" class="md:col-span-2 justify-self-start inline-flex min-h-12 items-center rounded-[8px] bg-[rgb(0,105,68)] px-6 py-3 font-hind text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5">তথ্যসহ WhatsApp-এ পাঠান</button>
+          <p id="order-form-status" class="md:col-span-2 hidden font-hind text-[16px] text-[rgb(0,105,68)]" role="status">তথ্য পেয়েছি। WhatsApp না খুললেও চিন্তা নেই, আমরা এই নম্বরে ফোন করব।</p>
         </form>
       </div>
-      <p class="font-hind text-[17px] md:text-[20px] text-[rgb(84,89,95)] text-center mt-2">অথবা সরাসরি কল করুন এই নাম্বারে</p>
+      <p class="font-hind text-[18px] md:text-[20px] leading-[34px] text-[#4b5a51] text-center mt-2">অথবা সরাসরি কল করুন এই নাম্বারে</p>
       <div class="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 md:gap-4">
         <a href="tel:+8801334211984" class="inline-flex items-center gap-2 font-hind font-bold text-[rgb(0,105,68)] text-[24px] md:text-[32px] leading-none border-2 border-[rgb(14,124,75)]/30 hover:border-[rgb(14,124,75)] hover:bg-[rgb(14,124,75)]/5 rounded-[10px] px-5 py-3 transition"><svg class="w-6 h-6 md:w-7 md:h-7 fill-[rgb(14,124,75)]" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z"/></svg>01334-211984</a>
         <span class="basis-full text-center font-hind text-[16px] text-[rgb(84,89,95)]">না পেলে এই নম্বরে:</span>
@@ -1480,56 +1482,12 @@
   <!-- ═══════════ GLOWING WHATSAPP BUTTON (fixed) ═══════════ -->
   <a href="https://wa.me/8801334211984?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%96%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B0%E0%A6%AD%E0%A7%87%E0%A6%B8%E0%A7%8D%E0%A6%9F%20%E0%A6%AD%E0%A7%81%E0%A6%9F%E0%A7%8D%E0%A6%9F%E0%A6%BE%20%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%B2%E0%A7%87%E0%A6%9C%20%E0%A6%A8%E0%A6%BF%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%20%E0%A6%A6%E0%A6%BE%E0%A6%AE%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%AC%E0%A7%87%E0%A6%A8%3F"
      target="_blank" rel="noopener" aria-label="WhatsApp-এ অর্ডার করুন"
-     class="wa-glow motion-reduce:hover:scale-100 fixed bottom-5 right-5 z-50 hidden md:inline-flex items-center gap-3 bg-[#0e7c4b] hover:bg-[#0b6a3e] text-white font-hind font-semibold text-[18px] md:text-[22px] leading-none pl-4 pr-5 py-3.5 md:py-4 rounded-full transition hover:scale-105">
-    <svg class="w-8 h-8 md:w-9 md:h-9 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+     class="wa-glow motion-reduce:hover:scale-100 fixed bottom-5 right-5 z-50 hidden md:inline-flex items-center gap-3 bg-[#25D366] text-white font-hind font-semibold text-[16px] md:text-[18px] leading-none pl-5 pr-7 py-4 rounded-full transition hover:scale-105">
+    <svg class="w-7 h-7 fill-current shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     WhatsApp-এ অর্ডার করুন
   </a>
 
   <script>
-    // Video lightbox popup. Embeds inline when hosted (http/https); opens YouTube when viewed as a local file.
-    (function () {
-      var facade = document.getElementById('yt-facade');
-      var modal = document.getElementById('yt-modal');
-      var body = document.getElementById('yt-modal-body');
-      function open() {
-        if (typeof gaEvent === 'function') gaEvent('video_play', { video_id: 'n8sSOV0KQ64', video_title: 'khamar silage short' });
-        if (location.protocol.indexOf('http') === 0) {
-          body.innerHTML = '<iframe src="https://www.youtube.com/embed/n8sSOV0KQ64?autoplay=1" title="ভুট্টা সাইলেজ তৈরির ভিডিও" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-          modal.classList.remove('hidden');
-          modal.classList.add('flex');
-          document.body.style.overflow = 'hidden';
-          // Keyboard and screen-reader users land in the dialog, not behind it.
-          document.getElementById('yt-close').focus();
-        } else {
-          window.open('https://www.youtube.com/shorts/n8sSOV0KQ64', '_blank');
-        }
-      }
-      function close() {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        body.innerHTML = '';
-        document.body.style.overflow = '';
-        facade.focus();
-      }
-      function isOpen() { return !modal.classList.contains('hidden'); }
-      facade.addEventListener('click', open);
-      document.getElementById('yt-close').addEventListener('click', close);
-      modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
-      document.addEventListener('keydown', function (e) {
-        if (!isOpen()) return;
-        if (e.key === 'Escape') close();
-        // Two stops in the dialog (close, video): keep Tab between them.
-        if (e.key === 'Tab') {
-          var closeBtn = document.getElementById('yt-close');
-          var frame = body.querySelector('iframe');
-          if (e.shiftKey && document.activeElement === closeBtn && frame) { e.preventDefault(); frame.focus(); }
-          else if (!e.shiftKey && document.activeElement === frame) { e.preventDefault(); closeBtn.focus(); }
-        }
-      });
-      // Escape inside the YouTube iframe never reaches this page, so a tap outside
-      // or the close button stays the way out; focus leaving the dialog closes it.
-      modal.addEventListener('focusout', function (e) { if (isOpen() && e.relatedTarget && !modal.contains(e.relatedTarget)) close(); });
-    })();
 
     // ═══════════ Conversion tracking: WhatsApp order clicks ═══════════
     // প্রতিটি WhatsApp ক্লিক GA4-তে 'whatsapp_click' ইভেন্ট হিসেবে যায়, সাথে কোন সেকশন থেকে ক্লিক হলো তা-ও।
@@ -1652,8 +1610,9 @@
           var on = b === btn;
           b.classList.toggle('border-[rgb(14,124,75)]', on);
           b.classList.toggle('text-[rgb(0,105,68)]', on);
-          b.classList.toggle('shadow-sm', on);
-          b.classList.toggle('border-transparent', !on);
+          b.classList.toggle('bg-[rgb(14,124,75)]/10', on);
+          b.classList.toggle('bg-white', !on);
+          b.classList.toggle('border-[rgb(14,124,75)]/30', !on);
           b.classList.toggle('text-stone-600', !on);
           b.setAttribute('aria-pressed', on ? 'true' : 'false');
         });
@@ -1775,6 +1734,7 @@
       recalc();
     })();
   </script>
+
   <script src="/js/leads.js" defer></script>
   <!-- order-bar:start -->
   <div class="h-24 min-[420px]:h-20 md:hidden print:hidden" aria-hidden="true"></div>

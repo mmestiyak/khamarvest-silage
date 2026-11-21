@@ -34,6 +34,7 @@ DISTRIBUTION.md
 # optimized img/*-1200.jpeg copies. Never referenced by a published page.
 img/IMG_*.JPG.jpeg
 img/WhatsApp Image *.jpeg
+banner.jpg
 
 # Design scratch page for the Google Business cover photo, not a public page
 gmb-cover-photo.html

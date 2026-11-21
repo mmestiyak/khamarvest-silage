@@ -55,15 +55,16 @@ const steps = [
   ['৩. বস্তা হাতে পেয়ে টাকা', 'আগে কোনো টাকা নয়। নগদে, বা শুধু খামারভেস্টের নিজের নামের ব্যাংক অ্যাকাউন্টে।'],
 ];
 
-const buySteps = `  <section data-cta="buy_steps" class="bg-white px-4 pb-10">
+// Styled to match the homepage hero and price section (owner, 2026-11-21): site font, calm cards, hero buttons.
+const buySteps = `  <section data-cta="buy_steps" class="bg-white px-[10px] pb-16 font-hind md:pb-20">
     <div class="mx-auto max-w-[1140px]">
-      <h2 class="text-center text-2xl font-bold text-[rgb(14,124,75)] md:text-4xl">কীভাবে কিনবেন, ৩ ধাপে</h2>
-      <ol class="mt-6 grid gap-4 md:grid-cols-3">
-${steps.map(([t, d]) => `        <li class="rounded-xl border border-[#184d32]/15 bg-[#f7f8f4] p-5 text-[17px] leading-7 text-[#33483a]"><strong class="block text-lg text-[#0b6a3e]">${t}</strong>${d}</li>`).join('\n')}
+      <h2 class="text-center font-semibold text-[rgb(14,124,75)] text-[30px] leading-[1.35] md:text-[44px] md:leading-[1.3]">কীভাবে কিনবেন, ৩ ধাপে</h2>
+      <ol class="mt-8 grid gap-5 md:grid-cols-3">
+${steps.map(([t, d]) => `        <li class="rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 text-[17px] leading-[32px] text-[#4b5a51] md:p-7 md:text-[18px] md:leading-[34px]"><strong class="mb-2 block text-[19px] font-bold leading-[1.4] text-[rgb(14,124,75)] md:text-[20px]">${t}</strong>${d}</li>`).join('\n')}
       </ol>
-      <div class="mt-5 flex flex-wrap justify-center gap-3">
-        <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-11 items-center rounded-xl bg-[#0e7c4b] px-5 py-3 text-base font-bold text-white hover:bg-[#0b6a3e]">WhatsApp-এ মেসেজ পাঠান</a>
-        <a href="tel:${CALL_TEL}" class="inline-flex min-h-11 items-center rounded-xl border border-[#0b5b38]/40 bg-white px-5 py-3 text-base font-bold text-[#0b5b38] hover:bg-[#e7f3e9]">কল করুন</a>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="inline-flex min-h-12 items-center whitespace-nowrap rounded-[8px] bg-[#ea580c] px-5 py-3 text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5">WhatsApp-এ মেসেজ পাঠান</a>
+        <a href="tel:${CALL_TEL}" class="inline-flex min-h-12 items-center whitespace-nowrap rounded-[8px] border-2 border-[rgb(0,105,68)] bg-[rgb(0,105,68)] px-5 py-3 text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5">কল করুন</a>
       </div>
     </div>
   </section>`;
@@ -100,11 +101,30 @@ const advanceCard = `<section id="advance-booking" data-cta="advance_booking" cl
           <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। নতুন মৌসুমের সাইলেজ তৈরি হলে আমরা আপনাকে এই নম্বরে আগে ফোন করব। এখন কোনো টাকা লাগবে না।</p>
         </form>
       </section>`;
-const advanceHome = `  <div class="bg-white px-4 pb-10">
+// Homepage only: restyle the cards to match the hero, price and buy-steps sections
+// (owner, 2026-11-21). District pages and guides keep the original look.
+const homeTheme = (html) => {
+  const swaps = [
+    ['bg-white px-4 pb-10', 'bg-white px-[10px] pb-16 md:pb-20'],
+    [/rounded-2xl border border-\[#0b5b38\]\/25 bg-\[#(?:eaf5eb|f3f8ee)\] p-5 sm:p-6/g, 'rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 font-hind md:p-10'],
+    [/text-xl font-bold text-\[#123b28\] sm:text-2xl/g, 'text-[24px] font-semibold leading-[1.35] text-[rgb(14,124,75)] md:text-[32px]'],
+    [/mt-2 text-base leading-7 text-\[#33483a\]/g, 'mt-3 text-[17px] leading-[32px] text-[#4b5a51] md:text-[18px] md:leading-[34px]'],
+    [/mt-4 grid gap-3 sm:grid-cols-2/g, 'mt-6 grid gap-x-5 gap-y-4 sm:grid-cols-2'],
+    [/mt-1 block min-h-11 w-full rounded-lg border border-\[#6f8f7c\] bg-white px-3 py-2/g, 'mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5'],
+    [/min-h-11 rounded-xl bg-\[#0(?:e7c4b|b5b38)\] px-5 py-3 text-base font-bold text-white hover:bg-\[#0(?:b6a3e|e7c4b)\]/g, 'min-h-12 rounded-[8px] bg-[rgb(0,105,68)] px-6 py-3 text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5'],
+  ];
+  for (const [from, to] of swaps) {
+    const next = html.replace(from, to);
+    if (next === html) throw new Error(`homeTheme: pattern not found: ${from}`);
+    html = next;
+  }
+  return html;
+};
+const advanceHome = homeTheme(`  <div class="bg-white px-4 pb-10">
     <div class="mx-auto max-w-[1140px]">
       ${advanceCard}
     </div>
-  </div>`;
+  </div>`);
 const advanceGuide = advanceCard.replace('<section id="advance-booking"', '<section id="advance-booking"').replace(/^/, '          ').replace('data-cta="advance_booking" class="', 'data-cta="advance_booking" class="mt-11 ');
 const ADVANCE_GUIDES = ['silage-er-jonno-vutta-chash', 'silage-kinben-naki-nije-banaben', 'shiter-jonno-silage-mojud', 'silage-ki-kivabe-toiri-upokarita'].map((s) => `blog/${s}.html`);
 
@@ -128,11 +148,11 @@ const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="s
           <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আপনার এলাকার অর্ডার একসাথে হলে আমরা এই নম্বরে ফোন করে তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না।</p>
         </form>
       </section>`;
-const sharedHome = `  <div class="bg-white px-4 pb-10">
+const sharedHome = homeTheme(`  <div class="bg-white px-4 pb-10">
     <div class="mx-auto max-w-[1140px]">
       ${sharedCard()}
     </div>
-  </div>`;
+  </div>`);
 const sharedGuide = '          ' + sharedCard().replace('data-cta="shared_delivery" class="', 'data-cta="shared_delivery" class="mt-11 ');
 const districtNames = {};
 for (const m of (await readFile(join(root, 'scripts/generate-area-pages.mjs'), 'utf8')).matchAll(/\{ name: '([^']+)', loc: '[^']+', slug: '([^']+)'/g)) districtNames[m[2]] = m[1];
@@ -155,10 +175,32 @@ function before(html, anchor, text, file) {
 
 let changed = 0;
 
+// Homepage only: the photo strip styled like the restyled homepage sections (owner, 2026-11-21).
+// /about and the district pages keep the original strip.
+const homePhotoStrip = (() => {
+  let html = `  <div class="bg-white px-4 pb-10">\n${photoStrip}\n  </div>`;
+  const swaps = [
+    ['bg-white px-4 pb-10', 'bg-white px-[10px] py-16 font-hind md:py-24'],
+    ['class="mx-auto mt-9 w-full max-w-5xl"', 'class="mx-auto w-full max-w-[1140px] px-[10px]"'],
+    ['text-2xl font-bold text-[#123b28]', 'text-center font-semibold text-[rgb(14,124,75)] text-[30px] leading-[1.35] md:text-[44px] md:leading-[1.3]'],
+    ['mt-2 text-base leading-7 text-[#456451]', 'mt-4 text-center text-[18px] leading-[32px] text-[#4b5a51] md:text-[20px]'],
+    ['mt-4 grid grid-cols-2 gap-3 md:grid-cols-4', 'mt-10 grid grid-cols-2 gap-5 md:grid-cols-4'],
+    [/aspect-\[4\/3\] w-full rounded-xl object-cover shadow-sm/g, 'aspect-[4/5] w-full rounded-2xl object-cover'],
+    [/mt-2 text-sm leading-6 text-\[#33483a\]/g, 'mt-3 text-[16px] leading-[26px] text-[#33483a]'],
+    ['mt-3 text-base text-[#456451]', 'mt-8 text-center text-[17px] text-[#456451]'],
+  ];
+  for (const [from, to] of swaps) {
+    const next = html.replace(from, to);
+    if (next === html) throw new Error(`homePhotoStrip: pattern not found: ${from}`);
+    html = next;
+  }
+  return html;
+})();
+
 changed += await update('index.html', (h) => {
   h = strip(strip(strip(strip(h, 'photo-strip'), 'buy-steps'), 'advance-booking'), 'shared-delivery');
   h = before(h, /[ \t]*<!-- ═+ SECTION 3 · /, block('buy-steps', buySteps) + '\n\n' + block('shared-delivery', sharedHome) + '\n\n' + block('advance-booking', advanceHome), 'index.html');
-  h = before(h, /[ \t]*<!-- ═+ DELIVERY AREAS/, block('photo-strip', `  <div class="bg-white px-4 pb-10">\n${photoStrip}\n  </div>`), 'index.html');
+  h = before(h, /[ \t]*<!-- ═+ DELIVERY AREAS/, block('photo-strip', homePhotoStrip), 'index.html');
   return h;
 });
 

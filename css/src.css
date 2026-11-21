@@ -20,4 +20,13 @@
     outline: 3px solid #0b6a3e;
     outline-offset: 2px;
   }
+  /* Form fields: the ring above sat 2px outside the field's own border and read as a
+     heavy double box (owner, 2026-11-21). A ring that hugs the field is still clearly
+     visible. Applies on click too, so a farmer sees which box they are typing in. */
+  input:not([type="checkbox"]):not([type="radio"]):focus, input:not([type="checkbox"]):not([type="radio"]):focus-visible,
+  select:focus, select:focus-visible, textarea:focus, textarea:focus-visible {
+    outline: none;
+    border-color: #0b6a3e;
+    box-shadow: 0 0 0 2px rgba(11, 106, 62, 0.35);
+  }
 }
