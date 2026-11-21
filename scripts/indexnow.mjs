@@ -19,7 +19,7 @@ const site = 'https://silage.khamarvest.com';
 // Repo files that are HTML but not public pages (mirrors .assetsignore), plus
 // 404.html, which is public but noindex: submitting it would ask Bing to index
 // an error page.
-const NOT_PUBLIC = new Set(['blog/article-template.html', 'gmb-cover-photo.html', '404.html']);
+const NOT_PUBLIC = new Set(['blog/article-template.html', 'gmb-cover-photo.html', '404.html', 'form.html']);
 
 function toUrl(file) {
   if (file === 'index.html') return `${site}/`;

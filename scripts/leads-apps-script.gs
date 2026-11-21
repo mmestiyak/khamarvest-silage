@@ -83,6 +83,7 @@ function doPost(e) {
     // yearly answers arrive inside the note (and as d.months, d.animals, d.yearly).
     var booking = d.form_type === 'advance_booking';
     var shared = d.form_type === 'shared_delivery';
+    var callForm = d.form_type === 'call_form'; // the /form page linked from the WhatsApp auto-reply
     var sheet = getSheet();
     sheet.appendRow([
       new Date(),
@@ -93,7 +94,7 @@ function doPost(e) {
       clip(d.note, 500),
       clip(d.page, 200),
       clip(d.source, 80),
-      booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : 'ওয়েবসাইট ফর্ম'),
+      booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : (callForm ? 'ফর্ম (WhatsApp থেকে)' : 'ওয়েবসাইট ফর্ম')),
       'নতুন',
       ''
     ]);
@@ -101,7 +102,7 @@ function doPost(e) {
     if (shared) logShared(d, name, phone);
     var to = ownerEmail();
     if (to) {
-      MailApp.sendEmail(to, (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : 'নতুন লিড: ')) + name + ' (' + clip(d.location, 40) + ')',
+      MailApp.sendEmail(to, (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + name + ' (' + clip(d.location, 40) + ')',
         'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + clip(d.location, 120) +
         '\nবস্তা: ' + clip(d.bags, 20) + '\nতথ্য: ' + clip(d.note, 500) +
         '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +

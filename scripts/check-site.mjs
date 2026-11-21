@@ -74,7 +74,7 @@ const NOT_PUBLIC = new Set(['blog/article-template.html', 'gmb-cover-photo.html'
 // 404.html is served by Cloudflare for unknown paths: intentionally noindex,
 // no canonical and absent from the sitemap, so it skips the SEO page rules and
 // gets its own assertions at the bottom of this file instead.
-const UTILITY = new Set(['guide-book.html', '404.html']);
+const UTILITY = new Set(['guide-book.html', '404.html', 'form.html']);
 // Generated, checked as a page but not as an article.
 const GENERATED = new Set(['blog/index.html']);
 
@@ -415,6 +415,22 @@ for (const file of articles) {
   if (!/"not_found_handling"\s*:\s*"404-page"/.test(wrangler)) errors.push('wrangler.jsonc: assets.not_found_handling must be "404-page" or 404.html is never served');
 }
 
+// --- /form (WhatsApp auto-reply landing page) ---
+// Noindex utility page, never in sitemap/feed/llms. Phone is the one required field.
+{
+  const html = await readFile(join(root, 'form.html'), 'utf8');
+  if (!/<meta name="robots" content="noindex/i.test(html)) errors.push('form.html: must be noindex, it is a WhatsApp landing page');
+  if (/rel="canonical"/.test(html)) errors.push('form.html: must not carry a canonical');
+  const form = html.match(/<form[^>]*data-call-form[^>]*>[\s\S]*?<\/form>/)?.[0] || '';
+  if (!form) errors.push('form.html: missing form[data-call-form]');
+  else if (!/<input[^>]*name="phone"[^>]*required|<input[^>]*required[^>]*name="phone"/.test(form)) errors.push('form.html: phone field must be required');
+  const leads = await readFile(join(root, 'js/leads.js'), 'utf8');
+  if (!leads.includes('data-call-form')) errors.push('js/leads.js: no handler for form[data-call-form]');
+  for (const f of ['sitemap.xml', 'feed.xml', 'llms.txt', 'llms-full.txt']) {
+    if (/khamarvest\.com\/form(?![\w-])/.test(await readFile(join(root, f), 'utf8'))) errors.push(`${f}: /form must stay out of it (noindex utility page)`);
+  }
+}
+
 // --- RSS feed ---
 // An always-current feed is a machine-readable "what changed" endpoint for
 // aggregators and AI crawlers, and one discovery path that does not wait on
@@ -640,7 +656,7 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
 // scrolled 11-13 screens to the first WhatsApp link. scripts/order-bar.mjs
 // writes the bar into every page except the two with a bottom bar of their own.
 {
-  const OWN_BAR = new Set(['tools/ration-generator.html', 'guide-book.html']);
+  const OWN_BAR = new Set(['tools/ration-generator.html', 'guide-book.html', 'form.html']);
   const missing = [];
   for (const file of files) {
     if (OWN_BAR.has(file)) continue;

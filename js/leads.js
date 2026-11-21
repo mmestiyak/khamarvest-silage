@@ -9,6 +9,7 @@
 //    confirmation. If the sheet is not set up, it falls back to WhatsApp.
 //  - any <form data-booking-form>: the advance-booking (আগাম চাহিদা) form, below.
 //  - any <form data-shared-delivery-form>: the shared-delivery (একসাথে ডেলিভারি) form, below.
+//  - any <form data-call-form>: the /form page the owner links in the WhatsApp auto-reply, below.
 // Homepage loads this directly; every other page gets it from /js/ga.js.
 // Until LEADS_URL is filled in, nothing is sent.
 (function () {
@@ -184,6 +185,80 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindSharedDeliveryForms);
   else bindSharedDeliveryForms();
+
+
+  // /form (<form data-call-form>): the short "we will call you" form linked from
+  // the WhatsApp Business auto-reply. Only the mobile number is required; name,
+  // district, upazila and the number of cattle are optional. Tagged form_type
+  // call_form; the answers are also written into the note so an older deployed
+  // Apps Script still stores everything.
+  function bindCallForms() {
+    document.querySelectorAll('form[data-call-form]').forEach(function (f) {
+      var phone = f.elements.phone;
+      phone.addEventListener('input', function () { phone.setCustomValidity(''); });
+      // Live estimate under "কয়টা গরু আছে?": 10-15 kg a cow a day (owner's choice,
+      // 2026-11-21: inside the published beef 10-20 / dairy 15-25 ranges, no cow
+      // category asked) x 30 days / 50 kg bag = 6-9 bags a cow a month. Bag price is read from the page's <span data-bag-price>, which
+      // set-price / build:calc keep current, so nothing here goes stale.
+      var est = f.querySelector('[data-bag-estimate]');
+      var range = '';
+      // "২৫-৩৮ হাজার টাকা", "৮.৫-১১.৩ লাখ টাকা": a farmer reads a rounded sum at a glance.
+      var money = function (a, b) {
+        if (b >= 100000) { var l = function (x) { return bnNum(Math.round(x / 10000) / 10); }; return l(a) + '-' + l(b) + ' লাখ টাকা'; }
+        if (b >= 10000) return bnNum(Math.round(a / 1000)) + '-' + bnNum(Math.round(b / 1000)) + ' হাজার টাকা';
+        return bnNum(Math.round(a)) + '-' + bnNum(Math.round(b)) + ' টাকা';
+      };
+      var bnNum = function (n) { return n.toLocaleString('en-IN').replace(/\d/g, function (d) { return '০১২৩৪৫৬৭৮৯'[d]; }); };
+      if (est && f.elements.cows) {
+        f.elements.cows.addEventListener('input', function () {
+          var n = parseInt(toAscii(f.elements.cows.value).replace(/\D/g, ''), 10);
+          if (!n || n < 1 || n > 5000) { est.hidden = true; range = ''; return; }
+          var lo = Math.ceil(n * 10 * 30 / 50), hi = Math.ceil(n * 15 * 30 / 50);
+          range = lo + '-' + hi;
+          var bp = document.querySelector('[data-bag-price]');
+          var price = bp ? parseFloat(toAscii(bp.textContent).replace(/[^\d.]/g, '')) : 0;
+          est.querySelector('[data-bag-range]').textContent = 'মাসে আনুমানিক ' + bnNum(lo) + '-' + bnNum(hi) + ' বস্তা';
+          est.querySelector('[data-bag-cost]').textContent = (price ? 'দাম প্রায় ' + money(lo * price, hi * price) + ', পরিবহন আলাদা। ' : '') + 'গরুপ্রতি দিনে ১০-১৫ কেজি ধরে।';
+          est.hidden = false;
+        });
+      }
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (toAscii(phone.value).replace(/\D/g, '').length < 11) {
+          phone.setCustomValidity('১১ সংখ্যার মোবাইল নম্বর লিখুন, যেমন ০১৭১২৩৪৫৬৭৮');
+          phone.reportValidity();
+          return;
+        }
+        var v = function (n) { return f.elements[n] && f.elements[n].value ? f.elements[n].value.trim() : ''; };
+        var cows = toAscii(v('cows')).replace(/\D/g, '');
+        var animals = cows && parseInt(cows, 10) > 0 ? 'গরু ' + cows : '';
+        var loc = [v('district'), v('upazila')].filter(Boolean).join(', ');
+        var parts = ['ফোনের অনুরোধ (WhatsApp থেকে ফর্ম)'];
+        if (loc) parts.push('এলাকা: ' + loc);
+        if (animals) parts.push('পশু: ' + animals);
+        if (animals && range) parts.push('আনুমানিক মাসে বস্তা: ' + range);
+        if (v('note')) parts.push('নোট: ' + v('note'));
+        var saved = window.saveLead({
+          form_type: 'call_form', name: v('name'), phone: v('phone'), location: loc,
+          animals: animals, note: parts.join(' | '), website: v('website')
+        });
+        if (typeof window.gaEvent === 'function') window.gaEvent('order_details_submitted', { submission_method: saved ? 'call_form' : 'call_form_whatsapp', page_path: location.pathname });
+        if (saved) {
+          var done = document.querySelector('[data-call-done]');
+          f.hidden = true;
+          if (done) { done.hidden = false; done.scrollIntoView({ block: 'start' }); done.focus(); }
+          return;
+        }
+        var msg = ['আসসালামু আলাইকুম, আমি ভুট্টা সাইলেজ নিতে চাই।',
+          v('name') ? 'নাম: ' + v('name') : '', 'মোবাইল: ' + v('phone'),
+          loc ? 'এলাকা: ' + loc : '', animals ? 'পশু: ' + animals : '', v('note') ? 'নোট: ' + v('note') : '',
+          'আমাকে ফোন করবেন?'].filter(Boolean).join('\n');
+        window.open('https://wa.me/8801334211984?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindCallForms);
+  else bindCallForms();
 
   var last = '', lastAt = 0;
   document.addEventListener('click', function (e) {

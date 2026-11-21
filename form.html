@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আপনার খামারের সাইলেজের হিসাব নিন | খামারভেস্ট সাইলেজ</title>
+  <meta name="description" content="গরু কয়টা আর কোথায় পৌঁছাবে জানান, খামারভেস্ট সাইলেজ মাসে কত বস্তা আর পরিবহন খরচের হিসাব করে আপনাকে ফোন করবে।">
+  <meta name="robots" content="noindex, follow">
+  <link rel="preload" href="/fonts/noto-serif-bengali-400-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/site.css?v=f6e4eb6a">
+  <!-- favicon:start --><link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/favicon-180.png"><!-- favicon:end -->
+</head>
+<body class="font-hind text-base text-[#111111] bg-[rgb(244,248,250)] antialiased">
+  <nav class="bg-white border-b border-[rgb(14,124,75)]/15 px-[10px]" aria-label="প্রধান নেভিগেশন">
+    <div class="max-w-[1140px] mx-auto flex items-center justify-between gap-4 py-3.5 md:py-4">
+      <a href="/" class="font-hind font-semibold text-[18px] text-[rgb(0,105,68)]">খামারভেস্ট সাইলেজ</a>
+    </div>
+  </nav>
+
+  <main id="main">
+  <section class="bg-[rgb(245,255,248)] px-[10px] pb-10 pt-8 md:pb-16 md:pt-12">
+    <div class="mx-auto max-w-[560px] px-[10px]">
+      <h1 class="font-hind font-semibold text-[rgb(0,105,68)] text-[30px] leading-[1.35] md:text-[44px] md:leading-[1.25]">আপনার খামারের সাইলেজের হিসাব নিন</h1>
+      <p class="mt-3 font-hind text-[#2b3a31] text-[17px] leading-[30px] md:text-[19px] md:leading-[34px]">গরু কয়টা আর সাইলেজ কোথায় পৌঁছাবে, এটুকু জানালে ফোন করার আগেই হিসাব করে রাখি: মাসে কত বস্তা লাগবে, আর পরিবহনে কেমন খরচ পড়বে। ফোনে তখন সোজা কাজের কথা।</p>
+
+      <form data-call-form onsubmit="event.preventDefault()" novalidate class="mt-5 rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-5 md:p-6">
+        <label class="block text-base font-semibold text-[#123b28]" for="f-phone">মোবাইল নম্বর</label>
+        <p class="mt-1 text-[15px] leading-[24px] text-[#4b5a51]">এই নম্বরেই হিসাবসহ ফোন করব।</p>
+        <input id="f-phone" name="phone" required inputmode="tel" autocomplete="tel" placeholder="যেমন: ০১৭১২-৩৪৫৬৭৮" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#0b5fcc]">
+        <label class="mt-4 block text-base font-semibold text-[#123b28]" for="f-name">আপনার নাম <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span></label>
+        <input id="f-name" name="name" autocomplete="name" placeholder="যেমন: মোহাম্মদ রহিম" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#0b5fcc]">
+        <label id="lbl-district" class="mt-4 block text-base font-semibold text-[#123b28]" for="f-district">সাইলেজ কোথায় পৌঁছাবে?</label>
+        <p class="mt-1 text-[15px] leading-[24px] text-[#4b5a51]">পরিবহন খরচ দূরত্ব দেখে ঠিক হয়, তাই উপজেলাও লিখুন।</p>
+        <select id="f-district" name="district" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#0b5fcc]"><option value="">জেলা বেছে নিন</option><option value="বগুড়া" data-en="bogura bogra">বগুড়া</option><option value="পাবনা" data-en="pabna">পাবনা</option><option value="সিরাজগঞ্জ" data-en="sirajganj">সিরাজগঞ্জ</option><option value="নাটোর" data-en="natore">নাটোর</option><option value="রংপুর" data-en="rangpur">রংপুর</option><option value="দিনাজপুর" data-en="dinajpur">দিনাজপুর</option><option value="ময়মনসিংহ" data-en="mymensingh">ময়মনসিংহ</option><option value="টাঙ্গাইল" data-en="tangail">টাঙ্গাইল</option><option value="ঢাকা" data-en="dhaka">ঢাকা</option><option value="গাজীপুর" data-en="gazipur">গাজীপুর</option><option value="কুষ্টিয়া" data-en="kushtia">কুষ্টিয়া</option><option value="যশোর" data-en="jashore jessore">যশোর</option><option value="খুলনা" data-en="khulna">খুলনা</option><option value="সাতক্ষীরা" data-en="satkhira">সাতক্ষীরা</option><option value="কুমিল্লা" data-en="cumilla comilla">কুমিল্লা</option><option value="নোয়াখালী" data-en="noakhali">নোয়াখালী</option><option value="চট্টগ্রাম" data-en="chattogram chittagong">চট্টগ্রাম</option><option value="কক্সবাজার" data-en="coxsbazar cox's bazar coxs bazar">কক্সবাজার</option><option value="রাজশাহী" data-en="rajshahi">রাজশাহী</option><option value="নওগাঁ" data-en="naogaon">নওগাঁ</option><option value="জয়পুরহাট" data-en="joypurhat">জয়পুরহাট</option><option value="গাইবান্ধা" data-en="gaibandha">গাইবান্ধা</option><option value="নীলফামারী" data-en="nilphamari">নীলফামারী</option><option value="কুড়িগ্রাম" data-en="kurigram">কুড়িগ্রাম</option><option value="লালমনিরহাট" data-en="lalmonirhat">লালমনিরহাট</option><option value="ঠাকুরগাঁও" data-en="thakurgaon">ঠাকুরগাঁও</option><option value="জামালপুর" data-en="jamalpur">জামালপুর</option><option value="কিশোরগঞ্জ" data-en="kishoreganj">কিশোরগঞ্জ</option><option value="ব্রাহ্মণবাড়িয়া" data-en="brahmanbaria brahmanbaria">ব্রাহ্মণবাড়িয়া</option><option value="সিলেট" data-en="sylhet sylhet">সিলেট</option><option value="হবিগঞ্জ" data-en="habiganj">হবিগঞ্জ</option><option value="ফরিদপুর" data-en="faridpur">ফরিদপুর</option><option value="বরিশাল" data-en="barishal barisal">বরিশাল</option><option value="চাঁপাইনবাবগঞ্জ" data-en="chapainawabganj nawabganj chapai">চাঁপাইনবাবগঞ্জ</option><option value="পঞ্চগড়" data-en="panchagarh">পঞ্চগড়</option><option value="শেরপুর" data-en="sherpur">শেরপুর</option><option value="নেত্রকোনা" data-en="netrokona">নেত্রকোনা</option><option value="মানিকগঞ্জ" data-en="manikganj">মানিকগঞ্জ</option><option value="ঝিনাইদহ" data-en="jhenaidah">ঝিনাইদহ</option><option value="চুয়াডাঙ্গা" data-en="chuadanga">চুয়াডাঙ্গা</option><option value="মেহেরপুর" data-en="meherpur">মেহেরপুর</option><option value="অন্য জেলা">অন্য জেলা</option></select>
+        <label class="sr-only" for="f-upazila">উপজেলা</label>
+        <input id="f-upazila" name="upazila" autocomplete="address-level2" placeholder="উপজেলা" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#0b5fcc]">
+        <label class="mt-4 block text-base font-semibold text-[#123b28]" for="f-cows">কয়টা গরু আছে? <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span></label>
+        <p class="mt-1 text-[15px] leading-[24px] text-[#4b5a51]">গরু অনুযায়ী মাসে কত বস্তা লাগবে, সেটা আমরা হিসাব করে বলব।</p>
+        <input id="f-cows" name="cows" inputmode="numeric" autocomplete="off" placeholder="যেমন: ১০" class="mt-2 block min-h-12 w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#0b5fcc]">
+        <div data-bag-estimate hidden aria-live="polite" class="mt-2 border-l-[3px] border-[rgb(14,124,75)]/40 pl-3"><p class="text-[17px] font-semibold leading-[28px] text-[rgb(0,105,68)]" data-bag-range></p><p class="text-[15px] leading-[24px] text-[#4b5a51]" data-bag-cost></p></div>
+        <label class="mt-4 block text-base font-semibold text-[#123b28]" for="f-note">আর কিছু লিখতে চাইলে <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span></label>
+        <textarea id="f-note" name="note" rows="2" maxlength="300" placeholder="যেমন: কবে থেকে লাগবে, বাড়ি পর্যন্ত গাড়ি যায় কি না" class="mt-2 block w-full rounded-[8px] border border-[#6f8f7c] bg-white px-4 py-2.5 text-base font-normal text-black placeholder:text-[#6b7280] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#0b5fcc]"></textarea>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+        <button type="submit" class="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-[8px] border-2 border-[rgb(0,105,68)] bg-[rgb(0,105,68)] px-5 py-3 font-hind text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#0b5fcc] disabled:opacity-60">আমার খামারের হিসাব চাই</button>
+      </form>
+
+      <p class="mt-4 text-[16px] leading-[28px] text-[#3d4b42]">ফোন আসবে <a href="https://wa.me/8801334211984" class="font-medium underline">01334-211984</a> থেকে · অগ্রিম টাকা লাগে না, পণ্য হাতে পেয়ে টাকা · দাম <!--=price-->৮.৫০<!--/=--> টাকা কেজি, ৫০ কেজির বস্তা <span data-bag-price><!--=bag-->৪২৫<!--/=--></span> টাকা, লোড পয়েন্টে, পরিবহন আলাদা</p>
+
+      <section data-call-done hidden role="status" tabindex="-1" class="mt-5 rounded-2xl border border-[#0b5b38]/10 bg-[#fafefb] p-6 text-center">
+        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[rgb(14,124,75)]/10" aria-hidden="true"><svg class="h-7 w-7 fill-none stroke-[rgb(14,124,75)]" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <p class="mt-4 font-hind text-xl font-semibold leading-8 text-[#123b28]">পেয়েছি। আপনার খামারের হিসাব করে <a href="https://wa.me/8801334211984" class="font-medium underline">01334-211984</a> থেকে ফোন করব।</p>
+        <p class="mt-2 text-[17px] leading-[30px] text-[#4b5a51]">এখন কোনো টাকা দিতে হবে না। চাইলে WhatsApp-এ সরাসরিও লিখতে পারেন।</p>
+        <a href="https://wa.me/8801334211984" target="_blank" rel="noopener" class="mt-5 inline-flex min-h-12 items-center gap-2 whitespace-nowrap rounded-[8px] bg-[#ea580c] px-5 py-3 text-[17px] font-medium leading-none text-white transition hover:-translate-y-0.5"><svg aria-hidden="true" class="w-5 h-5 shrink-0 fill-current" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg"><path d="M423.3 440.7c0 25.3-20.3 45.6-45.6 45.6s-45.8-20.3-45.8-45.6 20.6-45.8 45.8-45.8c25.4 0 45.6 20.5 45.6 45.8zm-253.9-45.8c-25.3 0-45.6 20.6-45.6 45.8s20.3 45.6 45.6 45.6 45.8-20.3 45.8-45.6-20.5-45.8-45.8-45.8zm291.7-270C158.9 124.9 81.9 112.1 0 25.7c34.4 51.7 53.3 148.9 373.1 144.2 333.3-5 130 86.1 70.8 188.9 186.7-166.7 319.4-233.9 17.2-233.9z"/></svg> WhatsApp-এ লিখুন</a>
+        <p class="mt-4"><a href="/" class="inline-flex min-h-11 items-center font-semibold text-[#0b6a3e] underline underline-offset-4">হোমপেজে ফিরে যান</a></p>
+      </section>
+    </div>
+  </section>
+  </main>
+
+  <footer class="bg-[#0b2e1f] px-4 pb-2 font-hind text-[15px] text-[#d7e6dc]">
+    <p class="mx-auto max-w-[1140px] pt-6 pb-3 text-center text-[14px] text-[#a9c3b2]">© ২০২৬ খামারভেস্ট (Khamarvest)</p>
+    <!-- credit:start -->
+    <p class="mx-auto max-w-[1140px] px-2 pb-1 text-center text-[14px] text-[#a9c3b2]">খামারভেস্ট ছাদবাগান ও টবের জন্য ট্রাইকো কম্পোস্টও বানায়: <a href="https://compost.khamarvest.com/" class="underline underline-offset-2 text-[#d7e6dc] hover:text-white">compost.khamarvest.com</a></p>
+    <p class="mx-auto max-w-[1140px] px-2 pb-1 text-center text-[14px] text-[#a9c3b2]">সাইলেজের সহজ গাইড ও তথ্যসূত্র: <a href="https://silagebd.com/" class="underline underline-offset-2 text-[#d7e6dc] hover:text-white">Silage BD</a></p>
+        <p class="mx-auto max-w-[1140px] px-2 pb-3 text-center text-[14px] text-[#a9c3b2]">ওয়েবসাইট তৈরি ও দেখাশোনা: <a href="https://mmestiyak.com" rel="author" class="underline underline-offset-2 text-[#d7e6dc] hover:text-white">মীর ইশতিয়াক (Meer Estiyak)</a>, সহপ্রতিষ্ঠাতা, খামারভেস্ট</p>
+    <!-- credit:end -->
+  </footer>
+<script src="/js/ga.js" defer></script>
+<script src="/js/district-picker.js" defer></script>
+</body>
+</html>
