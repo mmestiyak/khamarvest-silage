@@ -682,6 +682,7 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
     if (html.includes('</footer>') && !html.includes('<!-- credit:start -->')) missing.push(file);
     else if (html.includes('<!-- credit:start -->') && !/<!-- credit:start -->[\s\S]*href="https:\/\/compost\.khamarvest\.com\/"[\s\S]*<!-- credit:end -->/.test(html)) errors.push(`${file}: footer lacks the compost.khamarvest.com cross-link, run npm run build:credit`);
     else if (html.includes('<!-- credit:start -->') && !/<!-- credit:start -->[\s\S]*href="https:\/\/silagebd\.com\/"[\s\S]*<!-- credit:end -->/.test(html)) errors.push(`${file}: footer lacks the silagebd.com cross-link, run npm run build:credit`);
+    else if (html.includes('<!-- credit:start -->') && !/<!-- credit:start -->[\s\S]*href="https:\/\/www\.facebook\.com\/groups\/3200411093487700"[\s\S]*<!-- credit:end -->/.test(html)) errors.push(`${file}: footer lacks the Silage BD Facebook group link, run npm run build:credit`);
   }
   if (missing.length) errors.push(`${missing.length} page(s) have a footer without the credit line, run npm run build:credit: ${missing.slice(0, 3).join(', ')}`);
   for (const f of ['index.html', 'about.html']) {

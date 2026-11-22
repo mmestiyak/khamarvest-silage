@@ -42,6 +42,7 @@ export const FOUNDER = {
 
 const COMPOST = 'https://compost.khamarvest.com/';
 const SILAGEBD = 'https://silagebd.com/';
+const FB_GROUP = 'https://www.facebook.com/groups/3200411093487700';
 const line = (dark, en) => `${OPEN}
     <p class="mx-auto max-w-[1140px] px-2 pb-1 text-center text-[14px] ${dark ? 'text-[#a9c3b2]' : 'text-[#54705d]'}">${en
       ? 'Khamarvest also makes Trichoderma compost for rooftop gardens and pots:'
@@ -49,6 +50,9 @@ const line = (dark, en) => `${OPEN}
     <p class="mx-auto max-w-[1140px] px-2 pb-1 text-center text-[14px] ${dark ? 'text-[#a9c3b2]' : 'text-[#54705d]'}">${en
       ? 'Simple silage guide with references:'
       : 'সাইলেজের সহজ গাইড ও তথ্যসূত্র:'} <a href="${SILAGEBD}" class="underline underline-offset-2${dark ? ' text-[#d7e6dc] hover:text-white' : ''}">Silage BD</a></p>
+    <p class="mx-auto max-w-[1140px] px-2 pb-1 text-center text-[14px] ${dark ? 'text-[#a9c3b2]' : 'text-[#54705d]'}">${en
+      ? 'Questions and answers for farmers:'
+      : 'খামারিদের প্রশ্নোত্তর গ্রুপ:'} <a href="${FB_GROUP}" target="_blank" rel="noopener" class="underline underline-offset-2${dark ? ' text-[#d7e6dc] hover:text-white' : ''}">${en ? 'Silage BD Facebook group' : 'Silage BD ফেসবুক গ্রুপ'}</a></p>
         <p class="mx-auto max-w-[1140px] px-2 pb-3 text-center text-[14px] ${dark ? 'text-[#a9c3b2]' : 'text-[#54705d]'}">${en
       ? 'Website built and maintained by'
       : 'ওয়েবসাইট তৈরি ও দেখাশোনা:'} <a href="${SITE}" rel="author" class="underline underline-offset-2${dark ? ' text-[#d7e6dc] hover:text-white' : ''}">${en ? 'Meer Estiyak' : 'মীর ইশতিয়াক (Meer Estiyak)'}</a>, ${en ? 'co-founder, Khamarvest' : 'সহপ্রতিষ্ঠাতা, খামারভেস্ট'}</p>

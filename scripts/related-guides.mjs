@@ -26,6 +26,7 @@ const BUY_ROW = [
   ['/tools/silage-calculator', 'কত বস্তা লাগবে: ক্যালকুলেটর'],
 ];
 
+const FB_GROUP = 'https://www.facebook.com/groups/3200411093487700';
 const root = process.cwd();
 const MARKER_OPEN = '<!-- related-guides:start -->';
 const MARKER_CLOSE = '<!-- related-guides:end -->';
@@ -208,6 +209,7 @@ for (const a of articles) {
               ${districtLinks}
             </div>
           </section>
+          <p class="mt-6 text-[15px] text-[#456451]">এই বিষয়ে আরও প্রশ্ন? খামারিদের গ্রুপে জিজ্ঞেস করুন: <a href="${FB_GROUP}" target="_blank" rel="noopener" class="font-semibold text-[#0b6a3e] underline underline-offset-2">Silage BD ফেসবুক গ্রুপ</a></p>
           ${MARKER_CLOSE}`;
 
   // Insert just before the article body's closing wrapper.
