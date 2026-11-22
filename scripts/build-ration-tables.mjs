@@ -22,9 +22,9 @@ const dec = (n, d = 1) => bn(Number(n).toFixed(d)).replace(/\.০+$/, '');
 const num = (n, d = 0) => bn(Number(n).toFixed(d));
 const short = (s) => s.split(' (')[0];
 
-const th = (t, right) => `<th class="px-3 py-2 ${right ? 'text-right' : 'text-left'} text-xs font-semibold text-[#54705d]">${t}</th>`;
+const th = (t, right) => `<th class="px-3 py-2 ${right ? 'text-right' : 'text-left'} text-xs font-semibold text-neutral-600">${t}</th>`;
 const td = (t, right, cls = '') => `<td class="px-3 py-2 ${right ? 'text-right whitespace-nowrap' : ''} ${cls}">${t}</td>`;
-const table = (caption, head, rows) => `<div class="mt-4 overflow-x-auto rounded-xl border border-[#184d32]/10 bg-white"><table class="w-full text-sm leading-6 text-[#233126]"><caption class="sr-only">${caption}</caption><thead class="bg-[#f7f8f4]"><tr>${head}</tr></thead><tbody>${rows.map((r, i) => `<tr class="${i ? 'border-t border-[#184d32]/10' : ''}">${r}</tr>`).join('')}</tbody></table></div>`;
+const table = (caption, head, rows) => `<div class="mt-4 overflow-x-auto rounded-lg border border-neutral-200 bg-white"><table class="w-full text-sm leading-6 text-neutral-800"><caption class="sr-only">${caption}</caption><thead class="bg-neutral-50"><tr>${head}</tr></thead><tbody>${rows.map((r, i) => `<tr class="${i ? 'border-t border-neutral-200' : ''}">${r}</tr>`).join('')}</tbody></table></div>`;
 
 // 1. Requirements for the animals farmers actually ask about.
 const STANDARD = [
@@ -71,27 +71,33 @@ const exampleCards = EXAMPLES.map((a) => {
   const items = r.items.map((it) => `<li class="flex justify-between gap-3"><span>${short(it.feed.bn)}</span><span class="whitespace-nowrap font-semibold">${dec(it.freshKg, it.freshKg < 1 ? 2 : 1)} কেজি</span></li>`).join('');
   const adds = [`লবণ ${bn(r.additives.saltG)} গ্রাম`, r.additives.dcpG ? `ডিসিপি ${bn(r.additives.dcpG)} গ্রাম` : '', r.additives.limeG ? `ঝিনুক গুঁড়া ${bn(r.additives.limeG)} গ্রাম` : ''].filter(Boolean).join(', ');
   const extra = r.cost.perLitre != null ? `প্রতি লিটার দুধে ${dec(r.cost.perLitre)} টাকা` : r.cost.perKgGain != null ? `প্রতি কেজি বৃদ্ধিতে ${num(r.cost.perKgGain)} টাকা` : '';
-  return `<div class="rounded-xl border border-[#184d32]/10 bg-white p-4"><h4 class="font-bold text-[#0b5b38]">${label(a)}</h4><ul class="mt-2 space-y-1 text-sm text-[#33483a]">${items}</ul><p class="mt-2 text-xs text-[#54705d]">${adds}</p><p class="mt-2 text-sm"><strong>${num(r.cost.perAnimal)} টাকা/দিন</strong>${extra ? ` · ${extra}` : ''} · প্রোটিন ${num(r.adequacy.cp * 100)}%, শক্তি ${num(r.adequacy.me * 100)}%</p></div>`;
+  return `<div class="rounded-lg border border-neutral-200 bg-white p-4"><h4 class="font-bold text-[#0b5b38]">${label(a)}</h4><ul class="mt-2 space-y-1 text-sm text-neutral-700">${items}</ul><p class="mt-2 text-xs text-neutral-600">${adds}</p><p class="mt-2 text-sm"><strong>${num(r.cost.perAnimal)} টাকা/দিন</strong>${extra ? ` · ${extra}` : ''} · প্রোটিন ${num(r.adequacy.cp * 100)}%, শক্তি ${num(r.adequacy.me * 100)}%</p></div>`;
 });
 
 const generated = `
-      <section id="ration-data" class="mt-10 space-y-8">
-        <div>
-          <h2 class="text-xl font-bold text-[#123b28]">পশু অনুযায়ী দৈনিক পুষ্টি চাহিদা</h2>
-          <p class="mt-2 max-w-3xl leading-7 text-[#456451]">জেনারেটর যে সূত্রে চাহিদা বের করে, তার ফল সাধারণ কয়েকটি পশুর জন্য। শুষ্ক পদার্থের ঘরটি ন্যূনতম পেট ভরা থেকে খাওয়ার ক্ষমতা পর্যন্ত; বাকিগুলো দৈনিক চাহিদা। সূত্র NRC (২০০১, ২০১৬, ২০০৭) ও Kearl (১৯৮২)।</p>
+      <section id="ration-data" class="space-y-2">
+        <details class="rounded-lg border border-neutral-200 bg-white px-4">
+          <summary class="block cursor-pointer py-3 font-semibold text-neutral-900">পশু অনুযায়ী দৈনিক পুষ্টি চাহিদা</summary>
+          <div class="pb-4">
+          <p class="mt-2 max-w-3xl leading-7 text-neutral-600">জেনারেটর যে সূত্রে চাহিদা বের করে, তার ফল সাধারণ কয়েকটি পশুর জন্য। শুষ্ক পদার্থের ঘরটি ন্যূনতম পেট ভরা থেকে খাওয়ার ক্ষমতা পর্যন্ত; বাকিগুলো দৈনিক চাহিদা। সূত্র NRC (২০০১, ২০১৬, ২০০৭) ও Kearl (১৯৮২)।</p>
           ${reqTable}
-        </div>
-        <div>
-          <h2 class="text-xl font-bold text-[#123b28]">বাংলাদেশের গো-খাদ্যের পুষ্টিমান ও দাম</h2>
-          <p class="mt-2 max-w-3xl leading-7 text-[#456451]">জেনারেটরের ${bn(FEEDS.length)}টি খাদ্যের বই-মান, শুষ্ক পদার্থের ভিত্তিতে। "টাকা/MJ" ঘরটিই বলে দেয় কোন খাদ্য আসলে সস্তা: কেজিতে সস্তা খড় প্রতি মেগাজুল শক্তিতে অনেক ক্ষেত্রে দানাদারের কাছাকাছি পড়ে। দাম জেলা পর্যায়ের দোকানের আনুমানিক, ২০২৬ সালের সেপ্টেম্বরের; ভুট্টা সাইলেজের দাম খামারভেস্টের বিক্রয়মূল্য। নিজের দামে হিসাব করতে উপরের টুল ব্যবহার করুন।</p>
+          </div>
+        </details>
+        <details class="rounded-lg border border-neutral-200 bg-white px-4">
+          <summary class="block cursor-pointer py-3 font-semibold text-neutral-900">বাংলাদেশের গো-খাদ্যের পুষ্টিমান ও দাম</summary>
+          <div class="pb-4">
+          <p class="mt-2 max-w-3xl leading-7 text-neutral-600">জেনারেটরের ${bn(FEEDS.length)}টি খাদ্যের বই-মান, শুষ্ক পদার্থের ভিত্তিতে। "টাকা/MJ" ঘরটিই বলে দেয় কোন খাদ্য আসলে সস্তা: কেজিতে সস্তা খড় প্রতি মেগাজুল শক্তিতে অনেক ক্ষেত্রে দানাদারের কাছাকাছি পড়ে। দাম ২০২৪-২৬ সালের বাজারের গড় দর (উৎস নিচের তথ্যসূত্রে), কোনো নির্দিষ্ট এলাকা বা দিনের নয়; ভুট্টা সাইলেজের দাম খামারভেস্টের বিক্রয়মূল্য। নিজের দামে হিসাব করতে উপরের টুল ব্যবহার করুন।</p>
           ${feedTable}
-          <p class="mt-2 text-xs leading-5 text-[#54705d]">খনিজ: ${ADDITIVES.dcp.bn} (Ca ${bn(ADDITIVES.dcp.ca)}%, P ${bn(ADDITIVES.dcp.p)}%), ${ADDITIVES.limestone.bn} (Ca ${bn(ADDITIVES.limestone.ca)}%), ${ADDITIVES.salt.bn}। "সর্বোচ্চ" মানে রেশনের মোট শুষ্ক পদার্থের কত ভাগ পর্যন্ত এই খাদ্য নিরাপদ; দুধের গাভীতে খড় ৪০%, শুকনা গাভীতে ৭০%।</p>
-        </div>
-        <div>
-          <h2 class="text-xl font-bold text-[#123b28]">উদাহরণ: ডিফল্ট দামে সবচেয়ে সস্তা রেশন</h2>
-          <p class="mt-2 max-w-3xl leading-7 text-[#456451]">উপরের দামে, সাধারণ ${bn(FEEDS.filter((f) => f.default).length)}টি খাদ্য (${FEEDS.filter((f) => f.default).map((f) => short(f.bn)).join(', ')}) খোলা রেখে জেনারেটর যা দেয়। আপনার বাজারে দাম আলাদা হলে মিশ্রণও আলাদা হবে, তাই এগুলো শুরুর ধারণা, চূড়ান্ত তালিকা নয়।</p>
+          <p class="mt-2 text-xs leading-5 text-neutral-600">খনিজ: ${ADDITIVES.dcp.bn} (Ca ${bn(ADDITIVES.dcp.ca)}%, P ${bn(ADDITIVES.dcp.p)}%), ${ADDITIVES.limestone.bn} (Ca ${bn(ADDITIVES.limestone.ca)}%), ${ADDITIVES.salt.bn}। "সর্বোচ্চ" মানে রেশনের মোট শুষ্ক পদার্থের কত ভাগ পর্যন্ত এই খাদ্য নিরাপদ; দুধের গাভীতে খড় ৪০%, শুকনা গাভীতে ৭০%।</p>
+          </div>
+        </details>
+        <details class="rounded-lg border border-neutral-200 bg-white px-4">
+          <summary class="block cursor-pointer py-3 font-semibold text-neutral-900">উদাহরণ: ডিফল্ট দামে সবচেয়ে সস্তা রেশন</summary>
+          <div class="pb-4">
+          <p class="mt-2 max-w-3xl leading-7 text-neutral-600">উপরের দামে, সাধারণ ${bn(FEEDS.filter((f) => f.default).length)}টি খাদ্য (${FEEDS.filter((f) => f.default).map((f) => short(f.bn)).join(', ')}) খোলা রেখে জেনারেটর যা দেয়। আপনার বাজারে দাম আলাদা হলে মিশ্রণও আলাদা হবে, তাই এগুলো শুরুর ধারণা, চূড়ান্ত তালিকা নয়।</p>
           <div class="mt-4 grid gap-4 sm:grid-cols-2">${exampleCards.join('')}</div>
-        </div>
+          </div>
+        </details>
       </section>
 `;
 
