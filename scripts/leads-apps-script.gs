@@ -50,7 +50,8 @@
 // "কুরিয়ার অর্ডার: <নাম> (<জেলা>)" and counted in the 8am digest. Telegram gets the order
 // text at once, with buttons "শিট" and "স্লিপ". The slip button opens the print page:
 //   <web app /exec URL>?slip=KV-C-0007&key=<SLIP_KEY>
-// (plain HTML: one slip per screen on a phone, two per A4 when printed; take a screenshot
+// (plain HTML: a "📷 ছবি হিসেবে সেভ করুন" button makes one slip into a PNG on the phone (share sheet, download,
+// or long-press the picture shown under the button); one slip per screen on a phone, two per A4 when printed; take a screenshot
 // on the phone to keep it as a picture).
 // Without the right key it shows "অনুমতি নেই". Treat that link like a password.
 //
@@ -694,10 +695,34 @@ function slipPage(no, key) {
     '.boxes{display:flex;gap:6mm}.b{flex:1;border:2.5px solid #111;padding:4mm;text-align:center;font-weight:700;font-size:19px}' +
     '.ln{font-size:17px;margin:1mm 0}.foot{margin-top:auto;border-top:1px solid #888;padding-top:2mm;font-size:13px;color:#555}' +
     '@media screen and (max-width:700px){.slip{height:auto;padding:12px}.band{flex-direction:column;gap:4px;font-size:16px}.cols{flex-direction:column;gap:6px;font-size:16px}.boxes{flex-direction:column;gap:8px}.b{font-size:17px}.ln{font-size:15px}.foot{margin-top:8px}}' +
-    '@media print{.bar{display:none}.slip:nth-of-type(2n){page-break-after:always}}';
-  var html = '<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>' + css +
-    '</style></head><body><div class="bar"><button onclick="window.print()">প্রিন্ট</button><p>ফোনে স্ক্রিনশট নিলেই ছবি হিসেবে রাখা যাবে</p></div>' +
-    slipHtmlOne(o, 'প্রেরকের কপি') + slipHtmlOne(o, 'পার্সেলের কপি') + '</body></html>';
+    '@media print{.bar,#out,#cap{display:none}.slip:nth-of-type(2n){page-break-after:always}}';
+  css += '.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.btns button{font:inherit;font-size:18px;padding:12px 24px;border:0;border-radius:8px;color:#fff;background:#0b5b38}' +
+    '.btns .photo{background:#1b4fd1}@media screen and (max-width:700px){.btns button{width:100%}}' +
+    '#out{padding:0 12px}#out img{width:100%;height:auto;border:1px solid #ccc;margin-top:8px}#out p{margin:6px 0;font-size:16px;text-align:center}' +
+    '#cap{position:absolute;left:-9999px;top:0;width:680px;background:#fff}#cap .slip{height:auto;margin:0}';
+  var script = '(function(){var NO=' + JSON.stringify(no) + ';' +
+    'function msg(t){var o=document.getElementById("out");var p=document.createElement("p");p.textContent=t;o.appendChild(p);}' +
+    'window.savePhoto=function(){var out=document.getElementById("out");out.innerHTML="";var btn=document.getElementById("photoBtn");btn.disabled=true;' +
+    'try{var ready=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();' +
+    'ready.then(function(){return html2canvas(document.getElementById("cap"),{scale:2,backgroundColor:"#ffffff",windowWidth:900});})' +
+    '.then(function(canvas){var url=canvas.toDataURL("image/png");var img=new Image();img.src=url;img.alt="স্লিপ";' +
+    'msg("ছবিটি চেপে ধরে রাখুন, তারপর \'Save image / ছবি সেভ\' চাপুন");out.appendChild(img);' +
+    'return new Promise(function(res){canvas.toBlob(function(b){res(b);},"image/png");}).then(function(blob){' +
+    'if(!blob)return;var name="slip-"+NO+".png";' +
+    'try{var f=new File([blob],name,{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})&&navigator.share){return navigator.share({files:[f],title:name}).catch(function(){dl(blob,name);});}}catch(e){}' +
+    'dl(blob,name);});})' +
+    '.catch(function(){msg("ছবি বানানো যায়নি, স্ক্রিনশট নিন");}).then(function(){btn.disabled=false;});' +
+    '}catch(e){msg("ছবি বানানো যায়নি, স্ক্রিনশট নিন");btn.disabled=false;}};' +
+    'function dl(blob,name){try{var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},2000);}catch(e){}}' +
+    '})();';
+  var html = '<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap">' +
+    '<style>' + css + '</style></head><body><div class="bar"><div class="btns"><button type="button" class="photo" id="photoBtn" onclick="savePhoto()">📷 ছবি হিসেবে সেভ করুন</button>' +
+    '<button type="button" onclick="window.print()">প্রিন্ট</button></div><p>ফোনে স্ক্রিনশট নিলেই ছবি হিসেবে রাখা যাবে</p></div>' +
+    '<div id="out"></div><div id="cap">' + slipHtmlOne(o, '') + '</div>' +
+    slipHtmlOne(o, 'প্রেরকের কপি') + slipHtmlOne(o, 'পার্সেলের কপি') +
+    '<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script>' + script + '</script></body></html>';
   return HtmlService.createHtmlOutput(html).setTitle('স্লিপ ' + o.no);
 }
 
