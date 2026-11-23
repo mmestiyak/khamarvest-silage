@@ -38,7 +38,7 @@
 //          "https://www.googleapis.com/auth/userinfo.email"
 //        ]
 //   4. Run setup() once from the editor and approve the new permissions. It creates the
-//      "কুরিয়ার" tab and a random SLIP_KEY (Script property) for the print page.
+//      "কুরিয়ার" tab.
 //   5. Optional check: run tgTest() once; it posts one line to each configured topic.
 //   6. Deploy > Manage deployments > Edit (pencil) > Version: New version > Deploy.
 //
@@ -48,12 +48,8 @@
 // নোট, অবস্থা (dropdown, default "নতুন"), CN নম্বর (you fill it in after booking). The same
 // order is also a row in the Leads tab (মাধ্যম "কুরিয়ার"), emailed to you as
 // "কুরিয়ার অর্ডার: <নাম> (<জেলা>)" and counted in the 8am digest. Telegram gets the order
-// text at once, with buttons "শিট" and "স্লিপ". The slip button opens the print page:
-//   <web app /exec URL>?slip=KV-C-0007&key=<SLIP_KEY>
-// (plain HTML: a "📷 ছবি হিসেবে সেভ করুন" button makes one slip into a PNG on the phone (share sheet, download,
-// or long-press the picture shown under the button); one slip per screen on a phone, two per A4 when printed; take a screenshot
-// on the phone to keep it as a picture).
-// Without the right key it shows "অনুমতি নেই". Treat that link like a password.
+// text at once, with buttons "WhatsApp" (reply to the farmer) and "শিট". There is no slip page:
+// it was removed because saving it as a photo failed on the owner's phone.
 //
 // Emails go to the Google account that owns this script. Put another address
 // in NOTIFY_EMAIL to send them elsewhere, or 'off' to stop them.
@@ -177,10 +173,7 @@ function doPost(e) {
 }
 
 // Opening the /exec URL in a browser shows this, a quick "is it live" check.
-// ?slip=<order>&key=<SLIP_KEY> shows the printable delivery slip instead.
-function doGet(e) {
-  var p = (e && e.parameter) || {};
-  if (p.slip) return slipPage(String(p.slip), String(p.key || ''));
+function doGet() {
   return ContentService.createTextOutput('Khamarvest lead inbox is live.');
 }
 
@@ -386,7 +379,6 @@ function setup() {
   getSheet();
   sharedSheet();
   courierSheet();
-  slipKey();
   dailyDigest(true);
 }
 
@@ -600,11 +592,6 @@ function tgSend(text, topicKey, buttons) {
 
 function sheetUrl() { return SpreadsheetApp.getActiveSpreadsheet().getUrl(); }
 
-function slipUrl(no) {
-  var base = ScriptApp.getService().getUrl();
-  return base ? base + '?slip=' + encodeURIComponent(no) + '&key=' + encodeURIComponent(slipKey()) : '';
-}
-
 // Phone as 8801XXXXXXXXX, or '' when it is not a Bangladeshi mobile. Accepts 01712345678,
 // 1712345678, 8801712345678, +8801712345678, 008801712345678, "+88 017-1234-5678", Bengali digits.
 function normBd(p) {
@@ -718,8 +705,6 @@ function telegramCourier(o) {
     var row1 = [];
     var wa = waButton(o.phone, 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার কুরিয়ার অর্ডার #' + o.no + ' পেয়েছি।');
     if (wa) row1.push(wa);
-    var su = slipUrl(o.no);
-    if (su) row1.push({ text: '🖨 স্লিপ', url: su });
     var kb = [];
     if (row1.length) kb.push(row1);
     kb.push([{ text: '📊 শিট', url: sheetUrl() }]);
@@ -737,90 +722,6 @@ function tgTest() {
   ['CALL', 'OTHER'].forEach(function (k) {
     Logger.log(k + ': ' + tgSend('✅ খামারভেস্ট লিড বট: সংযোগ ঠিক আছে (' + k + ')', k, null));
   });
-}
-
-// ---- Delivery slip: a printable HTML page opened from the Telegram button ----
-
-function slipKey() {
-  var props = PropertiesService.getScriptProperties();
-  var k = props.getProperty('SLIP_KEY');
-  if (!k) {
-    k = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '').slice(0, 8);
-    props.setProperty('SLIP_KEY', k);
-  }
-  return k;
-}
-
-function slipFields(o) {
-  return {
-    '{{ORDER}}': o.no,
-    '{{DATE}}': Utilities.formatDate(o.date instanceof Date ? o.date : new Date(), TZ, 'dd/MM/yyyy'),
-    '{{NAME}}': o.name,
-    '{{PHONE}}': o.phone,
-    '{{ALT}}': o.alt || '-',
-    '{{UPAZILA}}': o.upazila,
-    '{{DISTRICT}}': o.district,
-    '{{BRANCH}}': o.branch,
-    '{{BAGS}}': bn(o.bags),
-    '{{KG}}': bn(o.bags * 50),
-    '{{PAY}}': payLine(o)
-  };
-}
-
-function slipHtmlOne(o, copyLabel) {
-  var f = slipFields(o);
-  var h = function (k) { return esc(f[k]); };
-  return '<div class="slip"><div class="band"><b>খামারভেস্ট সাইলেজ · ডেলিভারি স্লিপ</b><span>' + h('{{ORDER}}') + ' · ' + h('{{DATE}}') +
-    ' · ' + esc(copyLabel) + '</span></div>' +
-    '<div class="cols"><div><p>প্রাপক: <b>' + h('{{NAME}}') + '</b></p><p>মোবাইল: <b>' + h('{{PHONE}}') + '</b></p><p>বিকল্প: ' + h('{{ALT}}') +
-    '</p><p>ঠিকানা: ' + h('{{UPAZILA}}') + ', ' + h('{{DISTRICT}}') + '</p></div><div><p>পেমেন্ট:</p><p>' + h('{{PAY}}') + '</p></div></div>' +
-    '<div class="boxes"><div class="b">সুন্দরবন শাখা: ' + h('{{BRANCH}}') + '</div><div class="b">মোট বস্তা: ' + h('{{BAGS}}') + ' টি (' + h('{{KG}}') + ' কেজি)</div></div>' +
-    '<p class="ln">কন্ডিশন টাকা: ____________ &nbsp;&nbsp; CN নম্বর: ____________</p>' +
-    '<p class="ln">বুঝে নিলাম: নাম ____________ &nbsp; সই ____________ &nbsp; তারিখ ________</p>' +
-    '<p class="foot">প্রেরক: খামারভেস্ট, শেরপুর, বগুড়া · 01334-211984 · বায়ুরোধী বস্তা: ফুটো করবেন না</p></div>';
-}
-
-function slipPage(no, key) {
-  if (!key || key !== slipKey()) return ContentService.createTextOutput('অনুমতি নেই');
-  var o = findCourier(no);
-  if (!o) return ContentService.createTextOutput('অর্ডার পাওয়া যায়নি');
-  var css = '@page{size:A4;margin:8mm}*{box-sizing:border-box}body{margin:0;font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif;color:#111}' +
-    '.bar{padding:12px;text-align:center}.bar button{font:inherit;font-size:18px;padding:10px 28px;background:#0b5b38;color:#fff;border:0;border-radius:8px}' +
-    '.bar p{margin:8px 0 0;font-size:15px;color:#555}.slip{height:136mm;border:2px dashed #888;padding:6mm;margin:0 0 4mm;page-break-inside:avoid;display:flex;flex-direction:column;gap:3mm}' +
-    '.band{background:#0b5b38;color:#fff;padding:3mm 4mm;display:flex;justify-content:space-between;font-size:18px}.band span{font-size:15px}' +
-    '.cols{display:flex;gap:6mm;font-size:17px}.cols>div{flex:1}.cols p{margin:1mm 0}' +
-    '.boxes{display:flex;gap:6mm}.b{flex:1;border:2.5px solid #111;padding:4mm;text-align:center;font-weight:700;font-size:19px}' +
-    '.ln{font-size:17px;margin:1mm 0}.foot{margin-top:auto;border-top:1px solid #888;padding-top:2mm;font-size:13px;color:#555}' +
-    '@media screen and (max-width:700px){.slip{height:auto;padding:12px}.band{flex-direction:column;gap:4px;font-size:16px}.cols{flex-direction:column;gap:6px;font-size:16px}.boxes{flex-direction:column;gap:8px}.b{font-size:17px}.ln{font-size:15px}.foot{margin-top:8px}}' +
-    '@media print{.bar,#out,#cap{display:none}.slip:nth-of-type(2n){page-break-after:always}}';
-  css += '.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.btns button{font:inherit;font-size:18px;padding:12px 24px;border:0;border-radius:8px;color:#fff;background:#0b5b38}' +
-    '.btns .photo{background:#1b4fd1}@media screen and (max-width:700px){.btns button{width:100%}}' +
-    '#out{padding:0 12px}#out img{width:100%;height:auto;border:1px solid #ccc;margin-top:8px}#out p{margin:6px 0;font-size:16px;text-align:center}' +
-    '#cap{position:absolute;left:-9999px;top:0;width:680px;background:#fff}#cap .slip{height:auto;margin:0}';
-  var script = '(function(){var NO=' + JSON.stringify(no) + ';' +
-    'function msg(t){var o=document.getElementById("out");var p=document.createElement("p");p.textContent=t;o.appendChild(p);}' +
-    'window.savePhoto=function(){var out=document.getElementById("out");out.innerHTML="";var btn=document.getElementById("photoBtn");btn.disabled=true;' +
-    'try{var ready=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();' +
-    'ready.then(function(){return html2canvas(document.getElementById("cap"),{scale:2,backgroundColor:"#ffffff",windowWidth:900});})' +
-    '.then(function(canvas){var url=canvas.toDataURL("image/png");var img=new Image();img.src=url;img.alt="স্লিপ";' +
-    'msg("ছবিটি চেপে ধরে রাখুন, তারপর \'Save image / ছবি সেভ\' চাপুন");out.appendChild(img);' +
-    'return new Promise(function(res){canvas.toBlob(function(b){res(b);},"image/png");}).then(function(blob){' +
-    'if(!blob)return;var name="slip-"+NO+".png";' +
-    'try{var f=new File([blob],name,{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})&&navigator.share){return navigator.share({files:[f],title:name}).catch(function(){dl(blob,name);});}}catch(e){}' +
-    'dl(blob,name);});})' +
-    '.catch(function(){msg("ছবি বানানো যায়নি, স্ক্রিনশট নিন");}).then(function(){btn.disabled=false;});' +
-    '}catch(e){msg("ছবি বানানো যায়নি, স্ক্রিনশট নিন");btn.disabled=false;}};' +
-    'function dl(blob,name){try{var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},2000);}catch(e){}}' +
-    '})();';
-  var html = '<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
-    '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
-    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700&display=swap">' +
-    '<style>' + css + '</style></head><body><div class="bar"><div class="btns"><button type="button" class="photo" id="photoBtn" onclick="savePhoto()">📷 ছবি হিসেবে সেভ করুন</button>' +
-    '<button type="button" onclick="window.print()">প্রিন্ট</button></div><p>ফোনে স্ক্রিনশট নিলেই ছবি হিসেবে রাখা যাবে</p></div>' +
-    '<div id="out"></div><div id="cap">' + slipHtmlOne(o, '') + '</div>' +
-    slipHtmlOne(o, 'প্রেরকের কপি') + slipHtmlOne(o, 'পার্সেলের কপি') +
-    '<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script>' + script + '</script></body></html>';
-  return HtmlService.createHtmlOutput(html).setTitle('স্লিপ ' + o.no);
 }
 
 function clip(v, n) {
