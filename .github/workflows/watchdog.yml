@@ -35,13 +35,21 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
+          ALERT_KEY: ${{ secrets.ALERT_KEY }}
         run: |
           TITLE="Live site watchdog found a problem"
           EXISTING=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
           if [ -n "$EXISTING" ]; then
             gh issue comment "$EXISTING" --body-file report.md
           else
-            gh issue create --title "$TITLE" --body-file report.md
+            URL=$(gh issue create --title "$TITLE" --body-file report.md)
+            # A new problem (state change): tell Telegram through the Apps Script relay.
+            if [ -n "$ALERT_KEY" ]; then
+              LEADS_URL=$(grep -o "LEADS_URL = '[^']*'" js/leads.js | cut -d"'" -f2)
+              jq -n --arg key "$ALERT_KEY" --arg title "$TITLE" --arg body "$(head -c 1400 report.md)" --arg url "$URL" \
+                '{form_type:"site_alert", key:$key, title:$title, body:$body, url:$url, resolved:false}' \
+                | curl -sS -o /dev/null -X POST -H 'Content-Type: text/plain;charset=utf-8' --data-binary @- "$LEADS_URL" || true
+            fi
           fi
 
       - name: Close the issue once the site is healthy again
@@ -49,10 +57,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
+          ALERT_KEY: ${{ secrets.ALERT_KEY }}
         run: |
           TITLE="Live site watchdog found a problem"
           EXISTING=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number')
           if [ -n "$EXISTING" ]; then
             gh issue comment "$EXISTING" --body "Watchdog is green again as of $(date -u +%F). Closing."
             gh issue close "$EXISTING"
+            # Problem gone (state change): tell Telegram through the Apps Script relay.
+            if [ -n "$ALERT_KEY" ]; then
+              LEADS_URL=$(grep -o "LEADS_URL = '[^']*'" js/leads.js | cut -d"'" -f2)
+              jq -n --arg key "$ALERT_KEY" --arg title "Live site watchdog: সব ঠিক আছে" \
+                '{form_type:"site_alert", key:$key, title:$title, resolved:true}' \
+                | curl -sS -o /dev/null -X POST -H 'Content-Type: text/plain;charset=utf-8' --data-binary @- "$LEADS_URL" || true
+            fi
           fi

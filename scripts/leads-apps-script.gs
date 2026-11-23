@@ -51,6 +51,18 @@
 // text at once, with buttons "WhatsApp" (reply to the farmer) and "শিট". There is no slip page:
 // it was removed because saving it as a photo failed on the owner's phone.
 //
+// Extra Telegram alerts (all optional, all skip silently without TG_TOKEN and TG_CHAT_ID):
+//   - every 30 min (7:00-22:00 Dhaka): one "ফোন করা হয়নি (২ ঘণ্টার বেশি)" message for Leads and
+//     কুরিয়ার rows still "নতুন" after 2 hours, each row once (Script property STALE_ALERTED)
+//   - the 8am digest also goes to Telegram ("আজকের সারাংশ"); Friday 9:00 "সাপ্তাহিক হিসাব"
+//   - a district crossing a truck size posts to Telegram too (with the farmers' list)
+//   - site alerts from the GitHub watchdog: form_type 'site_alert' with key = Script property
+//     ALERT_KEY (also a GitHub secret named ALERT_KEY); wrong or unset key is ignored
+//   - SilageBD questions post as "SilageBD প্রশ্ন"
+//   Optional Script property TG_TOPIC_ALERTS = topic for stale, truck and site alerts (else the
+//   main chat). The digest and weekly summary go to the main chat. setup() installs the triggers
+//   (dailyDigest, staleCheck every 30 min, weeklySummary Friday 9:00), replacing its own old ones.
+//
 // Emails go to the Google account that owns this script. Put another address
 // in NOTIFY_EMAIL to send them elsewhere, or 'off' to stop them.
 //
@@ -118,6 +130,7 @@ var HEADERS = ['সময়', 'নাম', 'মোবাইল', 'এলাক�
 function doPost(e) {
   try {
     var d = JSON.parse((e && e.postData && e.postData.contents) || '{}');
+    if (d.form_type === 'site_alert') return siteAlert(d);
     if (d.website) return ok(); // honeypot: real farmers never see this field
     if (d.type === 'click') return logClick(d);
     if (d.form_type === 'silagebd_question') return logQuestion(d);
@@ -235,6 +248,7 @@ function logQuestion(d) {
     body += '\n\nশিট: ' + ss.getUrl();
     MailApp.sendEmail(to, 'SilageBD: নতুন প্রশ্ন (' + (district || 'জেলা জানা নেই') + ')', body);
   }
+  telegramQuestion(question, district, phone);
   return ok();
 }
 
@@ -310,7 +324,6 @@ function checkTruckAlert(district) {
   if (now === was) return;
   props.setProperty(key, String(now));
   var to = ownerEmail();
-  if (!to) return;
   var t = TRUCKS[now];
   var line = district + ': ' + pool.rows.length + ' জন খামারির ' + bn(pool.bags) + ' বস্তা জমেছে। ' +
     t.label + ' (' + bn(t.bags) + ' বস্তা) ভরার মতো।';
@@ -322,7 +335,8 @@ function checkTruckAlert(district) {
   });
   body.push('', 'গাড়ি ঠিক হলে "একসাথে ডেলিভারি" ট্যাবে এদের অবস্থা বদলে দিন, তাহলে এই জেলার হিসাব আবার শূন্য থেকে শুরু হবে।',
     '', 'শিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
-  MailApp.sendEmail(to, 'একসাথে ডেলিভারি: ' + district + ', ' + bn(pool.bags) + ' বস্তা জমেছে', body.join('\n'));
+  if (to) MailApp.sendEmail(to, 'একসাথে ডেলিভারি: ' + district + ', ' + bn(pool.bags) + ' বস্তা জমেছে', body.join('\n'));
+  telegramTruck(district, pool, t, nx);
 }
 
 // Called from the daily digest: lowers stored levels for districts whose
@@ -372,10 +386,13 @@ function ownerEmail() {
 
 // Run once from the editor (step 3). Safe to run again: it replaces its trigger.
 function setup() {
+  var mine = ['dailyDigest', 'staleCheck', 'weeklySummary'];
   ScriptApp.getProjectTriggers().forEach(function (t) {
-    if (t.getHandlerFunction() === 'dailyDigest') ScriptApp.deleteTrigger(t);
+    if (mine.indexOf(t.getHandlerFunction()) > -1) ScriptApp.deleteTrigger(t);
   });
   ScriptApp.newTrigger('dailyDigest').timeBased().everyDays(1).atHour(DIGEST_HOUR).inTimezone(TZ).create();
+  ScriptApp.newTrigger('staleCheck').timeBased().everyMinutes(30).create();
+  ScriptApp.newTrigger('weeklySummary').timeBased().onWeekDay(ScriptApp.WeekDay.FRIDAY).atHour(9).inTimezone(TZ).create();
   getSheet();
   sharedSheet();
   courierSheet();
@@ -385,6 +402,7 @@ function setup() {
 // Every morning: who still has not been called, and what the site did in the
 // last 24 hours. Skipped on a day with nothing to report.
 function dailyDigest(force) {
+  try { telegramDigest(force === true); } catch (err) { console.error('telegramDigest: ' + err); }
   var to = ownerEmail();
   if (!to) return;
   resyncTruckLevels();
@@ -565,6 +583,7 @@ function tgConfig() {
 }
 
 function tgTopic(cfg, key) {
+  if (!key) return 0;
   var t = (cfg.props.getProperty('TG_TOPIC_' + key) || '').trim();
   return t ? parseInt(t, 10) : 0;
 }
@@ -722,6 +741,187 @@ function tgTest() {
   ['CALL', 'OTHER'].forEach(function (k) {
     Logger.log(k + ': ' + tgSend('✅ খামারভেস্ট লিড বট: সংযোগ ঠিক আছে (' + k + ')', k, null));
   });
+}
+
+// ---- More Telegram alerts: stale orders, digests, truck, site alerts, questions ----
+
+function isTest(name) { return /TEST/i.test(String(name || '')); }
+
+// Which form a Leads row came from: its মাধ্যম, with compost leads told apart by the note.
+function leadMedium(r) {
+  if (/^সাইট:\s*কম্পোস্ট/.test(String(r[5] || ''))) return 'কম্পোস্ট';
+  return String(r[8] || 'ওয়েবসাইট ফর্ম');
+}
+
+// Leads rows that count (not tests, not courier: those are listed from the courier tab).
+function realLeads() {
+  return dataRows(SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME)).filter(function (r) {
+    return r[0] instanceof Date && !isTest(r[1]) && r[8] !== 'কুরিয়ার';
+  });
+}
+
+function realCourier() {
+  return dataRows(SpreadsheetApp.getActiveSpreadsheet().getSheetByName(COURIER_NAME)).filter(function (r) {
+    return r[1] instanceof Date && !isTest(r[2]);
+  });
+}
+
+function bnAgo(ms) {
+  var m = Math.floor(ms / 60000);
+  if (m < 60) return bn(m) + ' মিনিট';
+  var h = Math.floor(m / 60);
+  if (h < 48) return bn(h) + ' ঘণ্টা';
+  return bn(Math.floor(h / 24)) + ' দিন';
+}
+
+function more(n, shown) { return n > shown ? '\nআরও ' + bn(n - shown) + 'টি' : ''; }
+
+// 1. Rows still "নতুন" after 2 hours, once each, 7:00-22:00 Dhaka.
+function staleCheck() {
+  try {
+    if (!tgConfig()) return;
+    var hour = Number(Utilities.formatDate(new Date(), TZ, 'H'));
+    if (hour < 7 || hour >= 22) return;
+    var props = PropertiesService.getScriptProperties();
+    var seen = [];
+    try { seen = JSON.parse(props.getProperty('STALE_ALERTED') || '[]'); } catch (e) { seen = []; }
+    var now = Date.now(), items = [];
+    realLeads().forEach(function (r) {
+      if (r[9] !== 'নতুন' || now - r[0].getTime() < 2 * 3600 * 1000) return;
+      items.push({ key: SHEET_NAME + '|' + r[0].getTime() + '|' + r[2], name: r[1], phone: r[2], where: r[3], at: r[0], courier: '' });
+    });
+    realCourier().forEach(function (r) {
+      if (r[COURIER_STATUS_COL - 1] !== COURIER_NEW || now - r[1].getTime() < 2 * 3600 * 1000) return;
+      items.push({ key: COURIER_NAME + '|' + r[1].getTime() + '|' + r[3], name: r[2], phone: r[3], where: r[5], at: r[1], courier: String(r[0]) });
+    });
+    items = items.filter(function (it) { return seen.indexOf(it.key) === -1; });
+    if (!items.length) return;
+    items.sort(function (a, b) { return a.at - b.at; });
+    var shown = items.slice(0, 15);
+    var blocks = [['⏰ <b>ফোন করা হয়নি (২ ঘণ্টার বেশি)</b>']];
+    shown.forEach(function (it) {
+      blocks.push(['<b>' + esc(it.name || 'নাম দেননি') + '</b>', phoneLine(it.phone), (it.where ? esc(it.where) + ' · ' : '') + bnAgo(now - it.at.getTime()) + ' আগে']);
+    });
+    var text = tgJoin(blocks) + more(items.length, shown.length);
+    var kb = [];
+    if (items.length === 1) {
+      var b = waButton(items[0].phone, items[0].courier
+        ? 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার কুরিয়ার অর্ডার #' + items[0].courier + ' পেয়েছি।'
+        : 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার অনুরোধ পেয়েছি।');
+      if (b) kb.push([b]);
+    }
+    kb.push([{ text: '📊 শিট', url: sheetUrl() }]);
+    if (tgSend(text, 'ALERTS', kb)) {
+      items.forEach(function (it) { seen.push(it.key); });
+      props.setProperty('STALE_ALERTED', JSON.stringify(seen.slice(-500)));
+    }
+  } catch (err) { console.error('staleCheck: ' + err); }
+}
+
+// 2. Short Telegram version of the 8am digest, main chat.
+function telegramDigest(force) {
+  if (!tgConfig()) return;
+  var since = Date.now() - 24 * 3600 * 1000;
+  var fresh = realLeads().filter(function (r) { return r[0].getTime() >= since; });
+  var courierDay = realCourier().filter(function (r) { return r[1].getTime() >= since; });
+  var waiting = realLeads().filter(function (r) { return r[9] === 'নতুন'; });
+  var waitingCourier = realCourier().filter(function (r) { return r[COURIER_STATUS_COL - 1] === COURIER_NEW; });
+  var pool = pendingPool(), poolKeys = Object.keys(pool);
+  if (!force && !fresh.length && !courierDay.length && !waiting.length && !waitingCourier.length && !poolKeys.length) return;
+  var by = {};
+  fresh.forEach(function (r) { var m = leadMedium(r); by[m] = (by[m] || 0) + 1; });
+  var counts = Object.keys(by).map(function (m) { return m + ': ' + bn(by[m]); });
+  var people = waiting.map(function (r) { return esc(r[1] || 'নাম দেননি') + '\n' + phoneLine(r[2]); })
+    .concat(waitingCourier.map(function (r) { return esc(r[2]) + ' (কুরিয়ার)\n' + phoneLine(r[3]); }));
+  var blocks = [
+    ['📋 <b>আজকের সারাংশ</b>'],
+    ['গত ২৪ ঘণ্টায় নতুন লিড: <b>' + bn(fresh.length) + '</b>'].concat(counts),
+    ['কুরিয়ার অর্ডার: <b>' + bn(courierDay.length) + '</b>']
+  ];
+  if (people.length) blocks.push(['ফোন করা হয়নি: <b>' + bn(people.length) + ' জন</b>', people.slice(0, 10).join('\n\n') + more(people.length, 10)]);
+  if (poolKeys.length) blocks.push(['একসাথে ডেলিভারি, অপেক্ষায়:'].concat(poolKeys.map(function (k) {
+    return esc(k) + ': <b>' + bn(pool[k].bags) + ' বস্তা</b> (' + bn(pool[k].rows.length) + ' জন)';
+  })));
+  tgSend(tgJoin(blocks), null, [[{ text: '📊 শিট', url: sheetUrl() }]]);
+}
+
+// 3. Truck size crossed (called from checkTruckAlert). Sizes stay in this script only.
+function telegramTruck(district, pool, truck, nx) {
+  try {
+    if (!tgConfig()) return;
+    var blocks = [['🚛 <b>' + esc(district) + ': ' + bn(pool.bags) + ' বস্তা জমেছে</b>'],
+      [esc(truck.label) + ' (' + bn(truck.bags) + ' বস্তা) ভরার মতো' + (nx ? '\n' + esc(nx.label) + ' ভরতে আর ' + bn(nx.need) + ' বস্তা লাগবে' : '')]];
+    pool.rows.slice(0, 25).forEach(function (r) {
+      blocks.push(['<b>' + esc(r[1]) + '</b>', phoneLine(r[2]), (r[4] ? esc(r[4]) + ' · ' : '') + bn(Number(r[5]) || 0) + ' বস্তা']);
+    });
+    tgSend(tgJoin(blocks) + more(pool.rows.length, 25), 'ALERTS', [[{ text: '📊 শিট', url: sheetUrl() }]]);
+  } catch (err) { console.error('telegramTruck: ' + err); }
+}
+
+// 4. Relay from the GitHub watchdog. Needs Script property ALERT_KEY; never touches a sheet.
+function siteAlert(d) {
+  try {
+    var key = (PropertiesService.getScriptProperties().getProperty('ALERT_KEY') || '').trim();
+    if (!key || String(d.key || '') !== key) return ok();
+    var title = clip(d.title, 200);
+    var url = /^https:\/\//.test(String(d.url || '')) ? clip(d.url, 500) : '';
+    var text;
+    if (d.resolved === true || d.resolved === 'true') {
+      text = tgJoin([['✅ <b>সাইট ঠিক আছে</b>'], title ? [esc(title)] : []]);
+    } else {
+      text = tgJoin([['⚠️ <b>সাইটে সমস্যা</b>'], title ? ['<b>' + esc(title) + '</b>'] : [], clip(d.body, 1500) ? [esc(clip(d.body, 1500))] : []]);
+    }
+    tgSend(text, 'ALERTS', url ? [[{ text: 'বিস্তারিত', url: url }]] : null);
+  } catch (err) { console.error('siteAlert: ' + err); }
+  return ok();
+}
+
+// 5. Friday 9:00 Dhaka, main chat.
+function weeklySummary() {
+  try {
+    if (!tgConfig()) return;
+    var since = Date.now() - 7 * 24 * 3600 * 1000;
+    var rows = realLeads().filter(function (r) { return r[0].getTime() >= since; });
+    var courier = realCourier().filter(function (r) { return r[1].getTime() >= since; });
+    var bags = courier.reduce(function (a, r) { return a + (Number(r[8]) || 0); }, 0);
+    var total = rows.length + courier.length;
+    var by = {};
+    rows.forEach(function (r) { var m = leadMedium(r); by[m] = (by[m] || 0) + 1; });
+    if (courier.length) by['কুরিয়ার'] = courier.length;
+    var medium = Object.keys(by).sort(function (a, b) { return by[b] - by[a]; }).map(function (m) { return m + ': ' + bn(by[m]); });
+    var area = {};
+    rows.forEach(function (r) { var k = String(r[3] || '').trim(); if (k) area[k] = (area[k] || 0) + 1; });
+    courier.forEach(function (r) { var k = [r[6], r[5]].filter(Boolean).join(', '); if (k) area[k] = (area[k] || 0) + 1; });
+    var topArea = Object.keys(area).sort(function (a, b) { return area[b] - area[a]; }).slice(0, 5)
+      .map(function (k) { return esc(k) + ': ' + bn(area[k]); });
+    var src = { 'এআই (ChatGPT ইত্যাদি)': 0, 'গুগল': 0, 'ফেসবুক': 0, 'সরাসরি বা অন্য': 0 };
+    rows.forEach(function (r) {
+      var v = String(r[7] || '').toLowerCase();
+      if (/chatgpt|openai|perplexity|copilot|gemini|claude|meta_ai/.test(v)) src['এআই (ChatGPT ইত্যাদি)']++;
+      else if (/google/.test(v)) src['গুগল']++;
+      else if (/facebook|fb/.test(v)) src['ফেসবুক']++;
+      else src['সরাসরি বা অন্য']++;
+    });
+    var srcLines = Object.keys(src).filter(function (k) { return src[k]; }).map(function (k) { return k + ': ' + bn(src[k]); });
+    var blocks = [['📊 <b>সাপ্তাহিক হিসাব</b>', 'গত ৭ দিন'], ['মোট লিড: <b>' + bn(total) + '</b>'].concat(medium)];
+    if (topArea.length) blocks.push(['এলাকা (সবচেয়ে বেশি):'].concat(topArea));
+    if (srcLines.length) blocks.push(['কোথা থেকে এসেছেন:'].concat(srcLines));
+    blocks.push(['কুরিয়ার অর্ডার: <b>' + bn(courier.length) + '</b>', 'মোট বস্তা: <b>' + bn(bags) + '</b>']);
+    tgSend(tgJoin(blocks), null, [[{ text: '📊 শিট', url: sheetUrl() }]]);
+  } catch (err) { console.error('weeklySummary: ' + err); }
+}
+
+// 6. silagebd.com question box.
+function telegramQuestion(question, district, phone) {
+  try {
+    if (!tgConfig()) return;
+    var blocks = [['❓ <b>SilageBD প্রশ্ন</b>'], [esc(question)], [district ? esc(district) : '', phone ? phoneLine(phone) : '']];
+    var kb = [];
+    var b = waButton(phone, 'আসসালামু আলাইকুম, Silage BD থেকে বলছি। আপনার প্রশ্নটি পেয়েছি।');
+    if (b) kb.push([b]);
+    kb.push([{ text: '📊 শিট', url: sheetUrl() }]);
+    tgSend(tgJoin(blocks), 'OTHER', kb);
+  } catch (err) { console.error('telegramQuestion: ' + err); }
 }
 
 function clip(v, n) {
