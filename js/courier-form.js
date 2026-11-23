@@ -35,6 +35,14 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
   function isOver() { return MAX > 0 && bags >= MAX; }
   function amountFor(k, c) { return k === 'silage' ? c * BAG : k === 'fee' ? c * FEE : c * (BAG + FEE); }
   function payAmount() { var t = paytype(), c = Math.max(1, bags); if (isOver() && (t === 'শুধু কুরিয়ার খরচ' || t === 'সাইলেজ + কুরিয়ার')) return 0; return t === 'সাইলেজের দাম' ? amountFor('silage', c) : t === 'শুধু কুরিয়ার খরচ' ? amountFor('fee', c) : t === 'সাইলেজ + কুরিয়ার' ? amountFor('total', c) : 0; }
+  // The amount starts empty. It follows the selected card only while a TrxID is present and
+  // the farmer has not typed an amount of their own.
+  var paidManual = false;
+  function syncPaid() {
+    if (!paid || paidManual) return;
+    if (trxOf()) { var pa = payAmount(); paid.value = pa ? String(pa) : ''; }
+    else paid.value = '';
+  }
   function paint(n, writeField) {
     bags = n;
     var c = Math.max(1, n);
@@ -65,7 +73,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     $('[data-btn-label]').textContent = over ? 'ফোন করার অনুরোধ পাঠান' : 'কুরিয়ারে অর্ডার পাঠান';
     $('[data-total-row]').hidden = over;
     if (typeof updateNudges === 'function') updateNudges();
-    if (paid) { var pa = payAmount(); if (pa) paid.value = String(pa); }
+    syncPaid();
   }
   function setBags(n) { paint(Math.max(1, Math.min(999, n)), true); }
   out.addEventListener('input', function () {
@@ -108,7 +116,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     }
     return el;
   }
-  form.querySelectorAll('input[name=paytype]').forEach(function (r) { r.addEventListener('change', function () { clearErr('paytype'); var pa = payAmount(); if (pa) paid.value = String(pa); }); });
+  form.querySelectorAll('input[name=paytype]').forEach(function (r) { r.addEventListener('change', function () { clearErr('paytype'); syncPaid(); }); });
   // Payment panel: collapsed by default, smooth expand (CSS), inert while closed so Tab skips it.
   function setPay() {} // step 3 is always open now
   // Service: three toggle buttons feeding the hidden input.
@@ -147,8 +155,8 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
   });
   function phoneOf(v) { return en(v).replace(/[\s-]/g, ''); }
   function trxOf() { return en(input('trx').value).replace(/[^A-Za-z0-9]/g, '').toUpperCase(); }
-  input('trx').addEventListener('input', function () { var t = this.value.replace(/[\s]/g, '').toUpperCase(); if (t !== this.value) this.value = t; });
-  input('paid').addEventListener('input', function () { var d = en(this.value).replace(/[^0-9]/g, ''); if (d !== this.value) this.value = d; });
+  input('trx').addEventListener('input', function () { var t = this.value.replace(/[\s]/g, '').toUpperCase(); if (t !== this.value) this.value = t; syncPaid(); });
+  input('paid').addEventListener('input', function () { var d = en(this.value).replace(/[^0-9]/g, ''); if (d !== this.value) this.value = d; paidManual = d !== ''; });
 
   // Copy the send-money number or a card's amount: clipboard API first, then a hidden-input execCommand, then select the text.
   (function () {
@@ -198,7 +206,9 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     }
     var trx = trxOf();
     var svc = input('service').value;
-    if (trx && !/^[A-Z0-9]{6,20}$/.test(trx)) bad('trx', 'সঠিক ট্রানজেকশন আইডি লিখুন');
+    var paidTyped = en(input('paid').value).replace(/\D/g, '');
+    if (!trx && paidTyped) bad('trx', 'টাকা পাঠিয়ে থাকলে ট্রানজেকশন আইডি দিন');
+    else if (trx && !/^[A-Z0-9]{6,20}$/.test(trx)) bad('trx', 'সঠিক ট্রানজেকশন আইডি লিখুন');
     else if (trx && !svc) bad('service', 'কোন মাধ্যমে পাঠিয়েছেন বেছে নিন');
     if (trx && !paytype()) bad('paytype', 'কিসের টাকা পাঠিয়েছেন বেছে নিন');
     if (first && ['service', 'trx', 'paid', 'paytype'].indexOf(first) > -1) setPay(true);
