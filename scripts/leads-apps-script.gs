@@ -160,7 +160,7 @@ function doPost(e) {
           '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
           '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
       } else {
-        MailApp.sendEmail(to, (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + name + ' (' + clip(d.location, 40) + ')',
+        MailApp.sendEmail(to, (d.site === 'compost' ? 'কম্পোস্ট: ' : '') + (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + name + ' (' + clip(d.location, 40) + ')',
           'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + clip(d.location, 120) +
           '\nবস্তা: ' + clip(d.bags, 20) + '\nতথ্য: ' + clip(d.note, 500) +
           '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
@@ -169,7 +169,7 @@ function doPost(e) {
     }
     // Telegram last, so a Telegram problem can never lose the lead or the email.
     if (courier) telegramCourier(order);
-    else telegramLead(d, name, phone, booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : (callForm ? 'ফোনের অনুরোধ (/form)' : 'নতুন লিড')), callForm ? 'CALL' : 'OTHER');
+    else telegramLead(d, name, phone, booking ? '<b>আগাম চাহিদা</b>' : (shared ? '<b>একসাথে ডেলিভারি</b>' : (callForm ? '📞 <b>ফোনের অনুরোধ / হিসাব</b>' : '<b>নতুন লিড</b>')), callForm ? 'CALL' : 'OTHER');
   } catch (err) {
     console.error(err);
   }
@@ -605,39 +605,136 @@ function slipUrl(no) {
   return base ? base + '?slip=' + encodeURIComponent(no) + '&key=' + encodeURIComponent(slipKey()) : '';
 }
 
+// Phone as 8801XXXXXXXXX, or '' when it is not a Bangladeshi mobile. Accepts 01712345678,
+// 1712345678, 8801712345678, +8801712345678, 008801712345678, "+88 017-1234-5678", Bengali digits.
+function normBd(p) {
+  var n = toAsciiDigits(String(p || '')).replace(/\D/g, '');
+  if (n.indexOf('00') === 0) n = n.slice(2);
+  if (n.indexOf('880') === 0) { /* keep */ }
+  else if (n.charAt(0) === '0') n = '88' + n;
+  else if (n.length === 10 && n.charAt(0) === '1') n = '880' + n;
+  return /^8801[3-9]\d{8}$/.test(n) ? n : '';
+}
+
+// Run from the editor: logs sample inputs and what they become.
+function phoneTest() {
+  ['01712345678', '1712345678', '8801712345678', '+8801712345678', '008801712345678', '+88 017-1234-5678',
+    '০১৭১২৩৪৫৬৭৮', '(017) 1234.5678', '12345', '01212345678'].forEach(function (x) {
+    Logger.log(x + ' -> ' + (normBd(x) ? '+' + normBd(x) : '(invalid, shown as typed)'));
+  });
+}
+
+// Plain text (never inside <b>/<code>/a link) so Telegram offers tap-to-call.
+function phoneLine(p, label) {
+  var n = normBd(p);
+  return (label ? label + ': ' : '') + (n ? '+' + n : esc(p));
+}
+
+function waButton(phone, text) {
+  var n = normBd(phone);
+  return n ? { text: '💬 WhatsApp', url: 'https://wa.me/' + n + '?text=' + encodeURIComponent(text) } : null;
+}
+
+function fmtMoney(n) {
+  var s = String(Math.round(Number(n) || 0)), o = '';
+  while (s.length > 3) { o = ',' + s.slice(-3) + o; s = s.slice(0, -3); }
+  return bn(s + o);
+}
+
+var BN_MONTHS = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+
+// "২৩ নভেম্বর, রাত ১১:১৭"
+function bnWhen(date) {
+  var d = date instanceof Date ? date : new Date();
+  var day = Number(Utilities.formatDate(d, TZ, 'd')), mon = Number(Utilities.formatDate(d, TZ, 'M')) - 1;
+  var h = Number(Utilities.formatDate(d, TZ, 'H')), m = Utilities.formatDate(d, TZ, 'mm');
+  var part = h < 4 ? 'রাত' : h < 6 ? 'ভোর' : h < 12 ? 'সকাল' : h < 15 ? 'দুপুর' : h < 17 ? 'বিকাল' : h < 19 ? 'সন্ধ্যা' : 'রাত';
+  var h12 = h % 12 === 0 ? 12 : h % 12;
+  return bn(day) + ' ' + BN_MONTHS[mon] + ', ' + part + ' ' + bn(h12) + ':' + bn(m);
+}
+
+// Blocks of lines, blank line between blocks, empty blocks and lines dropped.
+function tgJoin(blocks) {
+  return blocks.map(function (b) { return b.filter(Boolean).join('\n'); }).filter(Boolean).join('\n\n');
+}
+
+function courierMessage(o, sample) {
+  var head = '🚚 <b>নতুন কুরিয়ার অর্ডার</b>  #' + esc(o.no);
+  var money = o.truck
+    ? '<b>৫ টন বা বেশি</b>: মিনি ট্রাকে পাঠাতে হবে, ফোন করুন'
+    : 'সাইলেজ ' + fmtMoney(o.silage) + ' + কুরিয়ার ' + fmtMoney(o.fee) + ' = <b>' + fmtMoney(o.total) + ' টাকা</b>';
+  var pay = o.trx ? ['পেমেন্ট: ' + esc([o.svc, o.paytype, o.sent ? fmtMoney(o.sent) + ' টাকা' : ''].filter(Boolean).join(' · ')),
+    'TrxID: <b>' + esc(o.trx) + '</b>'] : [];
+  var note = o.note && o.note.indexOf(' | ') === -1 ? 'নোট: ' + esc(o.note) : ''; // the web form's note is a generated summary
+  return tgJoin([
+    sample ? ['<i>নমুনা (আসল অর্ডার নয়)</i>'] : [],
+    [head],
+    ['<b>' + esc(o.name) + '</b>', phoneLine(o.phone), o.alt ? phoneLine(o.alt, 'বিকল্প') : ''],
+    [esc([o.upazila, o.district].filter(Boolean).join(', ')), 'শাখা: <b>' + esc(o.branch) + '</b>'],
+    ['<b>' + bn(o.bags) + ' বস্তা</b> (' + bn(o.bags * 50) + ' কেজি)', money],
+    pay,
+    [note, bnWhen(o.date)]
+  ]);
+}
+
+// Message for every non-courier form lead. d = the posted fields.
+function leadMessage(d, name, phone, label) {
+  var compost = d.site === 'compost';
+  var head = compost ? '🌱 <b>কম্পোস্ট লিড</b>' : label;
+  var note = clip(d.note, 400);
+  var noteLines = [];
+  if (compost) note = note.replace(/^সাইট:\s*কম্পোস্ট[\s|:,.\-]*/, '');
+  if (note.indexOf(' | ') > -1) {
+    note.split(' | ').slice(1).forEach(function (part) { if (part.trim()) noteLines.push(esc(part.trim())); });
+  } else if (note) {
+    noteLines.push('নোট: ' + esc(note));
+  }
+  var bags = toAsciiDigits(clip(d.bags, 20));
+  return tgJoin([
+    [head],
+    ['<b>' + esc(name || 'নাম দেননি') + '</b>', phone ? phoneLine(phone) : ''],
+    [clip(d.location, 120) ? esc(clip(d.location, 120)) : '', bags ? '<b>' + esc(/^\d+$/.test(bags) ? bn(bags) + ' বস্তা' : bags) + '</b>' : ''],
+    noteLines,
+    [bnWhen(new Date())]
+  ]);
+}
+
 function telegramLead(d, name, phone, label, topicKey) {
   try {
     if (!tgConfig()) return;
-    var lines = ['<b>' + esc(label) + '</b>', esc(name) + ' · ' + esc(phone)];
-    if (clip(d.location, 120)) lines.push('এলাকা: ' + esc(clip(d.location, 120)));
-    if (clip(d.bags, 20)) lines.push('বস্তা: ' + esc(toAsciiDigits(clip(d.bags, 20))));
-    if (clip(d.note, 300)) lines.push(esc(clip(d.note, 300)));
-    if (clip(d.page, 100)) lines.push('পাতা: ' + esc(clip(d.page, 100)));
-    tgSend(lines.join('\n'), topicKey, [[{ text: '📊 শিট', url: sheetUrl() }]]);
+    var row1 = [];
+    var wa = waButton(phone, 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার অনুরোধ পেয়েছি।');
+    if (wa) row1.push(wa);
+    var kb = [];
+    if (row1.length) kb.push(row1);
+    kb.push([{ text: '📊 শিট', url: sheetUrl() }]);
+    tgSend(leadMessage(d, name, phone, label), topicKey, kb);
   } catch (err) { console.error('telegramLead: ' + err); }
 }
 
 function telegramCourier(o) {
   try {
     if (!tgConfig()) return;
-    var lines = ['<b>🚚 নতুন কুরিয়ার অর্ডার #' + esc(o.no) + '</b>',
-      esc(o.name) + ' · ' + esc(o.phone) + (o.alt ? ' (' + esc(o.alt) + ')' : ''),
-      'জেলা: ' + esc(o.district), 'উপজেলা: ' + esc(o.upazila), 'সুন্দরবন শাখা: ' + esc(o.branch),
-      esc(amountLine(o))];
-    if (o.trx) lines.push('পেমেন্ট: ' + esc(payLine(o)));
-    var note = o.note.indexOf(' | ') > -1 ? '' : o.note; // the web form's note is a generated summary already shown above
-    if (note) lines.push('নোট: ' + esc(note));
-    var row = [];
+    var row1 = [];
+    var wa = waButton(o.phone, 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার কুরিয়ার অর্ডার #' + o.no + ' পেয়েছি।');
+    if (wa) row1.push(wa);
     var su = slipUrl(o.no);
-    if (su) row.push({ text: '🖨 স্লিপ', url: su });
-    row.push({ text: '📊 শিট', url: sheetUrl() });
-    tgSend(lines.join('\n'), 'COURIER', [row]);
+    if (su) row1.push({ text: '🖨 স্লিপ', url: su });
+    var kb = [];
+    if (row1.length) kb.push(row1);
+    kb.push([{ text: '📊 শিট', url: sheetUrl() }]);
+    tgSend(courierMessage(o, false), 'COURIER', kb);
   } catch (err) { console.error('telegramCourier: ' + err); }
 }
 
-// Run from the editor to check the bot, chat and topics: one line to each topic.
+// Run from the editor to check the bot, chat and topics: a sample courier message to the
+// courier topic (marked "নমুনা", nothing is saved) and one line to the other topics.
 function tgTest() {
-  ['COURIER', 'CALL', 'OTHER'].forEach(function (k) {
+  var sample = { no: 'KV-C-0007', date: new Date(), name: 'আব্দুল করিম', phone: '01712345678', alt: '01811111111',
+    district: 'সিরাজগঞ্জ', upazila: 'উল্লাপাড়া', branch: 'উল্লাপাড়া বাসস্ট্যান্ড', bags: 13, silage: 6175, fee: 3900, total: 10075,
+    truck: false, svc: 'বিকাশ', paytype: 'কুরিয়ার খরচ', trx: '9A7K3XQ2LM', sent: 3900, note: '' };
+  Logger.log('COURIER: ' + tgSend(courierMessage(sample, true), 'COURIER', [[{ text: '📊 শিট', url: sheetUrl() }]]));
+  ['CALL', 'OTHER'].forEach(function (k) {
     Logger.log(k + ': ' + tgSend('✅ খামারভেস্ট লিড বট: সংযোগ ঠিক আছে (' + k + ')', k, null));
   });
 }
