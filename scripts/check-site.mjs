@@ -819,8 +819,10 @@ for (const f of ['js/ga.js', 'index.html']) {
   // Shared delivery (একসাথে ডেলিভারি): homepage, every district page, the price guide.
   for (const f of ['index.html', ...bookingPages.filter((x) => x.startsWith('area/')), 'blog/vutta-silage-dam-koto-kothay-kinben.html']) {
     const h = await readFile(join(root, f), 'utf8');
+    { const sm = h.match(/<form data-shared-delivery-form[\s\S]*?<\/form>/); const sel = sm && sm[0].match(/<select id="f-district" name="district"[\s\S]*?<\/select>/); const n = sel ? (sel[0].match(/<option value="[^"]+"/g) || []).length - 1 : 0; if (sm && (!sel || n !== 64)) errors.push(`${f}: shared-delivery form needs select[name=district] with 64 districts plus "অন্য জেলা" (found ${n}). Run npm run build:trust`); if (sm && !h.includes('/js/district-picker.js')) errors.push(`${f}: shared-delivery form page does not load /js/district-picker.js`); }
     if (!h.includes('data-shared-delivery-form') || !h.includes('<!-- shared-delivery:start -->')) errors.push(`${f}: has no shared-delivery form (data-shared-delivery-form). Run npm run build:trust`);
   }
+  { const bd = JSON.parse(await readFile(join(root, 'scripts/bd-districts.json'), 'utf8')); if (bd.length !== 64) errors.push(`scripts/bd-districts.json has ${bd.length} entries, expected 64`); }
   if (!leads.includes("form_type: 'shared_delivery'") || !leads.includes("'shared_delivery'")) errors.push('js/leads.js: shared-delivery form no longer tags leads form_type shared_delivery');
 }
 

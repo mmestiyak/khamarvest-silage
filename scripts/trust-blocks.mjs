@@ -130,6 +130,15 @@ const ADVANCE_GUIDES = ['silage-er-jonno-vutta-chash', 'silage-kinben-naki-nije-
 
 // Shared delivery ("একসাথে ডেলিভারি"): farmers who want only a few bags leave their need,
 // the owner pools them per district and sends one truck. No dates, no amounts, no counter.
+// All 64 districts as a <select> (searchable via js/district-picker.js), so the Apps Script pools
+// sign-ups on one exact spelling per district. Generator names that differ in spelling are mapped here.
+const BD = JSON.parse(await readFile(join(root, 'scripts/bd-districts.json'), 'utf8'));
+const SPELL = { 'নীলফামারী': 'নিলফামারী' };
+const districtOptions = (sel = '') => {
+  const want = SPELL[sel] || sel;
+  if (want && !BD.some((d) => d.bn === want)) throw new Error(`district "${sel}" is not in scripts/bd-districts.json`);
+  return `<option value="">জেলা বেছে নিন</option>` + BD.map((d) => `<option value="${d.bn}" data-en="${d.aliases}"${d.bn === want ? ' selected' : ''}>${d.bn}</option>`).join('') + `<option value="অন্য জেলা">অন্য জেলা</option>`;
+};
 const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="shared_delivery" class="rounded-2xl border border-[#0b5b38]/25 bg-[#f3f8ee] p-5 sm:p-6">
         <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন</h2>
         <p class="mt-2 text-base leading-7 text-[#33483a]">খামারভেস্ট সাইলেজে ন্যূনতম অর্ডার নেই, এক বস্তাও নিতে পারেন। তবে অল্প বস্তার জন্য আলাদা গাড়ি গেলে কেজিপ্রতি পরিবহন খরচ বেশি পড়ে। একই এলাকার কয়েকজন খামারি একসাথে নিলে একটা গাড়িতেই সবার বস্তা যায়, তখন কেজিপ্রতি পরিবহন খরচ কমে আসে।</p>
@@ -138,8 +147,8 @@ const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="s
         <form data-shared-delivery-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
           <label class="${labelCls}">আপনার নাম${optional}<input name="name" autocomplete="name" class="${fieldCls}" placeholder="যেমন: রহিম উদ্দিন"></label>
           <label class="${labelCls}">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="${fieldCls}" placeholder="01XXXXXXXXX"></label>
-          <label class="${labelCls}">জেলা<input name="district" autocomplete="address-level1" class="${fieldCls}" placeholder="যেমন: পাবনা"${district ? ` value="${district}"` : ''}></label>
-          <label class="${labelCls}">উপজেলা${optional}<input name="upazila" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: ঈশ্বরদী"></label>
+          <div><label id="lbl-district" for="f-district" class="${labelCls}">জেলা</label><select id="f-district" name="district" required class="${fieldCls}">${districtOptions(district)}</select></div>
+          <label class="${labelCls}">উপজেলা${optional}<input id="f-upazila" name="upazila" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: ঈশ্বরদী"></label>
           <label class="${labelCls}">কত বস্তা লাগবে (৫০ কেজির বস্তা)<input name="bags" type="number" min="1" required inputmode="numeric" class="${fieldCls}" placeholder="যেমন: ১০"></label>
           <label class="${labelCls}">কবে লাগবে<select name="when" class="${fieldCls}"><option value="যেকোনো সময়">যেকোনো সময়</option><option value="এই মাসে">এই মাসে</option><option value="আগামী মাসে">আগামী মাসে</option></select></label>
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
@@ -147,6 +156,7 @@ const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="s
           <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
           <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আপনার এলাকার অর্ডার একসাথে হলে আমরা এই নম্বরে ফোন করে তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না।</p>
         </form>
+        <script src="/js/district-picker.js" defer></script>
       </section>`;
 const sharedHome = homeTheme(`  <div class="bg-white px-4 pb-10">
     <div class="mx-auto max-w-[1140px]">
