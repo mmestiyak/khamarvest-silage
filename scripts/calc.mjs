@@ -14,6 +14,7 @@
 //
 // Names a formula may use (from scripts/product.json):
 //   price  per-kg price (8.5)       bag    bag price (425)      bagKg  kg per bag (50)
+//   courierPrice / courierBag  Sundarban Courier price per kg (9.5) and per bag (475), /courier only
 //   prev   the previous per-kg price (10), for "১.৫০ টাকা কম"
 // Operators: + - * / ( ) and numbers. Results are written as money: Bengali
 // digits, thousands commas, two decimals only when the value is not whole
@@ -27,7 +28,7 @@ import { join } from 'node:path';
 import { product, money, moneyEn } from './product.mjs';
 
 const root = process.cwd();
-const VARS = { price: product.pricePerKg, bag: product.bagPrice, bagKg: product.bagKg, prev: product.previous ? product.previous.pricePerKg : product.pricePerKg };
+const VARS = { price: product.pricePerKg, bag: product.bagPrice, bagKg: product.bagKg, courierPrice: product.courier.perKg, courierBag: product.courier.bag, courierFee: product.courier.perBagFee, courierMax: product.courier.maxBags, courierMaxTon: product.courier.maxBags * product.bagKg / 1000, prev: product.previous ? product.previous.pricePerKg : product.pricePerKg };
 export const MARKER = /<!--=([^>]*?)-->([\s\S]*?)<!--\/=-->/g;
 
 export function evaluate(expr, where = '') {

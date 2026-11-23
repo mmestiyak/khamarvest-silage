@@ -5,6 +5,7 @@
   "bagPrice": 425,
   "currency": "BDT",
   "priceValidUntil": "2027-12-31",
+  "courier": { "perKg": 9.5, "bag": 475, "perBagFee": 300, "maxBags": 100, "note": "Sundarban Courier orders (owner, 2026-11-23). Used only by /courier; set-price leaves it alone." },
   "history": [
     {
       "until": "2025-12-31",

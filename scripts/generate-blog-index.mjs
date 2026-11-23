@@ -83,7 +83,7 @@ const toolPages = ['/tools/', '/tools/ration-generator', '/tools/silage-calculat
 // Standalone root pages that are not Bangla blog posts (kept out of the /blog/
 // index). Discovered rather than listed, so a new root page cannot silently miss
 // the sitemap. `excluded` are internal or non-indexable pages.
-const excluded = new Set(['index.html', rootPost, 'gmb-cover-photo.html', 'guide-book.html', '404.html', 'form.html']);
+const excluded = new Set(['index.html', rootPost, 'gmb-cover-photo.html', 'guide-book.html', '404.html', 'form.html', 'courier.html']);
 const staticPages = (await readdir(root, { withFileTypes: true }))
   .filter((e) => e.isFile() && e.name.endsWith('.html') && !excluded.has(e.name))
   .map((e) => `/${e.name.replace(/\.html$/, '')}`)

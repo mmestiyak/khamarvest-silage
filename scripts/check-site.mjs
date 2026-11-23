@@ -74,7 +74,7 @@ const NOT_PUBLIC = new Set(['blog/article-template.html', 'gmb-cover-photo.html'
 // 404.html is served by Cloudflare for unknown paths: intentionally noindex,
 // no canonical and absent from the sitemap, so it skips the SEO page rules and
 // gets its own assertions at the bottom of this file instead.
-const UTILITY = new Set(['guide-book.html', '404.html', 'form.html']);
+const UTILITY = new Set(['guide-book.html', '404.html', 'form.html', 'courier.html']);
 // Generated, checked as a page but not as an article.
 const GENERATED = new Set(['blog/index.html']);
 
@@ -415,6 +415,13 @@ for (const file of articles) {
   if (!/"not_found_handling"\s*:\s*"404-page"/.test(wrangler)) errors.push('wrangler.jsonc: assets.not_found_handling must be "404-page" or 404.html is never served');
 }
 
+// --- /courier: orders must reach the lead pipeline ---
+{
+  const cf = await readFile(join(root, 'js/courier-form.js'), 'utf8');
+  if (!/saveLead\(/.test(cf) || !cf.includes("'courier_order'")) errors.push("js/courier-form.js: must call saveLead with form_type 'courier_order'");
+  if (!cf.includes('courier_whatsapp')) errors.push('js/courier-form.js: missing the WhatsApp fallback (courier_whatsapp)');
+}
+
 // --- /form (WhatsApp auto-reply landing page) ---
 // Noindex utility page, never in sitemap/feed/llms. Phone is the one required field.
 {
@@ -428,6 +435,22 @@ for (const file of articles) {
   if (!leads.includes('data-call-form')) errors.push('js/leads.js: no handler for form[data-call-form]');
   for (const f of ['sitemap.xml', 'feed.xml', 'llms.txt', 'llms-full.txt']) {
     if (/khamarvest\.com\/form(?![\w-])/.test(await readFile(join(root, f), 'utf8'))) errors.push(`${f}: /form must stay out of it (noindex utility page)`);
+  }
+}
+
+// --- /courier (Sundarban Courier order form, design-first) ---
+// Same status as /form: noindex utility page, never in sitemap/feed/llms.
+{
+  const html = await readFile(join(root, 'courier.html'), 'utf8');
+  if (!/<meta name="robots" content="noindex/i.test(html)) errors.push('courier.html: must be noindex');
+  if (/rel="canonical"/.test(html)) errors.push('courier.html: must not carry a canonical');
+  const form = html.match(/<form[^>]*data-courier-form[^>]*>[\s\S]*?<\/form>/)?.[0] || '';
+  if (!form) errors.push('courier.html: missing form[data-courier-form]');
+  else if (!/<input[^>]*name="phone"[^>]*required/.test(form) || !/<input[^>]*name="office"[^>]*required/.test(form)) errors.push('courier.html: phone and office fields must be required');
+  { const mp = JSON.parse(await readFile(join(root, 'scripts/site.json'), 'utf8')).mobilePayment; if (!mp || !html.includes(mp)) errors.push('courier.html: must show site.json > mobilePayment'); }
+  if (!/<span data-bag-price><!--=courierBag-->/.test(html)) errors.push('courier.html: bag price must come from span[data-bag-price] with the <!--=courierBag--> marker');
+  for (const f of ['sitemap.xml', 'feed.xml', 'llms.txt', 'llms-full.txt']) {
+    if (/khamarvest\.com\/courier(?![\w-])/.test(await readFile(join(root, f), 'utf8'))) errors.push(`${f}: /courier must stay out of it (noindex utility page)`);
   }
 }
 
@@ -647,6 +670,8 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
     // An input's placeholder is an example ("যেমন: 01712-345678" on /form), never a contact number.
     const text = (await readFile(join(root, file), 'utf8')).replace(/placeholder="[^"]*"/g, '');
     for (const m of text.matchAll(/(?:\+?880[ -]?|(?<![0-9])0)(1[3-9]\d{2})-?(\d{6})(?![0-9])/g)) {
+      // site.mobilePayment (bKash/Nagad/Rocket send-money number) is allowed on /courier only.
+      if (file === 'courier.html' && site.mobilePayment && (m[1] + m[2]) === site.mobilePayment.replace(/\D/g, '').slice(1)) continue;
       if (!ours.has(m[1] + m[2])) err(file, `phone number ${m[0]} is not in scripts/site.json`);
     }
   }
@@ -657,7 +682,7 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
 // scrolled 11-13 screens to the first WhatsApp link. scripts/order-bar.mjs
 // writes the bar into every page except the two with a bottom bar of their own.
 {
-  const OWN_BAR = new Set(['tools/ration-generator.html', 'guide-book.html', 'form.html']);
+  const OWN_BAR = new Set(['tools/ration-generator.html', 'guide-book.html', 'form.html', 'courier.html']);
   const missing = [];
   for (const file of files) {
     if (OWN_BAR.has(file)) continue;

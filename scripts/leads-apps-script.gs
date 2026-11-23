@@ -11,6 +11,49 @@
 //      Copy the Web app URL (ends in /exec).
 //   5. Paste that URL into LEADS_URL in js/leads.js, then `npm run verify` and push.
 //
+//
+// REDEPLOY NEEDED for the /courier page ("কুরিয়ার অর্ডার", Sundarban Courier orders):
+//   1. Paste this whole file over the old one, Save.
+//   2. Project Settings (gear) > Script properties > Add (names exact, values are secrets,
+//      they live ONLY here, never in this file or the repo):
+//        TG_TOKEN          the Telegram bot token (from @BotFather)
+//        TG_CHAT_ID        the group's chat id. From a topic link t.me/c/1234567890/5 the chat id
+//                          is -100 followed by the first number: -1001234567890, and 5 is the
+//                          topic (thread) id. Add the bot to the group, make it allowed to post
+//                          in topics (admin, or "Post messages" on), then use these keys:
+//        TG_TOPIC_COURIER  thread id of the courier-orders topic (optional)
+//        TG_TOPIC_CALL     thread id of the /form "silage hishab" topic (optional)
+//        TG_TOPIC_OTHER    thread id for callback, advance booking, shared delivery, homepage orders (optional)
+//      A missing TG_TOKEN or TG_CHAT_ID silently turns Telegram off; a missing topic id posts
+//      to the group's General topic. This script only SENDS messages (sendMessage only,
+//      URL buttons only). It never calls getUpdates, setWebhook or deleteWebhook, so the
+//      bot's existing handler elsewhere keeps working.
+//   3. Show the manifest: Project Settings > tick "Show appsscript.json manifest file in editor",
+//      open appsscript.json and make sure it has these scopes (Telegram needs web requests):
+//        "oauthScopes": [
+//          "https://www.googleapis.com/auth/spreadsheets",
+//          "https://www.googleapis.com/auth/script.external_request",
+//          "https://www.googleapis.com/auth/script.send_mail",
+//          "https://www.googleapis.com/auth/script.scriptapp",
+//          "https://www.googleapis.com/auth/userinfo.email"
+//        ]
+//   4. Run setup() once from the editor and approve the new permissions. It creates the
+//      "কুরিয়ার" tab and a random SLIP_KEY (Script property) for the print page.
+//   5. Optional check: run tgTest() once; it posts one line to each configured topic.
+//   6. Deploy > Manage deployments > Edit (pencil) > Version: New version > Deploy.
+//
+// Courier tab "কুরিয়ার": one row per /courier order: অর্ডার নম্বর (KV-C-0001, 0002, ...),
+// তারিখ, নাম, মোবাইল, বিকল্প নম্বর, জেলা, উপজেলা, সুন্দরবন শাখা, বস্তা, সাইলেজ (টাকা),
+// কুরিয়ার (টাকা), মোট, ট্রাক দরকার, মাধ্যম (বিকাশ/নগদ), কিসের টাকা, TrxID, পাঠানো টাকা,
+// নোট, অবস্থা (dropdown, default "নতুন"), CN নম্বর (you fill it in after booking). The same
+// order is also a row in the Leads tab (মাধ্যম "কুরিয়ার"), emailed to you as
+// "কুরিয়ার অর্ডার: <নাম> (<জেলা>)" and counted in the 8am digest. Telegram gets the order
+// text at once, with buttons "শিট" and "স্লিপ". The slip button opens the print page:
+//   <web app /exec URL>?slip=KV-C-0007&key=<SLIP_KEY>
+// (plain HTML: one slip per screen on a phone, two per A4 when printed; take a screenshot
+// on the phone to keep it as a picture).
+// Without the right key it shows "অনুমতি নেই". Treat that link like a password.
+//
 // Emails go to the Google account that owns this script. Put another address
 // in NOTIFY_EMAIL to send them elsewhere, or 'off' to stop them.
 //
@@ -66,6 +109,13 @@ var TRUCKS = [
   { bags: 200, label: '১০ টনের গাড়ি' },
   { bags: 300, label: '১৫ টনের গাড়ি' }
 ];
+var COURIER_NAME = 'কুরিয়ার';
+var COURIER_HEADERS = ['অর্ডার নম্বর', 'তারিখ', 'নাম', 'মোবাইল', 'বিকল্প নম্বর', 'জেলা', 'উপজেলা', 'সুন্দরবন শাখা',
+  'বস্তা', 'সাইলেজ (টাকা)', 'কুরিয়ার (টাকা)', 'মোট', 'ট্রাক দরকার', 'মাধ্যম', 'কিসের টাকা', 'TrxID', 'পাঠানো টাকা',
+  'নোট', 'অবস্থা', 'CN নম্বর'];
+var COURIER_STATUSES = ['নতুন', 'ফোন হয়েছে', 'টাকা মিলেছে', 'বুক হয়েছে', 'পৌঁছেছে', 'বাতিল'];
+var COURIER_NEW = 'নতুন';
+var COURIER_STATUS_COL = 19; // S
 var HEADERS = ['সময়', 'নাম', 'মোবাইল', 'এলাকা', 'বস্তা', 'অতিরিক্ত তথ্য', 'পাতা', 'উৎস', 'মাধ্যম', 'অবস্থা', 'নোট (নিজের)'];
 
 function doPost(e) {
@@ -84,6 +134,8 @@ function doPost(e) {
     var booking = d.form_type === 'advance_booking';
     var shared = d.form_type === 'shared_delivery';
     var callForm = d.form_type === 'call_form'; // the /form page linked from the WhatsApp auto-reply
+    var courier = d.form_type === 'courier_order'; // the /courier page
+    var order = courier ? logCourier(d, name, phone) : null; // gets the order number first
     var sheet = getSheet();
     sheet.appendRow([
       new Date(),
@@ -91,10 +143,10 @@ function doPost(e) {
       "'" + phone, // keep the leading 0
       clip(d.location, 120),
       toAsciiDigits(clip(d.bags, 20)),
-      clip(d.note, 500),
+      (courier ? order.no + ' | ' : '') + clip(d.note, 500),
       clip(d.page, 200),
       clip(d.source, 80),
-      booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : (callForm ? 'ফর্ম (WhatsApp থেকে)' : 'ওয়েবসাইট ফর্ম')),
+      courier ? 'কুরিয়ার' : booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : (callForm ? 'ফর্ম (WhatsApp থেকে)' : 'ওয়েবসাইট ফর্ম')),
       'নতুন',
       ''
     ]);
@@ -102,12 +154,21 @@ function doPost(e) {
     if (shared) logShared(d, name, phone);
     var to = ownerEmail();
     if (to) {
-      MailApp.sendEmail(to, (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + name + ' (' + clip(d.location, 40) + ')',
-        'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + clip(d.location, 120) +
-        '\nবস্তা: ' + clip(d.bags, 20) + '\nতথ্য: ' + clip(d.note, 500) +
-        '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
-        '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
+      if (courier) {
+        MailApp.sendEmail(to, 'কুরিয়ার অর্ডার: ' + name + ' (' + order.district + ')', courierText(order) +
+          '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
+          '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
+      } else {
+        MailApp.sendEmail(to, (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + name + ' (' + clip(d.location, 40) + ')',
+          'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + clip(d.location, 120) +
+          '\nবস্তা: ' + clip(d.bags, 20) + '\nতথ্য: ' + clip(d.note, 500) +
+          '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
+          '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
+      }
     }
+    // Telegram last, so a Telegram problem can never lose the lead or the email.
+    if (courier) telegramCourier(order);
+    else telegramLead(d, name, phone, booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : (callForm ? 'ফোনের অনুরোধ (/form)' : 'নতুন লিড')), callForm ? 'CALL' : 'OTHER');
   } catch (err) {
     console.error(err);
   }
@@ -115,7 +176,10 @@ function doPost(e) {
 }
 
 // Opening the /exec URL in a browser shows this, a quick "is it live" check.
-function doGet() {
+// ?slip=<order>&key=<SLIP_KEY> shows the printable delivery slip instead.
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.slip) return slipPage(String(p.slip), String(p.key || ''));
   return ContentService.createTextOutput('Khamarvest lead inbox is live.');
 }
 
@@ -320,6 +384,8 @@ function setup() {
   ScriptApp.newTrigger('dailyDigest').timeBased().everyDays(1).atHour(DIGEST_HOUR).inTimezone(TZ).create();
   getSheet();
   sharedSheet();
+  courierSheet();
+  slipKey();
   dailyDigest(true);
 }
 
@@ -337,7 +403,8 @@ function dailyDigest(force) {
   var waiting = leads.filter(function (r) { return r[9] === 'নতুন'; });
   var dayClicks = clicks.filter(function (r) { return r[0] instanceof Date && r[0] >= since; });
   var sharedLines = sharedDigestLines();
-  if (force !== true && !fresh.length && !waiting.length && !dayClicks.length && !sharedLines.length) return;
+  var newCourier = dataRows(ss.getSheetByName(COURIER_NAME)).filter(function (r) { return r[COURIER_STATUS_COL - 1] === COURIER_NEW; });
+  if (force !== true && !fresh.length && !waiting.length && !dayClicks.length && !sharedLines.length && !newCourier.length) return;
 
   var wa = dayClicks.filter(function (r) { return r[1] === 'WhatsApp'; }).length;
   var lines = [
@@ -350,6 +417,13 @@ function dailyDigest(force) {
       lines.push('  - ' + r[1] + ', ' + r[2] + ', ' + r[3] + (r[4] ? ', ' + r[4] + ' বস্তা' : '') + ' (' + Utilities.formatDate(r[0], TZ, 'dd/MM HH:mm') + ')');
     });
     lines.push('ফোন করার পর শিটে "অবস্থা" বদলে দিন, তাহলে কাল আর এই তালিকায় আসবে না।', '');
+  }
+  if (newCourier.length) {
+    lines.push('কুরিয়ার অর্ডার, অবস্থা "নতুন" (' + newCourier.length + 'টি):');
+    newCourier.slice(0, 30).forEach(function (r) {
+      lines.push('  - ' + r[0] + ': ' + r[2] + ', ' + r[3] + ', ' + r[5] + ', ' + r[8] + ' বস্তা' + (r[12] === 'হ্যাঁ' ? ' (ট্রাক)' : ''));
+    });
+    lines.push('');
   }
   if (sharedLines.length) sharedLines.forEach(function (l) { lines.push(l); });
   if (dayClicks.length) {
@@ -388,10 +462,243 @@ function getSheet() {
       .requireValueInList(['নতুন', 'কল করা হয়েছে', 'দাম জানানো হয়েছে', 'অর্ডার হয়েছে', 'ডেলিভারি হয়েছে', 'বাতিল'], true).build();
     sheet.getRange('J2:J').setDataValidation(status);
     var source = SpreadsheetApp.newDataValidation()
-      .requireValueInList(['ওয়েবসাইট ফর্ম', 'WhatsApp', 'ফোন কল', 'Facebook', 'আগাম চাহিদা', 'একসাথে ডেলিভারি', 'অন্যান্য'], true).build();
+      .requireValueInList(['ওয়েবসাইট ফর্ম', 'WhatsApp', 'ফোন কল', 'Facebook', 'আগাম চাহিদা', 'একসাথে ডেলিভারি', 'কুরিয়ার', 'অন্যান্য'], true).build();
     sheet.getRange('I2:I').setDataValidation(source);
   }
   return sheet;
+}
+
+
+// ---- Courier orders (/courier) ----
+
+function courierSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(COURIER_NAME) || ss.insertSheet(COURIER_NAME);
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(COURIER_HEADERS);
+    sheet.setFrozenRows(1);
+    sheet.getRange(1, 1, 1, COURIER_HEADERS.length).setFontWeight('bold');
+    sheet.getRange('B:B').setNumberFormat('dd/MM/yyyy HH:mm');
+  }
+  sheet.getRange(2, COURIER_STATUS_COL, Math.max(sheet.getMaxRows() - 1, 1), 1).setDataValidation(
+    SpreadsheetApp.newDataValidation().requireValueInList(COURIER_STATUSES, true).build());
+  return sheet;
+}
+
+function pad4(n) { return ('0000' + n).slice(-4); }
+
+// Appends the courier row and returns the order object. The sequence number lives in a
+// Script property, guarded by a lock, and is never lower than the tab's row count.
+function logCourier(d, name, phone) {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var sheet = courierSheet();
+    var props = PropertiesService.getScriptProperties();
+    var seq = Math.max(parseInt(props.getProperty('COURIER_SEQ') || '0', 10), Math.max(sheet.getLastRow() - 1, 0)) + 1;
+    props.setProperty('COURIER_SEQ', String(seq));
+    var o = {
+      no: 'KV-C-' + pad4(seq),
+      date: new Date(),
+      name: name,
+      phone: phone,
+      alt: toAsciiDigits(clip(d.alt_phone, 30)).replace(/[^\d+]/g, ''),
+      district: clip(d.district, 60),
+      upazila: clip(d.upazila, 80),
+      branch: clip(d.branch, 120),
+      bags: parseInt(toAsciiDigits(clip(d.bags, 10)).replace(/\D/g, ''), 10) || 0,
+      silage: Number(d.silage_amount) || 0,
+      fee: Number(d.courier_amount) || 0,
+      total: Number(d.total) || 0,
+      truck: d.truck_mode === true || d.truck_mode === 'true',
+      svc: clip(d.service, 20),
+      paytype: clip(d.pay_type, 40),
+      trx: clip(d.trx_id, 30),
+      sent: Number(d.amount_sent) || 0,
+      note: clip(d.note, 600)
+    };
+    sheet.appendRow([o.no, o.date, o.name, "'" + o.phone, o.alt ? "'" + o.alt : '', o.district, o.upazila, o.branch,
+      o.bags, o.silage, o.fee, o.total, o.truck ? 'হ্যাঁ' : 'না', o.svc, o.paytype, o.trx, o.sent || '',
+      o.note, COURIER_NEW, '']);
+    return o;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+function courierFromRow(r) {
+  return {
+    no: String(r[0]), date: r[1], name: String(r[2]), phone: String(r[3]).replace(/^'/, ''), alt: String(r[4] || '').replace(/^'/, ''),
+    district: String(r[5]), upazila: String(r[6]), branch: String(r[7]), bags: Number(r[8]) || 0,
+    silage: Number(r[9]) || 0, fee: Number(r[10]) || 0, total: Number(r[11]) || 0, truck: r[12] === 'হ্যাঁ',
+    svc: String(r[13] || ''), paytype: String(r[14] || ''), trx: String(r[15] || ''), sent: Number(r[16]) || 0, note: String(r[17] || '')
+  };
+}
+
+function findCourier(no) {
+  var rows = dataRows(SpreadsheetApp.getActiveSpreadsheet().getSheetByName(COURIER_NAME));
+  for (var i = 0; i < rows.length; i++) if (String(rows[i][0]) === no) return courierFromRow(rows[i]);
+  return null;
+}
+
+function payLine(o) {
+  if (!o.trx) return 'কুরিয়ার খরচ এখনো পাঠাননি';
+  return o.svc + (o.paytype ? ' (' + o.paytype + ')' : '') + (o.sent ? ' ' + bn(o.sent) + ' টাকা' : '') + ' পাঠিয়েছেন, TrxID ' + o.trx;
+}
+
+function amountLine(o) {
+  if (o.truck) return bn(o.bags) + ' বস্তা, ৫ টন বা বেশি: ট্রাকে পাঠাতে হবে, ফোন করুন';
+  return bn(o.bags) + ' বস্তা, সাইলেজ ' + bn(o.silage) + ' + কুরিয়ার ' + bn(o.fee) + ' = মোট ' + bn(o.total) + ' টাকা';
+}
+
+// Plain text, for the owner email.
+function courierText(o) {
+  return ['অর্ডার: ' + o.no, 'নাম: ' + o.name, 'মোবাইল: ' + o.phone + (o.alt ? ' (বিকল্প ' + o.alt + ')' : ''),
+    'জেলা: ' + o.district, 'উপজেলা: ' + o.upazila, 'সুন্দরবন শাখা: ' + o.branch, amountLine(o), 'পেমেন্ট: ' + payLine(o),
+    'নোট: ' + o.note].join('\n');
+}
+
+// ---- Telegram (config only from Script properties; sends only, never reads updates) ----
+
+function esc(t) {
+  return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function tgConfig() {
+  var p = PropertiesService.getScriptProperties();
+  var token = (p.getProperty('TG_TOKEN') || '').trim(), chat = (p.getProperty('TG_CHAT_ID') || '').trim();
+  if (!token || !chat) return null;
+  return { token: token, chat: chat, props: p };
+}
+
+function tgTopic(cfg, key) {
+  var t = (cfg.props.getProperty('TG_TOPIC_' + key) || '').trim();
+  return t ? parseInt(t, 10) : 0;
+}
+
+// buttons: [[{text, url}, ...], ...]. URL buttons only, no callback_data.
+// Returns true when Telegram accepted it. Never throws.
+function tgSend(text, topicKey, buttons) {
+  try {
+    var cfg = tgConfig();
+    if (!cfg) return false;
+    var payload = { chat_id: cfg.chat, text: text, parse_mode: 'HTML', disable_web_page_preview: true };
+    var thread = tgTopic(cfg, topicKey);
+    if (thread) payload.message_thread_id = thread;
+    if (buttons && buttons.length) payload.reply_markup = { inline_keyboard: buttons };
+    var res = UrlFetchApp.fetch('https://api.telegram.org/bot' + cfg.token + '/sendMessage', {
+      method: 'post', contentType: 'application/json', payload: JSON.stringify(payload), muteHttpExceptions: true
+    });
+    if (res.getResponseCode() !== 200) { console.error('tgSend ' + res.getResponseCode() + ' ' + res.getContentText().slice(0, 300)); return false; }
+    return true;
+  } catch (err) {
+    console.error('tgSend: ' + err);
+    return false;
+  }
+}
+
+function sheetUrl() { return SpreadsheetApp.getActiveSpreadsheet().getUrl(); }
+
+function slipUrl(no) {
+  var base = ScriptApp.getService().getUrl();
+  return base ? base + '?slip=' + encodeURIComponent(no) + '&key=' + encodeURIComponent(slipKey()) : '';
+}
+
+function telegramLead(d, name, phone, label, topicKey) {
+  try {
+    if (!tgConfig()) return;
+    var lines = ['<b>' + esc(label) + '</b>', esc(name) + ' · ' + esc(phone)];
+    if (clip(d.location, 120)) lines.push('এলাকা: ' + esc(clip(d.location, 120)));
+    if (clip(d.bags, 20)) lines.push('বস্তা: ' + esc(toAsciiDigits(clip(d.bags, 20))));
+    if (clip(d.note, 300)) lines.push(esc(clip(d.note, 300)));
+    if (clip(d.page, 100)) lines.push('পাতা: ' + esc(clip(d.page, 100)));
+    tgSend(lines.join('\n'), topicKey, [[{ text: '📊 শিট', url: sheetUrl() }]]);
+  } catch (err) { console.error('telegramLead: ' + err); }
+}
+
+function telegramCourier(o) {
+  try {
+    if (!tgConfig()) return;
+    var lines = ['<b>🚚 নতুন কুরিয়ার অর্ডার #' + esc(o.no) + '</b>',
+      esc(o.name) + ' · ' + esc(o.phone) + (o.alt ? ' (' + esc(o.alt) + ')' : ''),
+      'জেলা: ' + esc(o.district), 'উপজেলা: ' + esc(o.upazila), 'সুন্দরবন শাখা: ' + esc(o.branch),
+      esc(amountLine(o))];
+    if (o.trx) lines.push('পেমেন্ট: ' + esc(payLine(o)));
+    var note = o.note.indexOf(' | ') > -1 ? '' : o.note; // the web form's note is a generated summary already shown above
+    if (note) lines.push('নোট: ' + esc(note));
+    var row = [];
+    var su = slipUrl(o.no);
+    if (su) row.push({ text: '🖨 স্লিপ', url: su });
+    row.push({ text: '📊 শিট', url: sheetUrl() });
+    tgSend(lines.join('\n'), 'COURIER', [row]);
+  } catch (err) { console.error('telegramCourier: ' + err); }
+}
+
+// Run from the editor to check the bot, chat and topics: one line to each topic.
+function tgTest() {
+  ['COURIER', 'CALL', 'OTHER'].forEach(function (k) {
+    Logger.log(k + ': ' + tgSend('✅ খামারভেস্ট লিড বট: সংযোগ ঠিক আছে (' + k + ')', k, null));
+  });
+}
+
+// ---- Delivery slip: a printable HTML page opened from the Telegram button ----
+
+function slipKey() {
+  var props = PropertiesService.getScriptProperties();
+  var k = props.getProperty('SLIP_KEY');
+  if (!k) {
+    k = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '').slice(0, 8);
+    props.setProperty('SLIP_KEY', k);
+  }
+  return k;
+}
+
+function slipFields(o) {
+  return {
+    '{{ORDER}}': o.no,
+    '{{DATE}}': Utilities.formatDate(o.date instanceof Date ? o.date : new Date(), TZ, 'dd/MM/yyyy'),
+    '{{NAME}}': o.name,
+    '{{PHONE}}': o.phone,
+    '{{ALT}}': o.alt || '-',
+    '{{UPAZILA}}': o.upazila,
+    '{{DISTRICT}}': o.district,
+    '{{BRANCH}}': o.branch,
+    '{{BAGS}}': bn(o.bags),
+    '{{KG}}': bn(o.bags * 50),
+    '{{PAY}}': payLine(o)
+  };
+}
+
+function slipHtmlOne(o, copyLabel) {
+  var f = slipFields(o);
+  var h = function (k) { return esc(f[k]); };
+  return '<div class="slip"><div class="band"><b>খামারভেস্ট সাইলেজ · ডেলিভারি স্লিপ</b><span>' + h('{{ORDER}}') + ' · ' + h('{{DATE}}') +
+    ' · ' + esc(copyLabel) + '</span></div>' +
+    '<div class="cols"><div><p>প্রাপক: <b>' + h('{{NAME}}') + '</b></p><p>মোবাইল: <b>' + h('{{PHONE}}') + '</b></p><p>বিকল্প: ' + h('{{ALT}}') +
+    '</p><p>ঠিকানা: ' + h('{{UPAZILA}}') + ', ' + h('{{DISTRICT}}') + '</p></div><div><p>পেমেন্ট:</p><p>' + h('{{PAY}}') + '</p></div></div>' +
+    '<div class="boxes"><div class="b">সুন্দরবন শাখা: ' + h('{{BRANCH}}') + '</div><div class="b">মোট বস্তা: ' + h('{{BAGS}}') + ' টি (' + h('{{KG}}') + ' কেজি)</div></div>' +
+    '<p class="ln">কন্ডিশন টাকা: ____________ &nbsp;&nbsp; CN নম্বর: ____________</p>' +
+    '<p class="ln">বুঝে নিলাম: নাম ____________ &nbsp; সই ____________ &nbsp; তারিখ ________</p>' +
+    '<p class="foot">প্রেরক: খামারভেস্ট, শেরপুর, বগুড়া · 01334-211984 · বায়ুরোধী বস্তা: ফুটো করবেন না</p></div>';
+}
+
+function slipPage(no, key) {
+  if (!key || key !== slipKey()) return ContentService.createTextOutput('অনুমতি নেই');
+  var o = findCourier(no);
+  if (!o) return ContentService.createTextOutput('অর্ডার পাওয়া যায়নি');
+  var css = '@page{size:A4;margin:8mm}*{box-sizing:border-box}body{margin:0;font-family:"Hind Siliguri","Noto Sans Bengali",sans-serif;color:#111}' +
+    '.bar{padding:12px;text-align:center}.bar button{font:inherit;font-size:18px;padding:10px 28px;background:#0b5b38;color:#fff;border:0;border-radius:8px}' +
+    '.bar p{margin:8px 0 0;font-size:15px;color:#555}.slip{height:136mm;border:2px dashed #888;padding:6mm;margin:0 0 4mm;page-break-inside:avoid;display:flex;flex-direction:column;gap:3mm}' +
+    '.band{background:#0b5b38;color:#fff;padding:3mm 4mm;display:flex;justify-content:space-between;font-size:18px}.band span{font-size:15px}' +
+    '.cols{display:flex;gap:6mm;font-size:17px}.cols>div{flex:1}.cols p{margin:1mm 0}' +
+    '.boxes{display:flex;gap:6mm}.b{flex:1;border:2.5px solid #111;padding:4mm;text-align:center;font-weight:700;font-size:19px}' +
+    '.ln{font-size:17px;margin:1mm 0}.foot{margin-top:auto;border-top:1px solid #888;padding-top:2mm;font-size:13px;color:#555}' +
+    '@media screen and (max-width:700px){.slip{height:auto;padding:12px}.band{flex-direction:column;gap:4px;font-size:16px}.cols{flex-direction:column;gap:6px;font-size:16px}.boxes{flex-direction:column;gap:8px}.b{font-size:17px}.ln{font-size:15px}.foot{margin-top:8px}}' +
+    '@media print{.bar{display:none}.slip:nth-of-type(2n){page-break-after:always}}';
+  var html = '<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>' + css +
+    '</style></head><body><div class="bar"><button onclick="window.print()">প্রিন্ট</button><p>ফোনে স্ক্রিনশট নিলেই ছবি হিসেবে রাখা যাবে</p></div>' +
+    slipHtmlOne(o, 'প্রেরকের কপি') + slipHtmlOne(o, 'পার্সেলের কপি') + '</body></html>';
+  return HtmlService.createHtmlOutput(html).setTitle('স্লিপ ' + o.no);
 }
 
 function clip(v, n) {
@@ -404,4 +711,23 @@ function toAsciiDigits(s) {
 
 function ok() {
   return ContentService.createTextOutput('ok');
+}
+
+// Run from the editor when tgTest() fails: logs which bot the token belongs to
+// and the chats it has recently been added to (with their real chat ids).
+// Never logs the token. getUpdates only works for a bot without a webhook.
+function tgDiagnose() {
+  var token = (PropertiesService.getScriptProperties().getProperty('TG_TOKEN') || '').trim();
+  if (!token) { Logger.log('TG_TOKEN নেই'); return; }
+  var api = 'https://api.telegram.org/bot' + token + '/';
+  var me = JSON.parse(UrlFetchApp.fetch(api + 'getMe', { muteHttpExceptions: true }).getContentText());
+  Logger.log('বট: ' + (me.ok ? '@' + me.result.username : JSON.stringify(me)));
+  var up = JSON.parse(UrlFetchApp.fetch(api + 'getUpdates', { muteHttpExceptions: true }).getContentText());
+  if (!up.ok) { Logger.log('getUpdates: ' + up.description); return; }
+  var seen = {};
+  up.result.forEach(function (u) {
+    var m = u.message || u.my_chat_member || u.channel_post || u.edited_message;
+    if (m && m.chat && !seen[m.chat.id]) { seen[m.chat.id] = 1; Logger.log('চ্যাট: ' + m.chat.id + ' · ' + (m.chat.title || m.chat.type)); }
+  });
+  if (!Object.keys(seen).length) Logger.log('কোনো চ্যাট পাওয়া যায়নি: গ্রুপে একটা মেসেজ দিন, তারপর আবার চালান');
 }

@@ -30,3 +30,8 @@
     box-shadow: 0 0 0 2px rgba(11, 106, 62, 0.35);
   }
 }
+
+/* /courier: the HTML [hidden] attribute loses to .flex / .grid / .inline-flex (same
+   specificity, utilities come later), so receipt rows, the total line and some copy
+   buttons stayed visible in truck mode. Scoped to the courier page only. */
+[data-courier-form] [hidden], [data-courier-done][hidden], [data-courier-mount][hidden] { display: none !important; }

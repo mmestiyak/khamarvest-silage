@@ -25,6 +25,7 @@ const SKIP = new Set([
   'tools/ration-generator.html', // mobile result bar sits in the same spot
   'gmb-cover-photo.html',
   'guide-book.html',
+  'courier.html', // same as form.html: the page is itself an order action
   'form.html', // the page is itself the order action (WhatsApp auto-reply landing)
 ]);
 
