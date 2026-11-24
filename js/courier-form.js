@@ -44,7 +44,15 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     var c = Math.max(1, bags), over = isOver();
     form.querySelectorAll('[data-opt]').forEach(function (o) { var k = o.getAttribute('data-opt'); o.textContent = (over && k !== 'silage') ? '' : money(withCharge(amountFor(k, c))) + ' টাকা'; });
     var b = form.querySelector('[data-service][aria-pressed="true"]'), n = form.querySelector('[data-cashout-note]');
-    if (n && b) n.textContent = 'অঙ্কে ' + b.getAttribute('data-service') + 'ের ক্যাশআউট চার্জ (হাজারে ' + bn(b.getAttribute('data-cashout')) + ' টাকা) ধরা আছে।';
+    if (!n || !b) return;
+    // Spell out the exact charge for the selected card: "কুরিয়ার খরচ ৩০০ + নগদের ক্যাশআউট চার্জ ৪ = ৩০৪ টাকা".
+    var t = paytype(), k = t === 'সাইলেজ + কুরিয়ার' ? 'total' : t === 'সাইলেজের দাম' ? 'silage' : 'fee';
+    var base = (over && k !== 'silage') ? 0 : amountFor(k, c), svc = b.getAttribute('data-service');
+    var rateTxt = '(হাজারে ' + bn(b.getAttribute('data-cashout')) + ' টাকা)';
+    n.textContent = base
+      ? (k === 'total' ? 'সাইলেজ + কুরিয়ার ' : k === 'silage' ? 'সাইলেজ ' : 'কুরিয়ার খরচ ') + money(base) + ' + ' + svc + 'ের ক্যাশআউট চার্জ ' +
+        money(withCharge(base) - base) + ' = ' + money(withCharge(base)) + ' টাকা ' + rateTxt + '।'
+      : 'অঙ্কে ' + svc + 'ের ক্যাশআউট চার্জ ' + rateTxt + ' ধরা আছে।';
   }
   // The amount starts empty. It follows the selected card only while a TrxID is present and
   // the farmer has not typed an amount of their own.
@@ -127,7 +135,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     }
     return el;
   }
-  form.querySelectorAll('input[name=paytype]').forEach(function (r) { r.addEventListener('change', function () { clearErr('paytype'); syncPaid(); }); });
+  form.querySelectorAll('input[name=paytype]').forEach(function (r) { r.addEventListener('change', function () { clearErr('paytype'); paintOpts(); syncPaid(); }); });
   // Payment panel: collapsed by default, smooth expand (CSS), inert while closed so Tab skips it.
   function setPay() {} // step 3 is always open now
   // Service: three toggle buttons feeding the hidden input.
