@@ -34,7 +34,18 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
   // rewritten when `writeField` is true, so typing is never interrupted.
   function isOver() { return MAX > 0 && bags >= MAX; }
   function amountFor(k, c) { return k === 'silage' ? c * BAG : k === 'fee' ? c * FEE : c * (BAG + FEE); }
-  function payAmount() { var t = paytype(), c = Math.max(1, bags); if (isOver() && (t === 'শুধু কুরিয়ার খরচ' || t === 'সাইলেজ + কুরিয়ার')) return 0; return t === 'সাইলেজের দাম' ? amountFor('silage', c) : t === 'শুধু কুরিয়ার খরচ' ? amountFor('fee', c) : t === 'সাইলেজ + কুরিয়ার' ? amountFor('total', c) : 0; }
+  // Cash-out charge per 1,000 taka (owner, 2026-11-24: bKash 18.50, Nagad 12.99), read from the
+  // selected service button's data-cashout. The amount the farmer sends includes it, rounded up,
+  // so the full courier/silage sum arrives after cash-out. Order totals elsewhere stay as they are.
+  function cashRate() { var b = form.querySelector('[data-service][aria-pressed="true"]'); return b ? parseFloat(b.getAttribute('data-cashout')) || 0 : 0; }
+  function withCharge(a) { return a ? a + Math.ceil(a * cashRate() / 1000) : 0; }
+  function payAmount() { var t = paytype(), c = Math.max(1, bags); if (isOver() && (t === 'শুধু কুরিয়ার খরচ' || t === 'সাইলেজ + কুরিয়ার')) return 0; return withCharge(t === 'সাইলেজের দাম' ? amountFor('silage', c) : t === 'শুধু কুরিয়ার খরচ' ? amountFor('fee', c) : t === 'সাইলেজ + কুরিয়ার' ? amountFor('total', c) : 0); }
+  function paintOpts() {
+    var c = Math.max(1, bags), over = isOver();
+    form.querySelectorAll('[data-opt]').forEach(function (o) { var k = o.getAttribute('data-opt'); o.textContent = (over && k !== 'silage') ? '' : money(withCharge(amountFor(k, c))) + ' টাকা'; });
+    var b = form.querySelector('[data-service][aria-pressed="true"]'), n = form.querySelector('[data-cashout-note]');
+    if (n && b) n.textContent = 'অঙ্কে ' + b.getAttribute('data-service') + 'ের ক্যাশআউট চার্জ (হাজারে ' + bn(b.getAttribute('data-cashout')) + ' টাকা) ধরা আছে।';
+  }
   // The amount starts empty. It follows the selected card only while a TrxID is present and
   // the farmer has not typed an amount of their own.
   var paidManual = false;
@@ -56,7 +67,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     $('[data-r-total]').textContent = money(c * (BAG + FEE));
     $('[data-btn-total]').textContent = money(c * (BAG + FEE));
     var over = isOver();
-    form.querySelectorAll('[data-opt]').forEach(function (o) { var k = o.getAttribute('data-opt'); o.textContent = (over && k !== 'silage') ? '' : money(amountFor(k, c)) + ' টাকা'; });
+    paintOpts();
     form.querySelectorAll('[data-copy="amount:fee"], [data-copy="amount:total"]').forEach(function (b) { b.hidden = over; });
     var paySec = form.querySelector('[data-pay-section]');
     if (over && !paySec.hidden) {
@@ -125,6 +136,8 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     form.elements.service.value = v;
     svcBtns.forEach(function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-service') === v ? 'true' : 'false'); });
     var pl = form.querySelector('[data-pay-label]'); if (pl) pl.textContent = v + ' নম্বর (সেন্ড মানি)';
+    paintOpts();
+    syncPaid();
   }
   svcBtns.forEach(function (b) {
     b.addEventListener('click', function () {
@@ -177,7 +190,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     }
     form.querySelectorAll('[data-copy]').forEach(function (btn, i) {
       btn.addEventListener('click', function () {
-        var text = /^amount:/.test(btn.getAttribute('data-copy')) ? String(amountFor(btn.getAttribute('data-copy').slice(7), Math.max(1, bags))) : numEl.getAttribute('data-copy-value');
+        var text = /^amount:/.test(btn.getAttribute('data-copy')) ? String(withCharge(amountFor(btn.getAttribute('data-copy').slice(7), Math.max(1, bags)))) : numEl.getAttribute('data-copy-value');
         if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { ok(btn, i); }, function () { fallback(btn, text, i); });
         else fallback(btn, text, i);
       });
