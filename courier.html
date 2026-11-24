@@ -7,7 +7,7 @@
   <meta name="description" content="সুন্দরবন কুরিয়ারের কাছের অফিস জানান, খামারভেস্ট সাইলেজ ফোন করে বস্তার দাম আর কুরিয়ার খরচ মিলিয়ে মোট খরচ জানাবে। কুরিয়ার খরচ আগে পাঠাতে হয়।">
   <meta name="robots" content="noindex, follow">
   <link rel="preload" href="/fonts/noto-serif-bengali-400-700-bengali.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/css/site.css?v=dc9661d7">
+  <link rel="stylesheet" href="/css/site.css?v=baa59d16">
   <!-- favicon:start --><link rel="icon" href="/favicon.ico" sizes="32x32"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/favicon-180.png"><!-- favicon:end -->
 </head>
 <body class="font-hind text-base text-[#111111] bg-white antialiased">
@@ -114,6 +114,16 @@
         <h2 class="mt-3.5 text-center font-hind text-[22px] font-semibold leading-8 text-[#123b28]">অর্ডার পেয়েছি, ধন্যবাদ</h2>
         <p class="mt-2 text-[17px] leading-[30px] text-[#4b5a51]"><span data-done-line>আমরা ফোন করে মোট খরচ জানাব।</span> <span data-pay-note>পার্সেল শাখায় পৌঁছালে SMS পাবেন। টাকা অফিস থেকে পার্সেল নেওয়ার সময় দিতে পারবেন।</span></p>
         <dl class="mt-4 rounded-xl border border-[#0b5b38]/10 bg-white px-3.5 py-1 text-[16px]" data-summary></dl>
+        <div data-receipt class="mt-4 rounded-xl bg-[#f4f9f5] p-4 print:hidden">
+          <p class="text-[17px] font-semibold leading-[28px] text-[#123b28]">রসিদ রেখে দিন</p>
+          <p data-receipt-hint class="mt-1 text-[15px] leading-[24px] text-[#4b5a51]">অর্ডারের তথ্য ছবি বা PDF আকারে ফোনে রেখে দিন।</p>
+          <div class="mt-3 grid grid-cols-2 gap-2">
+            <button type="button" data-receipt-img class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[8px] border-2 border-[rgb(0,105,68)] px-3 text-[16px] font-semibold leading-none transition-colors outline-none [.kbd_&]:focus-visible:outline [.kbd_&]:focus-visible:outline-[3px] [.kbd_&]:focus-visible:outline-offset-2 [.kbd_&]:focus-visible:outline-[#0b5fcc] disabled:opacity-60 bg-[rgb(0,105,68)] text-white hover:bg-[#0b5b38]"><svg aria-hidden="true" class="h-5 w-5 shrink-0 fill-none stroke-current" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg>ছবি সেভ করুন</button>
+            <button type="button" data-receipt-pdf class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-[8px] border-2 border-[rgb(0,105,68)] px-3 text-[16px] font-semibold leading-none transition-colors outline-none [.kbd_&]:focus-visible:outline [.kbd_&]:focus-visible:outline-[3px] [.kbd_&]:focus-visible:outline-offset-2 [.kbd_&]:focus-visible:outline-[#0b5fcc] disabled:opacity-60 bg-white text-[rgb(0,105,68)] hover:bg-[#e6f6ec]"><svg aria-hidden="true" class="h-5 w-5 shrink-0 fill-none stroke-current" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14h6M9 17h4"/></svg>PDF সেভ করুন</button>
+          </div>
+          <p data-receipt-status role="status" aria-live="polite" class="mt-2 text-[15px] leading-[24px] text-[#4b5a51] empty:hidden"></p>
+          <div data-receipt-preview class="mt-3 empty:hidden [&>img]:w-full [&>img]:rounded-lg [&>img]:border [&>img]:border-[#0b5b38]/15"></div>
+        </div>
         <a data-wa href="https://wa.me/8801334211984" target="_blank" rel="noopener" class="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-[8px] border-2 border-[#0e7c4b] px-5 py-3 text-[17px] font-semibold leading-none text-[rgb(0,105,68)] transition hover:bg-[#e6f6ec] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-[#0b5fcc]">WhatsApp-এ কথা বলুন</a>
         <p class="mt-3 text-center"><button type="button" data-back class="min-h-11 font-semibold text-[#0b6a3e] underline underline-offset-4 outline-none [.kbd_&]:focus-visible:outline [.kbd_&]:focus-visible:outline-[3px] [.kbd_&]:focus-visible:outline-offset-2 [.kbd_&]:focus-visible:outline-[#0b5fcc]">ফর্মে ফিরে যান</button></p>
       </section>

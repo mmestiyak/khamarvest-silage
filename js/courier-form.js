@@ -259,7 +259,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     if (pt && trx) rows.push(['কিসের টাকা', pt]);
     if (svc && trx) rows.push(['পাঠানোর মাধ্যম', svc]);
     if (trx) rows.push(['TrxID', trx]);
-    if (paidV && trx) rows.push(['পাঠানো টাকা', paidV + ' টাকা']);
+    if (paidV && trx) rows.push(['পাঠানো টাকা', money(parseInt(paidV, 10)) + ' টাকা']);
     done.querySelector('[data-done-line]').textContent = isOver() ? 'আমরা ফোন করে ট্রাকের খরচ জানাব।' : 'আমরা ফোন করে মোট খরচ জানাব।';
     var note = done.querySelector('[data-pay-note]');
     note.textContent = isOver() ? '' : (trx ? 'টাকা পাঠানোর তথ্য পেয়েছি (TrxID: ' + trx + '), মিলিয়ে ফোনে জানাব।' : 'ফোনে কথা বলার পর কুরিয়ার খরচ পাঠালে পার্সেল বুক করা হবে।') + (pt === 'সাইলেজ + কুরিয়ার' ? '' : ' সাইলেজের দাম শাখায় পার্সেল নেওয়ার সময় দেবেন।');
@@ -282,6 +282,9 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
       v.office + ' থেকে ' + bn(bags) + ' বস্তা সাইলেজ নিতে চাই। সাইলেজ ' + money(bags * BAG) + ' টাকা' + (isOver() ? '।' : ', কুরিয়ার ' + money(bags * FEE) + ' টাকা, মোট ' + money(bags * (BAG + FEE)) + ' টাকা।') +
       (trx ? ' ' + (svc || '') + 'এ ' + (pt ? pt + ' বাবদ ' : '') + (paidV ? paidV + ' টাকা ' : '') + 'পাঠিয়েছি, TrxID: ' + trx + '।' : '') + (isOver() ? ' ট্রাকে পাঠাতে খরচ কত পড়বে?' : ' মোট খরচ জানাবেন?');
     done.querySelector('[data-wa]').href = 'https://wa.me/8801334211984?text=' + encodeURIComponent(text);
+    lastRows = rows.slice();
+    lastTrx = trx;
+    resetReceipt();
     mount.hidden = true;
     done.hidden = false;
     done.focus();
@@ -339,6 +342,129 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
       note: parts.join(' | '),
       website: form.elements.website ? form.elements.website.value : ''
     };
+  }
+
+  // ---- Receipt: the farmer keeps their own copy (owner, 2026-11-24) ----
+  // Drawn on a canvas from the same rows as the on-screen summary, so it needs no library
+  // and no network. "ছবি সেভ করুন" downloads a PNG and also shows it below, because a
+  // download can fail inside an in-app browser and a long-press on the picture still saves
+  // it. "PDF সেভ করুন" prints only that picture; the phone's print dialog offers Save as PDF.
+  // It is a record of what the farmer sent us, not a payment confirmation, and says so.
+  var lastRows = [], lastTrx = '', receiptUrl = '', receiptAt = null;
+  var rcpt = done.querySelector('[data-receipt]');
+  var BN_MON = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+  function bnDate(d) {
+    var h = d.getHours(), m = d.getMinutes(), part = h < 5 ? 'রাত' : h < 12 ? 'সকাল' : h < 16 ? 'দুপুর' : h < 18 ? 'বিকাল' : 'রাত';
+    return bn(d.getDate()) + ' ' + BN_MON[d.getMonth()] + ' ' + bn(d.getFullYear()) + ', ' + part + ' ' + bn(h % 12 || 12) + ':' + bn(('0' + m).slice(-2));
+  }
+  function resetReceipt() {
+    receiptUrl = ''; receiptAt = new Date();
+    if (!rcpt) return;
+    rcpt.querySelector('[data-receipt-preview]').textContent = '';
+    rcpt.querySelector('[data-receipt-status]').textContent = '';
+    rcpt.querySelector('[data-receipt-hint]').textContent = lastTrx
+      ? 'টাকা পাঠানোর প্রমাণ হিসেবে TrxID সহ রসিদটা ছবি বা PDF আকারে ফোনে রেখে দিন।'
+      : 'অর্ডারের তথ্য ছবি বা PDF আকারে ফোনে রেখে দিন।';
+  }
+  var FONT = '"Noto Serif Bengali", "Plus Jakarta Sans", serif';
+  function wrap(ctx, text, maxW) {
+    var words = String(text).split(' '), lines = [], cur = '';
+    words.forEach(function (w) {
+      var t = cur ? cur + ' ' + w : w;
+      if (cur && ctx.measureText(t).width > maxW) { lines.push(cur); cur = w; } else cur = t;
+    });
+    if (cur) lines.push(cur);
+    return lines;
+  }
+  function drawReceipt() {
+    var W = 1080, P = 64, c = document.createElement('canvas'), ctx = c.getContext('2d');
+    var foot = ['এটা আপনার দেওয়া তথ্যের রসিদ, টাকা পাওয়ার রসিদ নয়। টাকা মিলিয়ে আমরা ফোনে কনফার্ম করব।',
+      'খামারভেস্টের নম্বর ছাড়া অন্য কোনো নম্বরে টাকা পাঠাবেন না।', 'WhatsApp ও ফোন: 01334-211984 · silage.khamarvest.com'];
+    // Pass 1 measures, pass 2 draws on a canvas of the measured height.
+    function layout(draw) {
+      var y = 0;
+      if (draw) { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, W, c.height); ctx.fillStyle = 'rgb(0,105,68)'; ctx.fillRect(0, 0, W, 210); }
+      ctx.textBaseline = 'alphabetic';
+      ctx.font = '700 54px ' + FONT; if (draw) { ctx.fillStyle = '#ffffff'; ctx.fillText('খামারভেস্ট সাইলেজ', P, 100); }
+      ctx.font = '400 34px ' + FONT; if (draw) { ctx.fillStyle = '#dff3e7'; ctx.fillText('সুন্দরবন কুরিয়ারে অর্ডারের রসিদ', P, 160); }
+      y = 270;
+      ctx.font = '400 30px ' + FONT; if (draw) { ctx.fillStyle = '#4b5a51'; ctx.fillText('তারিখ: ' + bnDate(receiptAt || new Date()), P, y); }
+      y += 36;
+      lastRows.forEach(function (r) {
+        var tot = r[0] === 'মোট', trxRow = r[0] === 'TrxID';
+        ctx.font = (tot || trxRow ? '700 ' : '600 ') + (tot ? '40px ' : '34px ') + FONT;
+        var lines = wrap(ctx, r[1], W - 2 * P - 300), lh = tot ? 54 : 48, h = Math.max(1, lines.length) * lh + 34;
+        if (draw) {
+          ctx.fillStyle = tot ? '#e6f6ec' : trxRow ? '#fff8e1' : '#ffffff';
+          if (tot || trxRow) ctx.fillRect(P - 16, y + 4, W - 2 * P + 32, h - 8);
+          ctx.fillStyle = '#d9e6de'; if (!tot && !trxRow) ctx.fillRect(P, y + h, W - 2 * P, 2);
+          var f = ctx.font; ctx.font = '400 32px ' + FONT; ctx.fillStyle = '#4b5a51'; ctx.fillText(r[0], P, y + lh); ctx.font = f;
+          ctx.fillStyle = tot ? 'rgb(0,105,68)' : '#123b28'; ctx.textAlign = 'right';
+          lines.forEach(function (ln, i) { ctx.fillText(ln, W - P, y + lh + i * lh); });
+          ctx.textAlign = 'left';
+        }
+        y += h;
+      });
+      y += 40;
+      ctx.font = '400 28px ' + FONT;
+      foot.forEach(function (t, i) {
+        wrap(ctx, t, W - 2 * P).forEach(function (ln) {
+          if (draw) { ctx.fillStyle = i === 2 ? 'rgb(0,105,68)' : '#4b5a51'; ctx.fillText(ln, P, y + 30); }
+          y += 42;
+        });
+        y += 8;
+      });
+      return y + P;
+    }
+    c.width = W; c.height = 10;
+    var H = layout(false);
+    c.height = H;
+    layout(true);
+    return c;
+  }
+  function makeReceipt() {
+    if (receiptUrl) return Promise.resolve(receiptUrl);
+    var fonts = document.fonts && document.fonts.load
+      ? Promise.all([document.fonts.load('400 32px "Noto Serif Bengali"', 'অ'), document.fonts.load('700 32px "Noto Serif Bengali"', 'অ'), document.fonts.load('700 32px "Plus Jakarta Sans"', 'A')]).catch(function () {})
+      : Promise.resolve();
+    return fonts.then(function () { receiptUrl = drawReceipt().toDataURL('image/png'); return receiptUrl; });
+  }
+  function fileName() {
+    var d = receiptAt || new Date(), p = function (n) { return ('0' + n).slice(-2); };
+    return 'khamarvest-roshid-' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes()) + '.png';
+  }
+  if (rcpt) {
+    var st = rcpt.querySelector('[data-receipt-status]'), prev = rcpt.querySelector('[data-receipt-preview]');
+    rcpt.querySelector('[data-receipt-img]').addEventListener('click', function () {
+      var btn = this; btn.disabled = true;
+      makeReceipt().then(function (url) {
+        var a = document.createElement('a'); a.href = url; a.download = fileName();
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        prev.textContent = ''; var pi = new Image(); pi.alt = 'অর্ডারের রসিদ'; pi.src = url; prev.appendChild(pi);
+        st.textContent = 'ছবিটা ফোনের Download ফোল্ডারে গেছে। না পেলে নিচের ছবিটা চেপে ধরে রাখুন, তারপর ছবি সেভ করুন।';
+        if (typeof window.gaEvent === 'function') window.gaEvent('receipt_save', { format: 'image', page_path: location.pathname });
+      }).catch(function () { st.textContent = 'ছবি বানানো গেল না। স্ক্রিনশট নিয়ে রাখুন।'; })
+        .then(function () { btn.disabled = false; });
+    });
+    rcpt.querySelector('[data-receipt-pdf]').addEventListener('click', function () {
+      var btn = this; btn.disabled = true;
+      makeReceipt().then(function (url) {
+        var box = document.createElement('div'); box.setAttribute('data-receipt-print', '');
+        var img = new Image(); img.alt = 'অর্ডারের রসিদ'; box.appendChild(img);
+        document.body.appendChild(box);
+        var cleanup = function () { document.body.classList.remove('receipt-printing'); if (box.parentNode) box.parentNode.removeChild(box); window.removeEventListener('afterprint', cleanup); };
+        window.addEventListener('afterprint', cleanup);
+        img.onload = function () {
+          document.body.classList.add('receipt-printing');
+          st.textContent = 'প্রিন্টের পাতায় "Save as PDF" বা "PDF হিসেবে সেভ" বেছে নিন।';
+          window.print();
+          setTimeout(cleanup, 1500);
+        };
+        img.src = url;
+        if (typeof window.gaEvent === 'function') window.gaEvent('receipt_save', { format: 'pdf', page_path: location.pathname });
+      }).catch(function () { st.textContent = 'PDF বানানো গেল না। স্ক্রিনশট নিয়ে রাখুন।'; })
+        .then(function () { btn.disabled = false; });
+    });
   }
 
   done.querySelector('[data-back]').addEventListener('click', function () {

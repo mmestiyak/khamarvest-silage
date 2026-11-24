@@ -35,3 +35,12 @@
    specificity, utilities come later), so receipt rows, the total line and some copy
    buttons stayed visible in truck mode. Scoped to the courier page only. */
 [data-courier-form] [hidden], [data-courier-done][hidden], [data-courier-mount][hidden] { display: none !important; }
+
+/* /courier receipt (js/courier-form.js): "PDF সেভ করুন" prints only the generated receipt
+   picture. Scoped to body.receipt-printing so printing any other page is unaffected. */
+[data-receipt-print] { display: none; }
+@media print {
+  body.receipt-printing > :not([data-receipt-print]) { display: none !important; }
+  body.receipt-printing [data-receipt-print] { display: block; }
+  body.receipt-printing [data-receipt-print] img { display: block; width: 100%; max-width: 170mm; margin: 0 auto; }
+}
