@@ -70,7 +70,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     }
     form.querySelector('[data-row=fee]').hidden = over;
     form.querySelector('[data-row=total]').hidden = over;
-    $('[data-btn-label]').textContent = over ? 'ফোন করার অনুরোধ পাঠান' : 'কুরিয়ারে অর্ডার পাঠান';
+    $('[data-btn-label]').textContent = over ? 'ফোন করার অনুরোধ পাঠান' : 'অর্ডার কনফার্ম করুন';
     $('[data-total-row]').hidden = over;
     if (typeof updateNudges === 'function') updateNudges();
     syncPaid();
@@ -222,15 +222,17 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
       phone: bn(phoneOf(input('phone').value)),
       district: input('district').value,
       upazila: input('upazila').value.trim(),
+      address: form.elements.address ? form.elements.address.value.trim() : '',
       office: input('office').value.trim()
     };
     var rows = [
       ['নাম', v.name],
       ['মোবাইল', v.phone],
       ['জেলা / উপজেলা', v.district + ' / ' + v.upazila],
+    ].concat(v.address ? [['ঠিকানা', v.address]] : []).concat([
       ['সুন্দরবন শাখা', v.office],
-      ['বস্তা', bn(bags) + ' বস্তা, সাইলেজ ' + money(bags * BAG) + ' টাকা'],
-    ];
+      ['বস্তা', bn(bags) + ' বস্তা, সাইলেজ ' + money(bags * BAG) + ' টাকা']
+    ]);
     if (!isOver()) rows.push(['কুরিয়ার খরচ', money(bags * FEE) + ' টাকা'], ['মোট', money(bags * (BAG + FEE)) + ' টাকা']);
     var trx = trxOf(), svc = input('service').value, paidV = en(input('paid').value).replace(/\D/g, ''), pt = paytype();
     if (pt && trx) rows.push(['কিসের টাকা', pt]);
@@ -255,7 +257,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
       d.appendChild(dt); d.appendChild(dd); dl.appendChild(d);
     });
     // Complete as sent: ends with a question, never a label.
-    var text = 'আসসালামু আলাইকুম, আমি ' + v.name + ', ' + v.district + ', ' + v.upazila + '। সুন্দরবন কুরিয়ারের ' +
+    var text = 'আসসালামু আলাইকুম, আমি ' + v.name + ', ' + (v.address ? v.address + ', ' : '') + v.upazila + ', ' + v.district + '। সুন্দরবন কুরিয়ারের ' +
       v.office + ' থেকে ' + bn(bags) + ' বস্তা সাইলেজ নিতে চাই। সাইলেজ ' + money(bags * BAG) + ' টাকা' + (isOver() ? '।' : ', কুরিয়ার ' + money(bags * FEE) + ' টাকা, মোট ' + money(bags * (BAG + FEE)) + ' টাকা।') +
       (trx ? ' ' + (svc || '') + 'এ ' + (pt ? pt + ' বাবদ ' : '') + (paidV ? paidV + ' টাকা ' : '') + 'পাঠিয়েছি, TrxID: ' + trx + '।' : '') + (isOver() ? ' ট্রাকে পাঠাতে খরচ কত পড়বে?' : ' মোট খরচ জানাবেন?');
     done.querySelector('[data-wa]').href = 'https://wa.me/8801334211984?text=' + encodeURIComponent(text);
@@ -301,6 +303,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
       alt_phone: alt,
       district: district,
       upazila: upazila,
+      address: form.elements.address ? form.elements.address.value.trim() : '',
       location: district + ', ' + upazila,
       branch: office,
       bags: c,

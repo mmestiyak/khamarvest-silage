@@ -516,6 +516,7 @@ function logCourier(d, name, phone) {
       alt: toAsciiDigits(clip(d.alt_phone, 30)).replace(/[^\d+]/g, ''),
       district: clip(d.district, 60),
       upazila: clip(d.upazila, 80),
+      address: clip(d.address, 200),
       branch: clip(d.branch, 120),
       bags: parseInt(toAsciiDigits(clip(d.bags, 10)).replace(/\D/g, ''), 10) || 0,
       silage: Number(d.silage_amount) || 0,
@@ -565,8 +566,8 @@ function amountLine(o) {
 // Plain text, for the owner email.
 function courierText(o) {
   return ['অর্ডার: ' + o.no, 'নাম: ' + o.name, 'মোবাইল: ' + o.phone + (o.alt ? ' (বিকল্প ' + o.alt + ')' : ''),
-    'জেলা: ' + o.district, 'উপজেলা: ' + o.upazila, 'সুন্দরবন শাখা: ' + o.branch, amountLine(o), 'পেমেন্ট: ' + payLine(o),
-    'নোট: ' + o.note].join('\n');
+    'জেলা: ' + o.district, 'উপজেলা: ' + o.upazila, o.address ? 'ঠিকানা: ' + o.address : '', 'সুন্দরবন শাখা: ' + o.branch, amountLine(o), 'পেমেন্ট: ' + payLine(o),
+    'নোট: ' + o.note].filter(Boolean).join('\n');
 }
 
 // ---- Telegram (config only from Script properties; sends only, never reads updates) ----
@@ -641,6 +642,41 @@ function waButton(phone, text) {
   return n ? { text: '💬 WhatsApp', url: 'https://wa.me/' + n + '?text=' + encodeURIComponent(text) } : null;
 }
 
+// Prefilled WhatsApp replies behind the 💬 button: the farmer sees their own details back and
+// the message ends in a question, so it can be sent as is. No dates, no stock words.
+function waHello(name) {
+  name = String(name || '').trim();
+  return 'আসসালামু আলাইকুম' + (name ? ' ' + name : '') + ', খামারভেস্ট থেকে বলছি। ';
+}
+
+function waCourierText(o) {
+  var head = waHello(o.name) + 'আপনার কুরিয়ার অর্ডার #' + o.no + ' পেয়েছি: ' + bn(o.bags) + ' বস্তা';
+  if (o.truck) return head + '। এত বস্তা মিনি ট্রাকে পাঠাতে হবে, খরচটা ফোনে জানাব। কখন ফোন করলে সুবিধা হবে?';
+  return head + (o.branch ? ', সুন্দরবন কুরিয়ার ' + o.branch + ' শাখা' : '') + '। সাইলেজ ' + fmtMoney(o.silage) +
+    ' টাকা + কুরিয়ার খরচ ' + fmtMoney(o.fee) + ' টাকা = মোট ' + fmtMoney(o.total) + ' টাকা। সব ঠিক আছে কি?';
+}
+
+function waLeadText(d, name) {
+  var hi = waHello(name);
+  var bags = toAsciiDigits(clip(d.bags, 20));
+  var bagTxt = /^\d+$/.test(bags) ? bn(bags) + ' বস্তা' : '';
+  var where = [clip(d.upazila, 40), clip(d.district, 40)].filter(Boolean).join(', ') || clip(d.location, 80);
+  if (d.site === 'compost') return hi + 'কম্পোস্টের জন্য আপনার অনুরোধ পেয়েছি। কখন ফোন করলে সুবিধা হবে?';
+  if (d.form_type === 'courier_order') return hi + 'আপনার কুরিয়ার অর্ডার পেয়েছি। কখন ফোন করলে সুবিধা হবে?';
+  if (d.form_type === 'call_form') {
+    var cows = toAsciiDigits(clip(d.animals, 10));
+    return hi + 'আপনার খামারের সাইলেজের হিসাবের অনুরোধ পেয়েছি' + (/^\d+$/.test(cows) ? ' (' + bn(cows) + 'টা গরু)' : '') +
+      '। কখন ফোন করলে সুবিধা হবে?';
+  }
+  if (d.form_type === 'advance_booking')
+    return hi + 'নতুন মৌসুমের সাইলেজের জন্য আপনার চাহিদা পেয়েছি। নতুন সাইলেজ তৈরি হলে আপনাকে আগে ফোন করব। এর মধ্যে আর কিছু জানতে চান?';
+  if (d.form_type === 'shared_delivery')
+    return hi + 'একসাথে ডেলিভারির জন্য আপনার চাহিদা পেয়েছি' + (bagTxt || where ? ' (' + [bagTxt, where].filter(Boolean).join(', ') + ')' : '') +
+      '। ডেলিভারির আগে ফোন করে সব জানাব। এর মধ্যে আর কিছু জানতে চান?';
+  return hi + 'সাইলেজের জন্য আপনার অনুরোধ পেয়েছি' + (bagTxt || where ? ' (' + [bagTxt, where].filter(Boolean).join(', ') + ')' : '') +
+    '। কখন ফোন করলে সুবিধা হবে?';
+}
+
 function fmtMoney(n) {
   var s = String(Math.round(Number(n) || 0)), o = '';
   while (s.length > 3) { o = ',' + s.slice(-3) + o; s = s.slice(0, -3); }
@@ -676,7 +712,7 @@ function courierMessage(o, sample) {
     sample ? ['<i>নমুনা (আসল অর্ডার নয়)</i>'] : [],
     [head],
     ['<b>' + esc(o.name) + '</b>', phoneLine(o.phone), o.alt ? phoneLine(o.alt, 'বিকল্প') : ''],
-    [esc([o.upazila, o.district].filter(Boolean).join(', ')), 'শাখা: <b>' + esc(o.branch) + '</b>'],
+    [esc([o.address, o.upazila, o.district].filter(Boolean).join(', ')), 'শাখা: <b>' + esc(o.branch) + '</b>'],
     ['<b>' + bn(o.bags) + ' বস্তা</b> (' + bn(o.bags * 50) + ' কেজি)', money],
     pay,
     [note, bnWhen(o.date)]
@@ -709,7 +745,7 @@ function telegramLead(d, name, phone, label, topicKey) {
   try {
     if (!tgConfig()) return;
     var row1 = [];
-    var wa = waButton(phone, 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার অনুরোধ পেয়েছি।');
+    var wa = waButton(phone, waLeadText(d, name));
     if (wa) row1.push(wa);
     var kb = [];
     if (row1.length) kb.push(row1);
@@ -722,7 +758,7 @@ function telegramCourier(o) {
   try {
     if (!tgConfig()) return;
     var row1 = [];
-    var wa = waButton(o.phone, 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার কুরিয়ার অর্ডার #' + o.no + ' পেয়েছি।');
+    var wa = waButton(o.phone, waCourierText(o));
     if (wa) row1.push(wa);
     var kb = [];
     if (row1.length) kb.push(row1);
@@ -737,7 +773,7 @@ function tgTest() {
   var sample = { no: 'KV-C-0007', date: new Date(), name: 'আব্দুল করিম', phone: '01712345678', alt: '01811111111',
     district: 'সিরাজগঞ্জ', upazila: 'উল্লাপাড়া', branch: 'উল্লাপাড়া বাসস্ট্যান্ড', bags: 13, silage: 6175, fee: 3900, total: 10075,
     truck: false, svc: 'বিকাশ', paytype: 'কুরিয়ার খরচ', trx: '9A7K3XQ2LM', sent: 3900, note: '' };
-  Logger.log('COURIER: ' + tgSend(courierMessage(sample, true), 'COURIER', [[{ text: '📊 শিট', url: sheetUrl() }]]));
+  Logger.log('COURIER: ' + tgSend(courierMessage(sample, true), 'COURIER', [[waButton(sample.phone, waCourierText(sample))], [{ text: '📊 শিট', url: sheetUrl() }]]));
   ['CALL', 'OTHER'].forEach(function (k) {
     Logger.log(k + ': ' + tgSend('✅ খামারভেস্ট লিড বট: সংযোগ ঠিক আছে (' + k + ')', k, null));
   });
@@ -806,8 +842,8 @@ function staleCheck() {
     var kb = [];
     if (items.length === 1) {
       var b = waButton(items[0].phone, items[0].courier
-        ? 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার কুরিয়ার অর্ডার #' + items[0].courier + ' পেয়েছি।'
-        : 'আসসালামু আলাইকুম, খামারভেস্ট থেকে বলছি। আপনার অনুরোধ পেয়েছি।');
+        ? waHello(items[0].name) + 'আপনার কুরিয়ার অর্ডার #' + items[0].courier + ' পেয়েছি। অর্ডারটা কনফার্ম করতে কখন ফোন করলে সুবিধা হবে?'
+        : waHello(items[0].name) + 'আপনার অনুরোধ পেয়েছি। কখন ফোন করলে সুবিধা হবে?');
       if (b) kb.push([b]);
     }
     kb.push([{ text: '📊 শিট', url: sheetUrl() }]);

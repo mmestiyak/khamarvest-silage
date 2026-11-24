@@ -235,11 +235,12 @@
         var loc = [v('district'), v('upazila')].filter(Boolean).join(', ');
         var parts = ['ফোনের অনুরোধ (WhatsApp থেকে ফর্ম)'];
         if (loc) parts.push('এলাকা: ' + loc);
+        if (v('address')) parts.push('ঠিকানা: ' + v('address'));
         if (animals) parts.push('পশু: ' + animals);
         if (animals && range) parts.push('আনুমানিক মাসে বস্তা: ' + range);
         if (v('note')) parts.push('নোট: ' + v('note'));
         var saved = window.saveLead({
-          form_type: 'call_form', name: v('name'), phone: v('phone'), location: loc,
+          form_type: 'call_form', name: v('name'), phone: v('phone'), location: loc, address: v('address'),
           animals: animals, note: parts.join(' | '), website: v('website')
         });
         if (typeof window.gaEvent === 'function') window.gaEvent('order_details_submitted', { submission_method: saved ? 'call_form' : 'call_form_whatsapp', page_path: location.pathname });
