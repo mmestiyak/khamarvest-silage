@@ -228,10 +228,17 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
     var trx = trxOf();
     var svc = input('service').value;
     var paidTyped = en(input('paid').value).replace(/\D/g, '');
-    if (!trx && paidTyped) bad('trx', 'টাকা পাঠিয়ে থাকলে ট্রানজেকশন আইডি দিন');
-    else if (trx && !/^[A-Z0-9]{6,20}$/.test(trx)) bad('trx', 'সঠিক ট্রানজেকশন আইডি লিখুন');
-    else if (trx && !svc) bad('service', 'কোন মাধ্যমে পাঠিয়েছেন বেছে নিন');
-    if (trx && !paytype()) bad('paytype', 'কিসের টাকা পাঠিয়েছেন বেছে নিন');
+    // Owner, 2026-11-24: a courier order is confirmed only with payment, at least the courier
+    // charge (plus cash-out). Truck-size orders (isOver) are a phone call and skip all of this.
+    if (!isOver()) {
+      var need = withCharge(amountFor('fee', Math.max(1, bags)));
+      if (!svc) bad('service', 'কোন মাধ্যমে পাঠিয়েছেন বেছে নিন');
+      if (!paytype()) bad('paytype', 'কিসের টাকা পাঠিয়েছেন বেছে নিন');
+      if (!trx) bad('trx', 'টাকা পাঠিয়ে SMS-এর ট্রানজেকশন আইডি দিন। কমপক্ষে কুরিয়ার খরচ না পাঠালে অর্ডার কনফার্ম হবে না।');
+      else if (!/^[A-Z0-9]{6,20}$/.test(trx)) bad('trx', 'সঠিক ট্রানজেকশন আইডি লিখুন');
+      if (!paidTyped) bad('paid', 'কত টাকা পাঠিয়েছেন লিখুন');
+      else if (parseInt(paidTyped, 10) < need) bad('paid', 'কমপক্ষে ' + money(need) + ' টাকা (কুরিয়ার খরচ, ক্যাশআউট চার্জ সহ) পাঠাতে হবে');
+    }
     if (first && ['service', 'trx', 'paid', 'paytype'].indexOf(first) > -1) setPay(true);
     if (first) { focusTarget(first).focus(); return false; }
     return true;
