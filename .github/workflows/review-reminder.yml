@@ -1,0 +1,88 @@
+# Twice-monthly reminder to review Search Console and GA4, and to do the small
+# owner chores. It only opens an issue: it changes no content. Same rule as
+# season.yml, the last step stays human.
+name: Twice-monthly search review reminder
+
+on:
+  schedule:
+    - cron: '0 3 7 * *'    # 7th of every month, 03:00 UTC (09:00 Dhaka)
+    - cron: '0 3 20 * *'   # 20th of every month, 03:00 UTC (09:00 Dhaka)
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open the review issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const now = new Date();
+            const day = now.getUTCDate();
+            const date = now.toISOString().slice(0, 10);
+            const title = `Search review, ${date}`;
+            const { owner, repo } = context.repo;
+
+            // Dedupe: skip if an open issue with this exact title exists.
+            const open = await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, state: 'open', per_page: 100,
+            });
+            if (open.some(i => !i.pull_request && i.title === title)) {
+              core.info(`Open issue "${title}" already exists, skipping.`);
+              return;
+            }
+
+            const monthName = now.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
+            const lines = [
+              `Review reminder for ${date}. This only reminds; nothing has been changed.`,
+              '',
+              '## Search Console (last 28 days)',
+              'Both sites: silage.khamarvest.com and silagebd.com.',
+              '- [ ] Export Queries and Pages for both sites.',
+              '- [ ] List queries at position 6-20 with impressions and fewer than 3 clicks.',
+              '- [ ] Note the CTR of the top 10 pages.',
+              '',
+              '## Title rule',
+              'A title may change at most once a month, and not within 21 days of its last change.',
+              '- [ ] List pages whose title changed in the last 21 days: `git log --since="21 days ago" -p -- "*.html" | grep "^[+-]<title>"`',
+              '',
+              '## Guide refresh (at most one this month)',
+              '- [ ] Add the "এক কথায় উত্তর" block to ONE older guide that `npm run check` warns about, and bump its `dateModified`.',
+              `- [ ] Guide done in ${monthName}: ______ (write the slug here; skip if already done this month).`,
+              '',
+              '## GA4 (property: khamarvest silage)',
+              '- [ ] Key events `whatsapp_click`, `phone_click`, `order_details_submitted`: by `page_path` and by `ai_source`.',
+              '- [ ] Compare with the row counts in the Leads tab.',
+              '- [ ] Compare farmer-profile form leads (`form_type` farmer_profile) with the old forms on guides.',
+              '',
+            ];
+
+            if (day === 7) {
+              lines.push(
+                '## Only on the 7th',
+                '- [ ] SilageBD: check clicks for napier-grass-cultivation and the three data guides.',
+                '',
+              );
+            } else if (day === 20) {
+              lines.push(
+                '## Only on the 20th',
+                "- [ ] Price guide \"সাইলেজ এর দাম\": check clicks.",
+                '- [ ] Oilcake-protein queries: check clicks and positions.',
+                '',
+              );
+            }
+
+            lines.push(
+              '## Owner chores',
+              '- [ ] Post one Facebook guide post (`npm run social`).',
+              '- [ ] Ask for a Google review after the second order.',
+              '- [ ] Check the `llms.txt` size (`npm run check` fails past 16 KB).',
+              '',
+              '---',
+              'Ask Claude Code to pull the data and make the edits.',
+            );
+
+            await github.rest.issues.create({ owner, repo, title, body: lines.join('\n') });
