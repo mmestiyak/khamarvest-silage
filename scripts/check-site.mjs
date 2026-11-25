@@ -814,11 +814,25 @@ for (const f of ['js/ga.js', 'index.html']) {
   if (!/LEADS_URL = 'https:\/\/script\.google\.com\/macros\/s\/[^']+\/exec'/.test(leads)) errors.push('js/leads.js: LEADS_URL is not a Google Apps Script /exec URL, so no lead is saved');
   if (!(await readFile(join(root, 'js/ga.js'), 'utf8')).includes("'/js/leads.js'")) errors.push('js/ga.js: no longer loads /js/leads.js, so WhatsApp and call taps are not logged');
   if (!(await readFile(join(root, 'index.html'), 'utf8')).includes('src="/js/leads.js"')) errors.push('index.html: does not load /js/leads.js, so the order form saves nothing');
-  for (const f of (await readdir(join(root, 'area'))).filter((f) => f.startsWith('silage-') && f.endsWith('.html'))) {
-    if (!(await readFile(join(root, 'area', f), 'utf8')).includes('data-lead-form')) errors.push(`area/${f}: has no callback form (data-lead-form). Run npm run build:areas`);
+  // Farmer profile (খামারি প্রোফাইল, phase 1): homepage and every district page carry the merged
+  // two-step form and no longer carry the callback, advance-booking or shared-delivery boxes.
+  const districtPages = (await readdir(join(root, 'area'))).filter((f) => f.startsWith('silage-') && f.endsWith('.html')).map((f) => `area/${f}`);
+  for (const f of ['index.html', ...districtPages]) {
+    const h = await readFile(join(root, f), 'utf8');
+    const fm = h.match(/<form data-farmer-profile[\s\S]*?<\/form>/);
+    if (!fm || !h.includes('<!-- farmer-profile:start -->')) { errors.push(`${f}: has no farmer profile form (data-farmer-profile). Run npm run build:trust`); continue; }
+    const sel = fm[0].match(/<select id="fp-district" name="district"[\s\S]*?<\/select>/); const n = sel ? (sel[0].match(/<option value="[^"]+"/g) || []).length - 1 : 0;
+    if (!sel || n !== 64) errors.push(`${f}: farmer profile needs select#fp-district[name=district] with 64 districts plus "অন্য জেলা" (found ${n})`);
+    for (const k of ['phone', 'name', 'farm_name', 'upazila', 'address', 'cows', 'goats', 'buffalo', 'bags', 'when', 'shared_delivery', 'yearly', 'note', 'contact_ok']) if (!new RegExp(`name="${k}"`).test(fm[0])) errors.push(`${f}: farmer profile lacks field "${k}"`);
+    if (!/data-fp-step2/.test(fm[0]) || !/data-fp-saved/.test(fm[0])) errors.push(`${f}: farmer profile lacks the step 2 container or the saved line`);
+    if ((h.match(/\/js\/district-picker\.js/g) || []).length !== 1) errors.push(`${f}: district-picker.js must be loaded exactly once`);
+    for (const old of ['data-booking-form', 'data-shared-delivery-form', 'data-lead-form']) if (h.includes(old)) errors.push(`${f}: still carries ${old}; the farmer profile replaced it here`);
+    if (/ছাড় চলছে|স্টক|এখনই পাবেন|SMS|অফার/.test(fm[0])) errors.push(`${f}: farmer profile contains SMS, offer or stock wording (SMS only via SMS_PROMISE in scripts/trust-blocks.mjs, and the checker then needs updating)`);
   }
-  // Advance booking (আগাম চাহিদা): homepage, every district page, four harvest guides.
-  const bookingPages = ['index.html', ...(await readdir(join(root, 'area'))).filter((f) => f.startsWith('silage-') && f.endsWith('.html')).map((f) => `area/${f}`),
+  { const g = await readFile(join(root, 'scripts/trust-blocks.mjs'), 'utf8'); if (!/const SMS_PROMISE = false;/.test(g)) errors.push('scripts/trust-blocks.mjs: SMS_PROMISE must stay false until the owner really sends SMS'); }
+  for (const k of ["form_type: 'farmer_profile'", "'farmer_profile_complete'", 'lead_id', 'contact_ok']) if (!leads.includes(k)) errors.push(`js/leads.js: farmer profile handler lost ${k}`);
+  // Advance booking (আগাম চাহিদা): the four harvest guides (homepage and district pages use the farmer profile).
+  const bookingPages = [
     ...['silage-er-jonno-vutta-chash', 'silage-kinben-naki-nije-banaben', 'shiter-jonno-silage-mojud', 'silage-ki-kivabe-toiri-upokarita'].map((g) => `blog/${g}.html`)];
   for (const f of bookingPages) {
     const h = await readFile(join(root, f), 'utf8');
@@ -832,8 +846,8 @@ for (const f of ['js/ga.js', 'index.html']) {
     { const ids = [...h.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]); const dup = [...new Set(ids.filter((x, i) => ids.indexOf(x) !== i))]; if (dup.length) errors.push(`${f}: duplicate id(s): ${dup.join(', ')}`); }
   }
   if (!leads.includes("form_type: 'advance_booking'") || !leads.includes("'advance_booking'")) errors.push('js/leads.js: advance-booking form no longer tags leads form_type advance_booking');
-  // Shared delivery (একসাথে ডেলিভারি): homepage, every district page, the price guide.
-  for (const f of ['index.html', ...bookingPages.filter((x) => x.startsWith('area/')), 'blog/vutta-silage-dam-koto-kothay-kinben.html']) {
+  // Shared delivery (একসাথে ডেলিভারি): the price guide only (homepage and district pages use the farmer profile).
+  for (const f of ['blog/vutta-silage-dam-koto-kothay-kinben.html']) {
     const h = await readFile(join(root, f), 'utf8');
     { const sm = h.match(/<form data-shared-delivery-form[\s\S]*?<\/form>/); const sel = sm && sm[0].match(/<select id="sd-district" name="district"[\s\S]*?<\/select>/); const n = sel ? (sel[0].match(/<option value="[^"]+"/g) || []).length - 1 : 0; if (sm && (!sel || n !== 64)) errors.push(`${f}: shared-delivery form needs select[name=district] with 64 districts plus "অন্য জেলা" (found ${n}). Run npm run build:trust`); if (sm && !/name="address"/.test(sm[0])) errors.push(`${f}: shared-delivery form lacks the address (ঠিকানা) field`); if (sm && !h.includes('/js/district-picker.js')) errors.push(`${f}: shared-delivery form page does not load /js/district-picker.js`); }
     if (!h.includes('data-shared-delivery-form') || !h.includes('<!-- shared-delivery:start -->')) errors.push(`${f}: has no shared-delivery form (data-shared-delivery-form). Run npm run build:trust`);

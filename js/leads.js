@@ -7,6 +7,7 @@
 //  - any <form data-lead-form> (the "নম্বর দিন, আমরা ফোন করব" box on district
 //    pages): saves name, mobile, upazila and bags as a lead and shows a
 //    confirmation. If the sheet is not set up, it falls back to WhatsApp.
+//  - any <form data-farmer-profile>: the merged two-step "খামারি প্রোফাইল" form on the homepage and district pages, below.
 //  - any <form data-booking-form>: the advance-booking (আগাম চাহিদা) form, below.
 //  - any <form data-shared-delivery-form>: the shared-delivery (একসাথে ডেলিভারি) form, below.
 //  - any <form data-call-form>: the /form page the owner links in the WhatsApp auto-reply, below.
@@ -91,6 +92,99 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindForms);
   else bindForms();
+
+
+  // "খামারি প্রোফাইল" (<form data-farmer-profile>), homepage and district pages. Two steps in one form:
+  //  step 1 (mobile + district) is saved IMMEDIATELY (form_type farmer_profile, step 1, a fresh lead_id),
+  //  then step 2 (name, farm, upazila, address, cows/goats/buffalo, bags a month, when, shared delivery,
+  //  yearly, note; all optional) is sent with the SAME lead_id and the Apps Script updates that row.
+  //  Everything also goes into the note, so an older deployed script still stores it (as separate rows).
+  //  contact_ok is the hidden consent flag written by the generator ("phone", later "phone,sms").
+  //  No payment, no stock claim. If the sheet is not configured, a complete WhatsApp message is opened.
+  function bindFarmerProfileForms() {
+    document.querySelectorAll('form[data-farmer-profile]').forEach(function (f) {
+      if (f.getAttribute('data-fp-bound')) return;
+      f.setAttribute('data-fp-bound', '1');
+      var phone = f.elements.phone;
+      var step = 1;
+      var leadId = 'fp-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+      phone.addEventListener('input', function () { phone.setCustomValidity(''); });
+      var q = function (s) { return f.querySelector(s); };
+      var v = function (n) { return f.elements[n] && f.elements[n].value ? f.elements[n].value.trim() : ''; };
+      var num = function (n) { var x = toAscii(v(n)).replace(/\D/g, ''); return x && parseInt(x, 10) > 0 ? parseInt(x, 10) : 0; };
+      var ev = function (name) { if (typeof window.gaEvent === 'function') window.gaEvent('order_details_submitted', { submission_method: name, page_path: location.pathname }); };
+      var wa = function (lines) { window.open('https://wa.me/8801334211984?text=' + encodeURIComponent(lines.filter(Boolean).join('\n')), '_blank', 'noopener'); };
+
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (toAscii(phone.value).replace(/\D/g, '').length < 11) {
+          phone.setCustomValidity('১১ সংখ্যার মোবাইল নম্বর লিখুন, যেমন ০১৭১২৩৪৫৬৭৮');
+          phone.reportValidity();
+          return;
+        }
+        if (!v('district')) {
+          var dbtn = document.getElementById('fp-district-btn');
+          if (dbtn) dbtn.focus();
+          return;
+        }
+        var base = { form_type: 'farmer_profile', lead_id: leadId, phone: v('phone'), district: v('district'), contact_ok: v('contact_ok'), website: v('website') };
+        if (step === 1) {
+          var saved = window.saveLead(Object.assign({ step: 1, location: v('district'),
+            note: 'খামারি প্রোফাইল (ধাপ ১: নম্বর ও জেলা) | জেলা: ' + v('district') }, base));
+          ev(saved ? 'farmer_profile' : 'farmer_profile_whatsapp');
+          if (!saved) {
+            wa(['আসসালামু আলাইকুম, নতুন মৌসুমের সাইলেজের খবর পেতে আমার নম্বর রাখছি।', 'মোবাইল: ' + v('phone'), 'জেলা: ' + v('district'), 'সাইলেজ তৈরি হলে আমাকে ফোন করবেন?']);
+            return;
+          }
+          step = 2;
+          q('[data-fp-step1-btn]').hidden = true;
+          var ok1 = q('[data-fp-saved]');
+          ok1.hidden = false;
+          q('[data-fp-step2]').hidden = false;
+          if (ok1.scrollIntoView) ok1.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          return;
+        }
+        // Step 2: same lead_id, every answer optional.
+        var cows = num('cows'), goats = num('goats'), buffalo = num('buffalo');
+        var total = cows + goats + buffalo;
+        var bags = num('bags') ? String(num('bags')) : '';
+        var shared = !!(f.elements.shared_delivery && f.elements.shared_delivery.checked);
+        var yearly = !!(f.elements.yearly && f.elements.yearly.checked);
+        var loc = [v('district'), v('upazila')].filter(Boolean).join(', ');
+        var parts = ['খামারি প্রোফাইল (পূর্ণ)'];
+        if (v('district')) parts.push('জেলা: ' + v('district'));
+        if (v('upazila')) parts.push('উপজেলা: ' + v('upazila'));
+        if (v('address')) parts.push('ঠিকানা: ' + v('address'));
+        if (v('farm_name')) parts.push('খামার: ' + v('farm_name'));
+        var an = [cows ? 'গরু ' + cows : '', goats ? 'ছাগল/ভেড়া ' + goats : '', buffalo ? 'মহিষ ' + buffalo : ''].filter(Boolean);
+        if (an.length) parts.push('পশু: ' + an.join(', '));
+        if (bags) parts.push('মাসে বস্তা: ' + bags);
+        if (v('when')) parts.push('কখন লাগবে: ' + v('when'));
+        if (shared) parts.push('একসাথে ডেলিভারিতে নিতে চান');
+        if (yearly) parts.push('সারা বছরের সাইলেজ পরিকল্পনায় রাখতে বলেছেন');
+        if (v('note')) parts.push('নোট: ' + v('note'));
+        var done = window.saveLead(Object.assign({ step: 2, name: v('name'), farm_name: v('farm_name'), upazila: v('upazila'), address: v('address'),
+          location: loc, area: loc, cows: cows, goats: goats, buffalo: buffalo, animals: total, bags: bags, when: v('when'),
+          shared_delivery: shared, yearly: yearly, note: parts.join(' | ') }, base));
+        ev(done ? 'farmer_profile_complete' : 'farmer_profile_complete_whatsapp');
+        if (done) {
+          q('[data-fp-step2-btn]').disabled = true;
+          var fin = q('[data-fp-done]');
+          fin.hidden = false;
+          if (fin.scrollIntoView) fin.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+          return;
+        }
+        wa(['আসসালামু আলাইকুম, নতুন মৌসুমের সাইলেজের জন্য আমার তথ্য দিচ্ছি।',
+          v('name') ? 'নাম: ' + v('name') : '', v('farm_name') ? 'খামার: ' + v('farm_name') : '', 'মোবাইল: ' + v('phone'),
+          loc ? 'এলাকা: ' + loc : '', v('address') ? 'ঠিকানা: ' + v('address') : '', an.length ? 'পশু: ' + an.join(', ') : '',
+          bags ? 'মাসে বস্তা: ' + bags : '', v('when') ? 'কখন লাগবে: ' + v('when') : '',
+          shared ? 'একসাথে ডেলিভারিতে নিতে চাই' : '', yearly ? 'সারা বছরের সাইলেজ পরিকল্পনায় রাখুন' : '', v('note') ? 'নোট: ' + v('note') : '',
+          'সাইলেজ তৈরি হলে আমাকে ফোন করবেন?']);
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindFarmerProfileForms);
+  else bindFarmerProfileForms();
 
   // "নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন" (<form data-booking-form>):
   // saved like any lead but tagged form_type advance_booking, with the extra

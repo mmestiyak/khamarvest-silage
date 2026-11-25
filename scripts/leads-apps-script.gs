@@ -63,6 +63,20 @@
 //   main chat). The digest and weekly summary go to the main chat. setup() installs the triggers
 //   (dailyDigest, staleCheck every 30 min, weeklySummary Friday 9:00), replacing its own old ones.
 //
+// REDEPLOY NEEDED for "খামারি প্রোফাইল" (the merged two-step form on the homepage and district pages):
+//   1. Paste this whole file over the old one, Save.
+//   2. Run setup() once from the editor (adds the Leads columns L-O and the new মাধ্যম option).
+//   3. Deploy > Manage deployments > Edit (pencil) > Version: New version > Deploy.
+// Until then the old script stores both steps as two separate "ওয়েবসাইট ফর্ম" rows (everything is in
+// the note), and the shared-delivery pool does not run for profile sign-ups.
+// How it works: step 1 (mobile + district) appends a Leads row (মাধ্যম "খামারি প্রোফাইল") with a
+// random লিড আইডি in column L. Step 2 sends the same id; the row with that id is UPDATED in place
+// (name, এলাকা, বস্তা, নোট, খামারের নাম, পশু, address), never মাধ্যম/অবস্থা/নোট (নিজের), so your own
+// status and notes are safe. If the id is not found, step 2 is appended as a new row instead. Either
+// way you get a second email and Telegram message, "খামারি প্রোফাইল পূর্ণ", with the new details.
+// If "একসাথে ডেলিভারিতে নিতে চাই" was ticked, step 2 also adds a row to the "একসাথে ডেলিভারি" pool tab
+// (bags = the monthly bags typed), so the truck alerts keep working.
+//
 // Emails go to the Google account that owns this script. Put another address
 // in NOTIFY_EMAIL to send them elsewhere, or 'off' to stop them.
 //
@@ -125,7 +139,10 @@ var COURIER_HEADERS = ['অর্ডার নম্বর', 'তারিখ', 
 var COURIER_STATUSES = ['নতুন', 'ফোন হয়েছে', 'টাকা মিলেছে', 'বুক হয়েছে', 'পৌঁছেছে', 'বাতিল'];
 var COURIER_NEW = 'নতুন';
 var COURIER_STATUS_COL = 19; // S
-var HEADERS = ['সময়', 'নাম', 'মোবাইল', 'এলাকা', 'বস্তা', 'অতিরিক্ত তথ্য', 'পাতা', 'উৎস', 'মাধ্যম', 'অবস্থা', 'নোট (নিজের)'];
+var HEADERS = ['সময়', 'নাম', 'মোবাইল', 'এলাকা', 'বস্তা', 'অতিরিক্ত তথ্য', 'পাতা', 'উৎস', 'মাধ্যম', 'অবস্থা', 'নোট (নিজের)',
+  'লিড আইডি', 'খামারের নাম', 'পশু', 'যোগাযোগের অনুমতি'];
+var PROFILE_ID_COL = 12; // L: lead id of the খামারি প্রোফাইল form (step 2 updates the row with the same id)
+var LEAD_SOURCES = ['ওয়েবসাইট ফর্ম', 'WhatsApp', 'ফোন কল', 'Facebook', 'আগাম চাহিদা', 'একসাথে ডেলিভারি', 'খামারি প্রোফাইল', 'কুরিয়ার', 'অন্যান্য'];
 
 function doPost(e) {
   try {
@@ -145,6 +162,8 @@ function doPost(e) {
     var shared = d.form_type === 'shared_delivery';
     var callForm = d.form_type === 'call_form'; // the /form page linked from the WhatsApp auto-reply
     var courier = d.form_type === 'courier_order'; // the /courier page
+    var profile = d.form_type === 'farmer_profile'; // homepage and district pages, two steps
+    if (profile && Number(d.step) === 2 && updateProfile(d, name, phone)) return ok();
     var order = courier ? logCourier(d, name, phone) : null; // gets the order number first
     // Address (ঠিকানা) arrives as d.address and, from the current site, already inside the note.
     // Older or other senders: add it to the note so it is never lost. Booking sends no
@@ -154,6 +173,7 @@ function doPost(e) {
     if (addr && noteTxt.indexOf(addr) === -1 && !courier) noteTxt = clip(noteTxt + ' | ঠিকানা: ' + addr, 700);
     var locTxt = clip(d.location, 120) || [clip(d.district, 60), clip(d.upazila, 60)].filter(Boolean).join(', ');
     var sheet = getSheet();
+    var animalsTxt = profile ? profileAnimals(d) : '';
     sheet.appendRow([
       new Date(),
       name,
@@ -163,12 +183,17 @@ function doPost(e) {
       (courier ? order.no + ' | ' : '') + (courier ? clip(d.note, 500) : noteTxt),
       clip(d.page, 200),
       clip(d.source, 80),
-      courier ? 'কুরিয়ার' : booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : (callForm ? 'ফর্ম (WhatsApp থেকে)' : 'ওয়েবসাইট ফর্ম')),
+      courier ? 'কুরিয়ার' : profile ? 'খামারি প্রোফাইল' : booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : (callForm ? 'ফর্ম (WhatsApp থেকে)' : 'ওয়েবসাইট ফর্ম')),
       'নতুন',
-      ''
+      '',
+      profile ? clip(d.lead_id, 40) : '',
+      profile ? clip(d.farm_name, 80) : '',
+      animalsTxt,
+      profile ? contactOk(d) : ''
     ]);
 
     if (shared) logShared(d, name, phone);
+    if (profile && d.shared_delivery === true) logShared(d, name, phone); // step 2 never reaches here unless the id was not found
     var to = ownerEmail();
     if (to) {
       if (courier) {
@@ -176,7 +201,7 @@ function doPost(e) {
           '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
           '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
       } else {
-        MailApp.sendEmail(to, (d.site === 'compost' ? 'কম্পোস্ট: ' : '') + (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + name + ' (' + clip(locTxt, 40) + ')',
+        MailApp.sendEmail(to, (d.site === 'compost' ? 'কম্পোস্ট: ' : '') + (profile ? 'খামারি প্রোফাইল: ' : booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + (name || phone) + ' (' + clip(locTxt, 40) + ')',
           'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + locTxt + (addr ? '\nঠিকানা: ' + addr : '') +
           '\nবস্তা: ' + clip(d.bags, 20) + '\nতথ্য: ' + clip(d.note, 500) +
           '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
@@ -185,7 +210,7 @@ function doPost(e) {
     }
     // Telegram last, so a Telegram problem can never lose the lead or the email.
     if (courier) telegramCourier(order);
-    else telegramLead(d, name, phone, booking ? '<b>আগাম চাহিদা</b>' : (shared ? '<b>একসাথে ডেলিভারি</b>' : (callForm ? '📞 <b>ফোনের অনুরোধ / হিসাব</b>' : '<b>নতুন লিড</b>')), callForm ? 'CALL' : 'OTHER');
+    else telegramLead(d, name, phone, profile ? '<b>খামারি প্রোফাইল</b>' : booking ? '<b>আগাম চাহিদা</b>' : (shared ? '<b>একসাথে ডেলিভারি</b>' : (callForm ? '📞 <b>ফোনের অনুরোধ / হিসাব</b>' : '<b>নতুন লিড</b>')), callForm ? 'CALL' : 'OTHER');
   } catch (err) {
     console.error(err);
   }
@@ -403,6 +428,7 @@ function setup() {
   ScriptApp.newTrigger('staleCheck').timeBased().everyMinutes(30).create();
   ScriptApp.newTrigger('weeklySummary').timeBased().onWeekDay(ScriptApp.WeekDay.FRIDAY).atHour(9).inTimezone(TZ).create();
   getSheet();
+  ensureProfileColumns(getSheet());
   sharedSheet();
   courierSheet();
   dailyDigest(true);
@@ -485,7 +511,74 @@ function getSheet() {
       .requireValueInList(['ওয়েবসাইট ফর্ম', 'WhatsApp', 'ফোন কল', 'Facebook', 'আগাম চাহিদা', 'একসাথে ডেলিভারি', 'কুরিয়ার', 'অন্যান্য'], true).build();
     sheet.getRange('I2:I').setDataValidation(source);
   }
+  ensureProfileColumns(sheet);
   return sheet;
+}
+
+// Sheets created before the খামারি প্রোফাইল form: add the extra headers (L-O) once and allow the new
+// মাধ্যম value. Safe to run again.
+function ensureProfileColumns(sheet) {
+  if (sheet.getLastRow() < 1 || sheet.getRange(1, PROFILE_ID_COL).getValue()) return;
+  sheet.getRange(1, PROFILE_ID_COL, 1, 4).setValues([HEADERS.slice(PROFILE_ID_COL - 1)]).setFontWeight('bold');
+  sheet.getRange('I2:I').setDataValidation(SpreadsheetApp.newDataValidation().requireValueInList(LEAD_SOURCES, true).build());
+}
+
+function contactOk(d) {
+  var c = clip(d.contact_ok, 20);
+  return c === 'phone,sms' ? 'ফোন, SMS' : (c ? 'ফোন' : '');
+}
+
+// "গরু ১০, ছাগল/ভেড়া ২, মহিষ ১ (মোট ১৩)" from the three counts, or '' when none given.
+function profileAnimals(d) {
+  var c = parseInt(toAsciiDigits(clip(d.cows, 6)).replace(/\D/g, ''), 10) || 0;
+  var g = parseInt(toAsciiDigits(clip(d.goats, 6)).replace(/\D/g, ''), 10) || 0;
+  var b = parseInt(toAsciiDigits(clip(d.buffalo, 6)).replace(/\D/g, ''), 10) || 0;
+  var parts = [];
+  if (c) parts.push('গরু ' + bn(c));
+  if (g) parts.push('ছাগল/ভেড়া ' + bn(g));
+  if (b) parts.push('মহিষ ' + bn(b));
+  return parts.length ? parts.join(', ') + ' (মোট ' + bn(c + g + b) + ')' : '';
+}
+
+// Step 2 of the খামারি প্রোফাইল form: fill the row that step 1 created (found by লিড আইডি).
+// Touches only the farmer's own answers; অবস্থা, মাধ্যম and "নোট (নিজের)" stay as the owner left them.
+// Returns false when the id is not found (then the caller appends a normal row).
+function updateProfile(d, name, phone) {
+  var id = clip(d.lead_id, 40);
+  if (!id) return false;
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  var row = -1, sheet, locTxt = '';
+  try {
+    sheet = getSheet();
+    var last = sheet.getLastRow();
+    if (last < 2) return false;
+    var ids = sheet.getRange(2, PROFILE_ID_COL, last - 1, 1).getValues();
+    for (var i = ids.length - 1; i >= 0; i--) { if (String(ids[i][0]) === id) { row = i + 2; break; } }
+    if (row < 0) return false;
+    locTxt = clip(d.location, 120) || [clip(d.district, 60), clip(d.upazila, 60)].filter(Boolean).join(', ');
+    if (name) sheet.getRange(row, 2).setValue(name);
+    if (phone) sheet.getRange(row, 3).setValue("'" + phone);
+    if (locTxt) sheet.getRange(row, 4).setValue(locTxt);
+    var bags = toAsciiDigits(clip(d.bags, 20));
+    if (bags) sheet.getRange(row, 5).setValue(bags);
+    sheet.getRange(row, 6).setValue(clip(d.note, 700));
+    sheet.getRange(row, 13, 1, 2).setValues([[clip(d.farm_name, 80), profileAnimals(d)]]);
+    if (d.shared_delivery === true) logShared(d, name, phone);
+  } finally {
+    lock.releaseLock();
+  }
+  var to = ownerEmail();
+  if (to) {
+    MailApp.sendEmail(to, 'খামারি প্রোফাইল পূর্ণ: ' + (name || phone) + ' (' + clip(locTxt, 40) + ')',
+      'নাম: ' + (name || '(দেননি)') + '\nমোবাইল: ' + phone + '\nএলাকা: ' + locTxt +
+      (clip(d.address, 200) ? '\nঠিকানা: ' + clip(d.address, 200) : '') + '\nখামার: ' + (clip(d.farm_name, 80) || '(দেননি)') +
+      '\nপশু: ' + (profileAnimals(d) || '(দেননি)') + '\nমাসে বস্তা: ' + (toAsciiDigits(clip(d.bags, 20)) || '(দেননি)') +
+      '\nতথ্য: ' + clip(d.note, 700) + '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
+      '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl() + ' (সারি ' + row + ')');
+  }
+  telegramLead(d, name, phone, '<b>খামারি প্রোফাইল পূর্ণ</b>', 'OTHER');
+  return true;
 }
 
 
@@ -677,6 +770,8 @@ function waLeadText(d, name) {
     return hi + 'আপনার খামারের সাইলেজের হিসাবের অনুরোধ পেয়েছি' + (/^\d+$/.test(cows) ? ' (' + bn(cows) + 'টা গরু)' : '') +
       '। কখন ফোন করলে সুবিধা হবে?';
   }
+  if (d.form_type === 'farmer_profile')
+    return hi + 'নতুন মৌসুমের সাইলেজের জন্য আপনার তথ্য পেয়েছি। সাইলেজ তৈরি হলে বা সরবরাহ নিয়ে খবর থাকলে আপনাকে আগে ফোন করব। এর মধ্যে আর কিছু জানতে চান?';
   if (d.form_type === 'advance_booking')
     return hi + 'নতুন মৌসুমের সাইলেজের জন্য আপনার চাহিদা পেয়েছি। নতুন সাইলেজ তৈরি হলে আপনাকে আগে ফোন করব। এর মধ্যে আর কিছু জানতে চান?';
   if (d.form_type === 'shared_delivery')

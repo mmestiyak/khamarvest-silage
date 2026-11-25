@@ -15,6 +15,8 @@
 //    only order link in a guide sat after 11-13 screens of reading. Health and
 //    general guides do not get it: an order box in a mastitis guide is pushy.
 //
+// 5. farmer-profile (2026-11-25): the merged two-step form that replaces 4 and 4b on the homepage and district
+//    pages (guides keep them). See profileCard below.
 // 4b. shared-delivery: "অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন" form (homepage, district pages, price guide)
 // 4. advance-booking: the "নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন" form
 //    (owner decision 2026-10-27, see AGENTS.md) on the homepage after the buy
@@ -132,11 +134,6 @@ const homeTheme = (html) => {
   }
   return html;
 };
-const advanceHome = homeTheme(`  <div class="bg-white px-4 pb-10">
-    <div class="mx-auto max-w-[1140px]">
-      ${advanceCard()}
-    </div>
-  </div>`);
 const advanceGuide = advanceCard().replace('<section id="advance-booking"', '<section id="advance-booking"').replace(/^/, '          ').replace('data-cta="advance_booking" class="', 'data-cta="advance_booking" class="mt-11 ');
 const ADVANCE_GUIDES = ['silage-er-jonno-vutta-chash', 'silage-kinben-naki-nije-banaben', 'shiter-jonno-silage-mojud', 'silage-ki-kivabe-toiri-upokarita'].map((s) => `blog/${s}.html`);
 
@@ -162,12 +159,59 @@ const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="s
         </form>
         <script src="/js/district-picker.js" defer></script>
       </section>`;
-const sharedHome = homeTheme(`  <div class="bg-white px-4 pb-10">
+const sharedGuide = '          ' + sharedCard().replace('data-cta="shared_delivery" class="', 'data-cta="shared_delivery" class="mt-11 ');
+
+// Farmer profile ("খামারি প্রোফাইল", phase 1, owner 2026-11-25): ONE two-step form that replaces the
+// advance-booking, shared-delivery and callback boxes on the HOMEPAGE and every DISTRICT page.
+// Guides, /courier and /form keep their own forms for now so lead counts can be compared.
+// Step 1 (mobile + district) is saved at once by js/leads.js; step 2 (everything else, all optional)
+// updates the same lead by lead_id. Rules: nothing to pay, no stock/urgency/offer wording, no counter.
+// SMS_PROMISE: flip to true only once the owner really sends SMS; it changes the promise wording to
+// "ফোন ও SMS-এ" and the stored consent flag (contact_ok) from "phone" to "phone,sms". Then run npm run build.
+const SMS_PROMISE = false;
+const profilePromise = SMS_PROMISE
+  ? 'নতুন মৌসুমের সাইলেজ তৈরি হলে বা সরবরাহ নিয়ে কোনো খবর থাকলে আমরা আপনাকে আগে ফোন ও SMS-এ জানাব। কোনো টাকা দিতে হবে না। নম্বর শুধু খামারভেস্টের খবর জানাতে ব্যবহার হবে, অন্য কাউকে দেওয়া হবে না।'
+  : 'নতুন মৌসুমের সাইলেজ তৈরি হলে বা সরবরাহ নিয়ে কোনো খবর থাকলে আমরা আপনাকে আগে ফোন করব। কোনো টাকা দিতে হবে না। নম্বর শুধু খামারভেস্টের খবর জানাতে ব্যবহার হবে, অন্য কাউকে দেওয়া হবে না।';
+const profileCard = (district = '') => `<section id="farmer-profile" data-cta="farmer_profile" class="rounded-2xl border border-[#0b5b38]/25 bg-[#eaf5eb] p-5 sm:p-6">
+        <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">খামারি প্রোফাইল: নতুন মৌসুমের সাইলেজের খবর আগে পান</h2>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">ভুট্টা কাটা আর সাইলেজ তৈরি হয় ডিসেম্বর-জানুয়ারিতে, আর সেই সাইলেজ দিয়েই সারা বছরের সরবরাহ চলে। শুধু মোবাইল নম্বর আর জেলা দিন, বাকি তথ্য চাইলে পরে দিতে পারবেন।</p>
+        <p class="mt-2 text-base leading-7 text-[#33483a]">দাম <!--=price-->${product.perKgBn}<!--/=--> টাকা কেজি (লোড পয়েন্টে, পরিবহন আলাদা), সারা বছর একই, ২০২৭ সাল পর্যন্ত। এটা জানিয়ে রাখার ফর্ম, বস্তা আটকে রাখার নিশ্চয়তা নয়। এখনই লাগবে? তাহলে <a href="https://wa.me/${WA_NUMBER}" target="_blank" rel="noopener" class="${link}">সরাসরি WhatsApp-এ অর্ডার করুন</a>।</p>
+        <form data-farmer-profile onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
+          <label class="${labelCls}">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="${fieldCls}" placeholder="01XXXXXXXXX"></label>
+          <div><label for="fp-district" class="${labelCls}">জেলা</label><select id="fp-district" name="district" required class="${fieldCls}">${districtOptions(district)}</select></div>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
+          <input type="hidden" name="contact_ok" value="${SMS_PROMISE ? 'phone,sms' : 'phone'}">
+          <button type="submit" data-fp-step1-btn class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">নতুন মৌসুমের সাইলেজের খবর পেতে নাম লেখান</button>
+          <p class="text-base leading-7 text-[#33483a] sm:col-span-2">${profilePromise}</p>
+          <p data-fp-saved hidden role="status" tabindex="-1" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">আপনার নম্বর রাখা হয়েছে। নিচের তথ্যগুলো দিলে আমরা আপনার খামারের ঠিক হিসাব করে ফোন করতে পারব (ঐচ্ছিক)।</p>
+          <div data-fp-step2 hidden class="grid gap-3 sm:col-span-2 sm:grid-cols-2">
+            <label class="${labelCls}">আপনার নাম${optional}<input name="name" autocomplete="name" class="${fieldCls}" placeholder="যেমন: রহিম উদ্দিন"></label>
+            <label class="${labelCls}">খামারের নাম${optional}<input name="farm_name" class="${fieldCls}" placeholder="যেমন: রহিম ডেইরি ফার্ম"></label>
+            <label class="${labelCls}" for="fp-upazila">উপজেলা${optional}<input id="fp-upazila" name="upazila" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: শেরপুর"></label>
+            <label class="${labelCls}" for="fp-address">গ্রাম / বাড়ির ঠিকানা${optional}<input id="fp-address" name="address" autocomplete="street-address" class="${fieldCls}" placeholder="যেমন: গ্রাম, ইউনিয়ন বা কাছের বাজার"></label>
+            <fieldset class="sm:col-span-2"><legend class="${labelCls}">কয়টা পশু আছে?${optional}</legend>
+              <div class="grid grid-cols-3 gap-2">
+                <label class="text-base font-normal text-[#123b28]">গরু<input name="cows" inputmode="numeric" class="${fieldCls}" placeholder="০"></label>
+                <label class="text-base font-normal text-[#123b28]">ছাগল / ভেড়া<input name="goats" inputmode="numeric" class="${fieldCls}" placeholder="০"></label>
+                <label class="text-base font-normal text-[#123b28]">মহিষ<input name="buffalo" inputmode="numeric" class="${fieldCls}" placeholder="০"></label>
+              </div>
+            </fieldset>
+            <label class="${labelCls}">মাসে আনুমানিক কত বস্তা${optional}<input name="bags" inputmode="numeric" class="${fieldCls}" placeholder="যেমন: ২০"></label>
+            <label class="${labelCls}">কখন লাগবে${optional}<select name="when" class="${fieldCls}"><option value="যেকোনো সময়">যেকোনো সময়</option><option value="এই মাসে">এই মাসে</option><option value="আগামী মাসে">আগামী মাসে</option></select></label>
+            <label class="flex min-h-11 items-start gap-3 text-base font-semibold text-[#123b28] sm:col-span-2"><input type="checkbox" name="shared_delivery" class="mt-1 h-6 w-6 shrink-0 accent-[#0b5b38]"><span>অল্প বস্তা, অন্যদের সাথে একসাথে ডেলিভারিতে নিতে চাই<span class="block text-sm font-normal text-[#456451]">একই এলাকার কয়েকজন একসাথে নিলে একটা গাড়িতেই সবার বস্তা যায়, তাই কেজিপ্রতি পরিবহন খরচ কমে আসে। কবে গাড়ি যাবে আর মোট খরচ কত, তা ফোনে জানানো হবে।</span></span></label>
+            <label class="flex min-h-11 items-start gap-3 text-base font-semibold text-[#123b28] sm:col-span-2"><input type="checkbox" name="yearly" class="mt-1 h-6 w-6 shrink-0 accent-[#0b5b38]"><span>সারা বছরের সাইলেজ আমার জন্য পরিকল্পনায় রাখুন</span></label>
+            <label class="${labelCls} sm:col-span-2">কিছু জানাতে চান?${optional}<textarea name="note" rows="2" class="${fieldCls}"></textarea></label>
+            <button type="submit" data-fp-step2-btn class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">তথ্য জমা দিন</button>
+          </div>
+          <p data-fp-done hidden role="status" tabindex="-1" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">ধন্যবাদ, আপনার তথ্য যোগ হয়েছে। নতুন মৌসুমের সাইলেজ তৈরি হলে বা সরবরাহ নিয়ে কোনো খবর থাকলে আমরা আপনাকে আগে ফোন করব। কোনো টাকা লাগবে না।<span class="mt-1 block font-normal">অপেক্ষার সময় আরও জানতে খামারিদের <a href="https://www.facebook.com/groups/3200411093487700" target="_blank" rel="noopener" data-cta="fb_group" class="underline underline-offset-2">Silage BD ফেসবুক গ্রুপে</a> যোগ দিন।</span></p>
+        </form>
+        <script src="/js/district-picker.js" defer></script>
+      </section>`;
+const profileHome = homeTheme(`  <div class="bg-white px-4 pb-10">
     <div class="mx-auto max-w-[1140px]">
-      ${sharedCard()}
+      ${profileCard()}
     </div>
   </div>`);
-const sharedGuide = '          ' + sharedCard().replace('data-cta="shared_delivery" class="', 'data-cta="shared_delivery" class="mt-11 ');
 const districtNames = {};
 for (const m of (await readFile(join(root, 'scripts/generate-area-pages.mjs'), 'utf8')).matchAll(/\{ name: '([^']+)', loc: '[^']+', slug: '([^']+)'/g)) districtNames[m[2]] = m[1];
 
@@ -212,8 +256,8 @@ const homePhotoStrip = (() => {
 })();
 
 changed += await update('index.html', (h) => {
-  h = strip(strip(strip(strip(h, 'photo-strip'), 'buy-steps'), 'advance-booking'), 'shared-delivery');
-  h = before(h, /[ \t]*<!-- ═+ SECTION 3 · /, block('buy-steps', buySteps) + '\n\n' + block('shared-delivery', sharedHome) + '\n\n' + block('advance-booking', advanceHome), 'index.html');
+  h = strip(strip(strip(strip(strip(h, 'photo-strip'), 'buy-steps'), 'advance-booking'), 'shared-delivery'), 'farmer-profile');
+  h = before(h, /[ \t]*<!-- ═+ SECTION 3 · /, block('buy-steps', buySteps) + '\n\n' + block('farmer-profile', profileHome), 'index.html');
   h = before(h, /[ \t]*<!-- ═+ DELIVERY AREAS/, block('photo-strip', homePhotoStrip), 'index.html');
   return h;
 });
@@ -223,12 +267,11 @@ changed += await update('about.html', (h) => before(strip(h, 'photo-strip'), /[ 
 for (const f of (await readdir(join(root, 'area'))).filter((f) => /^silage-.+\.html$/.test(f))) {
   const file = `area/${f}`;
   changed += await update(file, (h) => {
-    h = before(strip(strip(strip(h, 'photo-strip'), 'advance-booking'), 'shared-delivery'), /[ \t]*<h2[^>]*>[^<]*থেকে অর্ডারের নিয়ম/, block('photo-strip', photoStrip), file);
+    h = before(strip(strip(strip(strip(h, 'photo-strip'), 'advance-booking'), 'shared-delivery'), 'farmer-profile'), /[ \t]*<h2[^>]*>[^<]*থেকে অর্ডারের নিয়ম/, block('photo-strip', photoStrip), file);
     const dn = districtNames[f.replace(/^silage-|\.html$/g, '')];
     if (!dn) throw new Error(`${file}: district name not found in generator`);
-    const anchor = /[ \t]*<section class="mt-9 rounded-2xl bg-\[#0b5b38\]/;
-    h = before(h, anchor, block('shared-delivery', '      ' + sharedCard(dn)), file);
-    return before(h, anchor, block('advance-booking', '      ' + advanceCard(dn)), file);
+    // The profile card sits where the callback box used to (before the bags table).
+    return before(h, /[ \t]*<h2 class="mt-9 text-2xl font-bold text-\[#123b28\]">কত বস্তা লাগবে\?<\/h2>/, block('farmer-profile', '      ' + profileCard(dn).replace('data-cta="farmer_profile" class="', 'data-cta="farmer_profile" class="mt-6 ')), file);
   });
 }
 
