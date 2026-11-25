@@ -12,6 +12,7 @@ import { readFileSync } from 'node:fs';
 // Official per-district figures (BBS), copied from the SilageBD table. Edit scripts/district-stats.json, never the HTML.
 const stats = JSON.parse(readFileSync(new URL('./district-stats.json', import.meta.url), 'utf8')).districts;
 
+const FBG = 'https://www.facebook.com/groups/3200411093487700';
 const root = process.cwd();
 const siteUrl = 'https://silage.khamarvest.com';
 const areaDir = join(root, 'area');
@@ -256,7 +257,7 @@ ${d.upazilas ? `      <h2 id="upazila" class="mt-9 text-2xl font-bold text-[#123
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
           <button type="submit" class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">ফোন করে দাম জানান</button>
           <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই অর্ডারের যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
-          <p data-lead-status hidden role="status" class="rounded-lg bg-[#eaf5eb] p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আমরা এই নম্বরে ফোন করে দাম আর ডেলিভারির খরচ জানাব।</p>
+          <p data-lead-status hidden role="status" class="rounded-lg bg-[#eaf5eb] p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আমরা এই নম্বরে ফোন করে দাম আর ডেলিভারির খরচ জানাব।<span class="mt-1 block font-normal">অপেক্ষার সময় আরও জানতে খামারিদের <a href="https://www.facebook.com/groups/3200411093487700" target="_blank" rel="noopener" data-cta="fb_group" class="underline underline-offset-2">Silage BD ফেসবুক গ্রুপে</a> যোগ দিন।</span></p>
         </form>
       </section>
 
@@ -284,6 +285,8 @@ ${d.upazilas ? `      <h2 id="upazila" class="mt-9 text-2xl font-bold text-[#123
         <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">আগে অল্প নিয়ে পরীক্ষা করা যাবে?</summary><p class="mt-2 text-[#33483a]">যাবে, কোনো ন্যূনতম অর্ডার নেই, এক বস্তাও নেওয়া যায়। দূরের জেলায় অল্প বস্তায় পরিবহন খরচ তুলনায় বেশি পড়ে। প্রথমে কয়েক বস্তা নিয়ে <a href="/vutta-silage-prothombar-khawano-rules" class="font-semibold text-[#0b6a3e] underline underline-offset-4">৭ দিনের নিয়মে</a> গরুকে অভ্যাস করান, তারপর প্রয়োজনমতো নিয়মিত অর্ডার দিন।</p></details>
         <details class="rounded-xl border border-[#184d32]/10 bg-white p-5"><summary class="block cursor-pointer py-2 font-bold text-[#0b6a3e]">সাইলেজের মান ভালো কি না কীভাবে বুঝব?</summary><p class="mt-2 text-[#33483a]">বস্তার বাইরে ফুটো, ফোলা বা ভেজা দাগ নেই, খোলার পর গন্ধ টক-মিষ্টি, রং ভুট্টার স্বাভাবিক সবুজ-হলুদ এবং ভেতরে ঠান্ডা, এগুলোই ভালো সাইলেজের লক্ষণ। গরম, বাসি বা পচা গন্ধ পেলে সেই বস্তা খাওয়াবেন না, ছবিসহ আমাদের জানান। বিস্তারিত আছে <a href="/blog/silage-mano-jachai" class="font-semibold text-[#0b6a3e] underline underline-offset-4">মান যাচাইয়ের ৬টি পরীক্ষায়</a>।</p></details>
       </div>
+
+      <p class="mt-6 text-[#456451]">সাইলেজ নিয়ে আরও প্রশ্ন? খামারিদের <a href="${FBG}" target="_blank" rel="noopener" data-cta="fb_group" class="font-semibold text-[#0b6a3e] underline underline-offset-4">Silage BD ফেসবুক গ্রুপে</a> জিজ্ঞেস করুন।</p>
 
       <p class="mt-8 text-[#456451]">কাছাকাছি জেলায়ও ডেলিভারি: ${nearLinks} · <a href="/area/" class="font-semibold text-[#0b6a3e] underline underline-offset-4">সব এলাকা দেখুন</a></p>
 

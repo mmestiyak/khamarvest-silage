@@ -98,7 +98,7 @@ const advanceCard = `<section id="advance-booking" data-cta="advance_booking" cl
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
           <button type="submit" class="min-h-11 rounded-xl bg-[#0b5b38] px-5 py-3 text-base font-bold text-white hover:bg-[#0e7c4b] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">আগে থেকে জানিয়ে রাখুন</button>
           <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
-          <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। নতুন মৌসুমের সাইলেজ তৈরি হলে আমরা আপনাকে এই নম্বরে আগে ফোন করব। এখন কোনো টাকা লাগবে না।</p>
+          <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। নতুন মৌসুমের সাইলেজ তৈরি হলে আমরা আপনাকে এই নম্বরে আগে ফোন করব। এখন কোনো টাকা লাগবে না।<span class="mt-1 block font-normal">অপেক্ষার সময় আরও জানতে খামারিদের <a href="https://www.facebook.com/groups/3200411093487700" target="_blank" rel="noopener" data-cta="fb_group" class="underline underline-offset-2">Silage BD ফেসবুক গ্রুপে</a> যোগ দিন।</span></p>
         </form>
       </section>`;
 // Homepage only: restyle the cards to match the hero, price and buy-steps sections
@@ -154,7 +154,7 @@ const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="s
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
           <button type="submit" class="min-h-11 rounded-xl bg-[#0e7c4b] px-5 py-3 text-base font-bold text-white hover:bg-[#0b6a3e] disabled:opacity-60 sm:col-span-2 sm:justify-self-start">একসাথে ডেলিভারিতে যোগ দিন</button>
           <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
-          <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আপনার এলাকার অর্ডার একসাথে হলে আমরা এই নম্বরে ফোন করে তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না।</p>
+          <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। আপনার এলাকার অর্ডার একসাথে হলে আমরা এই নম্বরে ফোন করে তারিখ আর মোট খরচ জানাব। এখন কোনো টাকা লাগবে না।<span class="mt-1 block font-normal">অপেক্ষার সময় আরও জানতে খামারিদের <a href="https://www.facebook.com/groups/3200411093487700" target="_blank" rel="noopener" data-cta="fb_group" class="underline underline-offset-2">Silage BD ফেসবুক গ্রুপে</a> যোগ দিন।</span></p>
         </form>
         <script src="/js/district-picker.js" defer></script>
       </section>`;

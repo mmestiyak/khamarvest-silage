@@ -699,6 +699,15 @@ if (PRODUCT.previous && PRODUCT.previous.pricePerKg < PRODUCT.pricePerKg) {
   if (bare.length) errors.push(`${bare.length} page(s) show a phone number as plain text, run npm run build:contact: ${bare.slice(0, 3).join(', ')}`);
 }
 
+// --- Silage BD Facebook group: in-content line with data-cta="fb_group" ---
+{
+  const re = /<a href="https:\/\/www\.facebook\.com\/groups\/3200411093487700"[^>]*data-cta="fb_group"/;
+  const need = files.filter((f) => f === 'about.html' || f === '404.html' || f.startsWith('tools/') || /^area\/silage-.+\.html$/.test(f));
+  const bad = [];
+  for (const f of need) if (!re.test(await readFile(join(root, f), 'utf8'))) bad.push(f);
+  if (bad.length) errors.push(`${bad.length} page(s) lack the Silage BD Facebook group line (data-cta="fb_group"), run npm run build or edit by hand: ${bad.slice(0, 3).join(', ')}`);
+}
+
 // --- Footer credit and founder schema (scripts/credit.mjs) ---
 {
   const missing = [];
