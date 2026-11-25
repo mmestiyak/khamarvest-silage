@@ -108,7 +108,7 @@ var TZ = 'Asia/Dhaka';
 var CLICKS_NAME = 'Clicks';
 var CLICK_HEADERS = ['সময়', 'মাধ্যম', 'পাতার নাম', 'পাতা', 'বোতাম', 'উৎস', 'ডিভাইস', 'কল নম্বর'];
 var SHARED_NAME = 'একসাথে ডেলিভারি';
-var SHARED_HEADERS = ['তারিখ', 'নাম', 'মোবাইল', 'জেলা', 'উপজেলা', 'বস্তা', 'কবে লাগবে', 'অবস্থা'];
+var SHARED_HEADERS = ['তারিখ', 'নাম', 'মোবাইল', 'জেলা', 'উপজেলা', 'বস্তা', 'কবে লাগবে', 'অবস্থা', 'ঠিকানা'];
 var SHARED_PENDING = 'অপেক্ষায়';
 var SHARED_STATUSES = ['অপেক্ষায়', 'গাড়ির তালিকায়', 'ডেলিভারি হয়েছে', 'বাতিল'];
 // Truck sizes, smallest first: bags of 50 kg.
@@ -146,14 +146,21 @@ function doPost(e) {
     var callForm = d.form_type === 'call_form'; // the /form page linked from the WhatsApp auto-reply
     var courier = d.form_type === 'courier_order'; // the /courier page
     var order = courier ? logCourier(d, name, phone) : null; // gets the order number first
+    // Address (ঠিকানা) arrives as d.address and, from the current site, already inside the note.
+    // Older or other senders: add it to the note so it is never lost. Booking sends no
+    // d.location from older pages, so rebuild "জেলা, উপজেলা" from the separate fields.
+    var addr = clip(d.address, 200);
+    var noteTxt = clip(d.note, 500);
+    if (addr && noteTxt.indexOf(addr) === -1 && !courier) noteTxt = clip(noteTxt + ' | ঠিকানা: ' + addr, 700);
+    var locTxt = clip(d.location, 120) || [clip(d.district, 60), clip(d.upazila, 60)].filter(Boolean).join(', ');
     var sheet = getSheet();
     sheet.appendRow([
       new Date(),
       name,
       "'" + phone, // keep the leading 0
-      clip(d.location, 120),
+      locTxt,
       toAsciiDigits(clip(d.bags, 20)),
-      (courier ? order.no + ' | ' : '') + clip(d.note, 500),
+      (courier ? order.no + ' | ' : '') + (courier ? clip(d.note, 500) : noteTxt),
       clip(d.page, 200),
       clip(d.source, 80),
       courier ? 'কুরিয়ার' : booking ? 'আগাম চাহিদা' : (shared ? 'একসাথে ডেলিভারি' : (callForm ? 'ফর্ম (WhatsApp থেকে)' : 'ওয়েবসাইট ফর্ম')),
@@ -169,8 +176,8 @@ function doPost(e) {
           '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
           '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
       } else {
-        MailApp.sendEmail(to, (d.site === 'compost' ? 'কম্পোস্ট: ' : '') + (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + name + ' (' + clip(d.location, 40) + ')',
-          'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + clip(d.location, 120) +
+        MailApp.sendEmail(to, (d.site === 'compost' ? 'কম্পোস্ট: ' : '') + (booking ? 'আগাম চাহিদা: ' : (shared ? 'একসাথে ডেলিভারি: ' : (callForm ? 'ফোনের অনুরোধ: ' : 'নতুন লিড: '))) + name + ' (' + clip(locTxt, 40) + ')',
+          'নাম: ' + name + '\nমোবাইল: ' + phone + '\nএলাকা: ' + locTxt + (addr ? '\nঠিকানা: ' + addr : '') +
           '\nবস্তা: ' + clip(d.bags, 20) + '\nতথ্য: ' + clip(d.note, 500) +
           '\nপাতা: ' + clip(d.page, 200) + '\nউৎস: ' + clip(d.source, 80) +
           '\n\nশিট: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl());
@@ -265,6 +272,8 @@ function sharedSheet() {
     sheet.getRange('H2:H').setDataValidation(SpreadsheetApp.newDataValidation()
       .requireValueInList(SHARED_STATUSES, true).build());
   }
+  // Sheets created before the address column existed: add its header once (column I).
+  if (sheet.getLastRow() > 0 && !sheet.getRange(1, 9).getValue()) sheet.getRange(1, 9).setValue('ঠিকানা').setFontWeight('bold');
   return sheet;
 }
 
@@ -275,7 +284,7 @@ function logShared(d, name, phone) {
     var district = clip(d.district, 60) || clip(d.location, 60) || '(জেলা জানা নেই)';
     var bags = parseInt(toAsciiDigits(clip(d.bags, 10)).replace(/\D/g, ''), 10) || 0;
     sharedSheet().appendRow([new Date(), name, "'" + phone, district, clip(d.upazila, 60), bags,
-      clip(d.when, 30) || 'যেকোনো সময়', SHARED_PENDING]);
+      clip(d.when, 30) || 'যেকোনো সময়', SHARED_PENDING, clip(d.address, 200)]);
     checkTruckAlert(district);
   } finally {
     lock.releaseLock();

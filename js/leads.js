@@ -111,13 +111,18 @@
         var v = function (n) { return f.elements[n] && f.elements[n].value ? f.elements[n].value.trim() : ''; };
         var yearly = !!(f.elements.yearly && f.elements.yearly.checked);
         var parts = ['আগাম চাহিদা (নতুন মৌসুম, তৈরি হলে আগে ফোন করবেন)'];
+        var area = [v('district'), v('upazila')].filter(Boolean).join(', ');
+        if (v('district')) parts.push('জেলা: ' + v('district'));
+        if (v('upazila')) parts.push('উপজেলা: ' + v('upazila'));
+        if (v('address')) parts.push('ঠিকানা: ' + v('address'));
         if (v('animals')) parts.push('গরু: ' + v('animals'));
         if (v('bags')) parts.push('মাসে বস্তা: ' + v('bags'));
         if (v('months')) parts.push('মাস: ' + v('months'));
         if (yearly) parts.push('সারা বছরের সাইলেজ পরিকল্পনায় রাখতে বলেছেন');
         if (v('note')) parts.push('নোট: ' + v('note'));
         var saved = window.saveLead({
-          form_type: 'advance_booking', name: v('name'), phone: v('phone'), location: v('location'),
+          form_type: 'advance_booking', name: v('name'), phone: v('phone'), location: area, area: area,
+          district: v('district'), upazila: v('upazila'), address: v('address'),
           bags: v('bags'), animals: v('animals'), months: v('months'), yearly: yearly,
           note: parts.join(' | '), website: v('website')
         });
@@ -129,7 +134,8 @@
         }
         var msg = ['আসসালামু আলাইকুম, নতুন মৌসুমের সাইলেজ তৈরি হলে আগে জানাবেন, আমি আগাম জানিয়ে রাখছি।',
           v('name') ? 'নাম: ' + v('name') : '', v('phone') ? 'মোবাইল: ' + v('phone') : '',
-          v('location') ? 'এলাকা: ' + v('location') : '', v('animals') ? 'গরু: ' + v('animals') : '',
+          v('district') ? 'জেলা: ' + v('district') : '', v('upazila') ? 'উপজেলা: ' + v('upazila') : '',
+          v('address') ? 'ঠিকানা: ' + v('address') : '', v('animals') ? 'গরু: ' + v('animals') : '',
           v('bags') ? 'মাসে বস্তা: ' + v('bags') : '', v('months') ? 'কোন মাসে লাগবে: ' + v('months') : '',
           yearly ? 'সারা বছরের সাইলেজ পরিকল্পনায় রাখুন' : '', v('note') ? 'নোট: ' + v('note') : '',
           'তৈরি হলে আমাকে ফোন করবেন?'].filter(Boolean).join('\n');
@@ -160,12 +166,13 @@
         var parts = ['একসাথে ডেলিভারি (এলাকার অর্ডার জমলে ফোন করবেন)'];
         if (v('district')) parts.push('জেলা: ' + v('district'));
         if (v('upazila')) parts.push('উপজেলা: ' + v('upazila'));
+        if (v('address')) parts.push('ঠিকানা: ' + v('address'));
         if (bags) parts.push('বস্তা: ' + bags);
         if (v('when')) parts.push('কবে লাগবে: ' + v('when'));
         var saved = window.saveLead({
           form_type: 'shared_delivery', name: v('name'), phone: v('phone'),
           location: [v('district'), v('upazila')].filter(Boolean).join(', '),
-          district: v('district'), upazila: v('upazila'), bags: bags, when: v('when'),
+          district: v('district'), upazila: v('upazila'), address: v('address'), bags: bags, when: v('when'),
           note: parts.join(' | '), website: v('website')
         });
         if (typeof window.gaEvent === 'function') window.gaEvent('order_details_submitted', { submission_method: saved ? 'shared_delivery' : 'shared_delivery_whatsapp', page_path: location.pathname });
@@ -177,7 +184,7 @@
         var msg = ['আসসালামু আলাইকুম, আমি একসাথে ডেলিভারিতে যোগ দিতে চাই।',
           v('name') ? 'নাম: ' + v('name') : '', v('phone') ? 'মোবাইল: ' + v('phone') : '',
           v('district') ? 'জেলা: ' + v('district') : '', v('upazila') ? 'উপজেলা: ' + v('upazila') : '',
-          bags ? 'বস্তা: ' + bags : '', v('when') ? 'কবে লাগবে: ' + v('when') : '',
+          v('address') ? 'ঠিকানা: ' + v('address') : '', bags ? 'বস্তা: ' + bags : '', v('when') ? 'কবে লাগবে: ' + v('when') : '',
           'আমার এলাকায় গাড়ি গেলে জানাবেন?'].filter(Boolean).join('\n');
         window.open('https://wa.me/8801334211984?text=' + encodeURIComponent(msg), '_blank', 'noopener');
       });

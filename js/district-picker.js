@@ -3,9 +3,18 @@
 // is only visually hidden once this script runs; without JS it shows as usual.
 // ARIA: button (aria-haspopup=listbox) opens a panel with a search field and a
 // listbox. Search matches the Bengali name and the English slug or spelling.
+// One picker per <select name="district">, so the homepage and district pages can carry
+// several forms; each select needs its own unique id, and ids below derive from it.
 (function () {
-  var sel = document.getElementById('f-district');
-  if (!sel) return;
+  Array.prototype.forEach.call(document.querySelectorAll('select[name="district"]'), function (sel) {
+    if (sel.getAttribute('data-dp-init') || !sel.id) return;
+    sel.setAttribute('data-dp-init', '1');
+    initPicker(sel);
+  });
+})();
+
+function initPicker(sel) {
+  var base = sel.id;
   var OTHER = 'অন্য জেলা';
   var items = [], other = null;
   Array.prototype.forEach.call(sel.options, function (o) {
@@ -23,13 +32,15 @@
   wrap.className = 'relative mt-2';
   var btn = document.createElement('button');
   btn.type = 'button';
-  btn.id = 'f-district-btn';
+  btn.id = base + '-btn';
   btn.className = inputCls + ' flex items-center justify-between gap-2 text-left';
   btn.setAttribute('aria-haspopup', 'listbox');
   btn.setAttribute('aria-expanded', 'false');
-  btn.setAttribute('aria-controls', 'f-district-list');
-  var lbl = document.getElementById('lbl-district');
-  if (lbl) btn.setAttribute('aria-labelledby', 'lbl-district f-district-btn');
+  btn.setAttribute('aria-controls', base + '-list');
+  var lbl = document.querySelector('label[for="' + base + '"]');
+  if (lbl && !lbl.id) lbl.id = 'lbl-' + base;
+  var lblId = lbl ? lbl.id : '';
+  if (lbl) btn.setAttribute('aria-labelledby', lblId + ' ' + base + '-btn');
   var btnText = document.createElement('span');
   btn.appendChild(btnText);
   btn.insertAdjacentHTML('beforeend', CHEVRON);
@@ -41,7 +52,7 @@
   search.type = 'text';
   search.setAttribute('role', 'combobox');
   search.setAttribute('aria-expanded', 'true');
-  search.setAttribute('aria-controls', 'f-district-list');
+  search.setAttribute('aria-controls', base + '-list');
   search.setAttribute('aria-autocomplete', 'list');
   search.setAttribute('aria-label', 'জেলার নাম খুঁজুন');
   search.autocomplete = 'off';
@@ -53,9 +64,9 @@
   empty.className = 'px-3 py-2 text-[15px] leading-6 text-[#4b5a51]';
   empty.textContent = 'পাওয়া যায়নি, \'অন্য জেলা\' বেছে নিন';
   var list = document.createElement('ul');
-  list.id = 'f-district-list';
+  list.id = base + '-list';
   list.setAttribute('role', 'listbox');
-  list.setAttribute('aria-labelledby', 'lbl-district');
+  if (lblId) list.setAttribute('aria-labelledby', lblId);
   list.className = 'mt-2 max-h-[18rem] overflow-y-auto overscroll-contain';
   panel.appendChild(search);
   panel.appendChild(empty);
@@ -84,7 +95,7 @@
     list.innerHTML = '';
     shown.forEach(function (it, idx) {
       var li = document.createElement('li');
-      li.id = 'f-district-opt-' + idx;
+      li.id = base + '-opt-' + idx;
       li.setAttribute('role', 'option');
       li.setAttribute('aria-selected', sel.value === it.v ? 'true' : 'false');
       li.className = 'flex min-h-11 cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 text-[17px] leading-6 text-black hover:bg-[rgb(245,255,248)] active:bg-[rgb(245,255,248)]' + (idx === active ? ' bg-[rgb(245,255,248)]' : '') + (it === other ? ' mt-1 border-t border-[#0b5b38]/10' : '');
@@ -94,13 +105,13 @@
       li.addEventListener('click', function () { choose(it); });
       list.appendChild(li);
     });
-    search.setAttribute('aria-activedescendant', 'f-district-opt-' + active);
+    search.setAttribute('aria-activedescendant', base + '-opt-' + active);
   }
 
   function setActive(n) {
     active = Math.max(0, Math.min(shown.length - 1, n));
     render();
-    var el = document.getElementById('f-district-opt-' + active);
+    var el = document.getElementById(base + '-opt-' + active);
     if (el && el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
   }
 
@@ -130,7 +141,7 @@
     sel.dispatchEvent(new Event('change', { bubbles: true }));
     paintButton();
     close(false);
-    var up = document.getElementById('f-upazila');
+    var up = sel.form && sel.form.elements.upazila;
     if (up) up.focus();
   }
 
@@ -152,4 +163,4 @@
   document.addEventListener('pointerdown', function (e) { if (!wrap.contains(e.target)) close(false); });
   sel.addEventListener('change', paintButton);
   paintButton();
-})();
+}

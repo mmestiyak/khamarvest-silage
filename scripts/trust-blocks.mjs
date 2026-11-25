@@ -82,14 +82,25 @@ const midGuide = `          <aside data-cta="mid_guide" class="mt-9 rounded-2xl 
 const fieldCls = 'mt-1 block min-h-11 w-full rounded-lg border border-[#6f8f7c] bg-white px-3 py-2 text-base font-normal text-black placeholder:text-[#6b7280]';
 const labelCls = 'text-base font-semibold text-[#123b28]';
 const optional = ' <span class="font-normal text-[#456451]">(ঐচ্ছিক)</span>';
-const advanceCard = `<section id="advance-booking" data-cta="advance_booking" class="rounded-2xl border border-[#0b5b38]/25 bg-[#eaf5eb] p-5 sm:p-6">
+// All 64 districts as a <select> (searchable via js/district-picker.js), so the Apps Script pools
+// sign-ups on one exact spelling per district. Generator names that differ in spelling are mapped here.
+const BD = JSON.parse(await readFile(join(root, 'scripts/bd-districts.json'), 'utf8'));
+const SPELL = { 'নীলফামারী': 'নিলফামারী' };
+const districtOptions = (sel = '') => {
+  const want = SPELL[sel] || sel;
+  if (want && !BD.some((d) => d.bn === want)) throw new Error(`district "${sel}" is not in scripts/bd-districts.json`);
+  return `<option value="">জেলা বেছে নিন</option>` + BD.map((d) => `<option value="${d.bn}" data-en="${d.aliases}"${d.bn === want ? ' selected' : ''}>${d.bn}</option>`).join('') + `<option value="অন্য জেলা">অন্য জেলা</option>`;
+};
+const advanceCard = (district = '') => `<section id="advance-booking" data-cta="advance_booking" class="rounded-2xl border border-[#0b5b38]/25 bg-[#eaf5eb] p-5 sm:p-6">
         <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">নতুন মৌসুমের সাইলেজ: আগে থেকে জানিয়ে রাখুন</h2>
         <p class="mt-2 text-base leading-7 text-[#33483a]">ভুট্টা কাটা আর সাইলেজ তৈরি হয় ডিসেম্বর-জানুয়ারিতে, আর সেই সাইলেজ দিয়েই সারা বছরের সরবরাহ চলে। আপনার কত লাগবে আগে জানালে আমরা পরিমাণ ঠিক করে নিতে পারি। তৈরি হলে আপনাকে আগে ফোন করব। এখন কোনো টাকা দিতে হবে না, আর সারা বছরের সরবরাহের শর্ত ফোনে দুই পক্ষের সুবিধামতো ঠিক হবে।</p>
         <p class="mt-2 text-base leading-7 text-[#33483a]">দাম <!--=price-->${product.perKgBn}<!--/=--> টাকা কেজি (লোড পয়েন্টে, পরিবহন আলাদা), সারা বছর একই, ২০২৭ সাল পর্যন্ত। এটা জানিয়ে রাখার ফর্ম, বস্তা আটকে রাখার নিশ্চয়তা নয়।</p>
         <form data-booking-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
           <label class="${labelCls}">আপনার নাম${optional}<input name="name" autocomplete="name" class="${fieldCls}" placeholder="যেমন: রহিম উদ্দিন"></label>
           <label class="${labelCls}">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="${fieldCls}" placeholder="01XXXXXXXXX"></label>
-          <label class="${labelCls}">জেলা ও উপজেলা${optional}<input name="location" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: বগুড়া, শেরপুর"></label>
+          <div><label for="ab-district" class="${labelCls}">জেলা${optional}</label><select id="ab-district" name="district" class="${fieldCls}">${districtOptions(district)}</select></div>
+          <label class="${labelCls}" for="ab-upazila">উপজেলা${optional}<input id="ab-upazila" name="upazila" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: শেরপুর"></label>
+          <label class="${labelCls} sm:col-span-2" for="ab-address">গ্রাম / বাড়ির ঠিকানা${optional}<input id="ab-address" name="address" autocomplete="street-address" class="${fieldCls}" placeholder="যেমন: গ্রাম, ইউনিয়ন বা কাছের বাজার"></label>
           <label class="${labelCls}">গরুর সংখ্যা${optional}<input name="animals" inputmode="numeric" class="${fieldCls}" placeholder="যেমন: ১৫"></label>
           <label class="${labelCls}">মাসে আনুমানিক কত বস্তা${optional}<input name="bags" inputmode="numeric" class="${fieldCls}" placeholder="যেমন: ২০"></label>
           <label class="${labelCls}">কোন মাসগুলোতে লাগবে${optional}<input name="months" class="${fieldCls}" placeholder="যেমন: সারা বছর, বা মার্চ থেকে জুন"></label>
@@ -100,6 +111,7 @@ const advanceCard = `<section id="advance-booking" data-cta="advance_booking" cl
           <p class="text-sm text-[#456451] sm:col-span-2">নাম আর নম্বর শুধু এই যোগাযোগের জন্য আমাদের কাছে থাকে।</p>
           <p data-lead-status hidden role="status" class="rounded-lg bg-white p-3 font-semibold text-[#0b5b38] sm:col-span-2">পেয়েছি, ধন্যবাদ। নতুন মৌসুমের সাইলেজ তৈরি হলে আমরা আপনাকে এই নম্বরে আগে ফোন করব। এখন কোনো টাকা লাগবে না।<span class="mt-1 block font-normal">অপেক্ষার সময় আরও জানতে খামারিদের <a href="https://www.facebook.com/groups/3200411093487700" target="_blank" rel="noopener" data-cta="fb_group" class="underline underline-offset-2">Silage BD ফেসবুক গ্রুপে</a> যোগ দিন।</span></p>
         </form>
+        <script src="/js/district-picker.js" defer></script>
       </section>`;
 // Homepage only: restyle the cards to match the hero, price and buy-steps sections
 // (owner, 2026-11-21). District pages and guides keep the original look.
@@ -122,23 +134,14 @@ const homeTheme = (html) => {
 };
 const advanceHome = homeTheme(`  <div class="bg-white px-4 pb-10">
     <div class="mx-auto max-w-[1140px]">
-      ${advanceCard}
+      ${advanceCard()}
     </div>
   </div>`);
-const advanceGuide = advanceCard.replace('<section id="advance-booking"', '<section id="advance-booking"').replace(/^/, '          ').replace('data-cta="advance_booking" class="', 'data-cta="advance_booking" class="mt-11 ');
+const advanceGuide = advanceCard().replace('<section id="advance-booking"', '<section id="advance-booking"').replace(/^/, '          ').replace('data-cta="advance_booking" class="', 'data-cta="advance_booking" class="mt-11 ');
 const ADVANCE_GUIDES = ['silage-er-jonno-vutta-chash', 'silage-kinben-naki-nije-banaben', 'shiter-jonno-silage-mojud', 'silage-ki-kivabe-toiri-upokarita'].map((s) => `blog/${s}.html`);
 
 // Shared delivery ("একসাথে ডেলিভারি"): farmers who want only a few bags leave their need,
 // the owner pools them per district and sends one truck. No dates, no amounts, no counter.
-// All 64 districts as a <select> (searchable via js/district-picker.js), so the Apps Script pools
-// sign-ups on one exact spelling per district. Generator names that differ in spelling are mapped here.
-const BD = JSON.parse(await readFile(join(root, 'scripts/bd-districts.json'), 'utf8'));
-const SPELL = { 'নীলফামারী': 'নিলফামারী' };
-const districtOptions = (sel = '') => {
-  const want = SPELL[sel] || sel;
-  if (want && !BD.some((d) => d.bn === want)) throw new Error(`district "${sel}" is not in scripts/bd-districts.json`);
-  return `<option value="">জেলা বেছে নিন</option>` + BD.map((d) => `<option value="${d.bn}" data-en="${d.aliases}"${d.bn === want ? ' selected' : ''}>${d.bn}</option>`).join('') + `<option value="অন্য জেলা">অন্য জেলা</option>`;
-};
 const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="shared_delivery" class="rounded-2xl border border-[#0b5b38]/25 bg-[#f3f8ee] p-5 sm:p-6">
         <h2 class="text-xl font-bold text-[#123b28] sm:text-2xl">অল্প বস্তা? একসাথে ডেলিভারিতে যোগ দিন</h2>
         <p class="mt-2 text-base leading-7 text-[#33483a]">খামারভেস্ট সাইলেজে ন্যূনতম অর্ডার নেই, এক বস্তাও নিতে পারেন। তবে অল্প বস্তার জন্য আলাদা গাড়ি গেলে কেজিপ্রতি পরিবহন খরচ বেশি পড়ে। একই এলাকার কয়েকজন খামারি একসাথে নিলে একটা গাড়িতেই সবার বস্তা যায়, তখন কেজিপ্রতি পরিবহন খরচ কমে আসে।</p>
@@ -147,8 +150,9 @@ const sharedCard = (district = '') => `<section id="shared-delivery" data-cta="s
         <form data-shared-delivery-form onsubmit="event.preventDefault()" class="mt-4 grid gap-3 sm:grid-cols-2">
           <label class="${labelCls}">আপনার নাম${optional}<input name="name" autocomplete="name" class="${fieldCls}" placeholder="যেমন: রহিম উদ্দিন"></label>
           <label class="${labelCls}">মোবাইল নম্বর<input name="phone" required inputmode="tel" autocomplete="tel" class="${fieldCls}" placeholder="01XXXXXXXXX"></label>
-          <div><label id="lbl-district" for="f-district" class="${labelCls}">জেলা</label><select id="f-district" name="district" required class="${fieldCls}">${districtOptions(district)}</select></div>
-          <label class="${labelCls}">উপজেলা${optional}<input id="f-upazila" name="upazila" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: ঈশ্বরদী"></label>
+          <div><label for="sd-district" class="${labelCls}">জেলা</label><select id="sd-district" name="district" required class="${fieldCls}">${districtOptions(district)}</select></div>
+          <label class="${labelCls}" for="sd-upazila">উপজেলা${optional}<input id="sd-upazila" name="upazila" autocomplete="address-level2" class="${fieldCls}" placeholder="যেমন: ঈশ্বরদী"></label>
+          <label class="${labelCls} sm:col-span-2" for="sd-address">গ্রাম / বাড়ির ঠিকানা${optional}<input id="sd-address" name="address" autocomplete="street-address" class="${fieldCls}" placeholder="যেমন: গ্রাম, ইউনিয়ন বা কাছের বাজার"></label>
           <label class="${labelCls}">কত বস্তা লাগবে (৫০ কেজির বস্তা)<input name="bags" type="number" min="1" required inputmode="numeric" class="${fieldCls}" placeholder="যেমন: ১০"></label>
           <label class="${labelCls}">কবে লাগবে<select name="when" class="${fieldCls}"><option value="যেকোনো সময়">যেকোনো সময়</option><option value="এই মাসে">এই মাসে</option><option value="আগামী মাসে">আগামী মাসে</option></select></label>
           <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden">
@@ -224,7 +228,7 @@ for (const f of (await readdir(join(root, 'area'))).filter((f) => /^silage-.+\.h
     if (!dn) throw new Error(`${file}: district name not found in generator`);
     const anchor = /[ \t]*<section class="mt-9 rounded-2xl bg-\[#0b5b38\]/;
     h = before(h, anchor, block('shared-delivery', '      ' + sharedCard(dn)), file);
-    return before(h, anchor, block('advance-booking', '      ' + advanceCard), file);
+    return before(h, anchor, block('advance-booking', '      ' + advanceCard(dn)), file);
   });
 }
 
