@@ -386,7 +386,7 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
   function drawReceipt() {
     var W = 1080, P = 64, c = document.createElement('canvas'), ctx = c.getContext('2d');
     var foot = ['এটা আপনার দেওয়া তথ্যের রসিদ, টাকা পাওয়ার রসিদ নয়। টাকা মিলিয়ে আমরা ফোনে কনফার্ম করব।',
-      'খামারভেস্টের নম্বর ছাড়া অন্য কোনো নম্বরে টাকা পাঠাবেন না।', 'WhatsApp ও ফোন: 01334-211984 · silage.khamarvest.com'];
+      'খামারভেস্টের নম্বর ছাড়া অন্য কোনো নম্বরে টাকা পাঠাবেন না।', 'WhatsApp ও ফোন: 01334-211984 · silage.khamarvest.com', 'সাইলেজের সহজ গাইড: silagebd.com'];
     // Pass 1 measures, pass 2 draws on a canvas of the measured height.
     function layout(draw) {
       var y = 0;
@@ -453,24 +453,60 @@ var NEAR_BOGURA = { 'বগুড়া': 1 };
       }).catch(function () { st.textContent = 'ছবি বানানো গেল না। স্ক্রিনশট নিয়ে রাখুন।'; })
         .then(function () { btn.disabled = false; });
     });
+    // PDF: a real HTML page (not the picture), so Chrome's "Save as PDF" keeps the
+    // website, WhatsApp and phone links clickable.
+    function el(tag, style, text) { var e = document.createElement(tag); if (style) e.style.cssText = style; if (text != null) e.textContent = text; return e; }
+    function link(href, text) { var a = el('a', 'color:rgb(0,105,68);font-weight:700;text-decoration:underline', text); a.href = href; return a; }
+    function printReceipt() {
+      var old = document.querySelector('[data-receipt-print]'); if (old) old.parentNode.removeChild(old);
+      var box = el('div', 'font-family:"Noto Serif Bengali","Plus Jakarta Sans",serif;color:#123b28;max-width:170mm;margin:0 auto;border:1px solid #d9e6de;border-radius:12px;overflow:hidden');
+      box.setAttribute('data-receipt-print', '');
+      var head = el('div', 'background:rgb(0,105,68);color:#fff;padding:18px 22px');
+      head.appendChild(el('div', 'font-size:24px;font-weight:700', 'খামারভেস্ট সাইলেজ'));
+      head.appendChild(el('div', 'font-size:15px;color:#dff3e7;margin-top:4px', 'সুন্দরবন কুরিয়ারে অর্ডারের রসিদ'));
+      box.appendChild(head);
+      var body = el('div', 'padding:14px 22px 18px');
+      body.appendChild(el('div', 'font-size:13px;color:#4b5a51;margin-bottom:6px', 'তারিখ: ' + bnDate(receiptAt || new Date())));
+      var tb = el('table', 'width:100%;border-collapse:collapse;font-size:14px');
+      lastRows.forEach(function (r) {
+        var tot = r[0] === 'মোট', trxRow = r[0] === 'TrxID';
+        var tr = el('tr', (tot ? 'background:#e6f6ec;' : trxRow ? 'background:#fff8e1;' : '') + 'border-bottom:1px solid #e3ece6');
+        tr.appendChild(el('td', 'padding:7px 6px;color:#4b5a51;white-space:nowrap;vertical-align:top', r[0]));
+        tr.appendChild(el('td', 'padding:7px 6px;text-align:right;font-weight:' + (tot || trxRow ? '700' : '600') + ';' + (tot ? 'font-size:17px;color:rgb(0,105,68)' : ''), r[1]));
+        tb.appendChild(tr);
+      });
+      body.appendChild(tb);
+      var f = el('div', 'font-size:12.5px;color:#4b5a51;line-height:1.7;margin-top:12px');
+      f.appendChild(el('div', '', 'এটা আপনার দেওয়া তথ্যের রসিদ, টাকা পাওয়ার রসিদ নয়। টাকা মিলিয়ে আমরা ফোনে কনফার্ম করব।'));
+      f.appendChild(el('div', '', 'খামারভেস্টের নম্বর ছাড়া অন্য কোনো নম্বরে টাকা পাঠাবেন না।'));
+      var c1 = el('div', 'margin-top:6px');
+      c1.appendChild(document.createTextNode('WhatsApp: ')); c1.appendChild(link('https://wa.me/8801334211984', '01334-211984'));
+      c1.appendChild(document.createTextNode(' · ফোন: ')); c1.appendChild(link('tel:+8801334211984', '01334-211984'));
+      f.appendChild(c1);
+      var c2 = el('div', '');
+      c2.appendChild(document.createTextNode('ওয়েবসাইট: ')); c2.appendChild(link('https://silage.khamarvest.com/', 'silage.khamarvest.com'));
+      c2.appendChild(document.createTextNode(' · সাইলেজের সহজ গাইড: ')); c2.appendChild(link('https://silagebd.com/', 'silagebd.com'));
+      f.appendChild(c2);
+      body.appendChild(f);
+      box.appendChild(body);
+      document.body.appendChild(box);
+      return box;
+    }
     rcpt.querySelector('[data-receipt-pdf]').addEventListener('click', function () {
       var btn = this; btn.disabled = true;
-      makeReceipt().then(function (url) {
-        var box = document.createElement('div'); box.setAttribute('data-receipt-print', '');
-        var img = new Image(); img.alt = 'অর্ডারের রসিদ'; box.appendChild(img);
-        document.body.appendChild(box);
-        var cleanup = function () { document.body.classList.remove('receipt-printing'); if (box.parentNode) box.parentNode.removeChild(box); window.removeEventListener('afterprint', cleanup); };
+      try {
+        if (!receiptAt) receiptAt = new Date();
+        printReceipt();
+        document.body.classList.add('receipt-printing');
+        // Clean up only after printing ends: Android's print is asynchronous, and removing the
+        // receipt early would print a blank page. The class only matters in print media.
+        var cleanup = function () { document.body.classList.remove('receipt-printing'); window.removeEventListener('afterprint', cleanup); };
         window.addEventListener('afterprint', cleanup);
-        img.onload = function () {
-          document.body.classList.add('receipt-printing');
-          st.textContent = 'প্রিন্টের পাতায় "Save as PDF" বা "PDF হিসেবে সেভ" বেছে নিন।';
-          window.print();
-          setTimeout(cleanup, 1500);
-        };
-        img.src = url;
+        st.textContent = 'প্রিন্টের পাতায় "Save as PDF" বা "PDF হিসেবে সেভ" বেছে নিন।';
+        var go = function () { window.print(); btn.disabled = false; };
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(go, go); else go();
         if (typeof window.gaEvent === 'function') window.gaEvent('receipt_save', { format: 'pdf', page_path: location.pathname });
-      }).catch(function () { st.textContent = 'PDF বানানো গেল না। স্ক্রিনশট নিয়ে রাখুন।'; })
-        .then(function () { btn.disabled = false; });
+      } catch (e) { st.textContent = 'PDF বানানো গেল না। স্ক্রিনশট নিয়ে রাখুন।'; btn.disabled = false; }
     });
   }
 

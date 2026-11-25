@@ -36,11 +36,12 @@
    buttons stayed visible in truck mode. Scoped to the courier page only. */
 [data-courier-form] [hidden], [data-courier-done][hidden], [data-courier-mount][hidden] { display: none !important; }
 
-/* /courier receipt (js/courier-form.js): "PDF সেভ করুন" prints only the generated receipt
-   picture. Scoped to body.receipt-printing so printing any other page is unaffected. */
+/* /courier receipt (js/courier-form.js): "PDF সেভ করুন" prints only the receipt (an HTML
+   copy, so its links stay clickable in the saved PDF). Scoped to body.receipt-printing so printing any other page is unaffected. */
 [data-receipt-print] { display: none; }
 @media print {
   body.receipt-printing > :not([data-receipt-print]) { display: none !important; }
   body.receipt-printing [data-receipt-print] { display: block; }
-  body.receipt-printing [data-receipt-print] img { display: block; width: 100%; max-width: 170mm; margin: 0 auto; }
+  body.receipt-printing [data-receipt-print] { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { margin: 12mm; }
 }
